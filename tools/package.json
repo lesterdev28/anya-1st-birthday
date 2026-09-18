@@ -1,0 +1,22 @@
+{
+  "name": "anya-invitation-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Higgsfield generation and media-optimization tooling for the invitation site.",
+  "type": "module",
+  "scripts": {
+    "generate": "tsx generate.ts",
+    "optimize": "tsx optimize.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@higgsfield/client": "^0.2.6",
+    "dotenv": "^16.4.5",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

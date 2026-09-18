@@ -1,0 +1,25 @@
+.cinematic {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cinematic__fallback {
+  position: absolute;
+  inset: 0;
+}
+
+.cinematic__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  /* Fading in over the painted scene hides the swap between the two layers. */
+  transition: opacity 900ms var(--ease-soft);
+}
+
+.cinematic__video.is-playing {
+  opacity: 1;
+}

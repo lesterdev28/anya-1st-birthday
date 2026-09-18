@@ -1,0 +1,71 @@
+{
+  "anya-portrait-01": {
+    "base": "/invitation/photos/optimized/anya-portrait-01",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.5625,
+    "placeholder": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4IKwAAACwBgCdASoYACsAPs1UoE2npSMiOqgA8BmJZACnNW0FBW1HGDRPMLa/rPdZ6/IM9LfOpxPZA8Mxa4JxhRnsgAD+7r4LK8BJ7pQjmc8eRtIVa/QUtcupETHoXnro65K6Jn3V8jamTtGv0aohaFP52yXPW4yLISMPUY5KkljW4GM7Qh3VJBDqE4by8AV1oATWYDNM9OHy9YUypxLocPSlfBQQmyoxiaGlCI1K4AAA"
+  },
+  "anya-smile-01": {
+    "base": "/invitation/photos/optimized/anya-smile-01",
+    "widths": [
+      480,
+      960,
+      1440
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAABwBQCdASoYACAAPu1oqk+ppaOiMBgIATAdiUAYmw0q8SvYPwu0Xy+vTqrSYbS1E6tPdSEAAP78EnFcj3qTVkwkh6x02Mv4A6PuA2cSa3c2J64YLPWFvCD0SQRfipYqxLYkNOKPCTEztBpNjhB455fw+KjGx6q9HiCTC0aye1sU9XCQayNud6SVrV4zMLZU+wuU4AAA"
+  },
+  "anya-smile-02": {
+    "base": "/invitation/photos/optimized/anya-smile-02",
+    "widths": [
+      480,
+      960,
+      1440
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACQBQCdASoYACAAPtleo02oJaMiN/qoAQAbCWQAv+xXb1/yBw+14vVsFdrpXFBPy9xEBBqxOAD+9PUd1nKQFx1vhDtOR5qhGDhpLvOQ88WpUIRnC/UkUiAk5q4mjY9x/ZhstqVMPH+lO48fHnDAUvbmtqUPLP3q02w0HU0tE3wxX3MIbWYzxFwKavl0mKw9tjggAA=="
+  },
+  "anya-smile-03": {
+    "base": "/invitation/photos/optimized/anya-smile-03",
+    "widths": [
+      480,
+      960,
+      1440
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAABQBQCdASoYACAAPu1eqE4ppKOiMBgMATAdiWIAwoWxxC565/+qme6vgnvIZLj7/GReC0AA/vf7AAmTuYcIqBmHHhZ86AOoY1NkemRuOb/M1qD2lqXVGTAb86bEnXTjrVC2dEYjrbf3/PaVlLuZIwiT0iKHzMysxtyzBoYtu1QV41/nediQifiFux72wMW5uW8w1bAAAAA="
+  },
+  "anya-sunhat-01": {
+    "base": "/invitation/photos/optimized/anya-sunhat-01",
+    "widths": [
+      480,
+      960,
+      1440
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAADQBQCdASoYACAAPtlepU2oJaOiN/qoAQAbCWgArDNofgBqDmHwOmtBtIyEY7muDNZ0oVI/g9OAAPrjYCft3RzsyfULsJdyPoNrmPRLlSSfp7d5QcC9wWqz0eCIUYbuBtA2Yv1ATQ+ddbCQXmqcVZqkqhtuTs8NVB4yYwdYBG6Bc06Rn4cqM4dVOpOqvK6LpenWFiXK6C/o+3/xJAePAVLgAAA="
+  },
+  "anya-sunhat-02": {
+    "base": "/invitation/photos/optimized/anya-sunhat-02",
+    "widths": [
+      480,
+      960,
+      1440
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAAAwBQCdASoYACAAPtFUoU2oJKMiN+gBABoJaACdITYCTNzsVYgeX0BmyE8OVT82MP0sAAD+yMYuD0midLJnC4OaRC0RKp+YPXij/rhcMHPqOHio82/x5Lko+djQDLI9BSwOF4ITFuYO2U7vAW1p8HMIbIbLmdn7PazVdwZ8JsiYLKtGg7dz2UUvM4C0qGuvfkwFmSCs663jgNoybdHPAjwNBeRF/gAA"
+  },
+  "anya-sunhat-03": {
+    "base": "/invitation/photos/optimized/anya-sunhat-03",
+    "widths": [
+      480,
+      960,
+      1440
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACwBQCdASoYACAAPu1kqU2ppaOiMAgBMB2JZACsOUFWABFyeJxtv2HTMeKl4UPZJYe4HKPs1QAA/tObkO4XUf8qOxd5AU7by7G9b/lpu6IE3/wSp/J1bzlPmKtrTwqv8Rmh9X33tNfnopMbphIH9HRbBZlmjgX0XqemXQQ5Ggj6o47/ECyfv07lNP35BrsjB37xamzguvYEwqYp2kkXAAAA"
+  }
+}

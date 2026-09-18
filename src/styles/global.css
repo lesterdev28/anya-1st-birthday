@@ -1,0 +1,184 @@
+/*
+ * The invitation's design system.
+ *
+ * The colour tokens here are the same palette the Higgsfield art direction is written
+ * against (tools/art-direction.md), so the CSS-painted layers, the typography and the
+ * generated artwork all sit in one visual world.
+ */
+
+:root {
+  /* Palette — shared verbatim with the Higgsfield art direction. */
+  --lavender: #c9b8e4;
+  --lavender-deep: #9c86c4;
+  --blush: #f3c9d4;
+  --blush-deep: #dfa0b4;
+  --powder: #bcd6ec;
+  --powder-deep: #8bb4d6;
+  --ivory: #fbf5ea;
+  --gold: #e4c68a;
+  --gold-deep: #c4a052;
+  --peach: #f6d3bc;
+  --sage: #c3d3be;
+
+  /* Ink. Warm, never pure black, so it sits softly on the pastels. */
+  --ink: #4a3f56;
+  --ink-soft: #6f6280;
+  --ink-faint: #9a8fa8;
+
+  /* The night sky the intro opens on. */
+  --night: #241c3a;
+  --night-deep: #171129;
+
+  --serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --script: "Tangerine", "Snell Roundhand", "Apple Chancery", cursive;
+  --sans: "Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+
+  --page-gutter: 20px;
+  --measure: 34rem;
+
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* The intro is a fixed overlay; this stops iOS from bouncing behind it. */
+  overscroll-behavior-y: none;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* While the intro plays, the page underneath must not scroll. */
+body[data-intro-open="true"] {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 300;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--lavender-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---- shared layout ---- */
+
+.section {
+  position: relative;
+  padding: clamp(4rem, 12vw, 8rem) var(--page-gutter);
+}
+
+.section__inner {
+  max-width: var(--measure);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 1.1rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 7vw, 3rem);
+  color: var(--ink);
+}
+
+/* A slim gold rule with a diamond at its centre, used between sections. */
+.rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 1.6rem auto 2rem;
+  max-width: 14rem;
+  color: var(--gold-deep);
+}
+
+.rule::before,
+.rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.rule span {
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  background: var(--gold);
+}
+
+/* ---- accessibility ---- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+ * Every decorative animation is wrapped in this query. Guests who have asked their
+ * device for less motion get the full invitation, just still.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

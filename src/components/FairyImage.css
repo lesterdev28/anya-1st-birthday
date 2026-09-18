@@ -1,0 +1,24 @@
+.fairy-image {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.fairy-image picture,
+.fairy-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fairy-image img {
+  opacity: 0;
+  transition: opacity 700ms var(--ease-soft);
+}
+
+.fairy-image img.is-loaded {
+  opacity: 1;
+}
