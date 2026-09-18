@@ -61,6 +61,13 @@ npm run generate -- --videos                          # both cinematic clips
 Generation needs `HF_CREDENTIALS` (format `key-id:key-secret`) in the environment or in
 `tools/.env.local`. It is never logged or committed.
 
+**This path bills Higgsfield API credits, which are a separate balance from a Higgsfield
+web subscription.** If it fails with a credits error, that balance is the reason — see
+`docs/generate-on-your-machine.md`, which covers making the same assets from a machine
+signed in to the subscription, through the CLI or the web app. Regenerate that guide with
+`npm run handoff` after any change to the canon; it is written from `art-direction.ts`,
+never by hand.
+
 Raw output lands in `public/invitation/higgsfield/<category>/`. Then:
 
 ```bash

@@ -7,7 +7,8 @@
   "scripts": {
     "generate": "tsx generate.ts",
     "optimize": "tsx optimize.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "handoff": "tsx handoff.ts"
   },
   "dependencies": {
     "@higgsfield/client": "^0.2.6",
