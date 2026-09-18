@@ -68,13 +68,18 @@ async function generateImage(scene: Scene, dryRun: boolean): Promise<void> {
   }
 
   console.log(`Generating image ${scene.id} at ${scene.size} (billable)...`);
+  // The image endpoint expects its arguments nested under `params`; the client posts
+  // `input` verbatim, so the nesting has to be spelled out here. The video endpoint
+  // below takes its arguments flat, which is why the two calls differ in shape.
   const response = await higgsfield.subscribe(IMAGE_ENDPOINT, {
     input: {
-      prompt,
-      width_and_height: scene.size,
-      quality: "1080p",
-      batch_size: 1,
-      enhance_prompt: false,
+      params: {
+        prompt,
+        width_and_height: scene.size,
+        quality: "1080p",
+        batch_size: 1,
+        enhance_prompt: false,
+      },
     },
     withPolling: true,
   });

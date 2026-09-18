@@ -31,14 +31,16 @@ switch a slot over.
 
 ### Current status of the generated assets
 
-**None of the Higgsfield assets have been generated yet.** Generation is blocked on the
-session environment: `api.higgsfield.ai` has to be in the environment's network egress
-allowlist, and the change only takes effect in a session started afterwards. Until then
-every art slot falls back to the painted kingdom, and the site is complete and usable
-without them.
+**None of the Higgsfield assets have been generated yet**, so every art slot still falls
+back to the painted kingdom and the site is complete and usable without them.
+
+The API connection itself is working: `api.higgsfield.ai` is reachable and the
+`HF_CREDENTIALS` in the environment authenticate (the same request returns 401 without
+them and is accepted with them). Whether the account has credits is only knowable from a
+real, billable generation, so it is still unconfirmed.
 
 Note that `@higgsfield/client` reports *every* HTTP 403 as
-`NotEnoughCreditsError: Not enough credits`, including the proxy's blocked-host denial.
+`NotEnoughCreditsError: Not enough credits`, including a proxy's blocked-host denial.
 If you see that error, check the raw HTTP response before concluding anything about the
 account balance.
 
