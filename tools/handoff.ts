@@ -63,7 +63,7 @@ function buildGuide(): string {
     "The generation tooling in `tools/` talks to the Higgsfield **API**, which bills its own " +
       "credit balance — separate from a Higgsfield web subscription. That balance is empty, so " +
       "the API path is blocked. This guide does the same job from a machine signed in to your " +
-      "subscription instead, so you are not paying for the same thing twice."
+      "subscription instead, so you are not paying for the same thing twice.",
   );
   push();
   push(
@@ -71,10 +71,12 @@ function buildGuide(): string {
       "sent, composed from the canon in `tools/art-direction.ts`. That repetition is deliberate: " +
       "it is what keeps the castle the same castle in all seventeen assets. **Do not reword them.** " +
       "If something comes back wrong, change the canon and re-run `npm run handoff`, so the fix " +
-      "reaches every asset at once."
+      "reaches every asset at once.",
   );
   push();
-  push("The tooling stays where it is. If you ever add API credit, `npm run generate` still works.");
+  push(
+    "The tooling stays where it is. If you ever add API credit, `npm run generate` still works.",
+  );
   push();
 
   push("## 1. Install and sign in (Windows)");
@@ -88,7 +90,7 @@ function buildGuide(): string {
   push();
   push(
     "`auth login` opens your browser and waits for you to approve. It has to be the browser on " +
-      "the same machine as the CLI, which is exactly why this could not be done from our end."
+      "the same machine as the CLI, which is exactly why this could not be done from our end.",
   );
   push();
   push("Then confirm the model names on your account, since the catalogue moves:");
@@ -100,7 +102,7 @@ function buildGuide(): string {
   push(
     `This guide uses \`${IMAGE_MODEL}\` for images and \`${VIDEO_MODEL}\` for video. If \`model list\` ` +
       "shows a newer Seedance (the CLI's own quickstart mentions `seedance_2_5`), prefer the newest " +
-      "one and keep every other setting the same."
+      "one and keep every other setting the same.",
   );
   push();
 
@@ -109,19 +111,19 @@ function buildGuide(): string {
   push(
     "Seventeen assets: fifteen images, then two video clips. **Generate the first one, " +
       "`fairytale-castle-hero-mobile`, and stop.** It establishes the look, and everything else is " +
-      "judged against it. Send it over before running the rest."
+      "judged against it. Send it over before running the rest.",
   );
   push();
   push(
     "Each command blocks until the generation finishes and then prints a result URL. The CLI does " +
       "not save the file for you — download it from that URL and put it at the path given under " +
       "each command. **The filename matters**: the site looks each asset up by that exact name, and " +
-      "an asset it cannot find falls back to the painted version instead."
+      "an asset it cannot find falls back to the painted version instead.",
   );
   push();
   push(
     "If pasting long prompts into PowerShell is awkward, `tools/generate-on-windows.ps1` runs the " +
-      "whole thing in one go — see section 5."
+      "whole thing in one go — see section 5.",
   );
   push();
 
@@ -132,7 +134,7 @@ function buildGuide(): string {
     push();
     push(
       `Save to \`public/invitation/higgsfield/${scene.category}/${scene.id}.png\` · ` +
-        `${aspectFor(scene)} · was ${scene.size} on the API`
+        `${aspectFor(scene)} · was ${scene.size} on the API`,
     );
     push();
     push("```powershell");
@@ -147,7 +149,7 @@ function buildGuide(): string {
   push();
   push(
     "Both clips are slow and gentle on purpose, and both end on a composition that matches the " +
-      "hero art so the site can cut from clip to still without a visible jump."
+      "hero art so the site can cut from clip to still without a visible jump.",
   );
   push();
   for (const [index, scene] of VIDEO_SCENES.entries()) {
@@ -155,14 +157,14 @@ function buildGuide(): string {
     push();
     push(
       `Save to \`public/invitation/higgsfield/video/${scene.id}-raw.mp4\` · ` +
-        `${scene.aspectRatio} · ${scene.duration}s`
+        `${scene.aspectRatio} · ${scene.duration}s`,
     );
     push();
     push("```powershell");
     push(`higgsfield generate create ${VIDEO_MODEL} \``);
     push(
       `  --aspect_ratio ${scene.aspectRatio} --duration ${scene.duration} ` +
-        `--resolution ${VIDEO_RESOLUTION} --wait \``
+        `--resolution ${VIDEO_RESOLUTION} --wait \``,
     );
     push(`  --prompt ${psLiteral(scene.prompt)}`);
     push("```");
@@ -189,7 +191,7 @@ function buildGuide(): string {
   push();
   push(
     "Keep the `-raw` suffix on the clips. It marks them as the untouched download, so the " +
-      "compression step below never overwrites your original."
+      "compression step below never overwrites your original.",
   );
   push();
 
@@ -206,13 +208,13 @@ function buildGuide(): string {
   push(
     "That builds the WebP and AVIF sizes the site actually loads, writes a blurred placeholder " +
       "for each, and regenerates `src/data/media-manifest.json`. Your original PNGs are left " +
-      "untouched. Commit the originals, the `optimized/` folders and the manifest together."
+      "untouched. Commit the originals, the `optimized/` folders and the manifest together.",
   );
   push();
   push(
     "The two clips need ffmpeg, which `optimize` does not do. The three commands per clip are in " +
       "`README.md` under **Videos** — an MP4, a WebM and a poster frame. The poster is required: " +
-      "it is what a guest sees while the clip loads, and what stays if the clip never plays."
+      "it is what a guest sees while the clip loads, and what stays if the clip never plays.",
   );
   push();
 
@@ -221,7 +223,7 @@ function buildGuide(): string {
   push(
     "`tools/generate-on-windows.ps1` holds every command above in order, downloads each result to " +
       "the right path, and skips anything already on disk, so you can stop and restart it. It " +
-      "pauses after the hero for your sign-off."
+      "pauses after the hero for your sign-off.",
   );
   push();
   push("```powershell");
@@ -232,7 +234,7 @@ function buildGuide(): string {
   push(
     "It reads the result URL out of the CLI's `--json` output. That part is written against the " +
       "CLI's documented shape but has not been run against your account, so if a download comes " +
-      "back empty, fall back to the individual commands in section 2 — those are the reliable path."
+      "back empty, fall back to the individual commands in section 2 — those are the reliable path.",
   );
   push();
 
@@ -241,24 +243,24 @@ function buildGuide(): string {
   push(
     "The web app is signed in to the same subscription, and for some of these it is genuinely " +
       "easier. Paste the same prompt, set the same aspect ratio, and save the download to the same " +
-      "filename — the site does not care which tool made the file."
+      "filename — the site does not care which tool made the file.",
   );
   push();
   push(
     "It is worth it for the **hero images** and the **five month backgrounds**, where you are " +
       "judging composition and will likely want to re-roll a few times. Seeing the result " +
-      "immediately beats re-running a command."
+      "immediately beats re-running a command.",
   );
   push();
   push(
     "The **six decorations** are the opposite. Each one needs its subject isolated cleanly on a " +
       "plain flat field so the site can lift it out and reuse it, and that depends entirely on the " +
-      "prompt being passed through exactly as written. Use the CLI for those."
+      "prompt being passed through exactly as written. Use the CLI for those.",
   );
   push();
   push(
     "For the **two clips**, use whichever you prefer, but keep the duration at 5 seconds and the " +
-      "ratio at 9:16."
+      "ratio at 9:16.",
   );
   push();
 
@@ -266,7 +268,7 @@ function buildGuide(): string {
   push();
   push(
     "_Generated by `tools/handoff.ts` from `tools/art-direction.ts`. Re-run `npm run handoff` " +
-      "after changing the canon._"
+      "after changing the canon._",
   );
   push();
 
@@ -297,14 +299,14 @@ function buildScript(): string {
   push("    )");
   push();
   push("    if (Test-Path $Destination) {");
-  push("        Write-Host \"skip   $Id (already on disk)\" -ForegroundColor DarkGray");
+  push('        Write-Host "skip   $Id (already on disk)" -ForegroundColor DarkGray');
   push("        return");
   push("    }");
   push();
-  push("    Write-Host \"generate  $Id\" -ForegroundColor Cyan");
+  push('    Write-Host "generate  $Id" -ForegroundColor Cyan');
   push("    $raw = & higgsfield @CliArgs --json");
   push("    if ($LASTEXITCODE -ne 0) {");
-  push("        Write-Host \"  the CLI reported an error for $Id; stopping\" -ForegroundColor Red");
+  push('        Write-Host "  the CLI reported an error for $Id; stopping" -ForegroundColor Red');
   push("        exit 1");
   push("    }");
   push();
@@ -319,20 +321,26 @@ function buildScript(): string {
   push("        }");
   push("    } catch { }");
   push("    if (-not $url) {");
-  push("        $match = [regex]::Match([string]$raw, 'https://[^\"\\s]+\\.(png|jpg|jpeg|webp|mp4)')");
+  push(
+    "        $match = [regex]::Match([string]$raw, 'https://[^\"\\s]+\\.(png|jpg|jpeg|webp|mp4)')",
+  );
   push("        if ($match.Success) { $url = $match.Value }");
   push("    }");
   push();
   push("    if (-not $url) {");
-  push("        Write-Host \"  finished, but no download URL was found in the response.\" -ForegroundColor Yellow");
-  push("        Write-Host \"  save it manually to: $Destination\" -ForegroundColor Yellow");
+  push(
+    '        Write-Host "  finished, but no download URL was found in the response." -ForegroundColor Yellow',
+  );
+  push('        Write-Host "  save it manually to: $Destination" -ForegroundColor Yellow');
   push("        Write-Host $raw");
   push("        return");
   push("    }");
   push();
-  push("    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Destination) | Out-Null");
+  push(
+    "    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Destination) | Out-Null",
+  );
   push("    Invoke-WebRequest -Uri $url -OutFile $Destination");
-  push("    Write-Host \"  saved  $Destination\" -ForegroundColor Green");
+  push('    Write-Host "  saved  $Destination" -ForegroundColor Green');
   push("}");
   push();
 
@@ -343,9 +351,13 @@ function buildScript(): string {
   push(...imageCall(hero));
   push();
   push("Write-Host ''");
-  push("Write-Host 'The hero is done. Send it over for sign-off before generating the rest.' -ForegroundColor Yellow");
+  push(
+    "Write-Host 'The hero is done. Send it over for sign-off before generating the rest.' -ForegroundColor Yellow",
+  );
   push("$answer = Read-Host 'Continue with the remaining 16 assets now? (y/N)'");
-  push("if ($answer -ne 'y') { Write-Host 'Stopped. Re-run this script to pick up where it left off.'; exit 0 }");
+  push(
+    "if ($answer -ne 'y') { Write-Host 'Stopped. Re-run this script to pick up where it left off.'; exit 0 }",
+  );
   push();
   push("# --- The remaining images ---");
   push();
