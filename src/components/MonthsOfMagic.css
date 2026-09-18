@@ -1,0 +1,154 @@
+.months {
+  position: relative;
+  background: linear-gradient(180deg, #f7f0f6 0%, var(--ivory) 22%, #f6f1e8 78%, var(--ivory) 100%);
+  overflow: hidden;
+}
+
+.months__fireflies {
+  opacity: 0.55;
+}
+
+.months__list {
+  list-style: none;
+  margin: clamp(2.5rem, 9vw, 4.5rem) auto 0;
+  padding: 0;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.6rem, 9vw, 4.5rem);
+}
+
+.months__chapter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(1.1rem, 5vw, 2.4rem);
+  padding: clamp(1rem, 4vw, 1.8rem);
+  border-radius: 14px;
+  isolation: isolate;
+}
+
+.months__chapter--right {
+  flex-direction: row-reverse;
+}
+
+/* The generated decoration, faded well back so the photograph leads. */
+.months__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.32;
+  border-radius: 14px;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);
+  mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);
+}
+
+/* ---- the photo frame ---- */
+
+.months__frame {
+  flex: none;
+  width: clamp(130px, 38vw, 220px);
+  padding: 7px;
+  border-radius: 8px;
+  background: linear-gradient(150deg, #f4e4c2 0%, #e4c68a 42%, #c4a052 100%);
+  box-shadow: 0 16px 34px -18px rgba(74, 63, 86, 0.5);
+}
+
+.months__frame .fairy-image {
+  border-radius: 4px;
+  aspect-ratio: 3 / 4;
+}
+
+/* A month still waiting for a photograph: a centred verse, not an empty frame. */
+.months__chapter--verse {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.2rem;
+  padding-block: clamp(0.5rem, 3vw, 1.2rem);
+}
+
+.months__title--verse {
+  font-style: italic;
+  font-size: clamp(1.05rem, 4.4vw, 1.35rem);
+  color: var(--ink-soft);
+}
+
+.months__text--verse {
+  max-width: 26ch;
+  color: var(--ink-faint);
+}
+
+.months__verse-mark {
+  display: block;
+  width: 5px;
+  height: 5px;
+  margin-top: 0.9rem;
+  transform: rotate(45deg);
+  background: var(--gold);
+  opacity: 0.75;
+}
+
+.months__chapter--verse .months__caption {
+  text-align: center;
+}
+
+/* ---- caption ---- */
+
+.months__caption {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.months__chapter--right .months__caption {
+  text-align: right;
+}
+
+.months__number {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.32em;
+  color: var(--gold-deep);
+  margin: 0 0 0.4rem;
+}
+
+.months__title {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 5vw, 1.6rem);
+  color: var(--ink);
+  margin: 0 0 0.35rem;
+}
+
+.months__text {
+  font-size: clamp(0.86rem, 3.4vw, 0.98rem);
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ---- finale ---- */
+
+.months__finale {
+  margin: clamp(3.5rem, 12vw, 6rem) auto 0;
+  text-align: center;
+}
+
+.months__finale-crown {
+  width: clamp(54px, 14vw, 82px);
+  margin: 0 auto 1rem;
+  filter: drop-shadow(0 0 18px rgba(228, 198, 138, 0.6));
+}
+
+.months__finale-text {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 8vw, 2.9rem);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  margin: 0;
+  background: linear-gradient(180deg, #e9d3a4 0%, #e4c68a 40%, #c4a052 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -265,8 +265,7 @@ export const SCENES: readonly Scene[] = [
       "in warm golden shafts, fireflies through the trunks, and a soft mist along the " +
       "ground. Richer and deeper than the earlier chapters.",
     canon: ["landscape"],
-    composition:
-      "Wide banner composition, with the centre of the frame left open and hazy.",
+    composition: "Wide banner composition, with the centre of the frame left open and hazy.",
   },
   {
     id: "month-castle-finale",

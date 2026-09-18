@@ -1,0 +1,23 @@
+.footer {
+  padding: clamp(2.5rem, 9vw, 4rem) var(--page-gutter) clamp(3rem, 10vw, 4.5rem);
+  text-align: center;
+  background: #ece3f0;
+  border-top: 1px solid rgba(228, 198, 138, 0.35);
+}
+
+.footer__line {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin: 0 0 0.3rem;
+  letter-spacing: 0.04em;
+}
+
+.footer__small {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0;
+}
