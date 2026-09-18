@@ -1,0 +1,124 @@
+.rsvp {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(228, 198, 138, 0.22) 0%, transparent 60%),
+    linear-gradient(180deg, var(--ivory) 0%, #f3ecf5 60%, #ece3f0 100%);
+}
+
+.rsvp__stars {
+  opacity: 0.5;
+}
+
+.rsvp__ornament {
+  width: clamp(120px, 30vw, 180px);
+  margin: 0 auto 1.4rem;
+  opacity: 0.9;
+}
+
+.rsvp__lede {
+  font-family: var(--serif);
+  font-size: clamp(1.02rem, 4vw, 1.2rem);
+  color: var(--ink-soft);
+  max-width: 28ch;
+  margin: 0 auto 2.4rem;
+  line-height: 1.7;
+}
+
+.rsvp__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rsvp__button {
+  display: inline-block;
+  padding: 0.95rem 2.4rem;
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  text-decoration: none;
+  background: linear-gradient(150deg, #d9bd7f 0%, #c4a052 100%);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 14px 30px -14px rgba(196, 160, 82, 0.9);
+  transition:
+    transform 260ms var(--ease-soft),
+    box-shadow 260ms var(--ease-soft);
+}
+
+.rsvp__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 38px -16px rgba(196, 160, 82, 0.95);
+}
+
+.rsvp__button:active {
+  transform: translateY(0);
+}
+
+.rsvp__link {
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(154, 143, 168, 0.4);
+  padding-bottom: 2px;
+}
+
+.rsvp__link:hover {
+  color: var(--ink);
+}
+
+.rsvp__by,
+.rsvp__note {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0.4rem 0 0;
+}
+
+/* ---- confirmed ---- */
+
+.rsvp__confirmed {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.6rem 0;
+}
+
+.rsvp__confirmed-sparkles {
+  inset: -20%;
+}
+
+.rsvp__confirmed-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 4.4vw, 1.35rem);
+  color: var(--ink);
+  max-width: 26ch;
+  margin: 0;
+}
+
+/* ---- pending (no RSVP details supplied yet) ---- */
+
+.rsvp__pending {
+  padding: 1.6rem 1.2rem;
+  border-radius: 12px;
+  background: rgba(251, 245, 234, 0.7);
+  box-shadow: inset 0 0 0 1px rgba(228, 198, 138, 0.45);
+}
+
+.rsvp__pending-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 4.4vw, 1.3rem);
+  color: var(--ink);
+  margin: 0 0 0.5rem;
+}

@@ -122,13 +122,20 @@ export function IntroSequence({ onFinish }: Props) {
       transition={{ duration: 1.1, ease: [0.22, 0.61, 0.36, 1] }}
     >
       {/* ---- backdrops ---- */}
-      <div className={`intro__backdrop intro__backdrop--night${backdrop === "night" ? " is-visible" : ""}`}>
+      <div
+        className={`intro__backdrop intro__backdrop--night${backdrop === "night" ? " is-visible" : ""}`}
+      >
         <ParticleField kind="stars" count={70} className="intro__stars" />
       </div>
 
       <div className={`intro__backdrop${backdrop === "opening" ? " is-visible" : ""}`}>
         {backdrop === "opening" && (
-          <CinematicVideo id="fairytale-opening" loop={false} preload="auto" fallback={<PaintedKingdom />} />
+          <CinematicVideo
+            id="fairytale-opening"
+            loop={false}
+            preload="auto"
+            fallback={<PaintedKingdom />}
+          />
         )}
       </div>
 

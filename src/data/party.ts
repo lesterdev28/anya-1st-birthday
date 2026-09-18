@@ -34,11 +34,7 @@ export const rsvp = {
 export const isRsvpConfigured = Boolean(rsvp.contactName && rsvp.contactNumber);
 
 /** The lines of the opening cinematic, in order. */
-export const introLines = [
-  "Once Upon a Time…",
-  "A little dream came true…",
-  "And now…",
-] as const;
+export const introLines = ["Once Upon a Time…", "A little dream came true…", "And now…"] as const;
 
 export interface MonthChapter {
   readonly month: number;
@@ -66,16 +62,88 @@ export interface MonthChapter {
  * grows richer as the year goes on, ending at the castle.
  */
 export const monthChapters: readonly MonthChapter[] = [
-  { month: 1, title: "One Month", caption: "So small, and already the whole world.", photo: null, background: "month-clouds-and-stars" },
-  { month: 2, title: "Two Months", caption: "First long looks at everything.", photo: null, background: "month-clouds-and-stars" },
-  { month: 3, title: "Three Months", caption: "The first real laugh.", photo: "anya-smile-01", background: "month-magical-garden" },
-  { month: 4, title: "Four Months", caption: "Hands discovered. Everything tasted.", photo: "anya-smile-02", background: "month-magical-garden" },
-  { month: 5, title: "Five Months", caption: "Rolling over, and very pleased about it.", photo: "anya-smile-03", background: "month-magical-garden" },
-  { month: 6, title: "Six Months", caption: "Half a year of being adored.", photo: null, background: "month-butterflies-and-blossoms" },
-  { month: 7, title: "Seven Months", caption: "Sitting up to see it all properly.", photo: "anya-portrait-01", background: "month-butterflies-and-blossoms" },
-  { month: 8, title: "Eight Months", caption: "Opinions, and the volume to share them.", photo: null, background: "month-butterflies-and-blossoms" },
-  { month: 9, title: "Nine Months", caption: "Off exploring, one hand held.", photo: "anya-sunhat-01", background: "month-enchanted-forest" },
-  { month: 10, title: "Ten Months", caption: "A favourite toy, carried everywhere.", photo: "anya-sunhat-02", background: "month-enchanted-forest" },
-  { month: 11, title: "Eleven Months", caption: "Almost walking. Definitely running.", photo: "anya-sunhat-03", background: "month-enchanted-forest" },
-  { month: 12, title: "Twelve Months", caption: "One whole year of magic.", photo: null, background: "month-castle-finale" },
+  {
+    month: 1,
+    title: "One Month",
+    caption: "So small, and already the whole world.",
+    photo: "anya-smile-01",
+    background: "month-clouds-and-stars",
+  },
+  {
+    month: 2,
+    title: "Two Months",
+    caption: "First long looks at everything.",
+    photo: "anya-smile-02",
+    background: "month-clouds-and-stars",
+  },
+  {
+    month: 3,
+    title: "Three Months",
+    caption: "The first real laugh.",
+    photo: "anya-smile-03",
+    background: "month-magical-garden",
+  },
+  {
+    month: 4,
+    title: "Four Months",
+    caption: "Hands discovered. Everything tasted.",
+    photo: null,
+    background: "month-magical-garden",
+  },
+  {
+    month: 5,
+    title: "Five Months",
+    caption: "Rolling over, and very pleased about it.",
+    photo: null,
+    background: "month-magical-garden",
+  },
+  {
+    month: 6,
+    title: "Six Months",
+    caption: "Half a year of being adored.",
+    photo: null,
+    background: "month-butterflies-and-blossoms",
+  },
+  {
+    month: 7,
+    title: "Seven Months",
+    caption: "Sitting up to see it all properly.",
+    photo: null,
+    background: "month-butterflies-and-blossoms",
+  },
+  {
+    month: 8,
+    title: "Eight Months",
+    caption: "Opinions, and the volume to share them.",
+    photo: "anya-portrait-01",
+    background: "month-butterflies-and-blossoms",
+  },
+  {
+    month: 9,
+    title: "Nine Months",
+    caption: "Off exploring, one hand held.",
+    photo: null,
+    background: "month-enchanted-forest",
+  },
+  {
+    month: 10,
+    title: "Ten Months",
+    caption: "A favourite toy, carried everywhere.",
+    photo: "anya-sunhat-01",
+    background: "month-enchanted-forest",
+  },
+  {
+    month: 11,
+    title: "Eleven Months",
+    caption: "Almost walking. Definitely running.",
+    photo: "anya-sunhat-02",
+    background: "month-enchanted-forest",
+  },
+  {
+    month: 12,
+    title: "Twelve Months",
+    caption: "One whole year of magic.",
+    photo: "anya-sunhat-03",
+    background: "month-castle-finale",
+  },
 ];

@@ -21,7 +21,14 @@ interface Props {
   readonly sizes?: string;
 }
 
-export function FairyImage({ id, alt, fallback = null, className, priority = false, sizes = "100vw" }: Props) {
+export function FairyImage({
+  id,
+  alt,
+  fallback = null,
+  className,
+  priority = false,
+  sizes = "100vw",
+}: Props) {
   const image = responsiveImage(id);
   const [loaded, setLoaded] = useState(false);
 

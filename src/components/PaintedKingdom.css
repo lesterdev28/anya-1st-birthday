@@ -4,28 +4,149 @@
   overflow: hidden;
 }
 
-.painted-kingdom__svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+/* ---- sky ---- */
+
+.pk-sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #bcd6ec 0%, #c9b8e4 42%, #f3c9d4 72%, #f6d3bc 100%);
 }
 
-/* Clouds drift very slowly. The brief asks for gentle, never dramatic. */
+.pk-air {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- the land band ---- */
+
+.pk-land {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Tall enough to hold the castle and three hills, short enough to leave the sky
+     (where the invitation typography sits) clear on any viewport. */
+  height: clamp(190px, 38%, 420px);
+}
+
+.pk-hills {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* The warm glow rising from behind the castle. */
+.pk-glow {
+  position: absolute;
+  left: 50%;
+  top: -34%;
+  width: min(120%, 900px);
+  aspect-ratio: 3 / 2;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(247, 226, 180, 0.85) 0%,
+    rgba(228, 198, 138, 0.3) 52%,
+    rgba(228, 198, 138, 0) 74%
+  );
+  pointer-events: none;
+}
+
+/* The castle keeps its own aspect ratio and is sized against the viewport width, so it
+   never stretches with the hills and never scales up to swallow the frame. */
+.pk-castle {
+  position: absolute;
+  left: 50%;
+  /* Its base lands just above the far hill line (y=96 of 400, i.e. 76% from the bottom). */
+  bottom: 72%;
+  width: clamp(130px, 25vw, 290px);
+  height: auto;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 8px 18px rgba(122, 96, 160, 0.18));
+}
+
+/* ---- foreground flowers ---- */
+
+.pk-flowers {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26%;
+}
+
+.pk-flower {
+  position: absolute;
+  bottom: 6%;
+  width: clamp(14px, 2.6vw, 26px);
+  height: auto;
+  transform: translateX(-50%);
+  transform-origin: bottom center;
+  animation: pk-sway ease-in-out infinite;
+}
+
+.pk-flower--0 {
+  animation-duration: 7.5s;
+}
+.pk-flower--1 {
+  animation-duration: 9s;
+  animation-delay: -1.5s;
+}
+.pk-flower--2 {
+  animation-duration: 8.2s;
+  animation-delay: -3s;
+}
+.pk-flower--3 {
+  animation-duration: 10s;
+  animation-delay: -4.5s;
+}
+
+@keyframes pk-sway {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-3deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(3deg);
+  }
+}
+
+/* ---- drifting clouds ---- */
+
 .pk-cloud {
   animation: pk-drift linear infinite;
   will-change: transform;
 }
 
-.pk-cloud--a { animation-duration: 96s; }
-.pk-cloud--b { animation-duration: 128s; animation-direction: reverse; }
-.pk-cloud--c { animation-duration: 152s; }
-.pk-cloud--d { animation-duration: 112s; animation-direction: reverse; }
-.pk-cloud--e { animation-duration: 140s; }
+.pk-cloud--a {
+  animation-duration: 96s;
+}
+.pk-cloud--b {
+  animation-duration: 128s;
+  animation-direction: reverse;
+}
+.pk-cloud--c {
+  animation-duration: 152s;
+}
+.pk-cloud--d {
+  animation-duration: 112s;
+  animation-direction: reverse;
+}
+.pk-cloud--e {
+  animation-duration: 140s;
+}
 
 @keyframes pk-drift {
-  from { transform: translateX(-70px); }
-  50%  { transform: translateX(70px); }
-  to   { transform: translateX(-70px); }
+  0%,
+  100% {
+    transform: translateX(-70px);
+  }
+  50% {
+    transform: translateX(70px);
+  }
 }
 
 .pk-moon {
@@ -33,23 +154,31 @@
 }
 
 @keyframes pk-moon-glow {
-  0%, 100% { opacity: 0.85; }
-  50%      { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
-/* Flowers sway just perceptibly. */
-.pk-flower {
-  transform-box: fill-box;
-  transform-origin: bottom center;
-  animation: pk-sway ease-in-out infinite;
-}
+/*
+ * On a wide screen the typography occupies the middle of the frame and there is far less
+ * sky below it than on a phone, so a centred castle collides with the headline. The art
+ * direction already calls for the desktop composition to place the castle "slightly right
+ * of centre" — this is that composition, and it keeps the centre column clear.
+ */
+@media (min-width: 860px) {
+  .pk-castle {
+    left: 74%;
+    width: clamp(150px, 15vw, 225px);
+    bottom: 76%;
+  }
 
-.pk-flower--0 { animation-duration: 7.5s; }
-.pk-flower--1 { animation-duration: 9s;  animation-delay: -1.5s; }
-.pk-flower--2 { animation-duration: 8.2s; animation-delay: -3s; }
-.pk-flower--3 { animation-duration: 10s; animation-delay: -4.5s; }
-
-@keyframes pk-sway {
-  0%, 100% { transform: rotate(-3deg); }
-  50%      { transform: rotate(3deg); }
+  .pk-glow {
+    left: 74%;
+    top: -26%;
+    width: min(70%, 620px);
+  }
 }

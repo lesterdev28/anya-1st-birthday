@@ -1,0 +1,198 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background: var(--night-deep);
+  display: grid;
+  place-items: center;
+}
+
+/* ---- backdrops ---- */
+
+.intro__backdrop {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1400ms var(--ease-soft);
+}
+
+.intro__backdrop.is-visible {
+  opacity: 1;
+}
+
+.intro__backdrop--night {
+  background:
+    radial-gradient(ellipse at 50% 78%, rgba(122, 96, 160, 0.5) 0%, transparent 62%),
+    linear-gradient(180deg, var(--night-deep) 0%, var(--night) 58%, #3a2c55 100%);
+}
+
+/* The stars fade up rather than snapping on, per scene 1. */
+.intro__stars {
+  animation: intro-stars-rise 2400ms var(--ease-soft) both;
+}
+
+@keyframes intro-stars-rise {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* A single shooting star, crossing once. */
+.intro__shooting-star {
+  position: absolute;
+  top: 18%;
+  left: -12%;
+  width: 150px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(251, 245, 234, 0) 0%,
+    rgba(251, 245, 234, 0.95) 65%,
+    #fbf5ea 100%
+  );
+  filter: drop-shadow(0 0 8px rgba(244, 226, 183, 0.9));
+  transform: rotate(14deg);
+  animation: intro-shoot 2600ms var(--ease-soft) 900ms both;
+  pointer-events: none;
+}
+
+@keyframes intro-shoot {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(14deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(128vw, 32vh, 0) rotate(14deg);
+  }
+}
+
+/* Keeps the typography readable over whatever is moving behind it. */
+.intro__scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 42%,
+    rgba(36, 28, 58, 0.34) 0%,
+    rgba(36, 28, 58, 0.06) 55%,
+    rgba(36, 28, 58, 0.42) 100%
+  );
+  pointer-events: none;
+}
+
+/* ---- typography ---- */
+
+.intro__stage {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 var(--page-gutter);
+  text-align: center;
+  color: var(--ivory);
+  text-shadow: 0 2px 26px rgba(36, 28, 58, 0.55);
+}
+
+.intro__line {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 7vw, 3.1rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.intro__name-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro__crown {
+  position: relative;
+  width: clamp(64px, 16vw, 96px);
+  margin-bottom: 0.7rem;
+}
+
+.intro__crown-sparkles {
+  inset: -70% -70% -70% -70%;
+}
+
+.intro__child-name {
+  font-family: var(--serif);
+  font-size: clamp(3.2rem, 15vw, 6rem);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  margin: 0;
+  color: var(--ivory);
+}
+
+.intro__turning {
+  font-family: var(--sans);
+  font-size: clamp(0.72rem, 2.6vw, 0.9rem);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin: 0.9rem 0 0.4rem;
+  color: rgba(251, 245, 234, 0.82);
+}
+
+.intro__one {
+  font-family: var(--serif);
+  font-size: clamp(4.2rem, 22vw, 9rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: 0.1em;
+  margin: 0;
+  background: linear-gradient(180deg, #fbf5ea 0%, #f2ddb2 45%, #e4c68a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.intro__invited {
+  font-family: var(--sans);
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  text-transform: uppercase;
+  font-weight: 300;
+  margin: 0;
+  color: var(--ivory);
+}
+
+/* ---- skip ---- */
+
+.intro__skip {
+  position: absolute;
+  right: max(var(--page-gutter), env(safe-area-inset-right));
+  bottom: max(1.6rem, env(safe-area-inset-bottom));
+  z-index: 3;
+  padding: 0.6rem 1.25rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(251, 245, 234, 0.9);
+  background: rgba(36, 28, 58, 0.34);
+  border: 1px solid rgba(251, 245, 234, 0.38);
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition:
+    background 250ms var(--ease-soft),
+    color 250ms var(--ease-soft);
+}
+
+.intro__skip:hover {
+  background: rgba(251, 245, 234, 0.92);
+  color: var(--night);
+}
