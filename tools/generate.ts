@@ -68,13 +68,18 @@ async function generateImage(scene: Scene, dryRun: boolean): Promise<void> {
   }
 
   console.log(`Generating image ${scene.id} at ${scene.size} (billable)...`);
+  // The v1 image endpoint expects its arguments under a `params` object, unlike the
+  // model-slug video endpoints, which take a flat body. The SDK posts `input` verbatim
+  // as the request body, so the wrapper has to be written here.
   const response = await higgsfield.subscribe(IMAGE_ENDPOINT, {
     input: {
-      prompt,
-      width_and_height: scene.size,
-      quality: "1080p",
-      batch_size: 1,
-      enhance_prompt: false,
+      params: {
+        prompt,
+        width_and_height: scene.size,
+        quality: "1080p",
+        batch_size: 1,
+        enhance_prompt: false,
+      },
     },
     withPolling: true,
   });
