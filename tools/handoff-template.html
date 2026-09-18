@@ -1,0 +1,765 @@
+<title>Anya's Art Run-Sheet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  :root {
+    --ground: #F6F4FA;
+    --surface: #FFFFFF;
+    --surface-sunk: #F0ECF6;
+    --ink: #1F1B29;
+    --ink-soft: #5D5570;
+    --ink-faint: #8A839C;
+    --line: #E3DDEF;
+    --line-strong: #CFC6E2;
+    --accent: #6D4FB5;
+    --accent-soft: #EDE7F8;
+    --gold: #8F6E22;
+    --gold-soft: #F7EFDA;
+    --good: #2F6B4A;
+    --good-soft: #E2F0E8;
+    --shadow: 0 1px 2px rgba(31, 27, 41, .06), 0 8px 24px rgba(31, 27, 41, .05);
+  }
+
+  :root:not([data-theme="light"]) {
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #131019;
+      --surface: #1C1826;
+      --surface-sunk: #24202F;
+      --ink: #F2EEF9;
+      --ink-soft: #ABA2BE;
+      --ink-faint: #7D7490;
+      --line: #2E2839;
+      --line-strong: #433B54;
+      --accent: #C9B8E4;
+      --accent-soft: #292036;
+      --gold: #E4C68A;
+      --gold-soft: #2D2517;
+      --good: #8CC7A4;
+      --good-soft: #17281E;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .3);
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #131019;
+    --surface: #1C1826;
+    --surface-sunk: #24202F;
+    --ink: #F2EEF9;
+    --ink-soft: #ABA2BE;
+    --ink-faint: #7D7490;
+    --line: #2E2839;
+    --line-strong: #433B54;
+    --accent: #C9B8E4;
+    --accent-soft: #292036;
+    --gold: #E4C68A;
+    --gold-soft: #2D2517;
+    --good: #8CC7A4;
+    --good-soft: #17281E;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .3);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 0 72px;
+  }
+
+  h1, h2, h3 {
+    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    text-wrap: balance;
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  code, pre, .mono {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  /* ---- masthead ---- */
+
+  .masthead { padding-block: 44px 28px; }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+
+  h1 { font-size: clamp(30px, 7vw, 44px); font-weight: 800; letter-spacing: -.02em; }
+
+  .standfirst {
+    margin: 16px 0 0;
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+
+  /* ---- the blocker note ---- */
+
+  .note {
+    background: var(--gold-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-block: 28px;
+  }
+
+  .note h2 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    margin-bottom: 6px;
+  }
+
+  .note p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+  .note p + p { margin-top: 10px; }
+
+  /* ---- progress rail ---- */
+
+  .rail {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: color-mix(in srgb, var(--ground) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    margin-inline: -20px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+  }
+
+  .rail-count {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .rail-track {
+    flex: 1;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--surface-sunk);
+    overflow: hidden;
+    min-width: 60px;
+  }
+
+  .rail-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width .25s ease;
+  }
+
+  .rail button {
+    background: none;
+    border: 1px solid var(--line-strong);
+    color: var(--ink-soft);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .rail button:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+  /* ---- sections ---- */
+
+  section { margin-block: 44px; }
+
+  h2.section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-soft);
+    margin-bottom: 22px;
+  }
+
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  .lede { color: var(--ink-soft); max-width: 64ch; }
+
+  ol.steps { padding-left: 20px; margin: 0; color: var(--ink-soft); }
+  ol.steps li { margin-bottom: 12px; }
+  ol.steps li::marker { color: var(--accent); font-weight: 600; }
+
+  /* ---- command blocks ---- */
+
+  .cmd {
+    position: relative;
+    background: var(--surface-sunk);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-block: 14px;
+    overflow-x: auto;
+  }
+
+  .cmd pre {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre;
+  }
+
+  /* ---- asset cards ---- */
+
+  .asset {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .asset.is-hero { border-color: var(--gold); border-width: 2px; }
+  .asset.is-done { opacity: .62; }
+
+  .asset-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    background: var(--surface-sunk);
+    border-radius: 5px;
+    padding: 3px 7px;
+    font-variant-numeric: tabular-nums;
+    flex: none;
+  }
+
+  .asset-id {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    font-weight: 600;
+    word-break: break-word;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .tick {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--ink-faint);
+    cursor: pointer;
+    user-select: none;
+    flex: none;
+  }
+
+  .tick input { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    border-radius: 5px;
+    padding: 3px 8px;
+    background: var(--surface-sunk);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .badge.gold { background: var(--gold-soft); color: var(--gold); }
+  .badge.accent { background: var(--accent-soft); color: var(--accent); }
+
+  .dest {
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--surface-sunk);
+    border-radius: 6px;
+    padding: 8px 10px;
+    overflow-x: auto;
+  }
+
+  .dest span {
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: 10.5px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .dest code { font-size: 12.5px; white-space: nowrap; }
+
+  .actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
+  .btn {
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 7px;
+    padding: 7px 13px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background .15s, border-color .15s;
+  }
+
+  .btn-primary { background: var(--accent); color: var(--surface); }
+  :root[data-theme="dark"] .btn-primary,
+  .btn-primary { color: var(--ground); }
+  .btn-primary:hover { filter: brightness(1.08); }
+
+  .btn-quiet {
+    background: transparent;
+    border-color: var(--line-strong);
+    color: var(--ink-soft);
+  }
+
+  .btn-quiet:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+  .btn.copied { background: var(--good-soft); color: var(--good); border-color: var(--good); }
+
+  details.prompt { margin-top: 14px; }
+
+  details.prompt summary {
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  details.prompt summary:hover { color: var(--accent); }
+
+  details.prompt p {
+    margin-top: 10px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    background: var(--surface-sunk);
+    border-radius: 7px;
+    padding: 12px 14px;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .stop-here {
+    background: var(--gold-soft);
+    border: 1px dashed var(--gold);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+
+  .stop-here strong { color: var(--ink); }
+
+  /* ---- where-things-go tree ---- */
+
+  .tree {
+    background: var(--surface-sunk);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .tree .dir { color: var(--accent); font-weight: 600; }
+
+  /* ---- split guidance ---- */
+
+  .split { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+
+  .split-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .split-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .split-card p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+  .split-card .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 2px 7px;
+    margin-bottom: 10px;
+  }
+
+  .tag-web { background: var(--accent-soft); color: var(--accent); }
+  .tag-cli { background: var(--gold-soft); color: var(--gold); }
+
+  footer {
+    margin-top: 52px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+
+  footer code { font-size: 12.5px; }
+
+  a { color: var(--accent); }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media (max-width: 460px) {
+    .rail { gap: 10px; }
+    .rail-count { font-size: 12px; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">Anya&rsquo;s first birthday &middot; invitation art</p>
+    <h1>Generating the art on your own machine</h1>
+    <p class="standfirst">
+      Seventeen assets, in the order they should be made, with every setting and the exact
+      filename each one needs. Generate the first, stop, and send it over.
+    </p>
+  </header>
+
+  <div class="note">
+    <h2>Why this exists</h2>
+    <p>
+      The tooling in the repo talks to the Higgsfield <strong>API</strong>, which bills its own
+      credit balance &mdash; a separate balance from a Higgsfield web subscription. That one is
+      empty, and topping it up would mean paying twice for what the subscription already covers.
+      This run-sheet does the same job from a machine signed in to the subscription instead.
+    </p>
+    <p>
+      Every prompt here is the exact string the tooling would have sent, composed from the canon
+      in <code>tools/art-direction.ts</code>. The repetition between them is deliberate: it is what
+      keeps the castle the same castle across all seventeen. <strong>Don&rsquo;t reword them.</strong>
+      If one comes back wrong, the canon gets fixed and these regenerate.
+    </p>
+  </div>
+
+  <div class="rail">
+    <span class="rail-count"><span id="done-count">0</span> of <span id="total-count">0</span> done</span>
+    <span class="rail-track"><span class="rail-fill" id="rail-fill"></span></span>
+    <button type="button" id="reset-btn">Reset</button>
+  </div>
+
+  <section>
+    <h2 class="section-title">1 &middot; Install and sign in</h2>
+    <p class="lede">In PowerShell, on the machine with your Higgsfield login:</p>
+    <div class="cmd"><pre>npm install -g @higgsfield/cli
+higgsfield auth login</pre></div>
+    <p class="lede">
+      <code>auth login</code> opens your browser and waits for you to approve it there. It has to be
+      the browser on the same machine as the CLI &mdash; which is exactly why this part could never
+      be done from our end.
+    </p>
+    <p class="lede">Then check the model names on your account, since the catalogue moves:</p>
+    <div class="cmd"><pre>higgsfield model list</pre></div>
+    <p class="lede">
+      These commands use <code class="mono" id="image-model-name"></code> for images and
+      <code class="mono" id="video-model-name"></code> for video. If <code>model list</code> shows a
+      newer Seedance, use that one and keep every other setting the same.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">2 &middot; The run</h2>
+    <p class="lede">
+      Each command waits for the generation to finish and then prints a result URL. The CLI
+      doesn&rsquo;t save the file for you &mdash; download it from that URL and put it at the path
+      shown on the card. <strong>The filename matters:</strong> the site looks each asset up by that
+      exact name, and anything it can&rsquo;t find quietly falls back to the painted version.
+    </p>
+
+    <div class="stop-here">
+      <strong>Start with number one and stop there.</strong> The mobile hero sets the look, and the
+      other sixteen are judged against it. Send it over before running the rest &mdash; if something
+      needs to change, it is far cheaper to change it once than seventeen times.
+    </div>
+
+    <div id="assets"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">3 &middot; Where everything goes</h2>
+    <div class="tree" id="tree"></div>
+    <p class="lede" style="margin-top:14px">
+      Keep the <code>-raw</code> on the two clips. It marks them as the untouched download, so the
+      compression step never overwrites your original.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">4 &middot; Once the files are in</h2>
+    <p class="lede">From the repo:</p>
+    <div class="cmd"><pre>cd tools
+npm install
+npm run optimize</pre></div>
+    <p class="lede">
+      That builds the WebP and AVIF sizes the site actually loads, makes a blurred placeholder for
+      each, and rewrites the manifest that tells the site which assets exist. Your originals are left
+      alone. Commit the originals, the <code>optimized/</code> folders and the manifest together.
+    </p>
+    <p class="lede">
+      The two clips need ffmpeg, which the optimize step doesn&rsquo;t do. The three commands per clip
+      are in the repo&rsquo;s <code>README.md</code> under <strong>Videos</strong> &mdash; an MP4, a WebM
+      and a poster frame. The poster isn&rsquo;t optional: it is what a guest sees while the clip loads,
+      and what stays on screen if the clip never plays at all.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">5 &middot; CLI or the web app</h2>
+    <p class="lede">
+      The web app is signed in to the same subscription, and the site doesn&rsquo;t care which tool made
+      a file. Paste the same prompt, set the same aspect ratio, save it under the same name.
+    </p>
+    <div class="split">
+      <div class="split-card">
+        <span class="tag tag-web">Web app is easier</span>
+        <h3>The heroes and the five month backgrounds</h3>
+        <p>
+          You&rsquo;re judging composition on these and will probably want to re-roll a few times.
+          Seeing the result immediately beats re-running a command and waiting.
+        </p>
+      </div>
+      <div class="split-card">
+        <span class="tag tag-cli">Use the CLI</span>
+        <h3>The six decorations</h3>
+        <p>
+          Each needs its subject isolated cleanly on a plain flat field so the site can lift it out
+          and reuse it. That depends on the prompt going through exactly as written, character for
+          character.
+        </p>
+      </div>
+      <div class="split-card">
+        <span class="tag tag-cli">Either</span>
+        <h3>The two clips</h3>
+        <p>
+          Whichever you prefer. Keep the duration at 5 seconds and the ratio at 9:16 so they match
+          the hero framing when the site cuts from clip to still.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      Generated from <code>tools/art-direction.ts</code> by <code>tools/handoff.ts</code>. The same
+      content is in the repo at <code>docs/generate-on-your-machine.md</code>, with a
+      <code>tools/generate-on-windows.ps1</code> that runs the whole list in one go. Change the canon,
+      run <code>npm run handoff</code>, and all three update together.
+    </p>
+    <p>Ticks are remembered in this browser only.</p>
+  </footer>
+</div>
+
+<script>
+  const DATA = /*__DATA__*/ null;
+
+  const STORE_KEY = "anya-art-runsheet-progress";
+
+  function loadProgress() {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      return raw ? new Set(JSON.parse(raw)) : new Set();
+    } catch (err) {
+      return new Set();
+    }
+  }
+
+  function saveProgress(set) {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify([...set]));
+    } catch (err) {
+      /* Private window or blocked storage: ticks just don't persist. */
+    }
+  }
+
+  const done = loadProgress();
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (ch) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[ch]));
+  }
+
+  function copyText(text, button) {
+    const mark = () => {
+      const original = button.textContent;
+      button.textContent = "Copied";
+      button.classList.add("copied");
+      setTimeout(() => {
+        button.textContent = original;
+        button.classList.remove("copied");
+      }, 1400);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(mark, () => fallbackCopy(text, mark));
+    } else {
+      fallbackCopy(text, mark);
+    }
+  }
+
+  function fallbackCopy(text, mark) {
+    const field = document.createElement("textarea");
+    field.value = text;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.opacity = "0";
+    document.body.appendChild(field);
+    field.select();
+    try {
+      document.execCommand("copy");
+      mark();
+    } catch (err) {
+      field.style.opacity = "1";
+      window.prompt("Copy this:", text);
+    }
+    field.remove();
+  }
+
+  function renderProgress() {
+    const total = DATA.assets.length;
+    const count = DATA.assets.filter((a) => done.has(a.id)).length;
+    document.getElementById("done-count").textContent = count;
+    document.getElementById("total-count").textContent = total;
+    document.getElementById("rail-fill").style.width = `${(count / total) * 100}%`;
+  }
+
+  function buildAsset(asset) {
+    const card = document.createElement("article");
+    card.className = "asset" + (asset.index === 1 ? " is-hero" : "");
+    if (done.has(asset.id)) card.classList.add("is-done");
+
+    const badges = asset.badges
+      .map((b) => `<span class="badge ${escapeHtml(b.tone || "")}">${escapeHtml(b.text)}</span>`)
+      .join("");
+
+    card.innerHTML = `
+      <div class="asset-head">
+        <span class="num">${String(asset.index).padStart(2, "0")}</span>
+        <span class="asset-id">${escapeHtml(asset.id)}</span>
+        <label class="tick">
+          <input type="checkbox" id="tick-${escapeHtml(asset.id)}" ${done.has(asset.id) ? "checked" : ""}>
+          done
+        </label>
+      </div>
+      <div class="badges">${badges}</div>
+      <div class="dest">
+        <span>Save as</span>
+        <code>${escapeHtml(asset.destination)}</code>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" data-copy="command">Copy command</button>
+        <button type="button" class="btn btn-quiet" data-copy="prompt">Copy prompt only</button>
+      </div>
+      <details class="prompt">
+        <summary>Read the prompt</summary>
+        <p>${escapeHtml(asset.prompt)}</p>
+      </details>
+    `;
+
+    card.querySelector('[data-copy="command"]').addEventListener("click", (e) => {
+      copyText(asset.command, e.currentTarget);
+    });
+    card.querySelector('[data-copy="prompt"]').addEventListener("click", (e) => {
+      copyText(asset.prompt, e.currentTarget);
+    });
+
+    const box = card.querySelector("input");
+    box.addEventListener("change", () => {
+      if (box.checked) done.add(asset.id); else done.delete(asset.id);
+      card.classList.toggle("is-done", box.checked);
+      saveProgress(done);
+      renderProgress();
+    });
+
+    return card;
+  }
+
+  function render() {
+    document.getElementById("image-model-name").textContent = DATA.imageModel;
+    document.getElementById("video-model-name").textContent = DATA.videoModel;
+
+    const host = document.getElementById("assets");
+    for (const asset of DATA.assets) host.appendChild(buildAsset(asset));
+
+    const tree = document.getElementById("tree");
+    tree.innerHTML = DATA.tree
+      .map((line) =>
+        line.isDir
+          ? `<div class="dir">${escapeHtml(line.text)}</div>`
+          : `<div>${escapeHtml(line.text)}</div>`
+      )
+      .join("");
+
+    document.getElementById("reset-btn").addEventListener("click", () => {
+      done.clear();
+      saveProgress(done);
+      document.querySelectorAll(".asset input").forEach((box) => { box.checked = false; });
+      document.querySelectorAll(".asset").forEach((card) => card.classList.remove("is-done"));
+      renderProgress();
+    });
+
+    renderProgress();
+  }
+
+  render();
+</script>

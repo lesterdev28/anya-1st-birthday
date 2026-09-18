@@ -1,0 +1,765 @@
+<title>Anya's Art Run-Sheet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  :root {
+    --ground: #F6F4FA;
+    --surface: #FFFFFF;
+    --surface-sunk: #F0ECF6;
+    --ink: #1F1B29;
+    --ink-soft: #5D5570;
+    --ink-faint: #8A839C;
+    --line: #E3DDEF;
+    --line-strong: #CFC6E2;
+    --accent: #6D4FB5;
+    --accent-soft: #EDE7F8;
+    --gold: #8F6E22;
+    --gold-soft: #F7EFDA;
+    --good: #2F6B4A;
+    --good-soft: #E2F0E8;
+    --shadow: 0 1px 2px rgba(31, 27, 41, .06), 0 8px 24px rgba(31, 27, 41, .05);
+  }
+
+  :root:not([data-theme="light"]) {
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #131019;
+      --surface: #1C1826;
+      --surface-sunk: #24202F;
+      --ink: #F2EEF9;
+      --ink-soft: #ABA2BE;
+      --ink-faint: #7D7490;
+      --line: #2E2839;
+      --line-strong: #433B54;
+      --accent: #C9B8E4;
+      --accent-soft: #292036;
+      --gold: #E4C68A;
+      --gold-soft: #2D2517;
+      --good: #8CC7A4;
+      --good-soft: #17281E;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .3);
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #131019;
+    --surface: #1C1826;
+    --surface-sunk: #24202F;
+    --ink: #F2EEF9;
+    --ink-soft: #ABA2BE;
+    --ink-faint: #7D7490;
+    --line: #2E2839;
+    --line-strong: #433B54;
+    --accent: #C9B8E4;
+    --accent-soft: #292036;
+    --gold: #E4C68A;
+    --gold-soft: #2D2517;
+    --good: #8CC7A4;
+    --good-soft: #17281E;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .3);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 0 72px;
+  }
+
+  h1, h2, h3 {
+    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    text-wrap: balance;
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  code, pre, .mono {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  /* ---- masthead ---- */
+
+  .masthead { padding-block: 44px 28px; }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+
+  h1 { font-size: clamp(30px, 7vw, 44px); font-weight: 800; letter-spacing: -.02em; }
+
+  .standfirst {
+    margin: 16px 0 0;
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+
+  /* ---- the blocker note ---- */
+
+  .note {
+    background: var(--gold-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-block: 28px;
+  }
+
+  .note h2 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    margin-bottom: 6px;
+  }
+
+  .note p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+  .note p + p { margin-top: 10px; }
+
+  /* ---- progress rail ---- */
+
+  .rail {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: color-mix(in srgb, var(--ground) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    margin-inline: -20px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+  }
+
+  .rail-count {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .rail-track {
+    flex: 1;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--surface-sunk);
+    overflow: hidden;
+    min-width: 60px;
+  }
+
+  .rail-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width .25s ease;
+  }
+
+  .rail button {
+    background: none;
+    border: 1px solid var(--line-strong);
+    color: var(--ink-soft);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .rail button:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+  /* ---- sections ---- */
+
+  section { margin-block: 44px; }
+
+  h2.section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-soft);
+    margin-bottom: 22px;
+  }
+
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  .lede { color: var(--ink-soft); max-width: 64ch; }
+
+  ol.steps { padding-left: 20px; margin: 0; color: var(--ink-soft); }
+  ol.steps li { margin-bottom: 12px; }
+  ol.steps li::marker { color: var(--accent); font-weight: 600; }
+
+  /* ---- command blocks ---- */
+
+  .cmd {
+    position: relative;
+    background: var(--surface-sunk);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-block: 14px;
+    overflow-x: auto;
+  }
+
+  .cmd pre {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre;
+  }
+
+  /* ---- asset cards ---- */
+
+  .asset {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .asset.is-hero { border-color: var(--gold); border-width: 2px; }
+  .asset.is-done { opacity: .62; }
+
+  .asset-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    background: var(--surface-sunk);
+    border-radius: 5px;
+    padding: 3px 7px;
+    font-variant-numeric: tabular-nums;
+    flex: none;
+  }
+
+  .asset-id {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    font-weight: 600;
+    word-break: break-word;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .tick {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--ink-faint);
+    cursor: pointer;
+    user-select: none;
+    flex: none;
+  }
+
+  .tick input { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    border-radius: 5px;
+    padding: 3px 8px;
+    background: var(--surface-sunk);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .badge.gold { background: var(--gold-soft); color: var(--gold); }
+  .badge.accent { background: var(--accent-soft); color: var(--accent); }
+
+  .dest {
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--surface-sunk);
+    border-radius: 6px;
+    padding: 8px 10px;
+    overflow-x: auto;
+  }
+
+  .dest span {
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: 10.5px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .dest code { font-size: 12.5px; white-space: nowrap; }
+
+  .actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
+  .btn {
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 7px;
+    padding: 7px 13px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background .15s, border-color .15s;
+  }
+
+  .btn-primary { background: var(--accent); color: var(--surface); }
+  :root[data-theme="dark"] .btn-primary,
+  .btn-primary { color: var(--ground); }
+  .btn-primary:hover { filter: brightness(1.08); }
+
+  .btn-quiet {
+    background: transparent;
+    border-color: var(--line-strong);
+    color: var(--ink-soft);
+  }
+
+  .btn-quiet:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+  .btn.copied { background: var(--good-soft); color: var(--good); border-color: var(--good); }
+
+  details.prompt { margin-top: 14px; }
+
+  details.prompt summary {
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  details.prompt summary:hover { color: var(--accent); }
+
+  details.prompt p {
+    margin-top: 10px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    background: var(--surface-sunk);
+    border-radius: 7px;
+    padding: 12px 14px;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .stop-here {
+    background: var(--gold-soft);
+    border: 1px dashed var(--gold);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+
+  .stop-here strong { color: var(--ink); }
+
+  /* ---- where-things-go tree ---- */
+
+  .tree {
+    background: var(--surface-sunk);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .tree .dir { color: var(--accent); font-weight: 600; }
+
+  /* ---- split guidance ---- */
+
+  .split { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+
+  .split-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .split-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .split-card p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+  .split-card .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 2px 7px;
+    margin-bottom: 10px;
+  }
+
+  .tag-web { background: var(--accent-soft); color: var(--accent); }
+  .tag-cli { background: var(--gold-soft); color: var(--gold); }
+
+  footer {
+    margin-top: 52px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+
+  footer code { font-size: 12.5px; }
+
+  a { color: var(--accent); }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media (max-width: 460px) {
+    .rail { gap: 10px; }
+    .rail-count { font-size: 12px; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">Anya&rsquo;s first birthday &middot; invitation art</p>
+    <h1>Generating the art on your own machine</h1>
+    <p class="standfirst">
+      Seventeen assets, in the order they should be made, with every setting and the exact
+      filename each one needs. Generate the first, stop, and send it over.
+    </p>
+  </header>
+
+  <div class="note">
+    <h2>Why this exists</h2>
+    <p>
+      The tooling in the repo talks to the Higgsfield <strong>API</strong>, which bills its own
+      credit balance &mdash; a separate balance from a Higgsfield web subscription. That one is
+      empty, and topping it up would mean paying twice for what the subscription already covers.
+      This run-sheet does the same job from a machine signed in to the subscription instead.
+    </p>
+    <p>
+      Every prompt here is the exact string the tooling would have sent, composed from the canon
+      in <code>tools/art-direction.ts</code>. The repetition between them is deliberate: it is what
+      keeps the castle the same castle across all seventeen. <strong>Don&rsquo;t reword them.</strong>
+      If one comes back wrong, the canon gets fixed and these regenerate.
+    </p>
+  </div>
+
+  <div class="rail">
+    <span class="rail-count"><span id="done-count">0</span> of <span id="total-count">0</span> done</span>
+    <span class="rail-track"><span class="rail-fill" id="rail-fill"></span></span>
+    <button type="button" id="reset-btn">Reset</button>
+  </div>
+
+  <section>
+    <h2 class="section-title">1 &middot; Install and sign in</h2>
+    <p class="lede">In PowerShell, on the machine with your Higgsfield login:</p>
+    <div class="cmd"><pre>npm install -g @higgsfield/cli
+higgsfield auth login</pre></div>
+    <p class="lede">
+      <code>auth login</code> opens your browser and waits for you to approve it there. It has to be
+      the browser on the same machine as the CLI &mdash; which is exactly why this part could never
+      be done from our end.
+    </p>
+    <p class="lede">Then check the model names on your account, since the catalogue moves:</p>
+    <div class="cmd"><pre>higgsfield model list</pre></div>
+    <p class="lede">
+      These commands use <code class="mono" id="image-model-name"></code> for images and
+      <code class="mono" id="video-model-name"></code> for video. If <code>model list</code> shows a
+      newer Seedance, use that one and keep every other setting the same.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">2 &middot; The run</h2>
+    <p class="lede">
+      Each command waits for the generation to finish and then prints a result URL. The CLI
+      doesn&rsquo;t save the file for you &mdash; download it from that URL and put it at the path
+      shown on the card. <strong>The filename matters:</strong> the site looks each asset up by that
+      exact name, and anything it can&rsquo;t find quietly falls back to the painted version.
+    </p>
+
+    <div class="stop-here">
+      <strong>Start with number one and stop there.</strong> The mobile hero sets the look, and the
+      other sixteen are judged against it. Send it over before running the rest &mdash; if something
+      needs to change, it is far cheaper to change it once than seventeen times.
+    </div>
+
+    <div id="assets"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">3 &middot; Where everything goes</h2>
+    <div class="tree" id="tree"></div>
+    <p class="lede" style="margin-top:14px">
+      Keep the <code>-raw</code> on the two clips. It marks them as the untouched download, so the
+      compression step never overwrites your original.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">4 &middot; Once the files are in</h2>
+    <p class="lede">From the repo:</p>
+    <div class="cmd"><pre>cd tools
+npm install
+npm run optimize</pre></div>
+    <p class="lede">
+      That builds the WebP and AVIF sizes the site actually loads, makes a blurred placeholder for
+      each, and rewrites the manifest that tells the site which assets exist. Your originals are left
+      alone. Commit the originals, the <code>optimized/</code> folders and the manifest together.
+    </p>
+    <p class="lede">
+      The two clips need ffmpeg, which the optimize step doesn&rsquo;t do. The three commands per clip
+      are in the repo&rsquo;s <code>README.md</code> under <strong>Videos</strong> &mdash; an MP4, a WebM
+      and a poster frame. The poster isn&rsquo;t optional: it is what a guest sees while the clip loads,
+      and what stays on screen if the clip never plays at all.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">5 &middot; CLI or the web app</h2>
+    <p class="lede">
+      The web app is signed in to the same subscription, and the site doesn&rsquo;t care which tool made
+      a file. Paste the same prompt, set the same aspect ratio, save it under the same name.
+    </p>
+    <div class="split">
+      <div class="split-card">
+        <span class="tag tag-web">Web app is easier</span>
+        <h3>The heroes and the five month backgrounds</h3>
+        <p>
+          You&rsquo;re judging composition on these and will probably want to re-roll a few times.
+          Seeing the result immediately beats re-running a command and waiting.
+        </p>
+      </div>
+      <div class="split-card">
+        <span class="tag tag-cli">Use the CLI</span>
+        <h3>The six decorations</h3>
+        <p>
+          Each needs its subject isolated cleanly on a plain flat field so the site can lift it out
+          and reuse it. That depends on the prompt going through exactly as written, character for
+          character.
+        </p>
+      </div>
+      <div class="split-card">
+        <span class="tag tag-cli">Either</span>
+        <h3>The two clips</h3>
+        <p>
+          Whichever you prefer. Keep the duration at 5 seconds and the ratio at 9:16 so they match
+          the hero framing when the site cuts from clip to still.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      Generated from <code>tools/art-direction.ts</code> by <code>tools/handoff.ts</code>. The same
+      content is in the repo at <code>docs/generate-on-your-machine.md</code>, with a
+      <code>tools/generate-on-windows.ps1</code> that runs the whole list in one go. Change the canon,
+      run <code>npm run handoff</code>, and all three update together.
+    </p>
+    <p>Ticks are remembered in this browser only.</p>
+  </footer>
+</div>
+
+<script>
+  const DATA = {"imageModel":"text2image_soul_v2","videoModel":"seedance_2_0","assets":[{"index":1,"id":"fairytale-castle-hero-mobile","destination":"public/invitation/higgsfield/hero/fairytale-castle-hero-mobile.png","prompt":"A breathtaking enchanted fairy-tale kingdom, seen as a wide establishing view. The castle stands small in the distance on the horizon, above soft rolling hills. Dreamy clouds gather around and behind it. The foreground holds delicate wildflowers, pale butterflies and tiny glowing fireflies. Small golden stars and magical particles float throughout. Warm golden sunlight. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Vertical 9:16 composition. Critically important: leave a large area of calm, uncluttered negative space across the centre and upper-centre of the frame — soft open sky with only faint haze and a few tiny particles there, no detail, nothing busy — because invitation typography will be laid over that area. Push all detail to the lower third and the outer edges. The castle sits low, near the horizon line in the lower-middle of the frame. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 9:16 --quality 2k --wait `\n  --prompt 'A breathtaking enchanted fairy-tale kingdom, seen as a wide establishing view. The castle stands small in the distance on the horizon, above soft rolling hills. Dreamy clouds gather around and behind it. The foreground holds delicate wildflowers, pale butterflies and tiny glowing fireflies. Small golden stars and magical particles float throughout. Warm golden sunlight. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Vertical 9:16 composition. Critically important: leave a large area of calm, uncluttered negative space across the centre and upper-centre of the frame — soft open sky with only faint haze and a few tiny particles there, no detail, nothing busy — because invitation typography will be laid over that area. Push all detail to the lower third and the outer edges. The castle sits low, near the horizon line in the lower-middle of the frame. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"9:16","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"},{"text":"generate this one first","tone":"gold"}]},{"index":2,"id":"fairytale-castle-hero-desktop","destination":"public/invitation/higgsfield/hero/fairytale-castle-hero-desktop.png","prompt":"The same enchanted fairy-tale kingdom as the mobile hero, recomposed wide. The castle stands in the distance, slightly right of centre, above soft rolling hills. Dreamy clouds surround it. The foreground spreads with delicate wildflowers, pale butterflies and tiny glowing fireflies. Golden stars and magical particles drift through the air. Warm golden sunlight. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Wide 16:9 cinematic composition. Leave calm, uncluttered negative space across the centre and upper-centre — soft open sky with no detail there — for typography. Detail lives in the lower third and the left and right edges. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 16:9 --quality 2k --wait `\n  --prompt 'The same enchanted fairy-tale kingdom as the mobile hero, recomposed wide. The castle stands in the distance, slightly right of centre, above soft rolling hills. Dreamy clouds surround it. The foreground spreads with delicate wildflowers, pale butterflies and tiny glowing fireflies. Golden stars and magical particles drift through the air. Warm golden sunlight. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Wide 16:9 cinematic composition. Leave calm, uncluttered negative space across the centre and upper-centre — soft open sky with no detail there — for typography. Detail lives in the lower third and the left and right edges. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"16:9","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":3,"id":"storybook-cover","destination":"public/invitation/higgsfield/storybook/storybook-cover.png","prompt":"An antique magical storybook lying closed, seen straight on from above. The cover is soft blush-and-ivory cloth with a wide ornate champagne-gold border embossed around its edge, a delicate gold crown emblem centred on the cover, fine floral fairy-tale ornamentation in the corners, and a scatter of tiny gold stars. Warm gold light catches the embossing. The book fills the frame, centred, on a plain soft lavender backdrop. Leave the centre of the cover below the crown emblem clear for typography. Flat straight-on view, no perspective distortion. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 3:4 --quality 2k --wait `\n  --prompt 'An antique magical storybook lying closed, seen straight on from above. The cover is soft blush-and-ivory cloth with a wide ornate champagne-gold border embossed around its edge, a delicate gold crown emblem centred on the cover, fine floral fairy-tale ornamentation in the corners, and a scatter of tiny gold stars. Warm gold light catches the embossing. The book fills the frame, centred, on a plain soft lavender backdrop. Leave the centre of the cover below the crown emblem clear for typography. Flat straight-on view, no perspective distortion. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"3:4","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":4,"id":"storybook-pages","destination":"public/invitation/higgsfield/storybook/storybook-pages.png","prompt":"The interior of the same antique storybook, opened flat to two blank facing pages of warm ivory parchment with soft deckled edges and a faint aged texture. A slim champagne-gold rule and a delicate floral vine ornament run around the outer margin of each page. A few tiny gold stars in the corners. Straight-on view of the open spread, filling the frame. Both pages are completely blank in their centres — empty parchment, no text, no illustration there — so the website can lay content over them. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 4:3 --quality 2k --wait `\n  --prompt 'The interior of the same antique storybook, opened flat to two blank facing pages of warm ivory parchment with soft deckled edges and a faint aged texture. A slim champagne-gold rule and a delicate floral vine ornament run around the outer margin of each page. A few tiny gold stars in the corners. Straight-on view of the open spread, filling the frame. Both pages are completely blank in their centres — empty parchment, no text, no illustration there — so the website can lay content over them. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"4:3","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":5,"id":"cloud-bank","destination":"public/invitation/higgsfield/decorations/cloud-bank.png","prompt":"A soft bank of rounded pastel cumulus clouds in blush pink, lavender and ivory, rimmed with warm gold light, with a few tiny golden particles drifting among them. The clouds sit across the lower half of the frame against a plain flat powder-blue field, so the asset can be cut out and layered. No horizon, no ground, no castle. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 16:9 --quality 2k --wait `\n  --prompt 'A soft bank of rounded pastel cumulus clouds in blush pink, lavender and ivory, rimmed with warm gold light, with a few tiny golden particles drifting among them. The clouds sit across the lower half of the frame against a plain flat powder-blue field, so the asset can be cut out and layered. No horizon, no ground, no castle. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"16:9","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":6,"id":"golden-crown","destination":"public/invitation/higgsfield/decorations/golden-crown.png","prompt":"A small delicate champagne-gold crown for a baby's first birthday: five slender points each tipped with a tiny pearl, a fine band set with two small blush-pink and lavender gems, soft warm gold glow and a few sparkles around it. The crown alone, centred, on a plain flat pale-lavender background with no scene and no shadow, so it can be isolated cleanly. Straight-on view. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 1:1 --quality 2k --wait `\n  --prompt 'A small delicate champagne-gold crown for a baby''s first birthday: five slender points each tipped with a tiny pearl, a fine band set with two small blush-pink and lavender gems, soft warm gold glow and a few sparkles around it. The crown alone, centred, on a plain flat pale-lavender background with no scene and no shadow, so it can be isolated cleanly. Straight-on view. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"1:1","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":7,"id":"butterflies-and-flowers","destination":"public/invitation/higgsfield/decorations/butterflies-and-flowers.png","prompt":"A small cluster of delicate pale butterflies in blush pink, lavender and powder blue with faint gold edging on their wings, together with a few small wildflowers and slender leaves in the same pastels, and a scatter of golden sparkles. The cluster alone, centred, on a plain flat warm-ivory background with no scene, so the elements can be isolated and reused separately. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 1:1 --quality 2k --wait `\n  --prompt 'A small cluster of delicate pale butterflies in blush pink, lavender and powder blue with faint gold edging on their wings, together with a few small wildflowers and slender leaves in the same pastels, and a scatter of golden sparkles. The cluster alone, centred, on a plain flat warm-ivory background with no scene, so the elements can be isolated and reused separately. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"1:1","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":8,"id":"castle-silhouette","destination":"public/invitation/higgsfield/decorations/castle-silhouette.png","prompt":"A soft distant silhouette of the castle and its hill, rendered as a pale flat lavender shape with a faint warm-gold rim of light along its upper edges, as if seen far away through morning haze. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. The silhouette sits along the bottom of the frame against a plain flat ivory field, with nothing else in the image, so it can be used as a page footer band. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 16:9 --quality 2k --wait `\n  --prompt 'A soft distant silhouette of the castle and its hill, rendered as a pale flat lavender shape with a faint warm-gold rim of light along its upper edges, as if seen far away through morning haze. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. The silhouette sits along the bottom of the frame against a plain flat ivory field, with nothing else in the image, so it can be used as a page footer band. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"16:9","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":9,"id":"crescent-moon-and-stars","destination":"public/invitation/higgsfield/decorations/crescent-moon-and-stars.png","prompt":"A slim champagne-gold crescent moon with a soft luminous halo, surrounded by a loose scatter of tiny gold stars of varying sizes and a few drifting sparkles. The moon and stars alone, centred, on a plain flat deep-lavender background so the asset can be isolated. No landscape, no clouds. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 1:1 --quality 2k --wait `\n  --prompt 'A slim champagne-gold crescent moon with a soft luminous halo, surrounded by a loose scatter of tiny gold stars of varying sizes and a few drifting sparkles. The moon and stars alone, centred, on a plain flat deep-lavender background so the asset can be isolated. No landscape, no clouds. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"1:1","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":10,"id":"gold-ornamental-border","destination":"public/invitation/higgsfield/decorations/gold-ornamental-border.png","prompt":"An ornate champagne-gold decorative border frame in a delicate fairy-tale style: fine scrollwork, small flowers, slender leaves and tiny stars woven through it, with a soft warm glow. The border runs around the outer edge of the frame only. The entire centre is plain flat warm ivory and completely empty, so content can sit inside it. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 3:4 --quality 2k --wait `\n  --prompt 'An ornate champagne-gold decorative border frame in a delicate fairy-tale style: fine scrollwork, small flowers, slender leaves and tiny stars woven through it, with a soft warm glow. The border runs around the outer edge of the frame only. The entire centre is plain flat warm ivory and completely empty, so content can sit inside it. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"3:4","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":11,"id":"month-clouds-and-stars","destination":"public/invitation/higgsfield/backgrounds/month-clouds-and-stars.png","prompt":"A very soft, quiet dawn sky of pale clouds with a few tiny golden stars — the gentlest and emptiest scene in the series, almost bare. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Wide banner composition, extremely simple and low-contrast, with a large empty area in the middle. This is the first and least decorated chapter background. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 16:9 --quality 2k --wait `\n  --prompt 'A very soft, quiet dawn sky of pale clouds with a few tiny golden stars — the gentlest and emptiest scene in the series, almost bare. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Wide banner composition, extremely simple and low-contrast, with a large empty area in the middle. This is the first and least decorated chapter background. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"16:9","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":12,"id":"month-magical-garden","destination":"public/invitation/higgsfield/backgrounds/month-magical-garden.png","prompt":"A small enchanted garden of pastel wildflowers and soft grasses, with a few fireflies and golden particles beginning to appear among them. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. Wide banner composition. Detail along the lower edge, the upper two thirds soft and open. Slightly more decorated than the clouds chapter. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 16:9 --quality 2k --wait `\n  --prompt 'A small enchanted garden of pastel wildflowers and soft grasses, with a few fireflies and golden particles beginning to appear among them. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. Wide banner composition. Detail along the lower edge, the upper two thirds soft and open. Slightly more decorated than the clouds chapter. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"16:9","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":13,"id":"month-butterflies-and-blossoms","destination":"public/invitation/higgsfield/backgrounds/month-butterflies-and-blossoms.png","prompt":"A drift of pale butterflies moving through flowering branches and soft blossoms, with golden particles and a warmer, richer glow than the earlier chapters. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. Wide banner composition. Detail along the lower edge and upper corners, the centre left open. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 16:9 --quality 2k --wait `\n  --prompt 'A drift of pale butterflies moving through flowering branches and soft blossoms, with golden particles and a warmer, richer glow than the earlier chapters. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. Wide banner composition. Detail along the lower edge and upper corners, the centre left open. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"16:9","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":14,"id":"month-enchanted-forest","destination":"public/invitation/higgsfield/backgrounds/month-enchanted-forest.png","prompt":"A gentle enchanted forest of slender pastel trees with light falling between them in warm golden shafts, fireflies through the trunks, and a soft mist along the ground. Richer and deeper than the earlier chapters. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. Wide banner composition, with the centre of the frame left open and hazy. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 16:9 --quality 2k --wait `\n  --prompt 'A gentle enchanted forest of slender pastel trees with light falling between them in warm golden shafts, fireflies through the trunks, and a soft mist along the ground. Richer and deeper than the earlier chapters. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. Wide banner composition, with the centre of the frame left open and hazy. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"16:9","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":15,"id":"month-castle-finale","destination":"public/invitation/higgsfield/backgrounds/month-castle-finale.png","prompt":"The full enchanted kingdom at its most radiant: the castle clear on its hill, flowers, butterflies, fireflies, golden particles and warm light everywhere. The richest and most celebratory scene of the series. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Wide banner composition. The castle sits right of centre, with the centre-left left open for typography. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create text2image_soul_v2 `\n  --aspect_ratio 16:9 --quality 2k --wait `\n  --prompt 'The full enchanted kingdom at its most radiant: the castle clear on its hill, flowers, butterflies, fireflies, golden particles and warm light everywhere. The richest and most celebratory scene of the series. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Wide banner composition. The castle sits right of centre, with the centre-left left open for typography. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"16:9","tone":"accent"},{"text":"text2image_soul_v2"},{"text":"quality 2k"}]},{"index":16,"id":"fairytale-opening","destination":"public/invitation/higgsfield/video/fairytale-opening-raw.mp4","prompt":"A slow, elegant cinematic push-in. The shot begins high above a bank of soft pastel clouds in blush pink, lavender and ivory, with tiny golden stars twinkling in the distance. The camera drifts gently forward through the clouds. A single glowing shooting star traces softly across the sky. The clouds part to reveal an enchanted pastel castle below. Warm golden light begins to rise from behind the castle. Tiny magical particles and fireflies drift toward the camera. The camera continues its gentle push toward the castle and settles with the castle clearly visible in the lower-middle of the frame and calm open sky above it. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. Camera movement is slow, smooth and graceful throughout — no rapid zoom, no shake, no whip pan, no chaotic particle bursts. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create seedance_2_0 `\n  --aspect_ratio 9:16 --duration 5 --resolution 1080p --wait `\n  --prompt 'A slow, elegant cinematic push-in. The shot begins high above a bank of soft pastel clouds in blush pink, lavender and ivory, with tiny golden stars twinkling in the distance. The camera drifts gently forward through the clouds. A single glowing shooting star traces softly across the sky. The clouds part to reveal an enchanted pastel castle below. Warm golden light begins to rise from behind the castle. Tiny magical particles and fireflies drift toward the camera. The camera continues its gentle push toward the castle and settles with the castle clearly visible in the lower-middle of the frame and calm open sky above it. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. Camera movement is slow, smooth and graceful throughout — no rapid zoom, no shake, no whip pan, no chaotic particle bursts. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"9:16","tone":"accent"},{"text":"seedance_2_0"},{"text":"5s"},{"text":"1080p"}]},{"index":17,"id":"castle-reveal","destination":"public/invitation/higgsfield/video/castle-reveal-raw.mp4","prompt":"Soft pastel clouds fill the frame, obscuring an enchanted castle behind them. The clouds slowly and gently drift apart. Golden particles begin to glow and rise. The castle gradually emerges into view. A subtle ray of warm golden light falls across its tallest tower. A few pale butterflies drift through the foreground. The shot ends holding on the castle on its hill, framed by soft open sky above it. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. The camera barely moves — a very slow, almost imperceptible push in. No rapid zoom, no shake, no chaotic motion. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.","command":"higgsfield generate create seedance_2_0 `\n  --aspect_ratio 9:16 --duration 5 --resolution 1080p --wait `\n  --prompt 'Soft pastel clouds fill the frame, obscuring an enchanted castle behind them. The clouds slowly and gently drift apart. Golden particles begin to glow and rise. The castle gradually emerges into view. A subtle ray of warm golden light falls across its tallest tower. A few pale butterflies drift through the foreground. The shot ends holding on the castle on its hill, framed by soft open sky above it. The castle is a single original pastel fairy-tale castle: slender pale-ivory stone towers with tall narrow arched windows, five conical spires roofed in pale lavender and blush pink, one taller central keep crowned with a champagne-gold finial and a small gold pennant, a low arched stone bridge at its base, and soft climbing vines of tiny pale flowers on the lower walls. It stands on a green rolling hill. It is an invented building, not modelled on any existing, historical or franchise castle. Soft rolling hills in muted sage and pale mint, a winding pale-gold pathway curving gently toward the castle, scattered clusters of small blush and lavender wildflowers, a few slender birch-like trees with soft pastel foliage, pale butterflies drifting low. The sky graduates from blush pink at the horizon, through lavender, to powder blue at the top. Soft rounded cumulus clouds rimmed in warm gold light. Tiny golden stars and a slim crescent moon high in the frame. Premium cinematic fairy-tale storybook illustration. Painterly digital artwork with soft gouache and watercolour texture and fine paper grain. A completely original invented world. Dreamy volumetric lighting, warm golden key light from the upper right, luminous atmospheric haze, soft shallow depth of field with a gently blurred background. Fine floating golden particles and tiny warm fireflies drifting through the air. Delicate whimsical hand-illustrated detail, elegant and refined, tender and gentle in mood. Strict pastel palette: lavender #C9B8E4, blush pink #F3C9D4, powder blue #BCD6EC, warm ivory #FBF5EA, champagne gold #E4C68A, soft peach #F6D3BC, muted sage green #C3D3BE. Low saturation, high luminosity, no strong or vivid colour anywhere. The camera barely moves — a very slow, almost imperceptible push in. No rapid zoom, no shake, no chaotic motion. No text, no letters, no words, no numerals, no watermark, no logo, no signature. No Disney characters, no recognisable or copyrighted princesses, no franchise or theme-park castles. No cartoon outlines, no flat clip-art, no cheap vector look, no harsh saturated colour, no photorealistic human faces, no modern objects.'","badges":[{"text":"9:16","tone":"accent"},{"text":"seedance_2_0"},{"text":"5s"},{"text":"1080p"}]}],"tree":[{"text":"public/invitation/higgsfield/","isDir":true},{"text":"  hero/","isDir":true},{"text":"    fairytale-castle-hero-mobile.png","isDir":false},{"text":"    fairytale-castle-hero-desktop.png","isDir":false},{"text":"  storybook/","isDir":true},{"text":"    storybook-cover.png","isDir":false},{"text":"    storybook-pages.png","isDir":false},{"text":"  decorations/","isDir":true},{"text":"    cloud-bank.png","isDir":false},{"text":"    golden-crown.png","isDir":false},{"text":"    butterflies-and-flowers.png","isDir":false},{"text":"    castle-silhouette.png","isDir":false},{"text":"    crescent-moon-and-stars.png","isDir":false},{"text":"    gold-ornamental-border.png","isDir":false},{"text":"  backgrounds/","isDir":true},{"text":"    month-clouds-and-stars.png","isDir":false},{"text":"    month-magical-garden.png","isDir":false},{"text":"    month-butterflies-and-blossoms.png","isDir":false},{"text":"    month-enchanted-forest.png","isDir":false},{"text":"    month-castle-finale.png","isDir":false},{"text":"  video/","isDir":true},{"text":"    fairytale-opening-raw.mp4","isDir":false},{"text":"    castle-reveal-raw.mp4","isDir":false}]};
+
+  const STORE_KEY = "anya-art-runsheet-progress";
+
+  function loadProgress() {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      return raw ? new Set(JSON.parse(raw)) : new Set();
+    } catch (err) {
+      return new Set();
+    }
+  }
+
+  function saveProgress(set) {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify([...set]));
+    } catch (err) {
+      /* Private window or blocked storage: ticks just don't persist. */
+    }
+  }
+
+  const done = loadProgress();
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (ch) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[ch]));
+  }
+
+  function copyText(text, button) {
+    const mark = () => {
+      const original = button.textContent;
+      button.textContent = "Copied";
+      button.classList.add("copied");
+      setTimeout(() => {
+        button.textContent = original;
+        button.classList.remove("copied");
+      }, 1400);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(mark, () => fallbackCopy(text, mark));
+    } else {
+      fallbackCopy(text, mark);
+    }
+  }
+
+  function fallbackCopy(text, mark) {
+    const field = document.createElement("textarea");
+    field.value = text;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.opacity = "0";
+    document.body.appendChild(field);
+    field.select();
+    try {
+      document.execCommand("copy");
+      mark();
+    } catch (err) {
+      field.style.opacity = "1";
+      window.prompt("Copy this:", text);
+    }
+    field.remove();
+  }
+
+  function renderProgress() {
+    const total = DATA.assets.length;
+    const count = DATA.assets.filter((a) => done.has(a.id)).length;
+    document.getElementById("done-count").textContent = count;
+    document.getElementById("total-count").textContent = total;
+    document.getElementById("rail-fill").style.width = `${(count / total) * 100}%`;
+  }
+
+  function buildAsset(asset) {
+    const card = document.createElement("article");
+    card.className = "asset" + (asset.index === 1 ? " is-hero" : "");
+    if (done.has(asset.id)) card.classList.add("is-done");
+
+    const badges = asset.badges
+      .map((b) => `<span class="badge ${escapeHtml(b.tone || "")}">${escapeHtml(b.text)}</span>`)
+      .join("");
+
+    card.innerHTML = `
+      <div class="asset-head">
+        <span class="num">${String(asset.index).padStart(2, "0")}</span>
+        <span class="asset-id">${escapeHtml(asset.id)}</span>
+        <label class="tick">
+          <input type="checkbox" id="tick-${escapeHtml(asset.id)}" ${done.has(asset.id) ? "checked" : ""}>
+          done
+        </label>
+      </div>
+      <div class="badges">${badges}</div>
+      <div class="dest">
+        <span>Save as</span>
+        <code>${escapeHtml(asset.destination)}</code>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" data-copy="command">Copy command</button>
+        <button type="button" class="btn btn-quiet" data-copy="prompt">Copy prompt only</button>
+      </div>
+      <details class="prompt">
+        <summary>Read the prompt</summary>
+        <p>${escapeHtml(asset.prompt)}</p>
+      </details>
+    `;
+
+    card.querySelector('[data-copy="command"]').addEventListener("click", (e) => {
+      copyText(asset.command, e.currentTarget);
+    });
+    card.querySelector('[data-copy="prompt"]').addEventListener("click", (e) => {
+      copyText(asset.prompt, e.currentTarget);
+    });
+
+    const box = card.querySelector("input");
+    box.addEventListener("change", () => {
+      if (box.checked) done.add(asset.id); else done.delete(asset.id);
+      card.classList.toggle("is-done", box.checked);
+      saveProgress(done);
+      renderProgress();
+    });
+
+    return card;
+  }
+
+  function render() {
+    document.getElementById("image-model-name").textContent = DATA.imageModel;
+    document.getElementById("video-model-name").textContent = DATA.videoModel;
+
+    const host = document.getElementById("assets");
+    for (const asset of DATA.assets) host.appendChild(buildAsset(asset));
+
+    const tree = document.getElementById("tree");
+    tree.innerHTML = DATA.tree
+      .map((line) =>
+        line.isDir
+          ? `<div class="dir">${escapeHtml(line.text)}</div>`
+          : `<div>${escapeHtml(line.text)}</div>`
+      )
+      .join("");
+
+    document.getElementById("reset-btn").addEventListener("click", () => {
+      done.clear();
+      saveProgress(done);
+      document.querySelectorAll(".asset input").forEach((box) => { box.checked = false; });
+      document.querySelectorAll(".asset").forEach((card) => card.classList.remove("is-done"));
+      renderProgress();
+    });
+
+    renderProgress();
+  }
+
+  render();
+</script>

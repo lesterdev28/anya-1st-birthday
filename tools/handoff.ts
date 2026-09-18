@@ -15,8 +15,9 @@
  * Writes:
  *   docs/generate-on-your-machine.md   the guide, in order, with every setting
  *   tools/generate-on-windows.ps1      the same run as one PowerShell script
+ *   docs/generate-on-your-machine.html the same run-sheet as a page, for publishing
  */
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { SCENES, VIDEO_SCENES, buildPrompt, type Scene } from "./art-direction.js";
@@ -24,6 +25,8 @@ import { SCENES, VIDEO_SCENES, buildPrompt, type Scene } from "./art-direction.j
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const GUIDE_PATH = resolve(REPO_ROOT, "docs/generate-on-your-machine.md");
 const SCRIPT_PATH = resolve(REPO_ROOT, "tools/generate-on-windows.ps1");
+const TEMPLATE_PATH = resolve(REPO_ROOT, "tools/handoff-template.html");
+const PAGE_PATH = resolve(REPO_ROOT, "docs/generate-on-your-machine.html");
 
 /**
  * The CLI takes an aspect ratio, not a pixel size. Every size the canon uses maps onto
@@ -379,6 +382,99 @@ function buildScript(): string {
   return lines.join("\n");
 }
 
+/** The PowerShell command for one image scene, as shown in the guide and the page. */
+function imageCommand(scene: Scene): string {
+  return [
+    `higgsfield generate create ${IMAGE_MODEL} \``,
+    `  --aspect_ratio ${aspectFor(scene)} --quality ${IMAGE_QUALITY} --wait \``,
+    `  --prompt ${psLiteral(buildPrompt(scene))}`,
+  ].join("\n");
+}
+
+function videoCommand(scene: VideoSceneLike): string {
+  return [
+    `higgsfield generate create ${VIDEO_MODEL} \``,
+    `  --aspect_ratio ${scene.aspectRatio} --duration ${scene.duration} ` +
+      `--resolution ${VIDEO_RESOLUTION} --wait \``,
+    `  --prompt ${psLiteral(scene.prompt)}`,
+  ].join("\n");
+}
+
+type VideoSceneLike = (typeof VIDEO_SCENES)[number];
+
+interface PageAsset {
+  readonly index: number;
+  readonly id: string;
+  readonly destination: string;
+  readonly prompt: string;
+  readonly command: string;
+  readonly badges: ReadonlyArray<{ text: string; tone?: string }>;
+}
+
+/**
+ * The page is the same run-sheet as the guide, rendered from the same canon. The template
+ * holds the design; this only supplies the data, so a canon change updates all three
+ * outputs at once.
+ */
+async function buildPage(): Promise<string> {
+  const assets: PageAsset[] = [
+    ...SCENES.map((scene, index) => ({
+      index: index + 1,
+      id: scene.id,
+      destination: `public/invitation/higgsfield/${scene.category}/${scene.id}.png`,
+      prompt: buildPrompt(scene),
+      command: imageCommand(scene),
+      badges: [
+        { text: aspectFor(scene), tone: "accent" },
+        { text: IMAGE_MODEL },
+        { text: `quality ${IMAGE_QUALITY}` },
+        ...(index === 0 ? [{ text: "generate this one first", tone: "gold" }] : []),
+      ],
+    })),
+    ...VIDEO_SCENES.map((scene, index) => ({
+      index: SCENES.length + index + 1,
+      id: scene.id,
+      destination: `public/invitation/higgsfield/video/${scene.id}-raw.mp4`,
+      prompt: scene.prompt,
+      command: videoCommand(scene),
+      badges: [
+        { text: scene.aspectRatio, tone: "accent" },
+        { text: VIDEO_MODEL },
+        { text: `${scene.duration}s` },
+        { text: VIDEO_RESOLUTION },
+      ],
+    })),
+  ];
+
+  const tree: Array<{ text: string; isDir: boolean }> = [
+    { text: "public/invitation/higgsfield/", isDir: true },
+  ];
+  const byCategory = new Map<string, Scene[]>();
+  for (const scene of SCENES) {
+    const list = byCategory.get(scene.category) ?? [];
+    list.push(scene);
+    byCategory.set(scene.category, list);
+  }
+  for (const [category, scenes] of byCategory) {
+    tree.push({ text: `  ${category}/`, isDir: true });
+    for (const scene of scenes) tree.push({ text: `    ${scene.id}.png`, isDir: false });
+  }
+  tree.push({ text: "  video/", isDir: true });
+  for (const scene of VIDEO_SCENES) {
+    tree.push({ text: `    ${scene.id}-raw.mp4`, isDir: false });
+  }
+
+  const data = { imageModel: IMAGE_MODEL, videoModel: VIDEO_MODEL, assets, tree };
+  // Escaping "<" keeps a stray "</script>" in any future prompt from closing the block.
+  const json = JSON.stringify(data).split("<").join("\\u003c");
+
+  const template = await readFile(TEMPLATE_PATH, "utf8");
+  if (!template.includes("/*__DATA__*/ null")) {
+    throw new Error("handoff-template.html no longer has the /*__DATA__*/ null placeholder.");
+  }
+  return template.replace("/*__DATA__*/ null", json);
+}
+
 function imageCall(scene: Scene): string[] {
   return [
     `Invoke-Asset -Id ${psLiteral(scene.id)} \``,
@@ -402,8 +498,10 @@ async function main(): Promise<void> {
   // every editor handle the BOM fine, so it is the safe default for a script we cannot
   // test on the target machine.
   await writeFile(SCRIPT_PATH, `\uFEFF${buildScript()}`);
+  await writeFile(PAGE_PATH, await buildPage());
   console.log(`wrote ${GUIDE_PATH.replace(`${REPO_ROOT}/`, "")}`);
   console.log(`wrote ${SCRIPT_PATH.replace(`${REPO_ROOT}/`, "")}`);
+  console.log(`wrote ${PAGE_PATH.replace(`${REPO_ROOT}/`, "")}`);
   console.log(`${SCENES.length} images + ${VIDEO_SCENES.length} videos`);
 }
 
