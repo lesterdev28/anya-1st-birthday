@@ -39,17 +39,18 @@ export const ART_IDS = [
 
 export type ArtId = (typeof ART_IDS)[number];
 
-/** The two cinematic clips, served straight from public/ rather than the manifest. */
+/**
+ * The cinematic clip, served straight from public/ rather than the manifest.
+ *
+ * There is one clip rather than two: it is generated with the hero artwork as its
+ * final frame, so the push-in through the clouds arrives on exactly the still the
+ * invitation then holds. A separate castle-reveal clip would only repeat that.
+ */
 export const VIDEO_SOURCES = {
   "fairytale-opening": {
     webm: "/invitation/higgsfield/video/fairytale-opening.webm",
     mp4: "/invitation/higgsfield/video/fairytale-opening.mp4",
     poster: "/invitation/higgsfield/video/fairytale-opening-poster.webp",
-  },
-  "castle-reveal": {
-    webm: "/invitation/higgsfield/video/castle-reveal.webm",
-    mp4: "/invitation/higgsfield/video/castle-reveal.mp4",
-    poster: "/invitation/higgsfield/video/castle-reveal-poster.webp",
   },
 } as const;
 

@@ -19,6 +19,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CinematicVideo } from "./CinematicVideo";
+import { FairyImage } from "./FairyImage";
 import { PaintedKingdom } from "./PaintedKingdom";
 import { ParticleField } from "./ParticleField";
 import { GoldCrown } from "./GoldCrown";
@@ -37,7 +38,8 @@ interface Beat {
 
 const BEATS: readonly Beat[] = [
   { id: "darkness", hold: 2600 },
-  { id: "opening", hold: 4800 },
+  // Matches the 6s clip: cutting early would leave before it lands on the hero frame.
+  { id: "opening", hold: 6000 },
   { id: "reveal", hold: 3400 },
   { id: "line-1", hold: 2400 },
   { id: "line-2", hold: 2400 },
@@ -132,9 +134,20 @@ export function IntroSequence({ onFinish }: Props) {
         )}
       </div>
 
+      {/*
+        The clip ends on the hero artwork, so the reveal beat simply holds that same
+        still rather than playing a second video. The cut is invisible because both
+        layers are showing the identical frame.
+      */}
       <div className={`intro__backdrop${backdrop === "reveal" ? " is-visible" : ""}`}>
         {backdrop === "reveal" && (
-          <CinematicVideo id="castle-reveal" preload="auto" fallback={<PaintedKingdom />} />
+          <FairyImage
+            id="fairytale-castle-hero-mobile"
+            alt=""
+            priority
+            className="intro__hero-still"
+            fallback={<PaintedKingdom />}
+          />
         )}
       </div>
 
