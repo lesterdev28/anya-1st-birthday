@@ -119,12 +119,13 @@ around a family; a track with someone else's terms attached does not belong in i
 It is a 38-second seamless loop — the reverb tail that runs past the end is folded back
 over the opening, so the join is inaudible. To replace it, drop in any pair of files and
 point `AUDIO_SOURCES` in `src/lib/assets.ts` at them; Opus in WebM plus AAC in MP4 covers
-every browser.
+every browser. The AAC file is named `.mp4` rather than `.m4a` — same container, and
+some static hosts refuse to serve `.m4a` at all.
 
 ```bash
 python3 tools/musicbox.py     # writes a wav, no dependencies
 ffmpeg -i lullaby.wav -c:a libopus -b:a 64k music-box-lullaby.webm
-ffmpeg -i lullaby.wav -c:a aac -b:a 88k -movflags +faststart music-box-lullaby.m4a
+ffmpeg -i lullaby.wav -c:a aac -b:a 88k -movflags +faststart music-box-lullaby.mp4
 ```
 
 No browser will play audio before the visitor has done something, so the music starts at

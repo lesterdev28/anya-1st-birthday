@@ -115,7 +115,7 @@ export function SoundToggle() {
     <>
       <audio ref={audioRef} loop preload="auto">
         <source src={AUDIO_SOURCES.lullaby.webm} type="audio/webm" />
-        <source src={AUDIO_SOURCES.lullaby.m4a} type="audio/mp4" />
+        <source src={AUDIO_SOURCES.lullaby.mp4} type="audio/mp4" />
       </audio>
 
       <button

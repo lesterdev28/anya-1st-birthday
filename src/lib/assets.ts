@@ -65,7 +65,8 @@ export type VideoId = keyof typeof VIDEO_SOURCES;
 export const AUDIO_SOURCES = {
   lullaby: {
     webm: "/invitation/audio/music-box-lullaby.webm",
-    m4a: "/invitation/audio/music-box-lullaby.m4a",
+    /* AAC, in a plain .mp4 container: some static hosts refuse to serve .m4a. */
+    mp4: "/invitation/audio/music-box-lullaby.mp4",
   },
 } as const;
 
