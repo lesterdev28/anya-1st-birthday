@@ -28,6 +28,19 @@ export const party = {
 } as const;
 
 /**
+ * The background music.
+ *
+ * `autoStart` only means "begin at the first tap or scroll" — a browser will not let a
+ * page make noise before that, and nor should it. Set it to false to leave the music
+ * entirely to the button, and lower `volume` if it feels loud under the cinematic.
+ */
+export const sound = {
+  autoStart: true,
+  /** 0 to 1. Deliberately well under half: this plays behind everything, not over it. */
+  volume: 0.34,
+} as const;
+
+/**
  * RSVP details have not been given yet. Everything here is a placeholder — the section
  * renders an obvious "to be confirmed" state until `contactName` and `contactNumber`
  * are filled in, rather than inventing a number.

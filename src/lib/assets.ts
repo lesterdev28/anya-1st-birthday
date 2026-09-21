@@ -56,6 +56,19 @@ export const VIDEO_SOURCES = {
 
 export type VideoId = keyof typeof VIDEO_SOURCES;
 
+/**
+ * The background music, served straight from public/ like the cinematic.
+ *
+ * Opus first and AAC second: every browser plays one of the two, and Opus is the
+ * smaller of them for anything this sparse.
+ */
+export const AUDIO_SOURCES = {
+  lullaby: {
+    webm: "/invitation/audio/music-box-lullaby.webm",
+    m4a: "/invitation/audio/music-box-lullaby.m4a",
+  },
+} as const;
+
 export function getAsset(id: string): ManifestEntry | null {
   return assets[id] ?? null;
 }

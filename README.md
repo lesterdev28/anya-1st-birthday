@@ -110,6 +110,28 @@ If the intro beat length and the clip length drift apart, the cut happens before
 clip reaches the hero frame and the handover becomes visible. The `opening` beat in
 `IntroSequence.tsx` is set to the clip's duration for that reason.
 
+### The music
+
+`public/invitation/audio/music-box-lullaby.*` is an original piece, rendered by
+`tools/musicbox.py` rather than licensed from anywhere. An invitation gets forwarded
+around a family; a track with someone else's terms attached does not belong in it.
+
+It is a 38-second seamless loop — the reverb tail that runs past the end is folded back
+over the opening, so the join is inaudible. To replace it, drop in any pair of files and
+point `AUDIO_SOURCES` in `src/lib/assets.ts` at them; Opus in WebM plus AAC in MP4 covers
+every browser.
+
+```bash
+python3 tools/musicbox.py     # writes a wav, no dependencies
+ffmpeg -i lullaby.wav -c:a libopus -b:a 64k music-box-lullaby.webm
+ffmpeg -i lullaby.wav -c:a aac -b:a 88k -movflags +faststart music-box-lullaby.m4a
+```
+
+No browser will play audio before the visitor has done something, so the music starts at
+the first tap, click, key or scroll rather than on load. Silencing it is remembered in
+localStorage and is never overridden. `sound` in `src/data/party.ts` holds the volume and
+can switch the auto-start off entirely.
+
 ## Layout
 
 ```
@@ -121,7 +143,7 @@ public/invitation/
     storybook/      cover and parchment pages
     decorations/    the reusable isolated elements
   photos/           Anya's real photographs (originals + optimized/)
-  audio/            optional background audio
+  audio/            the music-box lullaby
 src/
   components/       the invitation's sections and media primitives
   data/party.ts     every editable detail: date, venue, RSVP, the twelve chapters
@@ -131,6 +153,7 @@ tools/
   art-direction.ts  the canon and every scene, in code
   generate.ts       the Higgsfield CLI
   optimize.ts       derivatives and manifest
+  musicbox.py       renders the background music from scratch
 ```
 
 ## Things a human still needs to do

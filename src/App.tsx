@@ -13,6 +13,7 @@ import { Countdown } from "./components/Countdown";
 import { PhotoJourney } from "./components/PhotoJourney";
 import { PartyDetails } from "./components/PartyDetails";
 import { Rsvp } from "./components/Rsvp";
+import { SoundToggle } from "./components/SoundToggle";
 import { child, introLines } from "./data/party";
 
 export function App() {
@@ -31,6 +32,9 @@ export function App() {
 
   return (
     <>
+      {/* Outside the intro so the music carries across it and into the invitation. */}
+      <SoundToggle />
+
       <AnimatePresence>{introOpen && <IntroSequence onFinish={closeIntro} />}</AnimatePresence>
 
       {/*
