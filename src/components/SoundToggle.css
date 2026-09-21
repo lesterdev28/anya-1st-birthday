@@ -7,8 +7,8 @@
   position: fixed;
   right: calc(var(--page-gutter) + env(safe-area-inset-right, 0px));
   bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px));
-  /* Above the intro overlay, which is 100: the music plays under the cinematic too. */
-  z-index: 120;
+  /* Above the dot rail and the page; below the loading screen, which hides it. */
+  z-index: 50;
 
   width: 42px;
   height: 42px;
@@ -23,7 +23,7 @@
   box-shadow: 0 4px 14px rgba(74, 63, 86, 0.16);
   cursor: pointer;
   transition:
-    bottom 0.5s var(--ease-soft),
+    opacity 0.5s var(--ease-soft),
     transform 0.25s var(--ease-soft),
     border-color 0.4s var(--ease-soft),
     background-color 0.4s var(--ease-soft),
@@ -31,22 +31,10 @@
     box-shadow 0.25s var(--ease-soft);
 }
 
-/*
- * While the cinematic is up it sits above Skip Intro, which occupies this corner, and
- * borrows that button's night styling so the two read as a pair rather than as one
- * control from the page showing through another.
- */
-body[data-intro-open="true"] .sound-toggle {
-  bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
-  border-color: rgba(247, 241, 230, 0.4);
-  background: rgba(23, 17, 41, 0.34);
-  color: rgba(247, 241, 230, 0.9);
-  box-shadow: none;
-}
-
-body[data-intro-open="true"] .sound-toggle:hover {
-  background: rgba(23, 17, 41, 0.58);
-  border-color: rgba(247, 241, 230, 0.75);
+/* The loading screen covers the page; there is nothing to control behind it. */
+body[data-loading="true"] .sound-toggle {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .sound-toggle svg {

@@ -6,9 +6,11 @@
  * That difference is the whole effect — a single band of flowers reads as a border, and
  * three read as ground you are moving over.
  *
- * Stems are generated from a fixed seed rather than drawn by hand, so the meadow is
- * dense and irregular without a thousand lines of path data. Each stem sways on its own
- * slightly different cycle, which is what stops it looking like one image wobbling.
+ * Every stem is a DOM element sized in pixels rather than a shape inside one stretched
+ * SVG. An SVG with `preserveAspectRatio: none` scales its contents by the width of its
+ * box, so the same meadow that looked right on a phone grew flowers the size of a fist
+ * on a desktop. Here the width of the screen changes how far apart the stems stand and
+ * nothing else, which is what distance actually does.
  */
 import { useMemo } from "react";
 import { Parallax } from "../../lib/scene";
@@ -24,6 +26,21 @@ const BAND_PALETTE: Record<Band, readonly string[]> = {
   near: ["#94a987", "#e8bfcb", "#c9b7e8", "#e8d3a4"],
 };
 
+/** Stem height and flower size in pixels, as [base, spread] pairs, per band. */
+const BAND_SCALE: Record<Band, { readonly height: readonly [number, number]; readonly head: readonly [number, number] }> = {
+  far: { height: [22, 16], head: [5, 4] },
+  mid: { height: [44, 28], head: [8, 6] },
+  near: { height: [72, 44], head: [12, 9] },
+};
+
+/**
+ * How many stems in a band, spread across whatever width it is given.
+ *
+ * A wide screen therefore stands them further apart rather than drawing them bigger,
+ * which is what the eye expects of a border of flowers seen from further back.
+ */
+const DENSITY: Record<Band, number> = { far: 34, mid: 24, near: 16 };
+
 function seeded(seed: number): () => number {
   let state = seed;
   return () => {
@@ -32,93 +49,60 @@ function seeded(seed: number): () => number {
   };
 }
 
-interface StemProps {
+interface StemsProps {
   readonly band: Band;
-  readonly count: number;
   readonly seed: number;
 }
 
-function Stems({ band, count, seed }: StemProps) {
+function Stems({ band, seed }: StemsProps) {
   const stems = useMemo(() => {
-    const random = seeded(seed * 65537 + count);
+    const random = seeded(seed * 65537 + DENSITY[band]);
     const palette = BAND_PALETTE[band];
+    const { height, head } = BAND_SCALE[band];
+    const count = DENSITY[band];
+
     return Array.from({ length: count }, (_, index) => {
-      const x = (index + random() * 0.8) * (100 / count);
-      const height = (band === "far" ? 14 : band === "mid" ? 26 : 42) * (0.6 + random() * 0.7);
+      const kind = random();
       return {
         key: index,
-        x,
-        height,
-        lean: (random() - 0.5) * 9,
+        /* Evenly spaced with a nudge, so it is irregular without ever leaving a gap. */
+        x: ((index + 0.5 + (random() - 0.5) * 0.7) / count) * 100,
+        height: height[0] + random() * height[1],
+        head: head[0] + random() * head[1],
+        lean: (random() - 0.5) * 10,
         colour: palette[Math.floor(random() * palette.length)],
-        // A bud, a five-petal flower, or bare grass.
-        head: random() < 0.62 ? (random() < 0.5 ? "flower" : "bud") : "grass",
-        petals: 5,
+        shape: kind < 0.38 ? "flower" : kind < 0.66 ? "bud" : "grass",
         sway: 4 + random() * 4,
         delay: -random() * 8,
-        size: (band === "far" ? 1.5 : band === "mid" ? 2.4 : 3.4) * (0.7 + random() * 0.6),
       };
     });
-  }, [band, count, seed]);
+  }, [band, seed]);
 
   return (
-    <svg
-      className={`meadow__svg meadow__svg--${band}`}
-      viewBox="0 0 100 50"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
+    <div className={`meadow__stems meadow__stems--${band}`}>
       {stems.map((stem) => (
-        <g
+        <span
           key={stem.key}
           className="meadow__stem"
-          style={{
-            // The hinge is at the base of the stem, so it bends rather than slides.
-            transformOrigin: `${stem.x}px 50px`,
-            animationDuration: `${stem.sway}s`,
-            animationDelay: `${stem.delay}s`,
-            "--lean": `${stem.lean}deg`,
-          } as React.CSSProperties}
+          style={
+            {
+              left: `${stem.x}%`,
+              "--h": `${stem.height}px`,
+              "--lean": `${stem.lean}deg`,
+              animationDuration: `${stem.sway}s`,
+              animationDelay: `${stem.delay}s`,
+            } as React.CSSProperties
+          }
         >
-          <path
-            d={`M ${stem.x} 50 Q ${stem.x + stem.lean * 0.4} ${50 - stem.height * 0.6} ${stem.x + stem.lean} ${50 - stem.height}`}
-            fill="none"
-            stroke={band === "far" ? "#c8d6be" : "#94a987"}
-            strokeWidth={band === "near" ? 0.6 : 0.4}
-            strokeLinecap="round"
-            opacity={band === "far" ? 0.5 : 0.75}
-          />
-
-          {stem.head === "flower" && (
-            <g transform={`translate(${stem.x + stem.lean} ${50 - stem.height})`}>
-              {Array.from({ length: stem.petals }, (_, petal) => (
-                <ellipse
-                  key={petal}
-                  rx={stem.size * 0.42}
-                  ry={stem.size * 0.9}
-                  cy={-stem.size * 0.62}
-                  fill={stem.colour}
-                  opacity="0.9"
-                  transform={`rotate(${(360 / stem.petals) * petal})`}
-                />
-              ))}
-              <circle r={stem.size * 0.34} fill="#e8d3a4" />
-            </g>
-          )}
-
-          {stem.head === "bud" && (
-            <ellipse
-              cx={stem.x + stem.lean}
-              cy={50 - stem.height}
-              rx={stem.size * 0.5}
-              ry={stem.size * 0.85}
-              fill={stem.colour}
-              opacity="0.85"
+          {stem.shape !== "grass" && (
+            <i
+              className={`meadow__head meadow__head--${stem.shape}`}
+              style={{ "--size": `${stem.head}px`, "--c": stem.colour } as React.CSSProperties}
             />
           )}
-        </g>
+        </span>
       ))}
-    </svg>
+    </div>
   );
 }
 
@@ -139,7 +123,7 @@ export function Meadow({ className, bands = ["far", "mid", "near"], seed = 3 }: 
           distance={180}
           className={`meadow__band meadow__band--${band}`}
         >
-          <Stems band={band} count={band === "far" ? 26 : band === "mid" ? 20 : 14} seed={seed + index} />
+          <Stems band={band} seed={seed + index} />
         </Parallax>
       ))}
     </div>

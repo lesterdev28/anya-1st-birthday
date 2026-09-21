@@ -9,6 +9,7 @@
  * being confirmed rather than swallowing a reply that would go nowhere.
  */
 import { useState, type FormEvent } from "react";
+import { playSfx } from "../../lib/audio";
 import { Chapter } from "../../lib/scene";
 import { CloudLayer } from "../world/Clouds";
 import { Drifters } from "../world/Drifters";
@@ -68,6 +69,7 @@ function RsvpForm() {
         });
         if (!response.ok) throw new Error(String(response.status));
         setSent(true);
+        void playSfx("bloom");
       } catch {
         setFailed(true);
       }
@@ -87,6 +89,7 @@ function RsvpForm() {
 
     window.location.href = `sms:${rsvp.contactNumber}?&body=${encodeURIComponent(lines.join("\n"))}`;
     setSent(true);
+    void playSfx("bloom");
   }
 
   if (sent) {

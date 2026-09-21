@@ -1,18 +1,18 @@
 /**
- * The music-box lullaby, and the one control that silences it.
+ * The one control for the invitation's sound, and the thing that drives the engine.
  *
- * Browsers will not let a page make noise before the visitor has done something, so
- * there is no question of the music simply starting: it waits for the first tap, click,
- * key or scroll and begins then. That is also the right behaviour for an invitation,
- * which is often opened in a room with other people in it — hence a control that is
- * visible from the first frame rather than hidden at the bottom of the page.
+ * Two jobs. It watches which chapter the guest is in and asks the engine for that
+ * chapter's music bed, which is what makes the soundtrack follow the journey. And it is
+ * the button: one tap silences everything, and the choice is remembered, because an
+ * invitation is often opened in a room with other people in it and someone who silences
+ * it once should never have it start on them again.
  *
- * The choice is remembered. Someone who silences it once never hears it start again,
- * on any visit, which matters more than the music does.
+ * Nothing makes a sound before the guest presses "Enter Anya's Fairy Garden". Browsers
+ * would refuse anyway, but the point is that the entrance is where the music belongs.
  */
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AUDIO_SOURCES } from "../lib/assets";
-import { sound } from "../data/party";
+import { bedForScene, playSfx, setBed, setMuted, unlock } from "../lib/audio";
+import { useActiveScene } from "../lib/scene";
 import "./SoundToggle.css";
 
 const STORAGE_KEY = "anya-sound";
@@ -35,116 +35,96 @@ function remember(choice: "on" | "off"): void {
   }
 }
 
+/** The one-shot that belongs to arriving in a chapter, where one does. */
+const ARRIVAL_SFX = {
+  "month-12": "sparkle",
+  invitation: "chime",
+} as const;
+
 export function SoundToggle() {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const fadeRef = useRef<number | null>(null);
-
-  /** Ramps the volume rather than cutting it in, which would land as a thump. */
-  const fadeTo = useCallback((target: number, done?: () => void) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (fadeRef.current !== null) window.clearInterval(fadeRef.current);
-
-    const step = (target - audio.volume) / 24;
-    fadeRef.current = window.setInterval(() => {
-      const next = audio.volume + step;
-      const finished = step > 0 ? next >= target : next <= target;
-      audio.volume = Math.min(1, Math.max(0, finished ? target : next));
-      if (finished) {
-        if (fadeRef.current !== null) window.clearInterval(fadeRef.current);
-        fadeRef.current = null;
-        done?.();
-      }
-    }, 50);
-  }, []);
+  const scene = useActiveScene();
+  const [on, setOn] = useState(false);
+  const started = useRef(false);
 
   const start = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    audio.volume = 0;
-    void audio
-      .play()
-      .then(() => {
-        setPlaying(true);
-        fadeTo(sound.volume);
-      })
-      .catch(() => {
-        // Refused by the browser. Leave the control showing "off" and say nothing;
-        // the visitor can press it themselves, which always counts as a gesture.
-        setPlaying(false);
-      });
-  }, [fadeTo]);
+    if (started.current) return;
+    started.current = true;
+    unlock();
+    setMuted(false);
+    void setBed(bedForScene(scene));
+    setOn(true);
+    remember("on");
+  }, [scene]);
 
-  const stop = useCallback(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-    setPlaying(false);
-    fadeTo(0, () => audio.pause());
-  }, [fadeTo]);
-
-  // Waits for the first gesture of any kind, then gets out of the way.
+  /*
+   * The entrance button is the gesture the whole soundtrack hangs on. It fires an event
+   * rather than calling in here directly so the hero does not have to know that sound
+   * exists at all.
+   */
   useEffect(() => {
-    if (!sound.autoStart || storedChoice() === "off") return;
-
-    const events = ["pointerdown", "keydown", "touchstart", "wheel", "scroll"] as const;
     const begin = () => {
-      events.forEach((event) => window.removeEventListener(event, begin));
+      if (storedChoice() === "off") return;
       start();
+      void playSfx("enter");
     };
-    events.forEach((event) => window.addEventListener(event, begin, { once: true, passive: true }));
-
-    return () => events.forEach((event) => window.removeEventListener(event, begin));
+    window.addEventListener("anya:enter", begin);
+    return () => window.removeEventListener("anya:enter", begin);
   }, [start]);
 
-  useEffect(() => () => {
-    if (fadeRef.current !== null) window.clearInterval(fadeRef.current);
-  }, []);
+  /* Follow the journey. Does nothing at all until the engine has been unlocked. */
+  useEffect(() => {
+    if (!on) return;
+    void setBed(bedForScene(scene));
+
+    const arrival = ARRIVAL_SFX[scene as keyof typeof ARRIVAL_SFX];
+    if (arrival) void playSfx(arrival);
+  }, [on, scene]);
 
   const toggle = () => {
-    if (playing) {
+    if (on) {
       remember("off");
-      stop();
-    } else {
-      remember("on");
-      start();
+      setMuted(true);
+      setOn(false);
+      return;
     }
+
+    if (started.current) {
+      remember("on");
+      setMuted(false);
+      setOn(true);
+      return;
+    }
+
+    start();
   };
 
   return (
-    <>
-      <audio ref={audioRef} loop preload="auto">
-        <source src={AUDIO_SOURCES.lullaby.webm} type="audio/webm" />
-        <source src={AUDIO_SOURCES.lullaby.mp4} type="audio/mp4" />
-      </audio>
-
-      <button
-        type="button"
-        className={`sound-toggle${playing ? " is-playing" : ""}`}
-        onClick={toggle}
-        aria-pressed={playing}
-        aria-label={playing ? "Turn the music off" : "Turn the music on"}
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <g
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 9.5h3L12 6v12l-4-3.5H5z" />
-            {playing ? (
-              <>
-                <path d="M15.6 9.3a3.6 3.6 0 0 1 0 5.4" />
-                <path d="M18 7a7 7 0 0 1 0 10" />
-              </>
-            ) : (
-              <path d="M16 9.5l4.5 5M20.5 9.5l-4.5 5" />
-            )}
-          </g>
-        </svg>
-      </button>
-    </>
+    <button
+      type="button"
+      className={`sound-toggle${on ? " is-playing" : ""}`}
+      onClick={toggle}
+      aria-pressed={on}
+      aria-label={on ? "Turn the music off" : "Turn the music on"}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <g
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M5 9.5h3L12 6v12l-4-3.5H5z" />
+          {on ? (
+            <>
+              <path d="M15.6 9.3a3.6 3.6 0 0 1 0 5.4" />
+              <path d="M18 7a7 7 0 0 1 0 10" />
+            </>
+          ) : (
+            <path d="M16 9.5l4.5 5M20.5 9.5l-4.5 5" />
+          )}
+        </g>
+      </svg>
+    </button>
   );
 }

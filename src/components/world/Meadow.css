@@ -16,37 +16,96 @@
   bottom: 0;
 }
 
-.meadow__svg {
-  display: block;
+.meadow__stems {
+  position: relative;
   width: 100%;
-  overflow: visible;
+  /* The tallest stem in the band decides the box; the stems stand on its floor. */
+  height: 140px;
 }
 
-/* Far flowers sit highest and smallest; near ones fill the bottom of the frame. */
-.meadow__band--far {
-  height: 58%;
+.meadow__stems--far {
+  height: 46px;
   opacity: 0.55;
 }
 
-.meadow__band--mid {
-  height: 76%;
-  opacity: 0.82;
-}
-
-.meadow__band--near {
-  height: 100%;
+.meadow__stems--mid {
+  height: 84px;
+  opacity: 0.85;
 }
 
 /*
- * Each stem bends about its own base. The rotation is small — a couple of degrees — but
- * the varied cycle lengths mean the meadow never pulses as one body.
+ * A stem is a zero-width element that draws its stalk with a pseudo and carries its
+ * flower at the top. It bends about its own base rather than sliding, which is the
+ * difference between a meadow in a breeze and a picture of one being dragged.
  */
 .meadow__stem {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: var(--h);
+  transform-origin: bottom center;
   animation-name: meadow-sway;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   will-change: transform;
+}
+
+.meadow__stem::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -0.8px;
+  width: 1.6px;
+  height: 100%;
+  border-radius: 1px;
+  background: linear-gradient(to top, rgba(148, 169, 135, 0.9), rgba(200, 214, 190, 0.7));
+}
+
+.meadow__head {
+  position: absolute;
+  top: calc(var(--size) / -2);
+  left: calc(var(--size) / -2);
+  width: var(--size);
+  height: var(--size);
+}
+
+/*
+ * Five petals and a gold centre, drawn as six background layers rather than as an SVG.
+ * `closest-side` makes each layer a circle that exactly fills its own tile, so the whole
+ * flower scales with one custom property and stays a flower at any size.
+ */
+.meadow__head--flower {
+  background-image:
+    radial-gradient(closest-side circle, #e8d3a4 98%, transparent),
+    radial-gradient(closest-side circle, var(--c) 96%, transparent),
+    radial-gradient(closest-side circle, var(--c) 96%, transparent),
+    radial-gradient(closest-side circle, var(--c) 96%, transparent),
+    radial-gradient(closest-side circle, var(--c) 96%, transparent),
+    radial-gradient(closest-side circle, var(--c) 96%, transparent);
+  background-size:
+    38% 38%,
+    52% 52%,
+    52% 52%,
+    52% 52%,
+    52% 52%,
+    52% 52%;
+  background-position:
+    50% 50%,
+    50% 0%,
+    100% 38%,
+    81% 100%,
+    19% 100%,
+    0% 38%;
+  background-repeat: no-repeat;
+}
+
+.meadow__head--bud {
+  width: calc(var(--size) * 0.62);
+  left: calc(var(--size) * -0.31);
+  border-radius: 50% 50% 46% 46%;
+  background: var(--c);
+  opacity: 0.9;
 }
 
 @keyframes meadow-sway {

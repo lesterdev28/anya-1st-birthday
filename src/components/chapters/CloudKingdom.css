@@ -98,7 +98,8 @@
   font-weight: 300;
   color: var(--ink-soft);
   margin: 1.5rem auto 0;
-  max-width: 17rem;
+  /* Wide enough to hold the line on one row at desktop; the copy box caps it on a phone. */
+  max-width: 22rem;
   line-height: 1.75;
 }
 
