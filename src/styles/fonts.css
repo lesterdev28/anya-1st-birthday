@@ -1,0 +1,43 @@
+/*
+ * Self-hosted rather than loaded from Google Fonts.
+ *
+ * The script face carries the whole look — falling back to a generic serif changes
+ * the design completely — so the invitation cannot afford to depend on a third-party
+ * host being reachable. Serving the files ourselves also removes two DNS lookups and
+ * a TLS handshake from first paint, which is the difference guests on phone data see.
+ *
+ * Latin subsets only. Cormorant Garamond and Jost are variable fonts, so one file
+ * covers every weight; Tangerine ships as static weights.
+ */
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/cormorant-garamond.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/fonts/jost.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Tangerine";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/tangerine-400.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Tangerine";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/tangerine-700.woff2) format("woff2");
+}

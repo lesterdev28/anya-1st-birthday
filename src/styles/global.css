@@ -6,6 +6,8 @@
  * generated artwork all sit in one visual world.
  */
 
+@import "./fonts.css";
+
 :root {
   /* Palette — shared verbatim with the Higgsfield art direction. */
   --lavender: #c9b8e4;

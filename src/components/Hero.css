@@ -1,5 +1,25 @@
 .hero {
   position: relative;
+  overflow: hidden;
+  /* The blurred backdrop sits at a negative z-index, which needs a context to sit in. */
+  isolation: isolate;
+}
+
+/*
+ * The panel the invitation is actually drawn in. On a phone it simply fills the screen;
+ * on a wide one it keeps the artwork's own portrait shape instead of being stretched.
+ * Either way the art positions itself against this, so the two cases share one layout.
+ */
+.hero__stage {
+  position: relative;
+  /*
+   * Everything inside is sized against this panel rather than the window. With viewport
+   * units the name was set from a 1440px desktop while the panel it sits in is barely
+   * 320px wide, so the copy grew until it covered the castle. Container units make the
+   * desktop panel an exact scale model of the phone.
+   */
+  container-type: inline-size;
+  width: 100%;
   min-height: 100svh;
   display: grid;
   align-content: start;
@@ -7,13 +27,23 @@
   isolation: isolate;
 }
 
+/* Replaced by a blurred wash of the same artwork at desktop widths. */
+.hero__backdrop {
+  display: none;
+}
+
 .hero__art {
   position: absolute;
-  inset: 0;
+  /*
+   * Bled past the viewport on every side. The art drifts and parallaxes, so it has to
+   * be larger than the frame or the moves would expose an edge.
+   */
+  inset: -8% -4%;
   z-index: -2;
 }
 
 .hero__art-image,
+.hero__backdrop-art,
 .hero__art .painted-kingdom {
   width: 100%;
   height: 100%;
@@ -28,8 +58,73 @@
   object-position: 50% 70%;
 }
 
-.hero__art-image--landscape {
-  display: none;
+/*
+ * A very slow push across the artwork. Long enough (three quarters of a minute) that
+ * nobody catches it moving — it just stops the first screen from feeling like a
+ * photograph of a website.
+ */
+.hero__art-image {
+  animation: hero-drift 46s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes hero-drift {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.09) translate3d(-1.4%, -1%, 0);
+  }
+  100% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+}
+
+/*
+ * Mist lying in the valley. Two soft bands sliding in opposite directions read as
+ * moving air; one band on its own reads as a moving rectangle.
+ */
+.hero__mist {
+  position: absolute;
+  inset: 40% -20% 0 -20%;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 40% at 30% 55%, rgba(251, 245, 234, 0.4), transparent 70%),
+    radial-gradient(50% 34% at 72% 42%, rgba(201, 184, 228, 0.28), transparent 72%);
+  animation: hero-mist 38s ease-in-out infinite alternate;
+}
+
+@keyframes hero-mist {
+  from {
+    transform: translate3d(-5%, 0, 0);
+  }
+  to {
+    transform: translate3d(5%, -2%, 0);
+  }
+}
+
+/* The sunrise on the right of the artwork, breathing. */
+.hero__bloom {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    34% 22% at 88% 62%,
+    rgba(246, 230, 192, 0.5),
+    rgba(246, 211, 188, 0.18) 45%,
+    transparent 72%
+  );
+  animation: hero-bloom 9s ease-in-out infinite;
+}
+
+@keyframes hero-bloom {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .hero__fireflies {
@@ -55,7 +150,7 @@
 
 .hero__copy {
   text-align: center;
-  padding: clamp(3rem, 11vh, 6rem) var(--page-gutter) 0;
+  padding: clamp(1.8rem, 13cqw, 3.2rem) var(--page-gutter) 0;
 }
 
 .hero__eyebrow {
@@ -64,49 +159,62 @@
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin: 0 0 1.4rem;
+  margin: 0 0 2rem;
 }
 
-.hero__crown {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 0.6rem;
-}
-
-.hero__crown .gold-crown {
-  width: clamp(44px, 11vw, 62px);
-  height: auto;
+/* Room above for the crown, which overlaps the rim. */
+.hero__medallion {
+  --medallion-size: clamp(7.5rem, 38cqw, 12rem);
+  margin-bottom: 1.4rem;
 }
 
 .hero__name {
   font-family: var(--script);
-  font-size: clamp(4.2rem, 21vw, 8rem);
-  line-height: 0.9;
+  font-size: clamp(3.6rem, 22cqw, 8.5rem);
+  line-height: 0.82;
   color: var(--ink);
   margin: 0;
 }
 
 .hero__turning {
-  font-size: clamp(1rem, 4vw, 1.3rem);
+  font-size: clamp(0.9rem, 4cqw, 1.25rem);
   color: var(--ink-soft);
-  margin: 0.4rem 0 0;
+  /*
+   * Close under the name. The script face carries a deep descender, so the two lines
+   * need less space between them than the numbers suggest.
+   */
+  margin: 0.1rem 0 0;
   letter-spacing: 0.04em;
+  text-shadow:
+    0 1px 3px rgba(251, 245, 234, 0.9),
+    0 0 16px rgba(251, 245, 234, 0.8);
 }
 
+/*
+ * On the same line as "is turning" rather than a block of its own. Set as a second
+ * display element underneath the name it competed with it, and left a hole in the
+ * middle of the composition that nothing filled.
+ */
 .hero__one {
-  display: block;
   font-family: var(--serif);
-  font-size: clamp(2.6rem, 13vw, 4.4rem);
-  letter-spacing: 0.22em;
+  font-size: 1.5em;
+  letter-spacing: 0.2em;
   /* The letter-spacing adds a trailing gap; this re-centres the word. */
-  text-indent: 0.22em;
+  margin-left: 0.24em;
   color: var(--gold-deep);
-  margin-top: 0.2rem;
+  text-shadow:
+    0 1px 3px rgba(251, 245, 234, 0.95),
+    0 0 20px rgba(251, 245, 234, 0.9);
 }
 
 .hero__rule {
   display: flex;
   justify-content: center;
+}
+
+.hero__rule .rule {
+  margin: 0.75rem auto 0.9rem;
+  max-width: 11rem;
 }
 
 /*
@@ -115,7 +223,7 @@
  * scrim above it.
  */
 .hero__when {
-  font-size: clamp(0.95rem, 3.6vw, 1.1rem);
+  font-size: clamp(0.85rem, 3.6cqw, 1.1rem);
   color: var(--ink);
   margin: 0;
   line-height: 1.9;
@@ -164,19 +272,56 @@
 }
 
 @media (min-width: 900px) {
+  .hero {
+    display: grid;
+    place-items: center;
+    min-height: 100svh;
+    padding: clamp(1.5rem, 4vh, 3rem) 0;
+  }
+
   /*
-   * The --portrait class is only applied when the wide artwork exists, so hiding it
-   * here can never leave an empty hero.
+   * Sized from the viewport height so the whole panel is always visible without
+   * scrolling — a fixed width would overflow on a short laptop screen.
    */
-  .hero__art-image--portrait {
-    display: none;
+  .hero__stage {
+    min-height: 0;
+    height: min(86svh, 44rem);
+    width: auto;
+    /*
+     * A phone's proportions, not the artwork's. At the painting's own 9:16 the full
+     * canvas shows, the castle rides up into the middle of the panel, and the name and
+     * the date end up printed across its spires. Cropping to a phone's taller frame is
+     * what puts the castle back underneath the copy, where the art was composed to
+     * leave it.
+     */
+    aspect-ratio: 390 / 844;
+    border-radius: 18px;
+    box-shadow:
+      0 1px 0 rgba(251, 245, 234, 0.6),
+      0 30px 70px rgba(74, 63, 86, 0.3);
   }
 
-  .hero__art-image--landscape {
+  /*
+   * The same painting, enlarged and thrown far out of focus, so the panel sits in the
+   * colours of its own artwork rather than on a flat background.
+   */
+  .hero__backdrop {
     display: block;
+    position: absolute;
+    inset: -6%;
+    z-index: -1;
   }
 
-  .hero__art-image img {
-    object-position: 50% 58%;
+  .hero__backdrop-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(42px) saturate(0.92) brightness(1.08);
+    transform: scale(1.12);
+  }
+
+  .hero__scroll {
+    /* Clear of the panel's rounded corner. */
+    bottom: clamp(0.6rem, 2vh, 1.2rem);
   }
 }

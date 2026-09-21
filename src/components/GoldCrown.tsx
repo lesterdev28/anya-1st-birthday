@@ -1,6 +1,12 @@
 /**
  * The little gold crown, drawn inline so it is crisp at any size and can glow via CSS.
  *
+ * Drawn as fine gold wire rather than as a solid shape. A filled, chunky crown reads as
+ * clip-art the moment it sits on top of the painted artwork — the artwork has soft
+ * edges and glazed light everywhere, and a flat vector silhouette is the one thing on
+ * the screen that obviously is not painted. Thin strokes with pearl tips sit in that
+ * world instead of on top of it.
+ *
  * A generated `golden-crown` asset is part of the art direction; when it exists,
  * callers that want the painted illustration use FairyImage with this as the fallback.
  * This version is also what sits above the number 1 in the intro, where a vector edge
@@ -28,25 +34,35 @@ export function GoldCrown({ className }: Props) {
         </linearGradient>
       </defs>
 
-      {/* Five points, each tipped with a pearl, over a banded base. */}
-      <path
-        d="M12 66 L6 22 L30 42 L46 10 L60 34 L74 10 L90 42 L114 22 L108 66 Z"
-        fill="url(#crown-gold)"
-      />
-      <rect x="12" y="66" width="96" height="12" rx="4" fill="url(#crown-gold)" />
-
-      <g fill="#fbf5ea">
-        <circle cx="6" cy="20" r="4.5" />
-        <circle cx="46" cy="8" r="4.5" />
-        <circle cx="74" cy="8" r="4.5" />
-        <circle cx="114" cy="20" r="4.5" />
-        <circle cx="60" cy="32" r="4" />
+      <g
+        fill="none"
+        stroke="url(#crown-gold)"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {/* Three points, the centre one tallest, springing from a single swept line. */}
+        <path d="M16 64 L22 32 L41 50 L60 22 L79 50 L98 32 L104 64" />
+        {/* The band, drawn as two fine rules rather than a filled bar. */}
+        <path d="M16 64 H104" />
+        <path d="M19 72 H101" opacity="0.7" />
       </g>
 
-      {/* Two small gems on the band, in the palette's blush and lavender. */}
-      <circle cx="42" cy="72" r="4" fill="#f3c9d4" />
-      <circle cx="78" cy="72" r="4" fill="#c9b8e4" />
-      <circle cx="60" cy="72" r="4.5" fill="#fbf5ea" />
+      {/* Pearls at the tips. Ivory centres with a gold edge, so they catch the light. */}
+      <g fill="#fbf5ea" stroke="url(#crown-gold)" strokeWidth="2">
+        <circle cx="22" cy="31" r="3.4" />
+        <circle cx="98" cy="31" r="3.4" />
+      </g>
+
+      {/* The centre point is finished with a small star rather than a pearl. */}
+      <path
+        d="M60 13 L62.4 19.6 L69 22 L62.4 24.4 L60 31 L57.6 24.4 L51 22 L57.6 19.6 Z"
+        fill="url(#crown-gold)"
+      />
+
+      {/* Two gems on the band, in the palette's blush and lavender. */}
+      <circle cx="46" cy="68" r="2.6" fill="#f3c9d4" />
+      <circle cx="74" cy="68" r="2.6" fill="#c9b8e4" />
     </svg>
   );
 }

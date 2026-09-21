@@ -22,12 +22,18 @@
       content="You're invited to Anya's first birthday. Saturday 10 October 2026, 2:00 to 6:00 in the afternoon, at Bantug Lake Ranch."
     />
 
-    <!-- Opening on a phone, over mobile data, is the normal case: warm the font host early. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      The fonts are served from this origin, so there is no third-party host to warm.
+      Preloading the two faces the first screen actually uses stops the name and the
+      date from flashing in a fallback serif while the bundle parses.
+    -->
+    <link rel="preload" href="/fonts/tangerine-400.woff2" as="font" type="font/woff2" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400&family=Tangerine:wght@400;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/cormorant-garamond.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
 
     <!-- The intro opens on a night sky; matching the background avoids an ivory flash. -->

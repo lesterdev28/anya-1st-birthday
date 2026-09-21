@@ -1,4 +1,12 @@
 {
+  "anya-hero-portrait": {
+    "base": "/invitation/photos/optimized/anya-hero-portrait",
+    "widths": [
+      480
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACQBQCdASoYABgAPu1kq06ppaQiKA1RMB2JZACdMtDBqEr9QkOMyGoAhKIE3gg7+KNhvVspwAD+04ShHEpfPbpzD8e96cMUUDlKi3KZaLJuCjFnewAM1iRgynw66a6DT47hQuXjhMUwd8HC/o0yOfIJna0qh9bzz4nSb3m5F3qO2b0uLVYYIS1hOsO0JSxq6AA="
+  },
   "anya-portrait-01": {
     "base": "/invitation/photos/optimized/anya-portrait-01",
     "widths": [

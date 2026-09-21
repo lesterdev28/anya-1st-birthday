@@ -6,6 +6,15 @@
 export const child = {
   name: "Anya",
   turning: "ONE",
+  /**
+   * The photograph set into the locket on the first screen. Any stem from
+   * public/invitation/photos works — change this one line to use a different picture.
+   *
+   * `anya-hero-portrait` is a square crop cut tight to her face from anya-sunhat-02,
+   * which is what the round frame needs: a wider photograph puts a sofa and a living
+   * room inside the locket, and no amount of feathering hides a room.
+   */
+  heroPortrait: "anya-hero-portrait",
 } as const;
 
 export const party = {
