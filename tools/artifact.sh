@@ -19,6 +19,8 @@ npx vite build --base=./ --outDir "$out"
 grep -rl '"/invitation/' "$out/assets" | xargs -r sed -i 's#"/invitation/#"invitation/#g'
 grep -rl '(/fonts/' "$out/assets" | xargs -r sed -i 's#(/fonts/#(fonts/#g'
 sed -i 's#href="/fonts/#href="fonts/#g' "$out/index.html"
+# The share-preview image, which is a meta tag rather than an asset Vite rewrites.
+sed -i 's#content="/invitation/#content="invitation/#g' "$out/index.html"
 
 echo
 echo "$out ready:"

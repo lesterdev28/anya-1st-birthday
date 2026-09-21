@@ -1,7 +1,11 @@
 # Anya's first birthday invitation
 
-An animated fairy-tale invitation: Higgsfield-generated cinematic artwork, Anya's real
-photographs, and web animation for everything that does not need to be generated media.
+One continuous scroll through a fairy kingdom in the clouds and down through Anya's
+first year, ending at the RSVP. Anya's real photographs, everything around them drawn
+in CSS and SVG, and an original soundtrack that follows the journey.
+
+Her photographs are never altered — not tinted, restyled, generated over or cropped
+into her face. All of the decoration goes around the opening they show through.
 
 **Saturday 10 October 2026 · 2:00–6:00 PM · Bantug Lake Ranch**
 
@@ -110,28 +114,47 @@ If the intro beat length and the clip length drift apart, the cut happens before
 clip reaches the hero frame and the handover becomes visible. The `opening` beat in
 `IntroSequence.tsx` is set to the clip's duration for that reason.
 
-### The music
+### The sound
 
-`public/invitation/audio/music-box-lullaby.*` is an original piece, rendered by
-`tools/musicbox.py` rather than licensed from anywhere. An invitation gets forwarded
-around a family; a track with someone else's terms attached does not belong in it.
+Every note on this page was written for it. `tools/musicbox.py` renders the music-box
+lullaby and `tools/soundscape.py` renders the other two beds and the four effects, both
+in plain Python with no dependencies. An invitation gets forwarded around a family; a
+track with someone else's terms attached does not belong in it.
 
-It is a 38-second seamless loop — the reverb tail that runs past the end is folded back
-over the opening, so the join is inaudible. To replace it, drop in any pair of files and
-point `AUDIO_SOURCES` in `src/lib/assets.ts` at them; Opus in WebM plus AAC in MP4 covers
-every browser. The AAC file is named `.mp4` rather than `.m4a` — same container, and
-some static hosts refuse to serve `.m4a` at all.
+Three beds, one key (F major) and one tempo, so any two can cross-fade mid-bar:
+
+| bed | where it plays |
+| --- | --- |
+| `sky-ambience` | the cloud kingdom at the start, and the sunset at the end |
+| `music-box-lullaby` | the meadow, the year, and the RSVP |
+| `shimmer` | the twelfth month and the invitation |
+
+Four effects: `sfx-enter` on the entrance button, `sfx-sparkle` when the clouds part on
+the twelfth month, `sfx-chime` arriving at the invitation, `sfx-bloom` when an RSVP is
+sent.
+
+Every bed loops seamlessly by construction rather than by editing. Sustained voices are
+tuned to a whole number of cycles per loop, so they arrive back at the start of their own
+waveform exactly at the join; struck notes are allowed to ring past the end and the
+overhang is folded back over the opening, so the decay of the last note is what plays
+under the first. All three are normalised to -17 LUFS, so a cross-fade never changes how
+loud the page is.
 
 ```bash
-python3 tools/musicbox.py     # writes a wav, no dependencies
-ffmpeg -i lullaby.wav -c:a libopus -b:a 64k music-box-lullaby.webm
-ffmpeg -i lullaby.wav -c:a aac -b:a 88k -movflags +faststart music-box-lullaby.mp4
+python3 tools/musicbox.py                  # writes lullaby.wav
+python3 tools/soundscape.py                # writes the rest; name pieces to do one
+ffmpeg -i sky-ambience.wav -c:a libopus -b:a 56k -vbr on sky-ambience.webm
+ffmpeg -i sky-ambience.wav -c:a aac -b:a 96k -movflags +faststart sky-ambience.mp4
 ```
 
-No browser will play audio before the visitor has done something, so the music starts at
-the first tap, click, key or scroll rather than on load. Silencing it is remembered in
-localStorage and is never overridden. `sound` in `src/data/party.ts` holds the volume and
-can switch the auto-start off entirely.
+Opus in WebM plus AAC in MP4 covers every browser. The AAC files are named `.mp4` rather
+than `.m4a` — same container, and some static hosts refuse to serve `.m4a` at all.
+
+`src/lib/audio.ts` is the engine: Web Audio rather than `<audio>`, because an `<audio>`
+element cannot cross-fade and on iOS cannot change its volume at all. Nothing is fetched
+until the guest asks for sound, nothing plays before they press "Enter Anya's Fairy
+Garden", and silencing it is remembered in localStorage and never overridden. `sound` in
+`src/data/party.ts` holds the volume and the fade length.
 
 ## Layout
 
@@ -144,25 +167,44 @@ public/invitation/
     storybook/      cover and parchment pages
     decorations/    the reusable isolated elements
   photos/           Anya's real photographs (originals + optimized/)
-  audio/            the music-box lullaby
+  audio/            three music beds and four effects
 src/
-  components/       the invitation's sections and media primitives
-  data/party.ts     every editable detail: date, venue, RSVP, the twelve chapters
+  components/
+    world/          the sky, clouds, meadow, drifting particles and butterflies
+    chapters/       one file per part of the journey, in scroll order
+  data/party.ts     every editable detail: date, venue, RSVP, story copy, the twelve months
+  lib/scene.tsx     which chapter owns the screen, and each chapter's scroll progress
+  lib/audio.ts      the scene-based sound engine
   lib/assets.ts     the manifest bridge
 tools/
   art-direction.md  the written specification — read this first
   art-direction.ts  the canon and every scene, in code
   generate.ts       the Higgsfield CLI
   optimize.ts       derivatives and manifest
-  musicbox.py       renders the background music from scratch
+  musicbox.py       renders the lullaby from scratch
+  soundscape.py     renders the other beds and the effects
+  artifact.sh       builds a relative-path bundle for publishing as a preview
 ```
+
+## How the journey is put together
+
+There are no sections with their own backgrounds. One fixed `Sky` sits behind the whole
+page and changes colour as the guest travels, driven by `body[data-scene]`, which
+`SceneProvider` sets from whichever chapter fills the middle of the screen. Each chapter
+measures its own scroll progress — 0 as it enters the viewport, 1 as it leaves — and its
+layers move against that, so nothing ever drifts thousands of pixels off screen however
+long the page grows.
+
+Month twelve has no photograph and is not getting one, so it is written as the climax:
+the clouds part and the days of the year count up as the guest scrolls. The four other
+months with no photograph get a keepsake page rather than an empty frame.
 
 ## Things a human still needs to do
 
 - **RSVP details** are not filled in. Set `rsvp` in `src/data/party.ts`; until
   `contactName` and `contactNumber` are set, the RSVP section renders an obvious
   "to be confirmed" state rather than inventing a number.
-- **The twelve-month photo journey** places the seven supplied photographs in a
-  plausible order, but the actual month each was taken is a guess. Correct the `photo`
-  fields in `src/data/party.ts` and drop further photos into
-  `public/invitation/photos/`.
+- **The twelve-month journey** places the seven supplied photographs in a plausible
+  order, but the actual month each was taken is a guess. Correct the `photo` fields in
+  `src/data/party.ts` and drop further photos into `public/invitation/photos/`, then run
+  `npm run optimize`. A month left at `photo: null` renders its keepsake page instead.
