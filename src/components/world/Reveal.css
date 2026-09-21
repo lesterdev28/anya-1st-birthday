@@ -1,0 +1,6 @@
+/* Words animate individually, so each needs to be its own box without breaking the line. */
+.reveal-word {
+  display: inline-block;
+  white-space: pre;
+  will-change: transform, opacity, filter;
+}

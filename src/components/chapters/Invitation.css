@@ -1,0 +1,124 @@
+.invite {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  gap: clamp(3rem, 10vh, 5rem);
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(5rem, 14vh, 8rem) var(--page-gutter);
+  container-type: inline-size;
+}
+
+.invite__clouds,
+.invite__air,
+.invite__butterflies {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.invite__clouds {
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.invite__air {
+  z-index: 2;
+}
+
+.invite__butterflies {
+  z-index: 5;
+}
+
+/*
+ * The card is the one panel on the page with a hard edge, and it earns it: this is the
+ * part a guest screenshots. Even so it is glass rather than paper — the sky still shows
+ * through it, so it belongs to the same world as everything above.
+ */
+.invite__card {
+  position: relative;
+  z-index: 3;
+  max-width: 27rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: clamp(2.8rem, 9cqw, 3.6rem) clamp(1.4rem, 7cqw, 2.6rem) clamp(2.2rem, 7cqw, 2.8rem);
+  text-align: center;
+  border-radius: 1.6rem;
+  border: 1px solid rgba(215, 180, 106, 0.45);
+  background: linear-gradient(
+    170deg,
+    rgba(255, 253, 248, 0.9) 0%,
+    rgba(255, 249, 241, 0.78) 58%,
+    rgba(244, 214, 223, 0.55) 100%
+  );
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 24px 60px rgba(103, 88, 132, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.invite__crown {
+  width: clamp(2.8rem, 13cqw, 3.6rem);
+  margin: 0 auto 1rem;
+}
+
+.invite__eyebrow {
+  margin-bottom: 0.6rem;
+}
+
+.invite__title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 11cqw, 2.9rem);
+  font-weight: 300;
+  color: var(--ink);
+  margin: 0;
+}
+
+.invite__body {
+  font-size: clamp(0.88rem, 3.8cqw, 0.98rem);
+  color: var(--ink-soft);
+  max-width: 19rem;
+  margin: 0 auto 1.8rem;
+}
+
+.invite__details {
+  display: grid;
+  gap: 1.2rem;
+  margin: 0;
+  text-align: center;
+}
+
+.invite__detail dt {
+  font-family: var(--sans);
+  font-size: 0.64rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.32rem;
+}
+
+.invite__detail dd {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 4.6cqw, 1.25rem);
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+/* The second line of a detail: quieter, and in the reading face rather than the serif. */
+.invite__time {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+}
+
+.invite__signoff {
+  font-size: 1.6rem;
+  color: var(--fairy-gold);
+  margin: 1.8rem 0 0;
+}

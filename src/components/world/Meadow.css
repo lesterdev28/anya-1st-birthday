@@ -1,0 +1,65 @@
+.meadow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(9rem, 30vh, 18rem);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.meadow__band {
+  position: absolute;
+  /* Wider than the frame so a parallaxing band never shows its ends. */
+  left: -10%;
+  right: -10%;
+  bottom: 0;
+}
+
+.meadow__svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+/* Far flowers sit highest and smallest; near ones fill the bottom of the frame. */
+.meadow__band--far {
+  height: 58%;
+  opacity: 0.55;
+}
+
+.meadow__band--mid {
+  height: 76%;
+  opacity: 0.82;
+}
+
+.meadow__band--near {
+  height: 100%;
+}
+
+/*
+ * Each stem bends about its own base. The rotation is small — a couple of degrees — but
+ * the varied cycle lengths mean the meadow never pulses as one body.
+ */
+.meadow__stem {
+  animation-name: meadow-sway;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+@keyframes meadow-sway {
+  from {
+    transform: rotate(calc(var(--lean, 0deg) * -0.16));
+  }
+  to {
+    transform: rotate(calc(var(--lean, 0deg) * 0.16 + 1.4deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meadow__stem {
+    animation: none;
+  }
+}

@@ -1,0 +1,68 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 40%, #3a2f56 0%, var(--night) 46%, var(--night-deep) 100%);
+}
+
+.loader__dust {
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+}
+
+.loader__middle {
+  position: relative;
+  text-align: center;
+  padding: 0 var(--page-gutter);
+}
+
+.loader__title {
+  font-size: clamp(2rem, 11vw, 3rem);
+  color: var(--champagne-gold);
+  margin: 0 0 0.5rem;
+}
+
+.loader__line {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 253, 248, 0.62);
+  margin: 0 0 1.4rem;
+}
+
+/* A line of gold that fills once, in the same time the loader holds. */
+.loader__rule {
+  display: block;
+  width: min(11rem, 52vw);
+  height: 1px;
+  margin: 0 auto;
+  background: rgba(255, 253, 248, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.loader__rule::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--champagne-gold), transparent);
+  transform: translateX(-100%);
+  animation: loader-sweep 1.5s var(--ease-drift) forwards;
+}
+
+@keyframes loader-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Nothing behind the loader should scroll while it is up. */
+body[data-loading="true"] {
+  overflow: hidden;
+}

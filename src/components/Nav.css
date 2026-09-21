@@ -1,0 +1,89 @@
+.nav {
+  position: fixed;
+  right: max(0.6rem, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.nav__dot {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  /* A 44px touch target around a 7px dot. */
+  padding: 0.55rem;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.nav__mark {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(103, 88, 132, 0.28);
+  box-shadow: 0 0 0 0 rgba(215, 180, 106, 0.4);
+  transition:
+    background-color 0.5s var(--ease-soft),
+    transform 0.5s var(--ease-soft),
+    box-shadow 0.5s var(--ease-soft);
+}
+
+.nav__dot.is-here .nav__mark {
+  background: var(--fairy-gold);
+  transform: scale(1.35);
+  box-shadow: 0 0 0 5px rgba(215, 180, 106, 0.16);
+}
+
+/*
+ * The label is for a pointer and for a screen reader; on a phone the dot alone is the
+ * whole control, because a rail of words down the edge of a 390px screen is clutter.
+ */
+.nav__label {
+  font-family: var(--sans);
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0;
+  transform: translateX(6px);
+  transition:
+    opacity 0.4s var(--ease-soft),
+    transform 0.4s var(--ease-soft);
+  white-space: nowrap;
+  order: -1;
+}
+
+@media (hover: hover) and (min-width: 900px) {
+  .nav__dot:hover .nav__label,
+  .nav__dot:focus-visible .nav__label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 899px) {
+  .nav__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+/* While the loader is up there is nothing to navigate. */
+body[data-loading="true"] .nav {
+  opacity: 0;
+}

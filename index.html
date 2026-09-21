@@ -27,7 +27,7 @@
       Preloading the two faces the first screen actually uses stops the name and the
       date from flashing in a fallback serif while the bundle parses.
     -->
-    <link rel="preload" href="/fonts/tangerine-400.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- The three faces the first screen actually sets: display, script, body. -->
     <link
       rel="preload"
       href="/fonts/cormorant-garamond.woff2"
@@ -35,8 +35,20 @@
       type="font/woff2"
       crossorigin
     />
+    <link
+      rel="preload"
+      href="/fonts/great-vibes.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preload" href="/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- The intro opens on a night sky; matching the background avoids an ivory flash. -->
+    <!--
+      The loading screen opens on a night sky, and this is what the browser paints before
+      any stylesheet arrives. It is on <html> rather than <body> on purpose: <body> has to
+      stay transparent so the fixed sky layer behind the page can be seen through it.
+    -->
     <style>
       html {
         background: #241c3a;

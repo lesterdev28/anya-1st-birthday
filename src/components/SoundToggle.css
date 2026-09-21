@@ -17,7 +17,7 @@
   padding: 0;
   border: 1px solid rgba(228, 198, 138, 0.9);
   border-radius: 50%;
-  color: var(--gold-deep);
+  color: var(--fairy-gold);
   background: rgba(251, 245, 234, 0.82);
   backdrop-filter: blur(6px);
   box-shadow: 0 4px 14px rgba(74, 63, 86, 0.16);
@@ -60,7 +60,7 @@ body[data-intro-open="true"] .sound-toggle:hover {
 }
 
 .sound-toggle:focus-visible {
-  outline: 2px solid var(--gold-deep);
+  outline: 2px solid var(--fairy-gold);
   outline-offset: 3px;
 }
 

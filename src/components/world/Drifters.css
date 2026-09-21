@@ -1,0 +1,162 @@
+.drifters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.drifters__bit {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  will-change: transform, opacity;
+}
+
+/* ---- stars: fixed points that twinkle rather than travel ---- */
+
+.drifters--stars .drifters__bit {
+  background: var(--soft-white);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+  animation-name: twinkle;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---- fairy dust: tiny gold motes rising ---- */
+
+.drifters--dust .drifters__bit {
+  background: var(--champagne-gold);
+  box-shadow: 0 0 7px rgba(215, 180, 106, 0.85);
+  animation-name: rise;
+}
+
+@keyframes rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0) scale(0.6);
+  }
+  18% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift, 0px), -140px, 0) scale(1.1);
+  }
+}
+
+/* ---- pollen: pale motes wandering in no particular direction ---- */
+
+.drifters--pollen .drifters__bit {
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: 0 0 8px rgba(255, 253, 248, 0.7);
+  animation-name: wander;
+}
+
+@keyframes wander {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translate3d(0, 0, 0);
+  }
+  33% {
+    opacity: 0.85;
+    transform: translate3d(var(--drift, 0px), -26px, 0);
+  }
+  66% {
+    opacity: 0.55;
+    transform: translate3d(calc(var(--drift, 0px) * -0.6), -52px, 0);
+  }
+}
+
+/* ---- petals: blush ovals falling and turning over ---- */
+
+.drifters--petals .drifters__bit {
+  /* Not a circle: an oval pinched at one end, which is enough to read as a petal. */
+  border-radius: 60% 0 60% 0;
+  background: linear-gradient(140deg, var(--blush-pink), var(--rose-mist));
+  opacity: 0.75;
+  animation-name: fall;
+  animation-timing-function: linear;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -40px, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 0.8;
+  }
+  88% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift, 0px), 340px, 0) rotate(calc(var(--spin, 1) * 420deg));
+  }
+}
+
+/* ---- fireflies: warm, soft-edged, breathing ---- */
+
+.drifters--fireflies .drifters__bit {
+  background: radial-gradient(circle, rgba(255, 244, 214, 0.95), rgba(215, 180, 106, 0) 70%);
+  box-shadow: 0 0 12px rgba(232, 211, 164, 0.8);
+  animation-name: hover-glow;
+}
+
+@keyframes hover-glow {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    opacity: 0.95;
+    transform: translate3d(calc(var(--drift, 0px) * 0.5), -18px, 0);
+  }
+  60% {
+    opacity: 0.4;
+    transform: translate3d(var(--drift, 0px), -34px, 0);
+  }
+}
+
+/*
+ * Phones: half the particles, per the brief. Hiding every other one costs nothing at
+ * runtime and keeps the scatter of the remainder exactly as designed.
+ */
+@media (max-width: 640px) {
+  .drifters__bit:nth-child(2n) {
+    display: none;
+  }
+}
+
+/*
+ * Reduced motion keeps the particles as still points of light rather than removing
+ * them — the sky should still have stars in it.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .drifters__bit {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .drifters--petals .drifters__bit,
+  .drifters--dust .drifters__bit {
+    display: none;
+  }
+}

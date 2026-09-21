@@ -1,0 +1,86 @@
+.butterflies {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/*
+ * The path is written in a 0-100 box, so the element has to be laid out in one for
+ * `offset-path` to resolve against. `offset-rotate: auto` turns the butterfly to face
+ * wherever the curve is heading.
+ */
+.butterflies__flyer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  aspect-ratio: 1;
+  offset-rotate: auto;
+  offset-distance: 0%;
+  animation-name: butterfly-travel;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: offset-distance;
+}
+
+@keyframes butterfly-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+.butterflies__flyer svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  animation-name: butterfly-flap;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/*
+ * Flapping is a horizontal squash of the whole pair rather than two rotations. It reads
+ * the same at this size and costs one transform instead of two.
+ */
+@keyframes butterfly-flap {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.35);
+  }
+}
+
+.butterflies__wing {
+  transform-origin: 50% 50%;
+}
+
+/* Phones carry fewer, per the brief's instruction to thin out simultaneous animation. */
+@media (max-width: 640px) {
+  .butterflies__flyer:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+/*
+ * Reduced motion parks one butterfly, still, rather than removing them: the scenery
+ * survives, the movement does not.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .butterflies__flyer {
+    animation: none;
+    offset-distance: 42%;
+  }
+
+  .butterflies__flyer svg {
+    animation: none;
+  }
+
+  .butterflies__flyer:nth-child(n + 2) {
+    display: none;
+  }
+}

@@ -1,0 +1,78 @@
+.finale {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(5rem, 14vh, 8rem) var(--page-gutter) clamp(8rem, 22vh, 12rem);
+  container-type: inline-size;
+}
+
+.finale__clouds,
+.finale__air {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.finale__clouds--far {
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.finale__clouds--near {
+  z-index: 4;
+  opacity: 0.35;
+}
+
+.finale__air {
+  z-index: 2;
+}
+
+.finale__inner {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+.finale__portrait {
+  margin: 0 auto clamp(1.6rem, 6vh, 2.4rem);
+}
+
+.finale__thanks {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 6cqw, 1.6rem);
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.45;
+  margin: 0;
+  text-shadow: 0 2px 22px rgba(255, 253, 248, 0.6);
+}
+
+.finale__see {
+  font-size: clamp(1.5rem, 8cqw, 2.1rem);
+  color: var(--ink-soft);
+  margin: 0.9rem 0 0;
+}
+
+.finale__signoff {
+  font-family: var(--sans);
+  font-size: clamp(0.72rem, 3.2cqw, 0.84rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  /*
+   * A deeper gold than the palette's own. The sign-off sits on the warmest part of the
+   * sunset, where --fairy-gold is close enough in value to the background to disappear.
+   */
+  color: #a8823c;
+  margin: 0;
+}
+
+.finale__meadow {
+  z-index: 5;
+  opacity: 0.8;
+}

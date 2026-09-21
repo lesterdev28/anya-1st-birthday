@@ -1,0 +1,113 @@
+.climax {
+  position: relative;
+  /* Taller than a screen: the clouds need room to part while the guest is still in it. */
+  min-height: 145svh;
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(4rem, 14vh, 8rem) var(--page-gutter);
+  container-type: inline-size;
+}
+
+/* The light behind the clouds, which is what they part to reveal. */
+.climax__light {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    64% 46% at 50% 44%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 249, 241, 0.6) 34%,
+    rgba(232, 211, 164, 0.24) 58%,
+    rgba(255, 253, 248, 0) 78%
+  );
+}
+
+.climax__dust {
+  position: absolute;
+  inset: -20% 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.climax__inner {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+.climax__crown {
+  width: clamp(3.4rem, 16cqw, 5rem);
+  margin: 0 auto 1.4rem;
+}
+
+.climax__count {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.climax__number {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(5rem, 30cqw, 9rem);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  /* Digits must not jostle as the count runs. */
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 28px rgba(255, 253, 248, 0.95);
+}
+
+.climax__unit {
+  font-family: var(--sans);
+  font-size: clamp(0.78rem, 3.4cqw, 0.92rem);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.climax__onward {
+  font-size: clamp(1.5rem, 8cqw, 2.2rem);
+  color: var(--ink-soft);
+  margin: clamp(1.6rem, 6vh, 2.6rem) 0 0;
+}
+
+.climax__celebrate {
+  font-family: var(--sans);
+  font-size: clamp(0.82rem, 3.6cqw, 0.95rem);
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--fairy-gold);
+  margin: 1rem 0 0;
+}
+
+.climax__gate {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.climax__gate-half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -52%;
+  width: 104%;
+  will-change: transform;
+}
+
+.climax__gate-half--right {
+  left: auto;
+  right: -52%;
+}

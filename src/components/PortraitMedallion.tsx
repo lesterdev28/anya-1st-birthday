@@ -13,7 +13,7 @@
  */
 import { FairyImage } from "./FairyImage";
 import { GoldCrown } from "./GoldCrown";
-import { ParticleField } from "./ParticleField";
+import { Drifters } from "./world/Drifters";
 import "./PortraitMedallion.css";
 
 interface Props {
@@ -45,7 +45,7 @@ export function PortraitMedallion({ photoId, alt, className }: Props) {
       */}
       <div className="medallion__wash" aria-hidden="true" />
 
-      <ParticleField kind="sparkles" count={9} className="medallion__sparkles" />
+      <Drifters kind="dust" count={9} className="medallion__sparkles" />
 
       <GoldCrown className="medallion__crown" />
     </div>

@@ -1,44 +1,69 @@
 /*
- * The invitation's design system.
+ * The invitation's design system: "Anya's Enchanted First Year".
  *
- * The colour tokens here are the same palette the Higgsfield art direction is written
- * against (tools/art-direction.md), so the CSS-painted layers, the typography and the
- * generated artwork all sit in one visual world.
+ * The palette and the three font roles are set by the brief. Everything the invitation
+ * paints — the sky, the clouds, the meadow, the particles — is built from these tokens,
+ * so the hand-drawn world and any generated artwork dropped in later sit in one place.
  */
 
 @import "./fonts.css";
 
 :root {
-  /* Palette — shared verbatim with the Higgsfield art direction. */
-  --lavender: #c9b8e4;
-  --lavender-deep: #9c86c4;
-  --blush: #f3c9d4;
-  --blush-deep: #dfa0b4;
-  --powder: #bcd6ec;
-  --powder-deep: #8bb4d6;
-  --ivory: #fbf5ea;
-  --gold: #e4c68a;
-  --gold-deep: #c4a052;
-  --peach: #f6d3bc;
-  --sage: #c3d3be;
+  /* Palette — the brief's named colours, verbatim. */
+  --fairy-lavender: #c9b7e8;
+  --dream-lavender: #e8ddf5;
+  --blush-pink: #f4d6df;
+  --rose-mist: #e8bfcb;
+  --cloud-cream: #fff9f1;
+  --warm-ivory: #fffdf8;
+  --fairy-sage: #c8d6be;
+  --forest-sage: #94a987;
+  --powder-sky: #ddebf4;
+  --fairy-gold: #d7b46a;
+  --champagne-gold: #e8d3a4;
+  --soft-white: #ffffff;
 
-  /* Ink. Warm, never pure black, so it sits softly on the pastels. */
-  --ink: #4a3f56;
-  --ink-soft: #6f6280;
-  --ink-faint: #9a8fa8;
+  /*
+   * Ink is not in the brief, which names no text colour. A deep lavender-plum rather
+   * than black or grey: it is the palette's own darkest relative, so body copy reads as
+   * part of the world instead of as type dropped on top of it.
+   */
+  --ink: #453a57;
+  --ink-soft: #6c6080;
+  --ink-faint: #9b90ab;
 
-  /* The night sky the intro opens on. */
-  --night: #241c3a;
-  --night-deep: #171129;
+  /*
+   * The sky the journey passes through, in scroll order. The gradient between these is
+   * interpolated live rather than being a fixed background, so leaving one chapter for
+   * the next changes the colour of the air.
+   */
+  --sky-dawn: #ddebf4;
+  --sky-cloud: #e8ddf5;
+  --sky-blush: #f4d6df;
+  --sky-cream: #fff9f1;
 
+  /* The night the loader and the opening moments sit in. */
+  --night: #2a2140;
+  --night-deep: #1a1430;
+
+  /* Three font roles, per the brief: display serif, script accent, body sans. */
   --serif: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  --script: "Tangerine", "Snell Roundhand", "Apple Chancery", cursive;
-  --sans: "Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --script: "Great Vibes", "Snell Roundhand", "Apple Chancery", cursive;
+  --sans: "DM Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
 
-  --page-gutter: 20px;
+  --page-gutter: 22px;
   --measure: 34rem;
 
   --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-drift: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /*
+   * One depth scale, so every layer in every chapter agrees about what is near and what
+   * is far. Scroll multipliers come straight from the brief.
+   */
+  --depth-far: 0.15;
+  --depth-mid: 0.35;
+  --depth-near: 0.65;
 }
 
 *,
@@ -62,11 +87,23 @@ html {
 }
 
 body {
-  background: var(--ivory);
+  /*
+   * Transparent on purpose. <html> carries the base colour (set inline in index.html so
+   * there is no flash before the CSS loads) and the fixed `.sky` layer sits between the
+   * two — an opaque body would paint straight over it and the whole journey would be
+   * cream from top to bottom.
+   */
+  background: transparent;
   color: var(--ink);
-  font-family: var(--serif);
-  font-size: 18px;
-  line-height: 1.65;
+  /*
+   * The brief is explicit that the serif is for display and the sans for everything a
+   * guest actually has to read. Body copy therefore defaults to the sans.
+   */
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: 0.012em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -79,10 +116,19 @@ body[data-intro-open="true"] {
 h1,
 h2,
 h3 {
+  font-family: var(--serif);
   font-weight: 300;
   line-height: 1.15;
   margin: 0;
   letter-spacing: 0.01em;
+}
+
+/* Short decorative phrases only — never a paragraph, never information. */
+.script {
+  font-family: var(--script);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--ink-soft);
 }
 
 p {
@@ -95,7 +141,7 @@ img {
 }
 
 :focus-visible {
-  outline: 2px solid var(--lavender-deep);
+  outline: 2px solid var(--fairy-gold);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -120,6 +166,7 @@ img {
   text-transform: uppercase;
   color: var(--ink-faint);
   margin: 0 0 1.1rem;
+  font-weight: 400;
 }
 
 .section-title {
@@ -135,7 +182,7 @@ img {
   gap: 0.7rem;
   margin: 1.6rem auto 2rem;
   max-width: 14rem;
-  color: var(--gold-deep);
+  color: var(--fairy-gold);
 }
 
 .rule::before,
@@ -143,14 +190,14 @@ img {
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--champagne-gold), transparent);
 }
 
 .rule span {
   width: 6px;
   height: 6px;
   transform: rotate(45deg);
-  background: var(--gold);
+  background: var(--fairy-gold);
 }
 
 /* ---- accessibility ---- */

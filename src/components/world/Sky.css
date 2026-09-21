@@ -1,0 +1,150 @@
+/*
+ * The sky is one fixed layer behind the whole journey.
+ *
+ * Its colour is held in four registered custom properties rather than in a gradient
+ * string, because a registered <color> property is something the browser knows how to
+ * interpolate — so changing scene is a real cross-fade of the air, done on the
+ * compositor, instead of JavaScript rebuilding a gradient on every scroll event.
+ */
+@property --sky-a {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ddebf4;
+}
+@property --sky-b {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #e8ddf5;
+}
+@property --sky-c {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f4d6df;
+}
+@property --sky-d {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff9f1;
+}
+
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sky__wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--sky-a) 0%,
+    var(--sky-b) 34%,
+    var(--sky-c) 68%,
+    var(--sky-d) 100%
+  );
+  /* Long enough that nobody sees it happen; they just notice the air has changed. */
+  transition:
+    --sky-a 2.4s var(--ease-drift),
+    --sky-b 2.4s var(--ease-drift),
+    --sky-c 2.4s var(--ease-drift),
+    --sky-d 2.4s var(--ease-drift);
+}
+
+/*
+ * The journey's palette, scene by scene. Dawn at the top of the clouds, warming through
+ * the meadow and the year, deepening to a lavender sunset at the end.
+ */
+body[data-scene="intro"] {
+  --sky-a: #c9d9ec;
+  --sky-b: #ddebf4;
+  --sky-c: #e8ddf5;
+  --sky-d: #f4d6df;
+}
+
+body[data-scene="fairy-garden"] {
+  --sky-a: #ddebf4;
+  --sky-b: #e8ddf5;
+  --sky-c: #f4d6df;
+  --sky-d: #fff9f1;
+}
+
+body[data-scene="month-journey"] {
+  --sky-a: #e8ddf5;
+  --sky-b: #f1e4f2;
+  --sky-c: #f4d6df;
+  --sky-d: #fff9f1;
+}
+
+body[data-scene="month-12"] {
+  --sky-a: #f4d6df;
+  --sky-b: #f6e2e4;
+  --sky-c: #fff3e6;
+  --sky-d: #fffdf8;
+}
+
+body[data-scene="invitation"] {
+  --sky-a: #fff9f1;
+  --sky-b: #f8ecf3;
+  --sky-c: #e8ddf5;
+  --sky-d: #fff9f1;
+}
+
+body[data-scene="rsvp"] {
+  --sky-a: #e8ddf5;
+  --sky-b: #e4e9ee;
+  --sky-c: #d9e6df;
+  --sky-d: #fff9f1;
+}
+
+/* The ending returns to the sky, lower and warmer — sunset rather than sunrise. */
+body[data-scene="finale"] {
+  --sky-a: #b9a7d8;
+  --sky-b: #d8c4e2;
+  --sky-c: #f0c9d3;
+  --sky-d: #fde7d4;
+}
+
+.sky__stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 2.4s var(--ease-drift);
+}
+
+/* Stars only where the sky is deep enough to hold them. */
+body[data-scene="intro"] .sky__stars,
+body[data-scene="finale"] .sky__stars {
+  opacity: 1;
+}
+
+.sky__clouds {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+}
+
+.sky__clouds--far {
+  top: 2%;
+  height: 46%;
+  opacity: 0.55;
+}
+
+.sky__clouds--mid {
+  top: 34%;
+  height: 52%;
+  opacity: 0.78;
+}
+
+.sky__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 76% at 50% 42%,
+    transparent 40%,
+    rgba(103, 88, 132, 0.07) 78%,
+    rgba(103, 88, 132, 0.13) 100%
+  );
+}

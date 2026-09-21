@@ -1,0 +1,89 @@
+.countdown {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+  max-width: 30rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.countdown__heading {
+  font-size: clamp(1.5rem, 8cqw, 2rem);
+  color: var(--ink-soft);
+  margin: 0 0 clamp(1.4rem, 5vh, 2.2rem);
+}
+
+.countdown__units {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.3rem, 2cqw, 1rem);
+}
+
+/*
+ * Each unit is a number resting in a cloud rather than sitting in a box. The cloud is
+ * the same radial-gradient recipe the sky uses, so it belongs to the same weather.
+ */
+.countdown__unit {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.3rem 0.2rem 0.9rem;
+  isolation: isolate;
+  animation: countdown-bob 7s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -1.6s);
+}
+
+@keyframes countdown-bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+.countdown__cloud {
+  position: absolute;
+  inset: -14% -8%;
+  z-index: -1;
+  background:
+    radial-gradient(42% 62% at 30% 52%, rgba(255, 255, 255, 0.95), transparent 72%),
+    radial-gradient(38% 78% at 54% 42%, rgba(255, 255, 255, 0.92), transparent 70%),
+    radial-gradient(32% 56% at 76% 58%, rgba(255, 253, 248, 0.88), transparent 72%),
+    radial-gradient(66% 34% at 50% 72%, rgba(255, 249, 241, 0.82), transparent 78%);
+}
+
+.countdown__value {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 9cqw, 2.6rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__label {
+  font-family: var(--sans);
+  font-size: clamp(0.52rem, 2.4cqw, 0.64rem);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 0.4rem;
+}
+
+/* The seconds are the live one; a touch of gold marks them without shouting. */
+.countdown__unit--seconds .countdown__value {
+  color: var(--fairy-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .countdown__unit {
+    animation: none;
+  }
+}

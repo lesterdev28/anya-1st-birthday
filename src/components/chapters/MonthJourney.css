@@ -1,0 +1,157 @@
+/*
+ * One month, one screen.
+ *
+ * The layout is deliberately not a grid of cards: on a phone the frame and the words
+ * stack centred, and from tablet width up the frame takes one side and the words the
+ * other, alternating down the page so the eye travels in a zigzag rather than a column.
+ */
+.journey__opening {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: clamp(3rem, 12vh, 6rem) var(--page-gutter) 0;
+}
+
+.journey__heading {
+  /* Narrow enough that the line breaks where it reads, not wherever it runs out. */
+  max-width: 13rem;
+  margin: 0 auto;
+  text-wrap: balance;
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.month {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(3rem, 10vh, 5rem) var(--page-gutter);
+  container-type: inline-size;
+}
+
+.month__clouds,
+.month__air,
+.month__butterflies {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.month__clouds--far {
+  z-index: 1;
+  opacity: 0.45;
+}
+
+.month__clouds--near {
+  z-index: 4;
+  opacity: 0.3;
+}
+
+.month__air {
+  z-index: 2;
+}
+
+.month__butterflies {
+  z-index: 5;
+}
+
+.month__numeral-layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/*
+ * The numeral is scenery, not a label: very large, very pale, and behind the photograph.
+ * It is what tells the guest how far through the year they are without a progress bar.
+ */
+.month__numeral {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(9rem, 46cqw, 20rem);
+  line-height: 1;
+  color: var(--soft-white);
+  opacity: 0.5;
+  letter-spacing: -0.03em;
+  user-select: none;
+}
+
+.month__inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.6rem, 6vh, 2.6rem);
+  max-width: 54rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.month__frame-holder {
+  width: 100%;
+  will-change: transform;
+}
+
+.month__words {
+  text-align: center;
+  max-width: 22rem;
+}
+
+.month__title {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 7cqw, 2.1rem);
+  font-weight: 300;
+  color: var(--ink);
+  margin: 0 0 0.35rem;
+}
+
+.month__caption {
+  font-family: var(--sans);
+  font-size: clamp(0.9rem, 3.8cqw, 1rem);
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/*
+ * From tablet width the month opens out. `--month-dir` flips the row, which is the only
+ * thing that differs between a left month and a right month at this width.
+ */
+@media (min-width: 760px) {
+  .month__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .month--right .month__inner {
+    flex-direction: row-reverse;
+  }
+
+  .month__frame-holder {
+    flex: 0 1 24rem;
+  }
+
+  .month__words {
+    flex: 0 1 20rem;
+    text-align: left;
+  }
+
+  .month--right .month__words {
+    text-align: right;
+  }
+}

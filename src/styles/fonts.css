@@ -1,13 +1,14 @@
 /*
  * Self-hosted rather than loaded from Google Fonts.
  *
- * The script face carries the whole look — falling back to a generic serif changes
- * the design completely — so the invitation cannot afford to depend on a third-party
- * host being reachable. Serving the files ourselves also removes two DNS lookups and
- * a TLS handshake from first paint, which is the difference guests on phone data see.
+ * The display and script faces carry the whole look — falling back to a generic serif
+ * changes the design completely — so the invitation cannot afford to depend on a
+ * third-party host being reachable. Serving the files ourselves also removes two DNS
+ * lookups and a TLS handshake from first paint, which is the difference guests on phone
+ * data see.
  *
- * Latin subsets only. Cormorant Garamond and Jost are variable fonts, so one file
- * covers every weight; Tangerine ships as static weights.
+ * Latin subsets only. Cormorant Garamond and DM Sans are variable fonts, so one file
+ * covers every weight; Great Vibes ships as a single weight.
  */
 
 @font-face {
@@ -18,26 +19,28 @@
   src: url(/fonts/cormorant-garamond.woff2) format("woff2");
 }
 
+/* The brief asks for elegant italic variants, so the true italic is loaded rather
+   than letting the browser slant the roman. */
 @font-face {
-  font-family: "Jost";
-  font-style: normal;
-  font-weight: 100 900;
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 300 700;
   font-display: swap;
-  src: url(/fonts/jost.woff2) format("woff2");
+  src: url(/fonts/cormorant-garamond-italic.woff2) format("woff2");
 }
 
 @font-face {
-  font-family: "Tangerine";
+  font-family: "Great Vibes";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(/fonts/tangerine-400.woff2) format("woff2");
+  src: url(/fonts/great-vibes.woff2) format("woff2");
 }
 
 @font-face {
-  font-family: "Tangerine";
+  font-family: "DM Sans";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 100 1000;
   font-display: swap;
-  src: url(/fonts/tangerine-700.woff2) format("woff2");
+  src: url(/fonts/dm-sans.woff2) format("woff2");
 }

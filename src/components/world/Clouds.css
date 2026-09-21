@@ -1,0 +1,143 @@
+/*
+ * One cloud is one element with several overlapping radial gradients. The gradients fade
+ * to transparent at their edges, which is what gives the watercolour softness without a
+ * blur filter — and a blur filter over a page this long is exactly what would cost the
+ * sixty frames a second the brief asks for.
+ */
+.clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  display: block;
+  width: 46vw;
+  max-width: 460px;
+  aspect-ratio: 5 / 2;
+  transform: scale(var(--cloud-scale, 1));
+  animation-name: cloud-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+/*
+ * Four silhouettes. Each is the same idea — a low flat base with two or three billows
+ * over it — with the lumps in different places, which is enough that a band of them does
+ * not read as one shape repeated.
+ */
+.cloud--a {
+  background:
+    radial-gradient(46% 70% at 32% 56%, rgba(255, 255, 255, 0.95), transparent 70%),
+    radial-gradient(38% 84% at 56% 44%, rgba(255, 255, 255, 0.92), transparent 70%),
+    radial-gradient(30% 56% at 76% 62%, rgba(255, 253, 248, 0.85), transparent 72%),
+    radial-gradient(62% 34% at 50% 74%, rgba(255, 249, 241, 0.8), transparent 76%);
+}
+
+.cloud--b {
+  background:
+    radial-gradient(34% 76% at 26% 50%, rgba(255, 255, 255, 0.9), transparent 72%),
+    radial-gradient(44% 64% at 52% 60%, rgba(255, 253, 248, 0.94), transparent 70%),
+    radial-gradient(34% 82% at 74% 46%, rgba(255, 255, 255, 0.88), transparent 70%),
+    radial-gradient(70% 30% at 50% 76%, rgba(244, 214, 223, 0.5), transparent 78%);
+}
+
+.cloud--c {
+  background:
+    radial-gradient(50% 62% at 38% 58%, rgba(255, 253, 248, 0.92), transparent 72%),
+    radial-gradient(30% 88% at 62% 42%, rgba(255, 255, 255, 0.9), transparent 68%),
+    radial-gradient(58% 32% at 48% 72%, rgba(232, 221, 245, 0.62), transparent 78%);
+}
+
+.cloud--d {
+  background:
+    radial-gradient(28% 70% at 22% 58%, rgba(255, 255, 255, 0.82), transparent 72%),
+    radial-gradient(40% 80% at 45% 48%, rgba(255, 255, 255, 0.95), transparent 70%),
+    radial-gradient(36% 66% at 70% 56%, rgba(255, 253, 248, 0.9), transparent 70%),
+    radial-gradient(26% 50% at 88% 64%, rgba(255, 255, 255, 0.7), transparent 74%),
+    radial-gradient(74% 30% at 52% 76%, rgba(255, 249, 241, 0.76), transparent 78%);
+}
+
+/*
+ * Far clouds are smaller, paler and hazier; near ones are large and opaque. The scale
+ * multiplier the component passes rides on top of this.
+ */
+.clouds--far .cloud {
+  width: 30vw;
+  max-width: 300px;
+  filter: opacity(0.72);
+}
+
+.clouds--near .cloud {
+  width: 68vw;
+  max-width: 720px;
+}
+
+/*
+ * A shadow in the shape of the cloud itself.
+ *
+ * `drop-shadow` reads the element's own alpha channel, so on a box painted entirely out
+ * of radial gradients it traces the silhouette rather than the box. Without it a white
+ * cloud on a pale sky is a smudge; with it the cloud has an underside and therefore a
+ * top, which is the whole difference between weather and haze. Far clouds are left flat
+ * on purpose — distance is exactly the loss of that shading.
+ */
+.clouds--mid .cloud,
+.clouds--near .cloud {
+  filter: drop-shadow(0 8px 12px rgba(157, 138, 194, 0.22));
+}
+
+/*
+ * A very long, very slow sideways crossing. Starting off the left edge and ending off
+ * the right means a cloud is never seen appearing or disappearing.
+ */
+@keyframes cloud-drift {
+  from {
+    transform: translate3d(-130%, 0, 0) scale(var(--cloud-scale, 1));
+  }
+  to {
+    transform: translate3d(130%, 0, 0) scale(var(--cloud-scale, 1));
+  }
+}
+
+/* ---- the curtain between chapters ---- */
+
+.curtain {
+  position: absolute;
+  inset: -30% 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.curtain__bank {
+  position: absolute;
+  left: -25%;
+  right: -25%;
+  height: 58%;
+}
+
+.curtain__bank--top {
+  top: 0;
+}
+
+.curtain__bank--bottom {
+  bottom: 0;
+}
+
+.curtain .cloud {
+  opacity: 0.95;
+}
+
+/*
+ * Under reduced motion the clouds stay exactly where they are. They are still drawn —
+ * the world should not lose its scenery — they simply stop travelling.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .cloud {
+    animation: none;
+    transform: scale(var(--cloud-scale, 1));
+  }
+}

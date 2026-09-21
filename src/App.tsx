@@ -1,61 +1,72 @@
 /**
- * The invitation, assembled.
+ * Anya's Enchanted First Year, assembled.
  *
- * The intro plays once per browser session and then lifts away. A guest who has
- * already seen it — coming back to check the date, which is the common case — lands
- * straight on the invitation rather than sitting through the cinematic again.
+ * One continuous journey rather than a set of sections: `SceneProvider` tracks which
+ * chapter owns the screen, `Sky` paints the air behind all of them, and each chapter
+ * contributes only its own foreground. Nothing here has a background of its own, which
+ * is what lets the guest travel from a dawn sky, down into a meadow, through a year and
+ * out into a sunset without ever crossing a visible seam.
  */
-import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import { IntroSequence, hasSeenIntro } from "./components/IntroSequence";
-import { Hero } from "./components/Hero";
-import { Countdown } from "./components/Countdown";
-import { PhotoJourney } from "./components/PhotoJourney";
-import { PartyDetails } from "./components/PartyDetails";
-import { Rsvp } from "./components/Rsvp";
+import { useCallback } from "react";
+import { SceneProvider } from "./lib/scene";
+import { Sky } from "./components/world/Sky";
+import { Loader } from "./components/Loader";
+import { Nav } from "./components/Nav";
 import { SoundToggle } from "./components/SoundToggle";
-import { child, introLines } from "./data/party";
+import { CloudKingdom } from "./components/chapters/CloudKingdom";
+import { FairyGarden } from "./components/chapters/FairyGarden";
+import { MonthJourney } from "./components/chapters/MonthJourney";
+import { YearClimax } from "./components/chapters/YearClimax";
+import { Invitation } from "./components/chapters/Invitation";
+import { Rsvp } from "./components/chapters/Rsvp";
+import { Finale } from "./components/chapters/Finale";
+import { child, story } from "./data/party";
 
 export function App() {
-  // Decided once on mount: reading sessionStorage during render would be a side effect.
-  const [introOpen, setIntroOpen] = useState(() => !hasSeenIntro());
-
-  const closeIntro = useCallback(() => setIntroOpen(false), []);
-
-  // The page underneath must not scroll while the overlay is up.
-  useEffect(() => {
-    document.body.dataset.introOpen = String(introOpen);
-    return () => {
-      delete document.body.dataset.introOpen;
-    };
-  }, [introOpen]);
+  /**
+   * The one interaction the brief hangs the entrance on. Scrolling to the meadow rather
+   * than jumping keeps the cloud gate parting visible, which is the point of having it.
+   *
+   * The button is also the guest's first gesture, which is what lets the music start —
+   * the sound engine listens for it rather than for any stray tap.
+   */
+  const enterGarden = useCallback(() => {
+    document.getElementById("garden")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.dispatchEvent(new CustomEvent("anya:enter"));
+  }, []);
 
   return (
-    <>
-      {/* Outside the intro so the music carries across it and into the invitation. */}
-      <SoundToggle />
-
-      <AnimatePresence>{introOpen && <IntroSequence onFinish={closeIntro} />}</AnimatePresence>
-
-      {/*
-        The story beats are spoken by the intro, which is decorative and skippable.
-        Repeating them here means the invitation still reads as a story for anyone
-        using a screen reader or arriving with the intro already dismissed.
-      */}
-      <section className="visually-hidden" id="story" aria-label="Once upon a time">
-        {introLines.map((line) => (
-          <p key={line}>{line}</p>
-        ))}
-        <p>{child.name} is turning {child.turning}.</p>
-      </section>
+    <SceneProvider>
+      <Loader />
+      <Sky />
 
       <main>
-        <Hero />
-        <Countdown />
-        <PhotoJourney />
-        <PartyDetails />
+        <CloudKingdom onEnter={enterGarden} />
+        <FairyGarden />
+        <MonthJourney />
+        <YearClimax />
+        <Invitation />
         <Rsvp />
+        <Finale />
       </main>
-    </>
+
+      <Nav />
+      <SoundToggle />
+
+      {/*
+        The story in plain words, for a screen reader or anyone who never sees the
+        animation. The journey is told through movement; this makes sure it is also
+        told in text.
+      */}
+      <section className="visually-hidden" aria-label="Anya's story">
+        <p>{story.once}</p>
+        {story.meadow.map((line) => (
+          <p key={line}>{line}</p>
+        ))}
+        <p>
+          {child.name} is turning {child.turning}.
+        </p>
+      </section>
+    </SceneProvider>
   );
 }

@@ -1,0 +1,111 @@
+.garden {
+  position: relative;
+  min-height: 118svh;
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(5rem, 16vh, 9rem) var(--page-gutter) clamp(9rem, 26vh, 14rem);
+  container-type: inline-size;
+}
+
+.garden__clouds,
+.garden__pollen,
+.garden__butterflies {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.garden__clouds {
+  z-index: 1;
+  opacity: 0.55;
+}
+
+.garden__pollen {
+  z-index: 2;
+}
+
+.garden__butterflies {
+  z-index: 4;
+}
+
+.garden__copy {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+/*
+ * The three story lines. Set in the display serif at a size that makes each one a
+ * statement on its own — they are the only words in this chapter, so they get the room.
+ */
+.garden__line {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.9rem, 10cqw, 2.9rem);
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0 0 clamp(1.4rem, 5vh, 2.4rem);
+  text-shadow: 0 2px 22px rgba(255, 253, 248, 0.75);
+}
+
+.garden__line:last-of-type {
+  color: var(--ink-soft);
+}
+
+.garden__lead {
+  font-family: var(--sans);
+  font-size: clamp(0.8rem, 3.4cqw, 0.9rem);
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: clamp(2rem, 8vh, 3.4rem) 0 0;
+}
+
+/* A word and a line of light that runs downward, pointing the way into the year. */
+.garden__scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+}
+
+.garden__hint-word {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.garden__hint-trail {
+  width: 1px;
+  height: 3.4rem;
+  background: linear-gradient(180deg, var(--champagne-gold), transparent);
+  transform-origin: top;
+  animation: hint-fall 2.8s var(--ease-drift) infinite;
+}
+
+@keyframes hint-fall {
+  0% {
+    transform: scaleY(0.2);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+.garden__meadow {
+  z-index: 5;
+}

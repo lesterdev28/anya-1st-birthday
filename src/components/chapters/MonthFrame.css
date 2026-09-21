@@ -1,0 +1,289 @@
+/*
+ * One frame, twelve dresses.
+ *
+ * `.frame` is the common box: an opening of a given shape, a drawn ornament around it,
+ * and a ring of light just outside. Each `.frame--*` changes the shape of the opening
+ * and how the ornament is placed. Nothing here touches the photograph's pixels — the
+ * only thing applied to the image itself is the shape of the hole it shows through.
+ */
+.frame {
+  position: relative;
+  width: min(22rem, 68cqw);
+  margin: 0 auto;
+  isolation: isolate;
+}
+
+.frame__opening {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 1.2rem;
+  background: linear-gradient(160deg, var(--dream-lavender), var(--cloud-cream));
+  box-shadow:
+    0 18px 44px rgba(103, 88, 132, 0.16),
+    0 2px 8px rgba(103, 88, 132, 0.08);
+}
+
+.frame__photo,
+.frame__photo picture,
+.frame__photo img {
+  width: 100%;
+  height: 100%;
+}
+
+.frame__photo picture {
+  display: block;
+}
+
+.frame__photo {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto !important;
+}
+
+.frame__photo img {
+  object-fit: cover;
+}
+
+/*
+ * The written page, for a month with no photograph.
+ *
+ * Five of the twelve months have no picture and are not going to get one, so this has to
+ * be a page in its own right rather than a gap waiting to be filled. Deeper colour than
+ * the photographs sit on, a numeral with real weight, and its own small constellation.
+ */
+.frame__keepsake {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  padding: 12%;
+  /* So the ring inside follows the frame's own shape rather than boxing it. */
+  border-radius: inherit;
+  background:
+    radial-gradient(64% 48% at 50% 26%, rgba(255, 255, 255, 0.7), transparent 74%),
+    linear-gradient(162deg, var(--dream-lavender) 0%, var(--fairy-lavender) 42%, var(--blush-pink) 78%, var(--cloud-cream) 100%);
+}
+
+.frame__keepsake-stars {
+  width: 58%;
+  margin-bottom: 0.4rem;
+  overflow: visible;
+}
+
+.frame__numeral {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(3.6rem, 26cqw, 5.4rem);
+  line-height: 1;
+  color: #a8823c;
+  text-shadow: 0 2px 18px rgba(255, 253, 248, 0.85);
+}
+
+.frame__numeral-label {
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+
+/* A hairline ring just inside the opening, following whatever shape the frame has. */
+.frame__keepsake-ring {
+  position: absolute;
+  inset: 5%;
+  border: 1px solid rgba(215, 180, 106, 0.55);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.frame__glow {
+  position: absolute;
+  inset: -14%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 46%,
+    rgba(255, 253, 248, 0.8) 0%,
+    rgba(232, 211, 164, 0.24) 52%,
+    rgba(255, 253, 248, 0) 76%
+  );
+}
+
+.frame__art {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* ---- the twelve ---- */
+
+/*
+ * Cloud: the opening itself is cloud-shaped, so the photograph appears to be resting in
+ * one rather than being a rectangle with clouds beside it. The mask is radial gradients
+ * in the same silhouette language as the sky's clouds.
+ */
+.frame--cloud .frame__opening {
+  border-radius: 46% 46% 44% 44% / 40% 40% 52% 52%;
+  aspect-ratio: 1 / 1;
+}
+
+.frame--butterfly .frame__opening {
+  border-radius: 1.6rem;
+}
+
+.frame--butterfly .frame__art {
+  inset: -12%;
+  width: 124%;
+  height: 124%;
+}
+
+.frame--wreath .frame__opening {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+}
+
+.frame--wreath .frame__art {
+  inset: -13%;
+  width: 126%;
+  height: 126%;
+  animation: frame-turn 90s linear infinite;
+}
+
+@keyframes frame-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Portal: a tall arch with a lit rim, as though the month were seen through a doorway. */
+.frame--portal .frame__opening {
+  aspect-ratio: 3 / 4;
+  border-radius: 50% 50% 1.1rem 1.1rem / 34% 34% 1.1rem 1.1rem;
+}
+
+.frame--portal .frame__glow {
+  background: radial-gradient(
+    circle at 50% 36%,
+    rgba(232, 221, 245, 0.95) 0%,
+    rgba(201, 183, 232, 0.35) 48%,
+    rgba(255, 253, 248, 0) 74%
+  );
+}
+
+.frame--arch .frame__opening,
+.frame--portal .frame__opening {
+  aspect-ratio: 3 / 4;
+}
+
+.frame--arch .frame__opening {
+  border-radius: 50% 50% 0.6rem 0.6rem / 30% 30% 0.6rem 0.6rem;
+}
+
+.frame--arch .frame__art,
+.frame--portal .frame__art {
+  inset: -7% -9%;
+  width: 118%;
+  height: 114%;
+}
+
+.frame--moon .frame__opening {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+}
+
+.frame--moon .frame__art {
+  inset: -18%;
+  width: 136%;
+  height: 136%;
+}
+
+/* Storybook: a landscape page, tipped very slightly, with a gold rule printed on it. */
+.frame--storybook .frame__opening {
+  aspect-ratio: 4 / 3;
+  border-radius: 0.4rem;
+  transform: rotate(-1.2deg);
+}
+
+.frame--storybook .frame__art {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  transform: rotate(-1.2deg);
+}
+
+.frame--meadow .frame__opening {
+  border-radius: 1.4rem 1.4rem 45% 45% / 1.4rem 1.4rem 18% 18%;
+}
+
+.frame--meadow .frame__art {
+  left: -8%;
+  right: -8%;
+  bottom: -7%;
+  width: 116%;
+  height: auto;
+  z-index: 3;
+}
+
+.frame--oval .frame__opening {
+  border-radius: 50%;
+  aspect-ratio: 3 / 4;
+}
+
+.frame--oval .frame__art {
+  inset: -6%;
+  width: 112%;
+  height: 112%;
+}
+
+.frame--vines .frame__opening {
+  border-radius: 1.2rem;
+  aspect-ratio: 5 / 6;
+}
+
+.frame--vines .frame__art {
+  inset: -10% -14%;
+  width: 128%;
+  height: 120%;
+  z-index: 3;
+}
+
+.frame--starry .frame__opening {
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+}
+
+.frame--starry .frame__art {
+  inset: -16%;
+  width: 132%;
+  height: 132%;
+  animation: frame-breathe 9s ease-in-out infinite;
+}
+
+@keyframes frame-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame--wreath .frame__art,
+  .frame--starry .frame__art {
+    animation: none;
+  }
+}
