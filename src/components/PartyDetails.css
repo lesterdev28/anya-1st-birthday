@@ -1,0 +1,57 @@
+.details {
+  background: linear-gradient(180deg, var(--ivory) 0%, #f4eff8 100%);
+}
+
+.details__list {
+  margin: 0;
+  display: grid;
+  gap: 1.6rem;
+  text-align: left;
+}
+
+.details__row {
+  display: grid;
+  gap: 0.3rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(228, 198, 138, 0.45);
+}
+
+.details__row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.details__row dt {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.details__row dd {
+  margin: 0;
+  font-size: clamp(1.05rem, 4.2vw, 1.25rem);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.details__flourish {
+  width: min(80%, 22rem);
+  margin: 2.4rem auto 0;
+  opacity: 0.9;
+}
+
+@media (min-width: 620px) {
+  .details__row {
+    grid-template-columns: 7rem 1fr;
+    gap: 1.2rem;
+    align-items: baseline;
+  }
+
+  .details__row dt {
+    /* Nudged down so the small caps sit on the same optical line as the value. */
+    position: relative;
+    top: 0.15rem;
+  }
+}

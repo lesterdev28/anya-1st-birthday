@@ -67,5 +67,14 @@
     ],
     "aspectRatio": 0.75,
     "placeholder": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACwBQCdASoYACAAPu1kqU2ppaOiMAgBMB2JZACsOUFWABFyeJxtv2HTMeKl4UPZJYe4HKPs1QAA/tObkO4XUf8qOxd5AU7by7G9b/lpu6IE3/wSp/J1bzlPmKtrTwqv8Rmh9X33tNfnopMbphIH9HRbBZlmjgX0XqemXQQ5Ggj6o47/ECyfv07lNP35BrsjB37xamzguvYEwqYp2kkXAAAA"
+  },
+  "fairytale-castle-hero-mobile": {
+    "base": "/invitation/higgsfield/hero/optimized/fairytale-castle-hero-mobile",
+    "widths": [
+      640,
+      1280
+    ],
+    "aspectRatio": 0.5655,
+    "placeholder": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAACwBACdASoYACoAPuVkpU24piOiNVgIAxAciWMAxNgeNTYdG6lAl2y9FLKkoEs8AP7tQ+7ufrtk/tfucsjvuIVjnTnzeLlewVxcL8XiybAFZExjc0LjXx2R5iqlFfRbK2SFKtpixJ6daywg77vHfrjh8+XcA+vjqHUGElQAAAA="
   }
 }

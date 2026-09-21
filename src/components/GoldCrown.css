@@ -1,0 +1,25 @@
+/*
+ * The crown is drawn inline as SVG, so the only job here is sizing and the soft glow
+ * that makes the gold read as lit rather than flat.
+ */
+.gold-crown {
+  display: block;
+  width: 56px;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 2px 8px rgba(196, 160, 82, 0.45));
+}
+
+.gold-crown--glow {
+  animation: crown-glow 3.6s var(--ease-soft) infinite;
+}
+
+@keyframes crown-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 2px 8px rgba(196, 160, 82, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 2px 16px rgba(228, 198, 138, 0.75));
+  }
+}

@@ -1,0 +1,199 @@
+/*
+ * The opening cinematic: a fixed overlay that plays once, then lifts to reveal the
+ * invitation underneath.
+ *
+ * Backdrops are stacked and cross-faded rather than swapped, so there is never a blank
+ * frame between the night sky, the video, and the hero still the video ends on.
+ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--night-deep);
+  overflow: hidden;
+}
+
+/* ---- backdrops ---- */
+
+.intro__backdrop {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease-soft);
+}
+
+.intro__backdrop.is-visible {
+  opacity: 1;
+}
+
+.intro__backdrop--night {
+  background: radial-gradient(ellipse at 50% 120%, #3a2d5c 0%, var(--night) 45%, var(--night-deep) 100%);
+}
+
+.intro__stars {
+  position: absolute;
+  inset: 0;
+}
+
+.intro__backdrop .cinematic,
+.intro__backdrop .fairy-image,
+.intro__backdrop .painted-kingdom {
+  width: 100%;
+  height: 100%;
+}
+
+.intro__backdrop img,
+.intro__backdrop video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* A single star crossing the sky during the opening beat. */
+.intro__shooting-star {
+  position: absolute;
+  top: 18%;
+  left: -12%;
+  width: 120px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(255, 249, 235, 0.95), transparent);
+  transform: rotate(14deg);
+  animation: shooting-star 2.6s var(--ease-soft) 0.7s 1 both;
+  pointer-events: none;
+}
+
+@keyframes shooting-star {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(14deg);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(96vw, 30vh) rotate(14deg);
+  }
+}
+
+/* Keeps the typography legible over whatever is playing behind it. */
+.intro__scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 42%, rgba(23, 17, 41, 0.28) 0%, rgba(23, 17, 41, 0.64) 100%);
+}
+
+/* ---- typography ---- */
+
+.intro__stage {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 34rem);
+  min-height: 12rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 0 var(--page-gutter);
+}
+
+.intro__line {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 6.6vw, 2.3rem);
+  font-style: italic;
+  font-weight: 300;
+  color: #f7f1e6;
+  margin: 0;
+  text-shadow: 0 2px 24px rgba(23, 17, 41, 0.6);
+}
+
+.intro__name-block {
+  display: grid;
+  justify-items: center;
+}
+
+.intro__crown {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.intro__crown .gold-crown {
+  width: clamp(46px, 12vw, 64px);
+}
+
+.intro__crown-sparkles {
+  position: absolute;
+  inset: -60% -90%;
+  pointer-events: none;
+}
+
+.intro__child-name {
+  font-family: var(--script);
+  font-size: clamp(3.8rem, 20vw, 7rem);
+  line-height: 0.92;
+  color: #fdf8ee;
+  margin: 0;
+  text-shadow: 0 4px 30px rgba(23, 17, 41, 0.55);
+}
+
+.intro__turning {
+  font-family: var(--sans);
+  font-size: clamp(0.72rem, 3vw, 0.85rem);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(247, 241, 230, 0.82);
+  margin: 0.7rem 0 0.3rem;
+}
+
+.intro__one {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 13vw, 4.2rem);
+  letter-spacing: 0.24em;
+  /* letter-spacing adds a trailing gap; this pulls the word back to centre. */
+  text-indent: 0.24em;
+  color: var(--gold);
+  margin: 0;
+  text-shadow: 0 2px 20px rgba(196, 160, 82, 0.5);
+}
+
+.intro__invited {
+  font-family: var(--sans);
+  font-size: clamp(0.95rem, 4.4vw, 1.3rem);
+  text-transform: uppercase;
+  color: #fdf8ee;
+  margin: 0;
+  text-shadow: 0 2px 24px rgba(23, 17, 41, 0.6);
+}
+
+/* ---- skip ---- */
+
+.intro__skip {
+  position: absolute;
+  z-index: 2;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  right: var(--page-gutter);
+  padding: 0.6rem 1.1rem;
+  border: 1px solid rgba(247, 241, 230, 0.4);
+  border-radius: 999px;
+  background: rgba(23, 17, 41, 0.3);
+  color: rgba(247, 241, 230, 0.9);
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.4s var(--ease-soft), border-color 0.4s var(--ease-soft);
+}
+
+.intro__skip:hover,
+.intro__skip:focus-visible {
+  background: rgba(23, 17, 41, 0.55);
+  border-color: rgba(247, 241, 230, 0.75);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro__shooting-star {
+    display: none;
+  }
+}

@@ -31,16 +31,29 @@ switch a slot over.
 
 ### Current status of the generated assets
 
-**None of the Higgsfield assets have been generated yet.** Generation is blocked on the
-session environment: `api.higgsfield.ai` has to be in the environment's network egress
-allowlist, and the change only takes effect in a session started afterwards. Until then
-every art slot falls back to the painted kingdom, and the site is complete and usable
-without them.
+Two are done and in the repo:
+
+- `fairytale-castle-hero-mobile` — the hero artwork, 9:16, 2K
+- `fairytale-opening` — the cinematic, 1080×1920, six seconds
+
+Everything else (the wide hero, the storybook, the decoration set, the twelve month
+illustrations) is still a painted fallback, which is a complete and usable state.
+
+**The CLI route does not work from a Claude Code session on this repo.** The
+environment's egress policy answers HTTP 403 to `clerk.higgsfield.ai` (OAuth) and
+`fnf-api-gw.higgsfield.ai` (the API), so `higgsfield auth login` fails at the token
+exchange, and `tools/generate.ts` cannot reach the API either. The assets above were
+generated through the **Higgsfield MCP connector** instead (`https://mcp.higgsfield.ai/mcp`,
+added under Customize → Connectors), which runs outside the sandbox and is unaffected.
 
 Note that `@higgsfield/client` reports *every* HTTP 403 as
 `NotEnoughCreditsError: Not enough credits`, including the proxy's blocked-host denial.
 If you see that error, check the raw HTTP response before concluding anything about the
 account balance.
+
+The result CDN (`d8j0ntlcm91z4.cloudfront.net`) is blocked too, so generated files
+cannot be downloaded from inside a session — they have to be fetched in a browser and
+added to the repo by hand.
 
 ## Generating the art
 
@@ -55,7 +68,7 @@ npm run generate -- --list                            # every scene id
 npm run generate -- --dry-run --scene <id>            # print the prompt, call nothing
 npm run generate -- --scene fairytale-castle-hero-mobile   # the hero, first
 npm run generate -- --images                          # every image scene
-npm run generate -- --videos                          # both cinematic clips
+npm run generate -- --videos                          # the cinematic clip
 ```
 
 Generation needs `HF_CREDENTIALS` (format `key-id:key-secret`) in the environment or in
@@ -71,29 +84,38 @@ Originals are left untouched — the site only ever loads the derivatives.
 
 ### Videos
 
-`optimize.ts` handles images only. The clips come back as `<id>-raw.mp4`; compress them
-and make a poster with ffmpeg:
+`optimize.ts` handles images only. There is **one** clip, not two: it is generated with
+the hero artwork as its `end_image`, so the push-in through the clouds lands on exactly
+the still the invitation then holds, and a separate castle-reveal clip would only repeat
+that. The intro's `reveal` beat shows the hero image instead.
+
+Higgsfield returns HEVC in an MP4, which Chrome and Firefox frequently cannot play, so
+transcoding is not optional:
 
 ```bash
 cd public/invitation/higgsfield/video
 
-ffmpeg -i fairytale-opening-raw.mp4 -vcodec libx264 -crf 28 -preset slow \
-  -movflags +faststart -an fairytale-opening.mp4
-ffmpeg -i fairytale-opening-raw.mp4 -c:v libvpx-vp9 -crf 36 -b:v 0 -an \
+ffmpeg -i raw.mp4 -an -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 27 \
+  -preset slow -movflags +faststart fairytale-opening.mp4
+ffmpeg -i raw.mp4 -an -c:v libvpx-vp9 -crf 34 -b:v 0 -row-mt 1 \
   fairytale-opening.webm
-ffmpeg -i fairytale-opening-raw.mp4 -vf "select=eq(n\,0)" -vframes 1 \
-  fairytale-opening-poster.webp
+ffmpeg -i raw.mp4 -vframes 1 -vf "scale=720:-2" fairytale-opening-poster.webp
 ```
 
-The same three commands for `castle-reveal`. A poster is required — the video component
+That also takes the 6-second clip from ~9.8 MB to under 1 MB, which matters on the phone
+connections most guests will open this on. A poster is required — the video component
 shows it while the clip loads and keeps it if the clip never plays.
+
+If the intro beat length and the clip length drift apart, the cut happens before the
+clip reaches the hero frame and the handover becomes visible. The `opening` beat in
+`IntroSequence.tsx` is set to the clip's duration for that reason.
 
 ## Layout
 
 ```
 public/invitation/
   higgsfield/
-    video/          the two cinematic clips, plus posters
+    video/          the cinematic clip, plus its poster
     hero/           hero artwork, mobile and desktop
     backgrounds/    the twelve-month chapter banners
     storybook/      cover and parchment pages

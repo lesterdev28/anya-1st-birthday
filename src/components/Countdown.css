@@ -1,0 +1,51 @@
+.countdown {
+  position: relative;
+  background: linear-gradient(180deg, var(--ivory) 0%, #f7eef3 55%, var(--ivory) 100%);
+  overflow: hidden;
+}
+
+.countdown__sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.countdown__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.4rem, 2.4vw, 1.2rem);
+}
+
+.countdown__unit {
+  display: grid;
+  gap: 0.35rem;
+  padding: clamp(0.8rem, 3.4vw, 1.4rem) 0.25rem;
+  border: 1px solid rgba(228, 198, 138, 0.5);
+  border-radius: 10px;
+  background: rgba(251, 245, 234, 0.72);
+}
+
+.countdown__value {
+  font-size: clamp(1.7rem, 8.5vw, 3rem);
+  line-height: 1;
+  color: var(--ink);
+  /* Tabular figures stop the seconds column shifting width as digits change. */
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__label {
+  font-family: var(--sans);
+  font-size: clamp(0.56rem, 2.4vw, 0.68rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.countdown__message {
+  font-size: clamp(1.05rem, 4.4vw, 1.35rem);
+  color: var(--ink-soft);
+  margin: 0;
+}
