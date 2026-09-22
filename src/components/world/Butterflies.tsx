@@ -6,9 +6,16 @@
  * sliding, and one that arcs and loops reads as alive. `offset-rotate` turns it to face
  * the direction of travel for free.
  *
- * The wings are two SVG paths sharing a hinge, flapping on their own much faster cycle.
+ * The butterflies themselves are Lester's watercolours rather than drawn shapes. That
+ * changes two things about how they fly. They are not symmetrical pairs of wings around
+ * a hinge, so the flap is a gentle horizontal breathe instead of a fold — a painting
+ * squashed to a third of its width reads as a glitch, not a wingbeat. And they are not
+ * rotated to face the curve: `offset-rotate: auto` is right for a drawn arrow shape and
+ * wrong for a painting, which it will happily turn upside down halfway along a descent.
+ * They keep their own heading and sway a little instead.
  */
 import { useMemo } from "react";
+import { responsiveImage } from "../../lib/assets";
 import "./Butterflies.css";
 
 /** Four routes across a chapter, in the 0-100 coordinate space of its box. */
@@ -19,12 +26,8 @@ const PATHS = [
   "M 108 84 C 78 40, 48 74, 26 30 S 4 10, -10 22",
 ] as const;
 
-const WING_COLOURS = [
-  ["#f4d6df", "#e8bfcb"],
-  ["#e8ddf5", "#c9b7e8"],
-  ["#ddebf4", "#c9d9ec"],
-  ["#e8d3a4", "#d7b46a"],
-] as const;
+/** The two painted butterflies, alternating so a chapter never shows one twice alike. */
+const WINGS = ["butterfly-cream", "butterfly-lilac"] as const;
 
 interface Props {
   readonly count?: number;
@@ -46,12 +49,14 @@ export function Butterflies({ count = 3, className, seed = 5 }: Props) {
     return Array.from({ length: count }, (_, index) => ({
       key: index,
       path: PATHS[Math.floor(random() * PATHS.length)],
-      colours: WING_COLOURS[Math.floor(random() * WING_COLOURS.length)],
-      size: 16 + random() * 14,
+      wing: WINGS[index % WINGS.length],
+      /* Bigger than the drawn ones were: a painting needs room to read as a painting. */
+      size: 34 + random() * 26,
       // Slow: a butterfly that crosses in three seconds is a distraction, not scenery.
       duration: 26 + random() * 22,
       delay: -random() * 40,
-      flap: 0.34 + random() * 0.22,
+      flap: 1.9 + random() * 1.1,
+      lean: random() < 0.5 ? -1 : 1,
     }));
   }, [count, seed]);
 
@@ -70,27 +75,27 @@ export function Butterflies({ count = 3, className, seed = 5 }: Props) {
             } as React.CSSProperties
           }
         >
-          <svg viewBox="0 0 24 20" style={{ animationDuration: `${flyer.flap}s` }}>
-            <g className="butterflies__wing butterflies__wing--left">
-              <path
-                d="M12 10 C 6 1, 0 2, 1 8 C 2 14, 7 15, 12 10 Z"
-                fill={flyer.colours[0]}
-                stroke={flyer.colours[1]}
-                strokeWidth="0.5"
-              />
-            </g>
-            <g className="butterflies__wing butterflies__wing--right">
-              <path
-                d="M12 10 C 18 1, 24 2, 23 8 C 22 14, 17 15, 12 10 Z"
-                fill={flyer.colours[0]}
-                stroke={flyer.colours[1]}
-                strokeWidth="0.5"
-              />
-            </g>
-            <path d="M12 7 L12 14" stroke="#6c6080" strokeWidth="0.9" strokeLinecap="round" />
-          </svg>
+          <Wing id={flyer.wing} flap={flyer.flap} lean={flyer.lean} />
         </span>
       ))}
     </div>
+  );
+}
+
+/** One painted butterfly, breathing. Renders nothing if the art has not been built. */
+function Wing({ id, flap, lean }: { readonly id: string; readonly flap: number; readonly lean: number }) {
+  const art = responsiveImage(id);
+  if (!art) return null;
+
+  return (
+    <picture
+      className="butterflies__wings"
+      style={
+        { animationDuration: `${flap}s`, "--lean": `${lean * 7}deg` } as React.CSSProperties
+      }
+    >
+      <source type="image/avif" srcSet={art.avifSrcSet} sizes="80px" />
+      <img src={art.src} srcSet={art.srcSet} sizes="80px" alt="" loading="lazy" decoding="async" />
+    </picture>
   );
 }

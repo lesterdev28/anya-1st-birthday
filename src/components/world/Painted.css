@@ -1,0 +1,22 @@
+/*
+ * A painted cut-out standing in a scene.
+ *
+ * Nothing here decorates it — no border, no shadow, no background. The painting already
+ * carries its own edge, and anything drawn around it would turn a thing standing in the
+ * meadow into a sticker laid over one. The only thing applied is a touch of the page's
+ * own light, so a cut-out sitting in a sunrise is not lit differently from the sunrise.
+ */
+.painted {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  /* Painted at full strength reads as a sticker; a breath of the sky through it does not. */
+  opacity: 0.95;
+  filter: drop-shadow(0 10px 18px rgba(103, 88, 132, 0.16));
+}
+
+.painted img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

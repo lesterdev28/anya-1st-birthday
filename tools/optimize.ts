@@ -31,6 +31,15 @@ const MANIFEST_PATH = resolve(REPO_ROOT, "src/data/media-manifest.json");
  */
 const PHOTO_WIDTHS = [480, 960];
 const ART_WIDTHS = [640, 1280, 1920];
+/**
+ * The cut-out watercolour pieces in public/invitation/art.
+ *
+ * Small on purpose: the largest any of them is drawn is about 320 CSS pixels, so 640
+ * already covers a 2x screen. They keep their alpha — webp and avif both carry it — and
+ * a higher quality than the photographs, because a flat wash shows banding where a
+ * photograph hides it.
+ */
+const DECOR_WIDTHS = [320, 640];
 
 interface Job {
   readonly source: string;
@@ -150,6 +159,7 @@ async function main(): Promise<void> {
 
   const photos = await collect(join(INVITATION_ROOT, "photos"), [".jpg", ".jpeg", ".png"]);
   const art = await collect(join(INVITATION_ROOT, "higgsfield"), [".png", ".jpg"]);
+  const decor = await collect(join(INVITATION_ROOT, "art"), [".png"]);
 
   const jobs: Job[] = [
     ...photos
@@ -158,6 +168,9 @@ async function main(): Promise<void> {
     ...art
       .filter((file) => !file.includes("/optimized/"))
       .map((source) => ({ source, widths: ART_WIDTHS, quality: 82 })),
+    ...decor
+      .filter((file) => !file.includes("/optimized/"))
+      .map((source) => ({ source, widths: DECOR_WIDTHS, quality: 88 })),
   ];
 
   if (jobs.length === 0) {

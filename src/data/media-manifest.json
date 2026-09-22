@@ -457,6 +457,51 @@
     "aspectRatio": 0.75,
     "placeholder": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACwBQCdASoYACAAPu1kqU2ppaOiMAgBMB2JZACsOUFWABFyeJxtv2HTMeKl4UPZJYe4HKPs1QAA/tObkO4XUf8qOxd5AU7by7G9b/lpu6IE3/wSp/J1bzlPmKtrTwqv8Rmh9X33tNfnopMbphIH9HRbBZlmjgX0XqemXQQ5Ggj6o47/ECyfv07lNP35BrsjB37xamzguvYEwqYp2kkXAAAA"
   },
+  "butterfly-cream": {
+    "base": "/invitation/art/optimized/butterfly-cream",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 0.9144,
+    "placeholder": "data:image/webp;base64,UklGRnICAABXRUJQVlA4WAoAAAAQAAAAFwAAGQAAQUxQSLEBAAANmTJE9D88UlzbdmTHOeccmIfh+UtGnoGRac45uz2HI13pIWdUuuCqkH9EJV1wVKiR47MeavRRoSs9p0YflRQxAROwIbARniEUAHS7/Y476K7zzrnktDOAzTbBI1mfcIVuoV8uuuCps+QYMXjZCveND9Vt6JowftF9hKqKUspj7DLRa4sHbrmpYSYKFN5IvxvXArV0t30ZNVcWV2V0LF/bj+us3tyzvoCqJlCgk0h1l7T+hRjSVzUvFUIaUGKnuo8OQ23ucHFXjSDNWkfhDgvputW1TwqioIzFQLZiwU+woS8CQNRrqFiqRQKYkXMFwHBN6AfkWowhPssMgNaN8xkXGjNHyiamRQEwM7U6AgQrYaJwvOJec/arjIwFqIB4lYpks1v4+ZcE6AAx0b2vMQ4EXA2qeC3d6LUdFm4Q1agF5ASYdVjYZ16h0TXtG83GCRSat70b0HV2QE8xEq+SEQlKaDOy36NKGF8BhQaoVK5d49M3rYWRACyyAShWZHVoZvMFjyBokdEDgFvVYfWWmvZqYUEbfToBbkmb4b+mhblbbrSdTyfAYZXj6mp9kyCsKc0BAFZQOCCaAAAA8AQAnQEqGAAaAD7taqlQKaYjoqgNUTAdiUAU4oHX95fwE4HCT2QbNnvEKfnSSM7QAP7gx4G2qvnGrkfyD7aAGr/CowZeuAu1RFD3CAKYOANX2a/Op0p90IJvzH2JUpL3u/sF2glS1MCvtRyybs6yrG123oF4c3fOy79rQsu9+J5fzZ5+QAEXRsDPWHtjKvzLdeCkU7FGytaAAA=="
+  },
+  "butterfly-lilac": {
+    "base": "/invitation/art/optimized/butterfly-lilac",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1.1429,
+    "placeholder": "data:image/webp;base64,UklGRiACAABXRUJQVlA4WAoAAAAQAAAAFwAAFAAAQUxQSF0BAAANmTJE9D80shQATkSn7u7eK9j9epEeoEfpp/31293dfa8w08DTHSa1QIZJbSEE9mshA/u1REzABJx4ygXnPbbbLuussETTk5Y6YoPX7rkLcLkmt6321jIz4akXVlFqcMM+L5WUHghob9GXPbIePLPWD7knkEHDLIR+vTeG50qTYfSv4LjS3KRKKvoJFbaHKBXUEXILJGQKqkyZ/dwTP5Jysa4KFUJCBaix/q1h2shxmaEsawhWJQCpCrtN7dA5b33fG0dULoWKEB12DXRtoBmfdJjj5SYHBHky2+4iSTOvVGQDzZQKU9bsin1tux/PRMeaC1jOziNlb05PY0E06iNbAYyV+uKdbNadcZxVY0AwIuliK733m0wPQOYIXqyF5LmUECs6HJjgkFAkYW11RpIU37U1IgDAPhkxEk8YfEpv0cgQ6aOREJXVYQijkfqZieFjAgIgUIaoSahAhU8CAFZQOCCcAAAA8AQAnQEqGAAVAD7tYqdOKaUjIjAYDAEwHYlkALDti5BuJ+hsP5Vn/cz2Ox0psoJAAP7tXeYuOlg6eMN6FtH5TBTiS1oEOSJbubpjglPZQUTv3GMWVyLs1co95++joR5PwIhJt8bDr+YzpsQPmJ05xqh/KlrgTQumXb/jiftCHXuEERrJ1/U9frI5pKtlqcywEf9EIQIZfQV3gAAA"
+  },
+  "fairy-cottage": {
+    "base": "/invitation/art/optimized/fairy-cottage",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1.0107,
+    "placeholder": "data:image/webp;base64,UklGRi4CAABXRUJQVlA4WAoAAAAQAAAAFwAAFwAAQUxQSHEBAAANmTJE9D80klVbT4Wn7u7yKn1/Ouyoo45sVnB3vc9wQurNxxf4rfn4UguEr24JXLhwiZiACVgVT662wTaHHHDDCcedt8dRu62zxn2Cp4vQHaedRMfstMUpF12zVn1A6QkSXQ83XSefWDaKNyzf0skAgCDxrvmqy2bTGj/lMt/WTQmAJ01X/JqN0LHZVn5K98AAIu3p73LpBHBAXMhlUgXIEFKdFggAa5JxE5lmYjHwcpr2IjypSJIjbmKiLvN8yRu4p0Ap9GwlKDk4i0J4plL1o4ZKIdFLD34WGDQu1OXtLijG2WGoc/Krl4U5JTNAB9RKfuxFRIiZBmitn2RhPOeQln1WxkARa8nm717jPUpDaBTWGkUQQENUXIQ4rbEzkw5hTrLNWKEvhRr0WaJwjbJ3qB2kpE9T8epqsh1SkMZikKeJmY9prlOhEJa7GasAoiDXc251LC0Ur2ggNoOoYx4//arJtfK9g9WpkQoTWpP4kgEAVlA4IJYAAACQBACdASoYABgAPu1mq1AppSOisBgIATAdiUAYG4IHr/MrdIqzu4qGll23G4AA/rEMuKhyM4cfZ23UGv/Y6q/HCeABzHh6nG8mthh7SL+NPsiTs9gC8RGBp2Hl83asriPFwtqIqZdO+sqsC3AJBXw5E7dYQ9BnUA8KLVQtkG2p0geXRA0LbXnpQFFcgHovbvYc1/aFAAA="
+  },
+  "fairy-on-toadstool": {
+    "base": "/invitation/art/optimized/fairy-on-toadstool",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 0.7081,
+    "placeholder": "data:image/webp;base64,UklGRjgDAABXRUJQVlA4WAoAAAAQAAAAFwAAIQAAQUxQSCsCAAANmS8wRPQ/FEnN9r+NpMs553zXxnV/jRzKOeccZnr4ISHxNfcWEP/sT1zALHcBQn/2J+Z3BXie56CIGjCf4d4CdEF8XcAMN4qYgAnYEgC22umg04767LF7/t9yx0fjP2NLGEi0yza3bT5De+y3j33qiQ/e2wsDCY394o3Xdmi2Y9Vst+diVAJI1SapR9oI6K1O1keeAUogRmwnr0wF0E/aqpq2lmCkCq5/IbaNAACbaKfHePI9pPML5Tt0BAayCU3sRy/FpW4pNQUyGURqDNdtG+KkOcQeUCYapOxrn5fFOtxkeliWxSHQJfSlLC4KfD7Oskp4kFFX03yDyGr7c5x1LkYFwN65lG2EVoxt89lG5msCoHGptuvjNGNI03nnHCsA0BJLlVWzCJB2VISZ5wAARWaEawYAkSZbmtUdBoTYz2wCQFRY0+a/5AeCpZS3ziKEQpbyvAn4UVnTtKv7VM1N8vkoWQxWr9l4s1wqz7thKR9JRkM4Ru7GC2U8rqxnVRGgoj9o6Fubpnn/u4xCqkEErKwaSZJQE68hGwLUFhKdZ8fBRiVbdNddZYVIQmNbkrZ3XVMwSUpjdT5pCqIMdYAREbHoryCAhXgpOiO65JlBcIw5MYgSlloOUs371sSkAEQDIIGiB4Cqm/TOCAAQACIwFwSjKZFRDCVGNJ4AjhJq8DClnoRFCUtBrIZhMJFTVVnySinjOEzZ+FQk8sZLStEMI2ZEKogjSUKPHwEAVlA4IOYAAABQBgCdASoYACIAPt1aok2opSMiNUgBEBuJZjcAUwAJoxx+WgGaA8je7gtJePaWp+njB0OJ5onKaydLAAD+55RifNJHbpUL2p/bOyFImebSjqM3KX0WyVS+asVf+JIa8lmFjYgBO5bwZVhkN+SrUzO0bmft+RzPz5Sbpyfqq18dds53+NB0LWCZ1iT31G5SWnr3hXNhGC6dZnwAQYL1I8cf9QwaqcIiiQXz9BhNCq31q+HVbx5+bAgFuEZQR3OtQYhuuze1vVl77RPzOMTelxBYLEcXAHgC7n9xgGeHa45pYReMqgAAAA=="
+  },
+  "fairy-treehouse": {
+    "base": "/invitation/art/optimized/fairy-treehouse",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 0.6694,
+    "placeholder": "data:image/webp;base64,UklGRlQDAABXRUJQVlA4WAoAAAAQAAAAFwAAIwAAQUxQSEUCAAANmQswRPQ/ElHN9r+RJO3uee9N/kl56L33DoyJ4YeExKd4TwB14M/+RAFs8Vou9Ge/M8WnA+jhIkqg+DRXAiLiVwHU8EIREzABd+LMu+6xZ7zsT294F173LMN5HwL51ZfeY4941M9+8TtQzhJ7zG/6H3wjW7YqQDVADH9weMrDUqymvX/c8QmpR4ZYs5/8yPtE/U6FMzO/JWbAPFK12jsGIEzlwLo1B6jatBQp35uHVGuOh2/d/LUcjK7w9mnlK194gYa5XIS9KxVQa24X9wsPtwB9W9cnXZexNBgckWBzE4Q25/Vry0ucq61W6UJb8TwBqs7ddv/+g2MqTHXqnrPuJgGgynm66mEgPdJcuQUHAOokBN0qq13GstY6C04S1Tw2G6Sa6sFapp6AkorKTvUzQY/MzOAJEhaqOsPn9vM0BZKniNO5C+XgvQiihylxkrCsGaIclKRFw6liXg+xenGTsGGr8MYTyM6NOZsKM1gPEsyoqgIvRU0ARM2TOU6WlBqJJZtPAHW7wYBtFlO2PnLZ6wgAklRul+2q5xSYRs62AoC5Frd25DgS0lRgQU7AAvriFplB6JSwNpwqnGRcFU1AtDmVGPIJiPfzVeoEIHxmX5vaCTOpsTUHQKpv6GOjQJClj3YUAFBh15VRGwXBtnIzijsBxza0i4P47C2tu/8ucbqqmwcbi95ONl7sOgFPkdT3/voScd///7Gdb34KUCUqUo/hwdHSfx8ZZRiG5SHilI6RVrlcX37iKobjZDAPOtKRQF/DEQBWUDgg6AAAAHAGAJ0BKhgAJAA+6WCmTaklo6I1VAwBIB0JZAC/a4GUXkRGMJwXUNJfNFwTuO7aruzfaM58spqYVCFAAAD+7iRP88zDMPoLX1T0b9Ey8G9kDPDuYjqhRfnImfCH8abixdCV8ddYSzrB2YK+u1SCO3/3145k/m1Bq7TJEW4Vc/QWjEjXXBzQWuMXqmVUJ5xJtJkGpJBvlcxEmMS6fzFFRQVF5hYc4dbc7uCu9Wj3kumJEZOBJZZL2smbS3gGhHiS/xIrYu9EC/6nJn9F0nJlrbCVr/ycmf0WomGyCpacILTZTP+KFQgUAAA="
+  },
   "fairytale-castle-hero-mobile": {
     "base": "/invitation/higgsfield/hero/optimized/fairytale-castle-hero-mobile",
     "widths": [
@@ -465,5 +510,14 @@
     ],
     "aspectRatio": 0.5655,
     "placeholder": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAACwBACdASoYACoAPuVkpU24piOiNVgIAxAciWMAxNgeNTYdG6lAl2y9FLKkoEs8AP7tQ+7ufrtk/tfucsjvuIVjnTnzeLlewVxcL8XiybAFZExjc0LjXx2R5iqlFfRbK2SFKtpixJ6daywg77vHfrjh8+XcA+vjqHUGElQAAAA="
+  },
+  "magnolia-spray": {
+    "base": "/invitation/art/optimized/magnolia-spray",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 0.8069,
+    "placeholder": "data:image/webp;base64,UklGRiQDAABXRUJQVlA4WAoAAAAQAAAAFwAAHQAAQUxQSAQCAAANmTJE9D9EVLNtciRJq7XW+vw35nzQWmute334UaDkU7zGgDwRLEgacMXLgETB8kTxWwN6eZJ0IPk0rzUgSRhQBuzwQhETMAFH4pjjTrCLbjjlDS96yVH33HQGGI83+8HbXva5FwT7zPg1wTe08IYfaeFvfamYhfodxK/oSZZ4g0/F2TnJ21mXfexT4jQV/Fq+h1C7iFZA63uuMDA20xrPW05rulL7yP6iIzarb6KuSPJzf81u9wlhYQDMbv1Cz9MC3++ePfS+v8gkMcBumsYP+fkSZ9Q9sM1EygEAF2d5zIF1GQ73YjjEmBRgSmLLfymvUmrcS1d1rUVKSJi1hKdSsDqRUOe6sPekEH+A4eldu4NZlGuDdHXZ9kWdtOfzsyDNQQBlLQqCX/Qwx+fjUDtjAEmJJA3GNSGsbe//KgxAhEwkrYOLKbml5S1XSwSJ5JegWwr/pekwBG3Sm7BIawiDS3PrCVJt+c0ftMCKnGavU83eKK5tN5WZOIG1lvWAgzkeJHvhslrLzoR0msaeJtbiXIzrmERcJWlNHbdWjBkyUd+zv2A/+4aUhYIKA1DR3LA8oTGmoHFGV3mIAFjMoL/FNSZQk8JmOQOAiunWR5FEWRch0cS/goLaWDppTZauzPOTQBuQkhfrzMel7jfNUXQTS2twTFbLXmSQ4PFKQkHrMkSgAABWUDgg+gAAADAGAJ0BKhgAHgA+7WCqTamlJCIwGAwBMB2JbACdM1dvq2SkRFwVrf5p7BRLe1S8MxpsCPDjnGL6JwAA/uFCf9dcLnS/6xxPErtuBfNURBkud2EqYW/Ffdab5UYR5gK6gtuhwGeXfichUTlrybceRaZZInOYUMXHrbJ4zabfnQtfujPuNQP/Mmx2jjzbKOMOqAvZqfnkTiBCXx5uPs/lxYt+PcaxF6syal3B5O4xk9mWJl3/wrLgPvaJFusamm8+rx/OFhW6D93OEv3UQGw1bFJkz5moy8Gj8qmdTtk/uBmhq7mtG8rWbnfpBZbphH7n76nUxW4l9fUnwAA="
   }
 }

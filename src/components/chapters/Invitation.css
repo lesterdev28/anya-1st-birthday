@@ -122,3 +122,54 @@
   color: var(--fairy-gold);
   margin: 1.8rem 0 0;
 }
+
+/*
+ * The magnolia, at two corners of the card.
+ *
+ * One painting used twice and mirrored, which is how a printed invitation would do it —
+ * the eye reads a matched pair rather than a repeat. They overhang the card's edge, so
+ * the card stops being a rectangle with a border and becomes something with flowers laid
+ * on it. Behind the card's own text (z 1 against the content's stacking) and never over
+ * the date or the venue, because this is the one screen where the words have to win.
+ */
+.invite__bloom {
+  width: clamp(5.5rem, 26cqw, 8.5rem);
+  z-index: 0;
+  opacity: 0.88;
+  filter: drop-shadow(0 6px 12px rgba(103, 88, 132, 0.12));
+}
+
+.invite__bloom--top {
+  top: -1.8rem;
+  left: -2.2rem;
+  transform: rotate(-12deg);
+}
+
+.invite__bloom--bottom {
+  bottom: -2rem;
+  right: -2.4rem;
+  /* Mirrored as well as turned, so the pair reads as two blooms and not one twice. */
+  transform: rotate(168deg) scaleY(-1);
+}
+
+/* The card's own content sits above them. */
+.invite__card > *:not(.invite__bloom) {
+  position: relative;
+  z-index: 1;
+}
+
+@container (max-width: 30rem) {
+  .invite__bloom {
+    width: 5rem;
+  }
+
+  .invite__bloom--top {
+    top: -1.2rem;
+    left: -1.2rem;
+  }
+
+  .invite__bloom--bottom {
+    bottom: -1.2rem;
+    right: -1.2rem;
+  }
+}

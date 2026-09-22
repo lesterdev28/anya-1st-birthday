@@ -10,6 +10,7 @@ import { Chapter } from "../../lib/scene";
 import { CloudLayer } from "../world/Clouds";
 import { Drifters } from "../world/Drifters";
 import { Meadow } from "../world/Meadow";
+import { Painted } from "../world/Painted";
 import { Reveal } from "../world/Reveal";
 import { PortraitMedallion } from "../PortraitMedallion";
 import { child, story } from "../../data/party";
@@ -43,6 +44,9 @@ export function Finale() {
           {story.finaleSignOff}
         </Reveal>
       </div>
+
+      {/* "See you in the fairy garden" — so there is a house standing in it, waiting. */}
+      <Painted id="fairy-treehouse" className="finale__treehouse" />
 
       <Meadow className="finale__meadow" bands={["far", "mid"]} seed={12} />
     </Chapter>

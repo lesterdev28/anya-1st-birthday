@@ -76,3 +76,24 @@
   z-index: 5;
   opacity: 0.8;
 }
+
+/*
+ * The treehouse, at the far edge of the last meadow.
+ *
+ * Behind the grasses (the meadow is z 5) and well down in opacity: the finale's subject
+ * is Anya's portrait, and this is a house on the horizon of it, not a second subject.
+ */
+.finale__treehouse {
+  left: 2%;
+  bottom: 1rem;
+  width: clamp(6rem, 24cqw, 10rem);
+  z-index: 4;
+  opacity: 0.72;
+}
+
+@container (max-width: 30rem) {
+  .finale__treehouse {
+    width: 5.5rem;
+    left: -3%;
+  }
+}

@@ -109,3 +109,45 @@
 .garden__meadow {
   z-index: 5;
 }
+
+/*
+ * The cottage and the fairy, standing in the meadow.
+ *
+ * Both are pinned to the bottom of the chapter rather than centred in it, because a
+ * meadow has a floor and anything living in it stands on that floor. The cottage sits
+ * behind the grasses (z 4, under the meadow's 5) so the stems grow up in front of it and
+ * it reads as further away; the fairy sits in front of them (z 6), which is what makes
+ * the two of them a depth rather than a pair of stickers side by side.
+ */
+.garden__cottage {
+  left: -3%;
+  bottom: 1.5rem;
+  width: clamp(7rem, 30cqw, 11rem);
+  z-index: 4;
+  /* Further off, so it takes more of the sky's colour and less of its own. */
+  opacity: 0.8;
+}
+
+.garden__fairy {
+  right: -2%;
+  bottom: 0.5rem;
+  width: clamp(8rem, 34cqw, 13rem);
+  z-index: 6;
+}
+
+/*
+ * A phone has no room beside the words for either of them at full size, and the copy
+ * runs much closer to the floor. They shrink and tuck into the corners rather than
+ * being dropped: a meadow with nobody in it is the thing worth avoiding.
+ */
+@container (max-width: 30rem) {
+  .garden__cottage {
+    width: 6.5rem;
+    left: -5%;
+  }
+
+  .garden__fairy {
+    width: 7.5rem;
+    right: -4%;
+  }
+}

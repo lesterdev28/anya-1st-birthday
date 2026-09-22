@@ -15,7 +15,12 @@
   inset: 0;
   display: block;
   aspect-ratio: 1;
-  offset-rotate: auto;
+  /*
+   * Fixed heading rather than `auto`. Turning to face the curve is right for a drawn
+   * shape and wrong for a painting: on the descending half of any of these beziers it
+   * would fly the butterfly upside down.
+   */
+  offset-rotate: 0deg;
   offset-distance: 0%;
   animation-name: butterfly-travel;
   animation-timing-function: ease-in-out;
@@ -32,31 +37,35 @@
   }
 }
 
-.butterflies__flyer svg {
+.butterflies__wings {
+  display: block;
   width: 100%;
-  height: auto;
-  overflow: visible;
   animation-name: butterfly-flap;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+.butterflies__wings img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /*
- * Flapping is a horizontal squash of the whole pair rather than two rotations. It reads
- * the same at this size and costs one transform instead of two.
+ * A breathe rather than a fold. These are painted three-quarter views with a body in
+ * them, so squashing them flat the way a drawn pair of wings can be squashed reads as a
+ * rendering fault. Taking a tenth off the width and tipping a few degrees reads as a
+ * butterfly working its wings while it drifts.
  */
 @keyframes butterfly-flap {
-  0%,
-  100% {
-    transform: scaleX(1);
+  from {
+    transform: scaleX(1) rotate(0deg);
   }
-  50% {
-    transform: scaleX(0.35);
+  to {
+    transform: scaleX(0.88) rotate(var(--lean, 5deg));
   }
-}
-
-.butterflies__wing {
-  transform-origin: 50% 50%;
 }
 
 /* Phones carry fewer, per the brief's instruction to thin out simultaneous animation. */
@@ -76,7 +85,7 @@
     offset-distance: 42%;
   }
 
-  .butterflies__flyer svg {
+  .butterflies__wings {
     animation: none;
   }
 

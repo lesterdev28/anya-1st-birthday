@@ -12,6 +12,7 @@ import { Drifters } from "../world/Drifters";
 import { Butterflies } from "../world/Butterflies";
 import { Reveal } from "../world/Reveal";
 import { GoldCrown } from "../GoldCrown";
+import { Painted } from "../world/Painted";
 import { Countdown } from "./Countdown";
 import { child, party, story } from "../../data/party";
 import "./Invitation.css";
@@ -24,6 +25,13 @@ export function Invitation() {
       <Butterflies count={2} seed={27} className="invite__butterflies" />
 
       <Reveal className="invite__card" amount={0.3}>
+        {/*
+          One painting used twice, at opposite corners and mirrored, which is how a
+          printed invitation would do it — the eye reads a pair, not a repeat.
+        */}
+        <Painted id="magnolia-spray" className="invite__bloom invite__bloom--top" />
+        <Painted id="magnolia-spray" className="invite__bloom invite__bloom--bottom" />
+
         <div className="invite__crown">
           <GoldCrown />
         </div>
