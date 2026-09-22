@@ -14,6 +14,7 @@ import { motion, useMotionValueEvent, useReducedMotion, useTransform } from "fra
 import { Chapter, useChapterScroll } from "../../lib/scene";
 import { CloudBand } from "../world/Clouds";
 import { Drifters } from "../world/Drifters";
+import { Butterflies } from "../world/Butterflies";
 import { Reveal } from "../world/Reveal";
 import { GoldCrown } from "../GoldCrown";
 import { monthChapters, story } from "../../data/party";
@@ -55,6 +56,9 @@ function ClimaxScene() {
       <motion.div className="climax__dust" style={still ? undefined : { y: dustRise }}>
         <Drifters kind="dust" count={34} />
       </motion.div>
+
+      {/* Outside the dust layer, which parallaxes — a butterfly flies its own path. */}
+      <Butterflies count={5} seed={37} className="climax__butterflies" />
 
       <div className="climax__inner">
         <Reveal className="climax__crown" y={-14} amount={0.5}>

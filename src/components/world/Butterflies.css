@@ -6,13 +6,14 @@
 }
 
 /*
- * The path is written in a 0-100 box, so the element has to be laid out in one for
- * `offset-path` to resolve against. `offset-rotate: auto` turns the butterfly to face
- * wherever the curve is heading.
+ * The route arrives already measured in pixels (see Butterflies.tsx), drawn from the top
+ * left corner of this group. The flyer itself is only as big as the butterfly: it is the
+ * offset transform that carries it around the chapter, from its own centre.
  */
 .butterflies__flyer {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   display: block;
   aspect-ratio: 1;
   /*
@@ -25,7 +26,18 @@
   animation-name: butterfly-travel;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+  /*
+   * Parked until the group is near the screen. `offset-distance` animates on the main
+   * thread, so a page with sixteen chapters of butterflies all running at once is a page
+   * that stutters while it scrolls; a paused animation costs nothing.
+   */
+  animation-play-state: paused;
   will-change: offset-distance;
+}
+
+.butterflies.is-flying .butterflies__flyer,
+.butterflies.is-flying .butterflies__wings {
+  animation-play-state: running;
 }
 
 @keyframes butterfly-travel {
@@ -44,6 +56,7 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  animation-play-state: paused;
   will-change: transform;
 }
 
@@ -68,9 +81,13 @@
   }
 }
 
-/* Phones carry fewer, per the brief's instruction to thin out simultaneous animation. */
+/*
+ * Phones carry one fewer, per the brief's instruction to thin out simultaneous animation.
+ * Not many fewer, though: it is the empty top and bottom of a phone screen that need
+ * filling most, and each band needs more than one flyer for the band to ever be occupied.
+ */
 @media (max-width: 640px) {
-  .butterflies__flyer:nth-child(n + 3) {
+  .butterflies__flyer:nth-child(n + 5) {
     display: none;
   }
 }

@@ -22,7 +22,7 @@ export function Invitation() {
     <Chapter scene="invitation" id="invitation" className="invite" label="The invitation">
       <CloudLayer depth="far" count={3} seed={19} className="invite__clouds" />
       <Drifters kind="dust" count={16} className="invite__air" />
-      <Butterflies count={2} seed={27} className="invite__butterflies" />
+      <Butterflies count={5} seed={27} className="invite__butterflies" />
 
       <Reveal className="invite__card" amount={0.3}>
         {/*

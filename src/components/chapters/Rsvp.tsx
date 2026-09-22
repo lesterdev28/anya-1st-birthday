@@ -25,7 +25,7 @@ export function Rsvp() {
     <Chapter scene="rsvp" id="rsvp" className="rsvp" label="RSVP">
       <CloudLayer depth="far" count={3} seed={33} className="rsvp__clouds" />
       <Drifters kind="fireflies" count={18} className="rsvp__air" />
-      <Butterflies count={2} seed={41} className="rsvp__butterflies" />
+      <Butterflies count={5} seed={41} className="rsvp__butterflies" />
 
       <div className="rsvp__inner">
         <Reveal as="h2" className="rsvp__heading" amount={0.4}>

@@ -97,3 +97,11 @@
     left: -3%;
   }
 }
+
+/* Butterflies over the sunset, at the same depth as the fireflies drifting through it. */
+.finale__butterflies {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}

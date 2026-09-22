@@ -94,9 +94,14 @@ function MonthContents({ chapter }: { readonly chapter: MonthChapter }) {
         className="month__clouds month__clouds--near"
       />
       <Drifters kind={drifter} count={14} className="month__air" />
-      {chapter.month % 4 === 2 && (
-        <Butterflies count={1} seed={chapter.month * 11} className="month__butterflies" />
-      )}
+      {/*
+        Every month, not every fourth. A month is a screen tall with one cluster of
+        photographs in the middle of it, so the air above and below was empty enough to
+        read as something missing rather than as space. Three butterflies fill the two
+        empty bands and the diagonal between them, and the seed keeps no two months
+        flying the same way.
+      */}
+      <Butterflies count={5} seed={chapter.month * 11} className="month__butterflies" />
 
       {/* The numeral, large and pale, travelling slower than everything in front of it. */}
       <Parallax depth={0.15} distance={420} className="month__numeral-layer">

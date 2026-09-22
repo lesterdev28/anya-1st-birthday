@@ -85,7 +85,7 @@ function KingdomScene({ onEnter }: Props) {
       <CloudLayer depth="mid" count={3} seed={4} className="kingdom__clouds kingdom__clouds--mid" />
 
       <Drifters kind="petals" count={14} className="kingdom__petals" />
-      <Butterflies count={2} seed={9} className="kingdom__butterflies" />
+      <Butterflies count={5} seed={9} className="kingdom__butterflies" />
 
       <motion.div className="kingdom__copy" style={still ? undefined : { opacity: copyFade }}>
         <motion.p

@@ -111,3 +111,14 @@
   left: auto;
   right: -52%;
 }
+
+/*
+ * Butterflies over the year counting up. Above the light and the dust, below the
+ * numerals, so they pass in front of the weather and behind the words.
+ */
+.climax__butterflies {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
