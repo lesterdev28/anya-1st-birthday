@@ -86,6 +86,52 @@ html {
   overscroll-behavior-y: none;
 }
 
+/*
+ * The page does not move until the guest has entered.
+ *
+ * The hero is a door, not a first screen, and a guest who scrolls straight past it
+ * arrives in the meadow having never been asked in. So the whole journey is held still
+ * until "Enter Anya's Fairy Garden" is pressed.
+ *
+ * `data-gate` is set in index.html rather than by React, so the lock is in force from
+ * the first byte rather than from the first render — a page that can be scrolled for
+ * one frame is a page that can be scrolled. `App` only ever opens it.
+ *
+ * It takes all three of these. `overflow: hidden` on the root alone stops the wheel and
+ * the keyboard but not a finger on iOS, and `touch-action: none` alone stops the finger
+ * but not the wheel. Taps are unaffected by any of them, so the button still works.
+ */
+html[data-gate="closed"],
+html[data-gate="closed"] body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+html[data-gate="closed"] body {
+  touch-action: none;
+}
+
+/*
+ * And the chapter rail goes with it: its dots are links to places further down, which is
+ * exactly what is being held back.
+ */
+html[data-gate="closed"] .nav {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* The dots set their own `pointer-events: auto`, so they have to be told as well. */
+html[data-gate="closed"] .nav__dot {
+  pointer-events: none;
+}
+
+/* Fades in with the meadow rather than appearing the instant the lock lifts. */
+.nav {
+  transition:
+    opacity 1.2s var(--ease-soft),
+    visibility 1.2s;
+}
+
 body {
   /*
    * Transparent on purpose. <html> carries the base colour (set inline in index.html so
