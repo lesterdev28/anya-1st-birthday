@@ -38,7 +38,7 @@ export function Loader() {
           className="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.9, ease: "easeInOut" }}
+          transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
           aria-hidden="true"
         >
           <Drifters kind="dust" count={26} className="loader__dust" />

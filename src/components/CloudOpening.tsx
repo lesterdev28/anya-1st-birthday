@@ -19,7 +19,7 @@ import "./CloudOpening.css";
 
 /** Begun just as the loading screen starts to dissolve, so the two read as one move. */
 const PART_AFTER_MS = HOLD_MS + 250;
-const PART_SECONDS = 2.1;
+const PART_SECONDS = 2.4;
 
 export function CloudOpening() {
   const reduceMotion = useReducedMotion();
@@ -37,18 +37,24 @@ export function CloudOpening() {
 
   if (done) return null;
 
-  /* Slow to leave and quick to clear the middle, so the kingdom is not withheld. */
+  /*
+   * The banks do not slide off the screen; they thin out and go. Cloud that stays solid
+   * all the way to the edge reads as two doors being pulled, and the moment it passes the
+   * edge there is a hard line where the last of it was. Fading it out over the second
+   * half of the move means the kingdom is arriving through cloud that is dissolving,
+   * which is the only way cloud has ever cleared.
+   */
   const travel = {
-    duration: PART_SECONDS,
-    ease: [0.32, 0, 0.16, 1] as const,
+    x: { duration: PART_SECONDS, ease: [0.32, 0, 0.16, 1] as const },
+    opacity: { duration: PART_SECONDS * 0.62, delay: PART_SECONDS * 0.3, ease: "easeInOut" as const },
   };
 
   return (
     <div className="opening" aria-hidden="true">
       <motion.div
         className="opening__half"
-        initial={{ x: "0%" }}
-        animate={{ x: parting ? "-112%" : "0%" }}
+        initial={{ x: "0%", opacity: 1 }}
+        animate={{ x: parting ? "-86%" : "0%", opacity: parting ? 0 : 1 }}
         transition={travel}
       >
         <PaintedClouds count={9} seed={5} spread={132} />
@@ -56,8 +62,8 @@ export function CloudOpening() {
 
       <motion.div
         className="opening__half opening__half--right"
-        initial={{ x: "0%" }}
-        animate={{ x: parting ? "112%" : "0%" }}
+        initial={{ x: "0%", opacity: 1 }}
+        animate={{ x: parting ? "86%" : "0%", opacity: parting ? 0 : 1 }}
         transition={travel}
         onAnimationComplete={() => parting && setDone(true)}
       >

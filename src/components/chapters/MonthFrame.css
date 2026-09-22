@@ -172,7 +172,7 @@
   /* FairyImage sets the source's own ratio inline; the corner decides the shape here. */
   aspect-ratio: auto !important;
   opacity: 0;
-  transition: opacity 1.1s var(--ease-soft);
+  transition: opacity 1.6s var(--ease-soft);
 }
 
 .frame__corner-photo.is-showing {

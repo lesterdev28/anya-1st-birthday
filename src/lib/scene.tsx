@@ -30,6 +30,7 @@ import {
   useMotionValue,
   useReducedMotion,
   useScroll,
+  useSpring,
   useTransform,
   type MotionValue,
 } from "framer-motion";
@@ -157,9 +158,22 @@ interface ChapterProps {
   readonly label?: string;
 }
 
+/**
+ * How the chapter's layers follow the scroll.
+ *
+ * Overdamped on purpose — 26 against a critical damping of about 11 — so nothing ever
+ * overshoots and springs back. What it buys is a tenth of a second of trail: a layer
+ * bound straight to the scroll position stops dead the instant a finger leaves the
+ * screen, and a phone's scroll arrives in coarse jumps that a rigid layer reproduces
+ * exactly. Following the scroll slightly late smooths both, and the whole scene moves
+ * as one thing rather than as a stack of layers each snapping to its own number.
+ */
+const FOLLOW = { stiffness: 90, damping: 26, mass: 0.35, restDelta: 0.0004 } as const;
+
 export function Chapter({ scene, id, className, children, label }: ChapterProps) {
   const ref = useRef<HTMLElement>(null);
   const registry = useContext(RegistryContext);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const element = ref.current;
@@ -171,9 +185,10 @@ export function Chapter({ scene, id, className, children, label }: ChapterProps)
     target: ref,
     offset: ["start end", "end start"],
   });
+  const eased = useSpring(scrollYProgress, FOLLOW);
 
   return (
-    <ProgressContext.Provider value={scrollYProgress}>
+    <ProgressContext.Provider value={reduceMotion ? scrollYProgress : eased}>
       <section
         ref={ref}
         id={id}

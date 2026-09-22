@@ -7,6 +7,11 @@
  *
  * `once: true` is deliberate. A line that re-animates every time it is scrolled back
  * past stops reading as a memory being remembered and starts reading as a widget.
+ *
+ * Long and late-starting. A reveal that begins when a third of the block is on screen
+ * and takes a second and a half is still finishing as the guest settles on it, which is
+ * what makes it read as the page arriving rather than as an element being played at
+ * them. The curve has almost no acceleration at the end, so nothing ever lands.
  */
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
@@ -33,7 +38,7 @@ export function Reveal({
   delay = 0,
   y = 26,
   as = "div",
-  amount = 0.4,
+  amount = 0.3,
 }: RevealProps) {
   const reduceMotion = useReducedMotion();
   const Tag = motion[as];
@@ -49,7 +54,7 @@ export function Reveal({
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount }}
-      transition={{ duration: 1.1, delay, ease: [0.22, 0.61, 0.36, 1] }}
+      transition={{ duration: 1.45, delay, ease: [0.16, 0.62, 0.23, 1] }}
     >
       {children}
     </Tag>
@@ -65,7 +70,7 @@ export function Reveal({
  */
 const wordGroup: Variants = {
   hidden: {},
-  shown: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
+  shown: { transition: { staggerChildren: 0.16, delayChildren: 0.1 } },
 };
 
 const oneWord: Variants = {
@@ -74,7 +79,7 @@ const oneWord: Variants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.9, ease: [0.22, 0.61, 0.36, 1] },
+    transition: { duration: 1.15, ease: [0.16, 0.62, 0.23, 1] },
   },
 };
 
@@ -96,7 +101,7 @@ export function RevealWords({ text, className, delay = 0 }: WordsProps) {
       variants={wordGroup}
       initial="hidden"
       whileInView="shown"
-      viewport={{ once: true, amount: 0.6 }}
+      viewport={{ once: true, amount: 0.45 }}
       transition={{ delayChildren: delay }}
     >
       {words.map((word, index) => (
