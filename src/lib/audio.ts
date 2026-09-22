@@ -22,10 +22,16 @@ import { MUSIC_SOURCES } from "./assets";
  * refuses quietly, by rejecting the promise. There is no way around that and no way to
  * ask. So the first attempt is made immediately — it succeeds where the guest has been
  * here before, or has the site's autoplay permission — and the same attempt is armed on
- * the document in the capture phase, so the very first press, key or scroll starts it
- * before anything else on the page has had a chance to act on that gesture. On this page
- * that press is almost always "Enter Anya's Fairy Garden". The guest never sees a prompt
- * either way, and never a control.
+ * the document in the capture phase, so the very first touch, press or key starts it
+ * before anything else on the page has had a chance to act on that gesture.
+ *
+ * Which events are listened for is not a matter of taste. A browser only counts a few of
+ * them as the guest having acted — the end of a touch, the release of a button, a key —
+ * and a wheel or a scroll is not among them, however deliberate it looked. So the list
+ * below leads with the ones that actually unlock playback, and `touchend` is the one that
+ * matters most: it is what fires when a guest flicks the hero to scroll it, which is how
+ * almost everyone arrives here, and it means the music starts on the way in rather than
+ * waiting for the entrance button to be pressed.
  *
  * Returns the teardown for the listeners it attached.
  */
@@ -38,8 +44,20 @@ export function startMusic(audio: HTMLAudioElement): () => void {
 
   let playing = false;
 
-  /* Anything that counts as a gesture, plus the wheel and scroll that often come first. */
-  const gestures = ["pointerdown", "touchstart", "mousedown", "click", "keydown", "wheel"] as const;
+  /*
+   * The first six are what a browser accepts as the guest having acted; the last two
+   * almost never unlock anything on their own but cost nothing to ask on.
+   */
+  const gestures = [
+    "touchend",
+    "pointerup",
+    "mouseup",
+    "click",
+    "pointerdown",
+    "keydown",
+    "touchstart",
+    "wheel",
+  ] as const;
 
   /*
    * On the document, in the capture phase, so this runs before any handler the page has
@@ -51,7 +69,12 @@ export function startMusic(audio: HTMLAudioElement): () => void {
   const stopListening = () => {
     for (const event of gestures) document.removeEventListener(event, attempt, options);
     window.removeEventListener("scroll", attempt);
+    document.removeEventListener("visibilitychange", onVisible);
   };
+
+  function onVisible(): void {
+    if (document.visibilityState === "visible") attempt();
+  }
 
   function attempt(): void {
     if (playing) return;
@@ -75,6 +98,13 @@ export function startMusic(audio: HTMLAudioElement): () => void {
    */
   audio.addEventListener("canplay", attempt);
   audio.addEventListener("error", fallBackToAac);
+
+  /*
+   * And once more when the tab comes back to the front. A guest who opened the link and
+   * went somewhere else before it loaded comes back to a page that has already spent its
+   * one free attempt.
+   */
+  document.addEventListener("visibilitychange", onVisible);
 
   attempt();
   for (const event of gestures) {
