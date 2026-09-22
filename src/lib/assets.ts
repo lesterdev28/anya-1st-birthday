@@ -57,47 +57,16 @@ export const VIDEO_SOURCES = {
 export type VideoId = keyof typeof VIDEO_SOURCES;
 
 /**
- * The background music, served straight from public/ like the cinematic.
+ * The soundtrack, served straight from public/ like the cinematic.
  *
- * Opus first and AAC second: every browser plays one of the two, and Opus is the
- * smaller of them for anything this sparse.
+ * Opus first and AAC second: every browser plays one of the two, and Opus is a fifth
+ * smaller. AAC goes in a plain .mp4 container rather than .m4a, which some static hosts
+ * and the artifact publisher refuse to serve.
  */
-export const AUDIO_SOURCES = {
-  /* The three music beds. One key, one tempo, so any two can cross-fade mid-bar. */
-  lullaby: {
-    webm: "/invitation/audio/music-box-lullaby.webm",
-    /* AAC, in a plain .mp4 container: some static hosts refuse to serve .m4a. */
-    mp4: "/invitation/audio/music-box-lullaby.mp4",
-  },
-  sky: {
-    webm: "/invitation/audio/sky-ambience.webm",
-    mp4: "/invitation/audio/sky-ambience.mp4",
-  },
-  shimmer: {
-    webm: "/invitation/audio/shimmer.webm",
-    mp4: "/invitation/audio/shimmer.mp4",
-  },
-
-  /* One-shots. */
-  enter: {
-    webm: "/invitation/audio/sfx-enter.webm",
-    mp4: "/invitation/audio/sfx-enter.mp4",
-  },
-  chime: {
-    webm: "/invitation/audio/sfx-chime.webm",
-    mp4: "/invitation/audio/sfx-chime.mp4",
-  },
-  sparkle: {
-    webm: "/invitation/audio/sfx-sparkle.webm",
-    mp4: "/invitation/audio/sfx-sparkle.mp4",
-  },
-  bloom: {
-    webm: "/invitation/audio/sfx-bloom.webm",
-    mp4: "/invitation/audio/sfx-bloom.mp4",
-  },
+export const MUSIC_SOURCES = {
+  webm: "/invitation/audio/pixie-dust.webm",
+  mp4: "/invitation/audio/pixie-dust.mp4",
 } as const;
-
-export type SoundId = keyof typeof AUDIO_SOURCES;
 
 export function getAsset(id: string): ManifestEntry | null {
   return assets[id] ?? null;

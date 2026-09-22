@@ -23,6 +23,65 @@
   pointer-events: none;
 }
 
+/*
+ * The painted kingdom, behind everything the chapter draws.
+ *
+ * It is masked rather than faded: a flat opacity would still show four straight edges
+ * against the sky, and the whole point of the layer is that the guest cannot tell where
+ * the page's own air stops and the painting starts. The top dissolves into the sky
+ * gradient and the bottom into the cloud gate, so only the castle band is fully present.
+ */
+.kingdom__vista {
+  position: absolute;
+  /*
+   * Overscanned at the top and the sides so the parallax drift never pulls an edge into
+   * view — but flush with the bottom, because the chapter clips there. An overscanned
+   * bottom would be cut by that clip at whatever opacity the mask happened to be at,
+   * and a mask fade cannot hide a straight line drawn by something else.
+   */
+  top: -8%;
+  left: -4%;
+  right: -4%;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.88;
+  will-change: transform;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.7) 12%,
+    #000 26%,
+    #000 66%,
+    transparent 99%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.7) 12%,
+    #000 26%,
+    #000 66%,
+    transparent 99%
+  );
+}
+
+.kingdom__vista picture,
+.kingdom__vista img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.kingdom__vista img {
+  object-fit: cover;
+  /*
+   * The painting is far taller than a laptop window, so on a wide screen this decides
+   * which band of it is in frame. Low enough that the castle stands under the name
+   * rather than through it; a phone is nearly the artwork's own shape and sees it all.
+   */
+  object-position: 50% 54%;
+}
+
 .kingdom__clouds--far {
   z-index: 1;
   opacity: 0.7;
@@ -49,6 +108,27 @@
   z-index: 6;
   text-align: center;
   max-width: 24rem;
+}
+
+/*
+ * A breath of light under the words. The painting is pastel but it is not empty, and
+ * without this the turrets and the sunrise run straight through the name. It is a soft
+ * ellipse rather than a panel: a panel would read as a card laid over the artwork, and
+ * the point of the layer is that the words are standing in the sky, not on top of it.
+ */
+.kingdom__copy::before {
+  content: "";
+  position: absolute;
+  inset: -12% -26%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    62% 58% at 50% 46%,
+    rgba(255, 253, 248, 0.86) 0%,
+    rgba(255, 253, 248, 0.58) 42%,
+    rgba(255, 253, 248, 0.2) 68%,
+    transparent 84%
+  );
 }
 
 .kingdom__once {
@@ -80,6 +160,7 @@
   text-transform: uppercase;
   color: var(--ink-soft);
   margin: 0.9rem 0 0;
+  text-shadow: 0 1px 14px rgba(255, 253, 248, 0.95);
 }
 
 .kingdom__one {
@@ -101,6 +182,7 @@
   /* Wide enough to hold the line on one row at desktop; the copy box caps it on a phone. */
   max-width: 22rem;
   line-height: 1.75;
+  text-shadow: 0 1px 14px rgba(255, 253, 248, 0.95);
 }
 
 .kingdom__when {
@@ -109,6 +191,7 @@
   color: var(--ink);
   letter-spacing: 0.06em;
   margin: 0.5rem 0 2rem;
+  text-shadow: 0 1px 14px rgba(255, 253, 248, 0.95);
 }
 
 /* ---- the CTA ---- */

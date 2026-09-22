@@ -10,9 +10,15 @@
  * Scrolling away from here is written as a descent: the name grows and softens as though
  * the camera were moving toward and then past it, the words fade, and the foreground
  * clouds draw apart to either side to let the guest through into the meadow below.
+ *
+ * Behind all of it sits the painted kingdom itself — the one piece of generated artwork
+ * the invitation uses, masked top and bottom so it has no edges and the page's own sky
+ * simply becomes it. Everything in front is still drawn in CSS, so the clouds that pass
+ * over the castle are the same clouds that carry on through the rest of the journey.
  */
 import { motion, useReducedMotion, useTransform } from "framer-motion";
 import { Chapter, useChapterScroll } from "../../lib/scene";
+import { responsiveImage } from "../../lib/assets";
 import { CloudBand, CloudLayer } from "../world/Clouds";
 import { Drifters } from "../world/Drifters";
 import { Butterflies } from "../world/Butterflies";
@@ -42,6 +48,9 @@ function KingdomScene({ onEnter }: Props) {
    * is therefore keyed to the second half of that range — 0.5 is "untouched".
    */
   const nameScale = useTransform(progress, [0.5, 1], [1, 1.45]);
+  /* The deepest layer, so it moves least — a long way off rather than a backdrop. */
+  const vistaRise = useTransform(progress, [0.5, 1], ["0%", "-7%"]);
+  const vistaZoom = useTransform(progress, [0.5, 1], [1, 1.1]);
   const nameFilter = useTransform(progress, [0.5, 1], ["blur(0px)", "blur(7px)"]);
   const copyFade = useTransform(progress, [0.5, 0.86], [1, 0]);
   const starsRise = useTransform(progress, [0.5, 1], ["0%", "-38%"]);
@@ -50,8 +59,23 @@ function KingdomScene({ onEnter }: Props) {
 
   const still = reduceMotion || !inChapter;
 
+  const vista = responsiveImage("fairytale-castle-hero-mobile");
+
   return (
     <>
+      {vista && (
+        <motion.div
+          className="kingdom__vista"
+          aria-hidden="true"
+          style={still ? undefined : { y: vistaRise, scale: vistaZoom }}
+        >
+          <picture>
+            <source type="image/avif" srcSet={vista.avifSrcSet} sizes="100vw" />
+            <img src={vista.src} srcSet={vista.srcSet} sizes="100vw" alt="" decoding="async" />
+          </picture>
+        </motion.div>
+      )}
+
       <CloudLayer depth="far" count={4} seed={2} className="kingdom__clouds kingdom__clouds--far" />
 
       <motion.div className="kingdom__stars" style={still ? undefined : { y: starsRise }}>

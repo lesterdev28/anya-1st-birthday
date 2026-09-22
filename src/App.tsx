@@ -12,7 +12,7 @@ import { SceneProvider } from "./lib/scene";
 import { Sky } from "./components/world/Sky";
 import { Loader } from "./components/Loader";
 import { Nav } from "./components/Nav";
-import { SoundToggle } from "./components/SoundToggle";
+import { Music } from "./components/Music";
 import { CloudKingdom } from "./components/chapters/CloudKingdom";
 import { FairyGarden } from "./components/chapters/FairyGarden";
 import { MonthJourney } from "./components/chapters/MonthJourney";
@@ -27,12 +27,12 @@ export function App() {
    * The one interaction the brief hangs the entrance on. Scrolling to the meadow rather
    * than jumping keeps the cloud gate parting visible, which is the point of having it.
    *
-   * The button is also the guest's first gesture, which is what lets the music start —
-   * the sound engine listens for it rather than for any stray tap.
+   * It is also, for most guests, the first gesture on the page, so it is what lets a
+   * browser that held the music back release it. `Music` watches for any gesture rather
+   * than for this one, so the hero does not have to know that sound exists.
    */
   const enterGarden = useCallback(() => {
     document.getElementById("garden")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.dispatchEvent(new CustomEvent("anya:enter"));
   }, []);
 
   return (
@@ -51,7 +51,7 @@ export function App() {
       </main>
 
       <Nav />
-      <SoundToggle />
+      <Music />
 
       {/*
         The story in plain words, for a screen reader or anyone who never sees the

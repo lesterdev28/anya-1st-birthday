@@ -2,7 +2,7 @@
 
 One continuous scroll through a fairy kingdom in the clouds and down through Anya's
 first year, ending at the RSVP. Anya's real photographs, everything around them drawn
-in CSS and SVG, and an original soundtrack that follows the journey.
+in CSS and SVG, and a soundtrack that plays from the moment it opens.
 
 Her photographs are never altered — not tinted, restyled, generated over or cropped
 into her face. All of the decoration goes around the opening they show through.
@@ -116,45 +116,35 @@ clip reaches the hero frame and the handover becomes visible. The `opening` beat
 
 ### The sound
 
-Every note on this page was written for it. `tools/musicbox.py` renders the music-box
-lullaby and `tools/soundscape.py` renders the other two beds and the four effects, both
-in plain Python with no dependencies. An invitation gets forwarded around a family; a
-track with someone else's terms attached does not belong in it.
+One track, looping, for the whole journey: *Pixie Dust* by Marc Jungermann, chosen by
+Lester. It replaced the three synthesised beds and the four effects that were here
+before — a scored piece carries its own shape, and cross-fading between edits of it
+would only fight the arrangement. `tools/musicbox.py` and `tools/soundscape.py` still
+render those beds from scratch, in plain Python with no dependencies, if a generated
+soundtrack is ever wanted again.
 
-Three beds, one key (F major) and one tempo, so any two can cross-fade mid-bar:
-
-| bed | where it plays |
-| --- | --- |
-| `sky-ambience` | the cloud kingdom at the start, and the sunset at the end |
-| `music-box-lullaby` | the meadow, the year, and the RSVP |
-| `shimmer` | the twelfth month and the invitation |
-
-Four effects: `sfx-enter` on the entrance button, `sfx-sparkle` when the clouds part on
-the twelfth month, `sfx-chime` arriving at the invitation, `sfx-bloom` when an RSVP is
-sent.
-
-Every bed loops seamlessly by construction rather than by editing. Sustained voices are
-tuned to a whole number of cycles per loop, so they arrive back at the start of their own
-waveform exactly at the join; struck notes are allowed to ring past the end and the
-overhang is folded back over the opening, so the decay of the last note is what plays
-under the first. All three are normalised to -17 LUFS, so a cross-fade never changes how
-loud the page is.
+The track is normalised to about **-22 LUFS** with a two-second fade in and a four-second
+fade out, and it is played at volume 1 everywhere. Baking the level into the encode
+rather than setting a gain is what makes it sound the same on an iPhone, where `.volume`
+is read-only and every JavaScript fade is silently ignored.
 
 ```bash
-python3 tools/musicbox.py                  # writes lullaby.wav
-python3 tools/soundscape.py                # writes the rest; name pieces to do one
-ffmpeg -i sky-ambience.wav -c:a libopus -b:a 56k -vbr on sky-ambience.webm
-ffmpeg -i sky-ambience.wav -c:a aac -b:a 96k -movflags +faststart sky-ambience.mp4
+ffmpeg -i source.mp3 -af "loudnorm=I=-22:LRA=11:TP=-1.5,afade=t=in:st=0:d=2" pixie.wav
+ffmpeg -i pixie.wav -c:a libopus -b:a 64k -vbr on pixie-dust.webm
+ffmpeg -i pixie.wav -c:a aac -b:a 96k -movflags +faststart pixie-dust.mp4
 ```
 
-Opus in WebM plus AAC in MP4 covers every browser. The AAC files are named `.mp4` rather
-than `.m4a` — same container, and some static hosts refuse to serve `.m4a` at all.
+Opus in WebM plus AAC in MP4 covers every browser, and the browser picks between the two
+`<source>` elements itself. The AAC file is named `.mp4` rather than `.m4a` — same
+container, and some static hosts refuse to serve `.m4a` at all.
 
-`src/lib/audio.ts` is the engine: Web Audio rather than `<audio>`, because an `<audio>`
-element cannot cross-fade and on iOS cannot change its volume at all. Nothing is fetched
-until the guest asks for sound, nothing plays before they press "Enter Anya's Fairy
-Garden", and silencing it is remembered in localStorage and never overridden. `sound` in
-`src/data/party.ts` holds the volume and the fade length.
+`src/components/Music.tsx` is an `<audio>` element rather than a Web Audio graph: the
+track is five minutes long, and `decodeAudioData` must hold the whole file before it can
+make a sound, where an element streams. There is no control to silence it. Every browser
+refuses to play sound on a page nobody has touched yet, and refuses quietly by rejecting
+the promise, so `startMusic` in `src/lib/audio.ts` tries once on load and arms the same
+attempt behind the first gesture of any kind — which on this page is almost always
+"Enter Anya's Fairy Garden".
 
 ## Layout
 
@@ -167,22 +157,22 @@ public/invitation/
     storybook/      cover and parchment pages
     decorations/    the reusable isolated elements
   photos/           Anya's real photographs (originals + optimized/)
-  audio/            three music beds and four effects
+  audio/            the soundtrack, Opus and AAC
 src/
   components/
     world/          the sky, clouds, meadow, drifting particles and butterflies
     chapters/       one file per part of the journey, in scroll order
   data/party.ts     every editable detail: date, venue, RSVP, story copy, the twelve months
   lib/scene.tsx     which chapter owns the screen, and each chapter's scroll progress
-  lib/audio.ts      the scene-based sound engine
+  lib/audio.ts      starting the music, and getting past autoplay
   lib/assets.ts     the manifest bridge
 tools/
   art-direction.md  the written specification — read this first
   art-direction.ts  the canon and every scene, in code
   generate.ts       the Higgsfield CLI
   optimize.ts       derivatives and manifest
-  musicbox.py       renders the lullaby from scratch
-  soundscape.py     renders the other beds and the effects
+  musicbox.py       renders a music-box lullaby from scratch (unused)
+  soundscape.py     renders ambient beds and effects from scratch (unused)
   artifact.sh       builds a relative-path bundle for publishing as a preview
 ```
 

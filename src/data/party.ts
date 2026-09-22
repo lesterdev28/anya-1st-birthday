@@ -78,20 +78,6 @@ export const story = {
   finaleSignOff: "Anya turns ONE ✨",
 } as const;
 
-/**
- * The background music and the enchanted soundscape.
- *
- * `autoStart` is deliberately false: the brief asks for the sound to be unlocked by the
- * "Enter Anya's Fairy Garden" button rather than by any stray tap, so that a guest who
- * scrolls straight past the button never makes a noise they did not ask for.
- */
-export const sound = {
-  autoStart: false,
-  /** 0 to 1. Deliberately well under half: this plays behind everything, not over it. */
-  volume: 0.32,
-  /** Seconds. The brief asks for a 2-3 second fade rather than an abrupt start. */
-  fadeSeconds: 2.6,
-} as const;
 
 /**
  * RSVP details have not been given yet.
