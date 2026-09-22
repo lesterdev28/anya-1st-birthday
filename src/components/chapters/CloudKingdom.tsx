@@ -22,7 +22,6 @@ import { responsiveImage } from "../../lib/assets";
 import { CloudBand, CloudLayer } from "../world/Clouds";
 import { Drifters } from "../world/Drifters";
 import { Butterflies } from "../world/Butterflies";
-import { PaintedClouds } from "../world/PaintedClouds";
 import { child, party, story } from "../../data/party";
 import "./CloudKingdom.css";
 
@@ -154,18 +153,21 @@ function KingdomScene({ onEnter }: Props) {
       {/*
         In front of the words. These are the doors: they sit closed across the lower
         screen and draw apart as the guest scrolls down through them.
+
+        Gradient cloud only. The painted cloud that opens the page was tried here too, so
+        that the shape the guest came through was the shape they descend through — but a
+        drawn cut-out lying still over the castle is a sticker, where the same drawing in
+        motion is weather. It belongs to the opening and stays there.
       */}
       <div className="kingdom__gate" aria-hidden="true">
         <motion.div className="kingdom__gate-half" style={still ? undefined : { x: partLeft }}>
           <CloudBand depth="near" count={4} seed={61} />
-          <PaintedClouds count={3} columns={3} seed={5} spread={54} className="kingdom__gate-art" />
         </motion.div>
         <motion.div
           className="kingdom__gate-half kingdom__gate-half--right"
           style={still ? undefined : { x: partRight }}
         >
           <CloudBand depth="near" count={4} seed={73} />
-          <PaintedClouds count={3} columns={3} seed={17} spread={54} mirror className="kingdom__gate-art" />
         </motion.div>
       </div>
     </>

@@ -316,16 +316,3 @@
     opacity: 0.8;
   }
 }
-
-/*
- * The painted cloud, sitting in the gradient bank rather than replacing it. The gradients
- * are what make the gate soft-edged; the painting is what makes it the same cloud the
- * guest came up through. On its own it would be a cut-out lying on the sky.
- */
-.kingdom__gate-art {
-  top: auto;
-  bottom: -6%;
-  height: 78%;
-  opacity: 0.72;
-  filter: saturate(0.82) drop-shadow(0 8px 22px rgba(112, 96, 148, 0.16));
-}
