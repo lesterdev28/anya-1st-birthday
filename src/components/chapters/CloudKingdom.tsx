@@ -85,6 +85,7 @@ function KingdomScene({ onEnter }: Props) {
       <CloudLayer depth="mid" count={3} seed={4} className="kingdom__clouds kingdom__clouds--mid" />
 
       <Drifters kind="petals" count={14} className="kingdom__petals" />
+      <Drifters kind="dust" count={18} className="kingdom__dust" />
       <Butterflies count={5} seed={9} className="kingdom__butterflies" />
 
       <motion.div className="kingdom__copy" style={still ? undefined : { opacity: copyFade }}>
@@ -104,7 +105,14 @@ function KingdomScene({ onEnter }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.6, delay: 0.55, ease: [0.22, 0.61, 0.36, 1] }}
         >
-          {child.name}
+          {/*
+            The gilding is on an inner span, not on the h1.
+
+            The h1 carries a scroll-driven `filter` from motion, and the gilt needs a
+            `drop-shadow` filter of its own — an inline filter would simply replace it.
+            Nesting gives each one its own element to animate.
+          */}
+          <span className="gilt">{child.name}</span>
         </motion.h1>
 
         <motion.p

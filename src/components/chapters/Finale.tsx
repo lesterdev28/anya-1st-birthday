@@ -23,6 +23,7 @@ export function Finale() {
       <CloudLayer depth="far" count={4} seed={53} className="finale__clouds finale__clouds--far" />
       <CloudLayer depth="mid" count={2} seed={59} className="finale__clouds finale__clouds--near" />
       <Drifters kind="fireflies" count={20} className="finale__air" />
+      <Drifters kind="dust" count={16} className="finale__dust" />
       <Butterflies count={5} seed={71} className="finale__butterflies" />
 
       <div className="finale__inner">

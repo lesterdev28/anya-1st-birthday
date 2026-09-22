@@ -38,7 +38,7 @@ export function Invitation() {
 
         <p className="eyebrow invite__eyebrow">{story.inviteEyebrow}</p>
 
-        <h2 className="invite__title">{story.inviteTitle}</h2>
+        <h2 className="invite__title gilt">{story.inviteTitle}</h2>
 
         <div className="rule" aria-hidden="true">
           <span />

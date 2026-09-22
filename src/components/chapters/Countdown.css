@@ -62,9 +62,9 @@
 .countdown__value {
   font-family: var(--serif);
   font-size: clamp(1.7rem, 9cqw, 2.6rem);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1;
-  color: var(--ink);
+  color: var(--gold-antique);
   font-variant-numeric: tabular-nums;
 }
 
@@ -77,7 +77,10 @@
   margin-top: 0.4rem;
 }
 
-/* The seconds are the live one; a touch of gold marks them without shouting. */
+/*
+ * The seconds are the live one. Now that the whole clock is gold, a gold second hand
+ * marks nothing — so it is the light end of the ramp against the antique of the rest.
+ */
 .countdown__unit--seconds .countdown__value {
   color: var(--fairy-gold);
 }

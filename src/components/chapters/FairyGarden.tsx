@@ -25,6 +25,7 @@ export function FairyGarden() {
     <Chapter scene="fairy-garden" id="garden" className="garden" label="Anya's fairy garden">
       <CloudLayer depth="far" count={3} seed={6} className="garden__clouds" />
       <Drifters kind="pollen" count={22} className="garden__pollen" />
+      <Drifters kind="dust" count={14} className="garden__dust" />
       <Butterflies count={5} seed={14} className="garden__butterflies" />
 
       <div className="garden__copy">

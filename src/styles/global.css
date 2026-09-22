@@ -24,6 +24,37 @@
   --soft-white: #ffffff;
 
   /*
+   * The gold ramp.
+   *
+   * The brief names two golds, and two are enough to draw a rule or a crown. They are
+   * not enough to set type in: a letterform filled with one flat yellow reads as a
+   * highlighter, because what makes metal look like metal is the dark band between two
+   * light ones. So the two named golds keep their values and sit in the middle of a
+   * five-step ramp that runs from an antique shadow to a near-white highlight.
+   */
+  --gold-deep: #96702f;
+  --gold-antique: #b28b3c;
+  --gold-light: #f2e2bd;
+  --gold-highlight: #fffaef;
+
+  /*
+   * The sheen a gilded letter is filled with. The dark step sits just above the middle
+   * rather than at it, which is where the light breaks on a struck edge; moving it to
+   * dead centre makes the letters look creased instead of polished.
+   */
+  --gold-sheen: linear-gradient(
+    168deg,
+    var(--gold-light) 0%,
+    var(--champagne-gold) 18%,
+    var(--fairy-gold) 34%,
+    var(--gold-deep) 46%,
+    var(--gold-antique) 53%,
+    var(--fairy-gold) 66%,
+    var(--champagne-gold) 82%,
+    var(--gold-highlight) 100%
+  );
+
+  /*
    * Ink is not in the brief, which names no text colour. A deep lavender-plum rather
    * than black or grey: it is the palette's own darkest relative, so body copy reads as
    * part of the world instead of as type dropped on top of it.
@@ -154,14 +185,51 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/*
+ * Display weight is 400, not 300.
+ *
+ * Cormorant is a high-contrast face: its thin strokes are already hairlines at 400, and
+ * at 300 they thin to about a pixel on a phone, which a screen renders as grey rather
+ * than as a stroke. The headings were disappearing into the sky. 400 also gives the
+ * gilded headings enough letterform to hold the sheen — a gradient clipped to a hairline
+ * shows one colour, not a gradient.
+ */
 h1,
 h2,
 h3 {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: 400;
+  font-optical-sizing: auto;
   line-height: 1.15;
   margin: 0;
   letter-spacing: 0.01em;
+}
+
+/*
+ * Gilded type: the display faces filled with the gold sheen rather than painted flat.
+ *
+ * `color` is not decoration here — it is what shows if `background-clip: text` is
+ * unsupported, so it has to be a gold dark enough to read on cream on its own.
+ *
+ * The shadow is a `drop-shadow` filter and not a `text-shadow` on purpose. The glyph is
+ * filled with `transparent` so the background shows through it, and a text-shadow paints
+ * behind the glyph — which means it shows through the letters instead of falling under
+ * them. A drop-shadow follows the painted shape after the clip, so it behaves.
+ */
+.gilt {
+  color: var(--gold-antique);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .gilt {
+    background-image: var(--gold-sheen);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter:
+      drop-shadow(0 1px 0 rgba(255, 253, 248, 0.5))
+      drop-shadow(0 2px 14px rgba(150, 112, 47, 0.2));
+  }
 }
 
 /*
@@ -175,7 +243,12 @@ h3 {
   font-weight: 400;
   line-height: 1.25;
   word-spacing: 0.3em;
-  color: var(--ink-soft);
+  /*
+   * Gold rather than lavender. Great Vibes is a hairline face, so it is the one place
+   * the flat antique gold is better than the sheen: the gradient's dark band lands
+   * inside a stroke one pixel wide and breaks the letter in half.
+   */
+  color: var(--gold-antique);
 }
 
 p {
@@ -195,14 +268,19 @@ img {
 
 /* ---- shared layout ---- */
 
+/*
+ * The small caps above a section. Gold at 500 rather than grey at 400: letterspaced
+ * uppercase at 0.72rem is thin enough that the lighter weight reads as a smudge, and
+ * grey made it the quietest thing on a card it is supposed to introduce.
+ */
 .eyebrow {
   font-family: var(--sans);
   font-size: 0.72rem;
   letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--gold-antique);
   margin: 0 0 1.1rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* A slim gold rule with a diamond at its centre, used between sections. */

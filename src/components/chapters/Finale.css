@@ -10,7 +10,8 @@
 }
 
 .finale__clouds,
-.finale__air {
+.finale__air,
+.finale__dust {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -26,7 +27,8 @@
   opacity: 0.35;
 }
 
-.finale__air {
+.finale__air,
+.finale__dust {
   z-index: 2;
 }
 

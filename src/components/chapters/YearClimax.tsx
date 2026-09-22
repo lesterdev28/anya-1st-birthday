@@ -66,7 +66,7 @@ function ClimaxScene() {
         </Reveal>
 
         <p className="climax__count">
-          <span className="climax__number">{reduceMotion ? 365 : shown}</span>
+          <span className="climax__number gilt">{reduceMotion ? 365 : shown}</span>
           <span className="climax__unit">{story.climaxCount.replace(/^365\s*/, "")}</span>
         </p>
 

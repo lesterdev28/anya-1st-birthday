@@ -109,6 +109,9 @@ function MonthContents({ chapter }: { readonly chapter: MonthChapter }) {
         the month is surrounded rather than covered.
       */}
       <Fairies count={4} seed={chapter.month} className="month__fairies" />
+      {/* Gold in the air of every month, in front of the photographs rather than behind
+          them: dust is a scatter of specks, and specks are what a frame's edge hides. */}
+      <Drifters kind="dust" count={12} className="month__dust" />
 
       {/* The numeral, large and pale, travelling slower than everything in front of it. */}
       <Parallax depth={0.15} distance={420} className="month__numeral-layer">
@@ -130,7 +133,7 @@ function MonthContents({ chapter }: { readonly chapter: MonthChapter }) {
         </motion.div>
 
         <div className="month__words">
-          <Reveal as="h3" className="month__title" y={18}>
+          <Reveal as="h3" className="month__title gilt" y={18}>
             {chapter.title}
           </Reveal>
           <Reveal as="p" className="month__caption" delay={0.15} y={14}>

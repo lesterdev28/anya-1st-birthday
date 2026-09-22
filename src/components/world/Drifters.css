@@ -34,28 +34,117 @@
   }
 }
 
-/* ---- fairy dust: tiny gold motes rising ---- */
+/* ---- fairy dust: gold motes rising ---- */
 
+/*
+ * A mote is a lit grain, not a dot.
+ *
+ * A flat disc of champagne with a glow behind it reads as a bokeh blob — the same thing
+ * a dirty lens produces. What makes a speck look like gold catching the light is that
+ * it is brightest off-centre and falls away to nothing at its edge, so the grain has a
+ * lit side and a shaded one. That is the whole of this gradient: a white-hot point at
+ * upper left, gold through the body, and transparent before the box ends, which also
+ * means no hard circular edge for the eye to catch.
+ */
 .drifters--dust .drifters__bit {
-  background: var(--champagne-gold);
-  box-shadow: 0 0 7px rgba(215, 180, 106, 0.85);
+  background: radial-gradient(
+    circle at 36% 32%,
+    var(--gold-highlight) 0%,
+    var(--gold-light) 22%,
+    var(--champagne-gold) 42%,
+    var(--fairy-gold) 64%,
+    rgba(178, 139, 60, 0) 82%
+  );
+  box-shadow:
+    0 0 6px rgba(215, 180, 106, 0.9),
+    0 0 16px rgba(232, 211, 164, 0.5);
   animation-name: rise;
 }
 
+/*
+ * Not every grain is the same gold. Real dust in a sunbeam is a mix of specks that
+ * catch the light and specks that do not, and a field where every mote is identically
+ * bright reads as a particle system.
+ */
+.drifters--dust .drifters__bit:nth-child(3n + 2) {
+  background: radial-gradient(
+    circle at 36% 32%,
+    var(--gold-light) 0%,
+    var(--fairy-gold) 40%,
+    var(--gold-antique) 70%,
+    rgba(150, 112, 47, 0) 84%
+  );
+  box-shadow: 0 0 6px rgba(178, 139, 60, 0.55);
+}
+
+/*
+ * And roughly one in four is a four-pointed glint rather than a grain.
+ *
+ * This is what the eye actually reads as "sparkle": the star flare a bright point makes.
+ * It is a clip-path on the same painted box, so it costs no extra element and no extra
+ * paint — the grain is simply cut to a cross with a waist.
+ */
+.drifters--dust .drifters__bit:nth-child(4n + 1) {
+  border-radius: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--gold-highlight) 0%,
+    var(--gold-light) 30%,
+    var(--fairy-gold) 60%,
+    rgba(178, 139, 60, 0) 100%
+  );
+  box-shadow: 0 0 8px rgba(232, 211, 164, 0.7);
+  clip-path: polygon(
+    50% 0%,
+    58% 42%,
+    100% 50%,
+    58% 58%,
+    50% 100%,
+    42% 58%,
+    0% 50%,
+    42% 42%
+  );
+  /*
+   * A glint is a flare, so it sits larger than the grain it came from — and the size
+   * has to go in as a variable the keyframes multiply by, not as a `transform` here.
+   * The climb animates `transform`, and an animated property beats the element's own
+   * declaration for as long as it runs, so a bare `scale` on the element is discarded
+   * the moment the mote starts moving.
+   */
+  --mote: 1.45;
+}
+
+/*
+ * The rise carries the shimmer rather than a second animation running alongside it.
+ *
+ * `Drifters` sets `animation-duration` inline, and an inline duration applies to every
+ * name in the list — so a separate twinkle would be locked to the same fourteen seconds
+ * as the climb. Folding the brightness steps into the climb keeps one animation, and
+ * because each mote climbs at its own speed no two flare together anyway.
+ */
 @keyframes rise {
   0% {
     opacity: 0;
-    transform: translate3d(0, 30px, 0) scale(0.6);
+    transform: translate3d(0, 30px, 0) scale(calc(0.6 * var(--mote, 1)));
   }
-  18% {
+  14% {
+    opacity: 0.95;
+  }
+  31% {
+    opacity: 0.62;
+  }
+  48% {
     opacity: 1;
   }
-  80% {
+  66% {
+    opacity: 0.7;
+  }
+  84% {
     opacity: 0.9;
   }
   100% {
     opacity: 0;
-    transform: translate3d(var(--drift, 0px), -140px, 0) scale(1.1);
+    transform: translate3d(var(--drift, 0px), -140px, 0) scale(calc(1.1 * var(--mote, 1)));
   }
 }
 
@@ -155,8 +244,13 @@
     opacity: 0.5;
   }
 
-  .drifters--petals .drifters__bit,
-  .drifters--dust .drifters__bit {
+  /*
+   * The petals go, because a petal is a large shape whose whole meaning is the falling.
+   * The dust stays, as still points of gold: it is a colour in the air rather than a
+   * motion, and removing it takes the gold out of every screen that has no gold object
+   * on it. A guest who asked for less movement asked for less movement, not less gold.
+   */
+  .drifters--petals .drifters__bit {
     display: none;
   }
 }

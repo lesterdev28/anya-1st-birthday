@@ -55,14 +55,20 @@
 
 .climax__number {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: 500;
   font-size: clamp(5rem, 30cqw, 9rem);
   line-height: 1;
-  color: var(--ink);
   letter-spacing: -0.02em;
   /* Digits must not jostle as the count runs. */
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 2px 28px rgba(255, 253, 248, 0.95);
+  /*
+   * A gilded number, so the glow is a drop-shadow rather than a text-shadow — see the
+   * note on `.gilt`. `inline-block` is what gives the filter a box to work from.
+   */
+  display: inline-block;
+  filter:
+    drop-shadow(0 2px 20px rgba(255, 253, 248, 0.95))
+    drop-shadow(0 2px 14px rgba(150, 112, 47, 0.24));
 }
 
 .climax__unit {

@@ -10,6 +10,7 @@
 }
 
 .garden__clouds,
+.garden__dust,
 .garden__pollen,
 .garden__butterflies {
   position: absolute;
@@ -23,6 +24,11 @@
 }
 
 .garden__pollen {
+  z-index: 2;
+}
+
+/* With the pollen, not above it: the two drift together as one field of light. */
+.garden__dust {
   z-index: 2;
 }
 

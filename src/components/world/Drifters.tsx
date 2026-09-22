@@ -41,7 +41,13 @@ const SEEDS: Record<DrifterKind, number> = {
 /** How big each kind is, in pixels, as a [min, extra] pair. */
 const SIZES: Record<DrifterKind, readonly [number, number]> = {
   stars: [1.5, 2.6],
-  dust: [1.6, 2.4],
+  /*
+   * Dust is the largest of the small things on purpose. Its gradient fades to nothing
+   * before the box ends — which is what stops it reading as a disc — so only about the
+   * middle two thirds of the size is painted at all. At the old 1.6px a mote painted
+   * roughly one pixel and simply was not there.
+   */
+  dust: [3.4, 4.6],
   petals: [7, 7],
   pollen: [2, 2.6],
   fireflies: [3, 4.5],

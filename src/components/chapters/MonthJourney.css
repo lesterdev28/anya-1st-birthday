@@ -64,6 +64,16 @@
 }
 
 /*
+ * The dust sits above the photographs, unlike the fairies. A fairy is a figure the size
+ * of a face and has to stay behind them; a mote is two or three pixels, so it reads as
+ * air in front of the print rather than as something covering it, which is how dust in
+ * a room actually sits between the eye and what it is looking at.
+ */
+.month__dust {
+  z-index: 4;
+}
+
+/*
  * Under the photographs (which are z 3) and over the air. A fairy hovering in front of
  * Anya's face is the one way this decoration could spoil the thing it decorates.
  */
@@ -121,8 +131,7 @@
 .month__title {
   font-family: var(--serif);
   font-size: clamp(1.5rem, 7cqw, 2.1rem);
-  font-weight: 300;
-  color: var(--ink);
+  font-weight: 500;
   margin: 0 0 0.35rem;
 }
 

@@ -28,7 +28,7 @@ export function Rsvp() {
       <Butterflies count={5} seed={41} className="rsvp__butterflies" />
 
       <div className="rsvp__inner">
-        <Reveal as="h2" className="rsvp__heading" amount={0.4}>
+        <Reveal as="h2" className="rsvp__heading gilt" amount={0.4}>
           {story.rsvpHeading}
         </Reveal>
         <Reveal as="p" className="rsvp__body" delay={0.12} amount={0.4}>
