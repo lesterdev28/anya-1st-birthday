@@ -1,11 +1,11 @@
 {
-  "anya-hero-portrait": {
-    "base": "/invitation/photos/optimized/anya-hero-portrait",
+  "anya-finale-portrait": {
+    "base": "/invitation/photos/optimized/anya-finale-portrait",
     "widths": [
       480
     ],
     "aspectRatio": 1,
-    "placeholder": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACQBQCdASoYABgAPu1kq06ppaQiKA1RMB2JZACdMtDBqEr9QkOMyGoAhKIE3gg7+KNhvVspwAD+04ShHEpfPbpzD8e96cMUUDlKi3KZaLJuCjFnewAM1iRgynw66a6DT47hQuXjhMUwd8HC/o0yOfIJna0qh9bzz4nSb3m5F3qO2b0uLVYYIS1hOsO0JSxq6AA="
+    "placeholder": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAAAQBQCdASoYABgAPu1kqk2ppaQiMAgBMB2JZACsL2QBvbuekUQMt8vxZi4LYbVzwRsAAPewmokLSQwt4ivXBwf24YO5oH4VsiWUdzDLjGVm1mwatLYPTn6jMsZo9dk69m/zhyBjdi8OBi9HQlD7IoWKzdUq8I3utajNumY/NiVeJvwAAAA="
   },
   "anya-month-01-a": {
     "base": "/invitation/photos/optimized/anya-month-01-a",
@@ -393,6 +393,60 @@
     ],
     "aspectRatio": 0.75,
     "placeholder": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABwBQCdASoYACAAPtleo02oJaMiN/qoAQAbCWoArAAj6c7bM/fPG18r+evInqiP9Tlo5qkAAP7WwqMFu1e7tubTVULDLUUI4mOV6l/SmaWwohia1IbLGyCuTvbGQe38gXaUO+6pfdNo8Z7PP1/r/A1jGiOZVsz83Hc3mZ2squWCepB6vCyDIqLJLW7ZRaPgc29X/ye4nTwfICIQ0tQAAA=="
+  },
+  "anya-month-11-a": {
+    "base": "/invitation/photos/optimized/anya-month-11-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.5625,
+    "placeholder": "data:image/webp;base64,UklGRsAAAABXRUJQVlA4ILQAAABQBgCdASoYACsAPt1epE2opaOiNVgMARAbiWgAtOhpfWDaNjbOQpeAK0rFuk/1vHKQIq3uCYfI6PVAAAD+xeUAHNtBfOensDypegmkG+OZ5aizGYZE98zxl+B6uRmXz4H4Qxqp3zdd/sFSCXEgh1ese48VGVIFP/+cKh5M2OvUFEndsRsBj/5mt9/ZXHL9qHsuxNf/Ak+6G3rBpzEeLKCg4++CulvvXAwT81Tb/vD1eZltgAA="
+  },
+  "anya-month-11-b": {
+    "base": "/invitation/photos/optimized/anya-month-11-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.5625,
+    "placeholder": "data:image/webp;base64,UklGRswAAABXRUJQVlA4IMAAAAAQBwCdASoYACsAPtVap02oJSQiNVv8AQAaiWgAtvfhBZ0TPgehAspBIYw4f6LoV8u76kR6VBhK5R5vj56LUnh0AAD+7UsMO44e0f7OtineqlACJTPloH5V+62WBcxEq5GJhCMMbMBr9Fpn0YfC8BJEaysnTtexRoyWLJZ8TdJPYvh41uwC5EgimfZSYSyCrwncTubHyMygqS+u+MtgmOnsmFY4qETg26Re3a2QX+Mr9vC+y0opehBgrYEXxXoAAAA="
+  },
+  "anya-month-11-c": {
+    "base": "/invitation/photos/optimized/anya-month-11-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.5625,
+    "placeholder": "data:image/webp;base64,UklGRsoAAABXRUJQVlA4IL4AAADwBgCdASoYACsAPtlcok2oJaMiOrZoAQAbCWgAtRuwB9XBe145Rhi5sgnvDk/4Kutou87FealrK6FHMiOR0NSAAP7nK/DOZW8VUARfu0dwSfMXPGqwJ2vWlgTmzHUk+ughiMa9cHosDaAPsOMNVr2oCF88FlnWo2uFgKZGx33M/i5v+T5zoZ3FzCeG7cEeNaq3NnPv6tETjgw/LP1r0zi5+vBJ0SoNlbV8arB3wxXMnbDt7kzQngKJtzmh5AAA"
+  },
+  "anya-month-11-d": {
+    "base": "/invitation/photos/optimized/anya-month-11-d",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.5625,
+    "placeholder": "data:image/webp;base64,UklGRtgAAABXRUJQVlA4IMwAAAAwBwCdASoYACsAPu1kqk8ppSOiMBqoATAdiUAVJPB2fIV09Pw4WN0OykplbTichDgV5JiVsPB8JrK82DFYsq9611AA/rMXvxhRpem21SzumyPpKx1UlTH5gK1+64XxuVnKydWNptZVe2PnO0As2BUTTekTLPKssV0mmUea/hy03S5KMvJzFERfiHG0rQ7dD3unLRSw0nJ43eITiyra05bORCVw66yy35e/vWCd4TJvPdG0WI4yLBjKF5UhJP+LKud4Kh5pdzOYfpQJqAA="
+  },
+  "anya-month-11-e": {
+    "base": "/invitation/photos/optimized/anya-month-11-e",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.5625,
+    "placeholder": "data:image/webp;base64,UklGRswAAABXRUJQVlA4IMAAAAAwBwCdASoYACsAPuVcqU2pJSQiMBqtUSAciWgArk8OSIBu1eGPBMVZ7PnFqs3TtPH5PD/wUF5M8KmXN0S5ynmfkUgA/usS/1Ed+uBJRsYFpCVvKH90XjFpaqFNZWqh6nuWEGqSbHiSZqYQxVO1oFzU1WMvX4Yxc81uN871+eqe9IuYOATbZzQCI5moDoHi4C1u3dUDqc/lhYkY1bnQ9ls9vgIG7VKPa98NCEnIU7bsnWx+b+XZV4W8itnf9joWAAA="
+  },
+  "anya-month-11-f": {
+    "base": "/invitation/photos/optimized/anya-month-11-f",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.5625,
+    "placeholder": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABQBgCdASoYACsAPulipk2pJaOiMBqtUSAdCWYAqPQSQvMcxRx1V1lVwZtYcE2Cp4y6TPialx5w2FU0QAD+3qO+oBZbnpn+pEBKU4KkihLdPMXlQStHt+ioBJsOCvBmTKfoBSHSCjVxbjpA9ErW8nGHR2cJu46Dma+0F9ULazj1MnDlIIKWX6Yx7wsS67vsdYnAs0VOmiulf55NZzYzeQS51n4Ut2tMGvvUwcfCpoAAAA=="
   },
   "anya-portrait-01": {
     "base": "/invitation/photos/optimized/anya-portrait-01",

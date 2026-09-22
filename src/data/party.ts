@@ -9,11 +9,11 @@ export const child = {
   /**
    * The photograph the journey closes on. Any stem from public/invitation/photos works.
    *
-   * `anya-hero-portrait` is a square crop cut tight to her face; the round frames the
+   * `anya-finale-portrait` is a square crop cut tight to her face; the round frames the
    * finale uses need that, because a wider photograph puts a sofa and a living room
    * inside the frame and no amount of feathering hides a room.
    */
-  finalePortrait: "anya-hero-portrait",
+  finalePortrait: "anya-finale-portrait",
 } as const;
 
 export const party = {
@@ -206,7 +206,21 @@ export const monthChapters: readonly MonthChapter[] = [
     frame: "vines",
     from: "right",
   },
-  /* Still to come — Lester is sending these. */
-  { month: 11, title: "Eleven Months", caption: "Almost walking. Definitely running.", photos: [], frame: "starry", from: "left" },
+  {
+    month: 11,
+    title: "Eleven Months",
+    caption: "Almost walking. Definitely running.",
+    photos: [
+      "anya-month-11-a",
+      "anya-month-11-b",
+      "anya-month-11-c",
+      "anya-month-11-d",
+      "anya-month-11-e",
+      "anya-month-11-f",
+    ],
+    frame: "starry",
+    from: "left",
+  },
+  /* No photograph, and there will not be one — Lester said so. Twelve is the climax. */
   { month: 12, title: "Twelve Months", caption: "One whole year of magic.", photos: [], frame: "finale", from: "left" },
 ];
