@@ -186,15 +186,16 @@ layers move against that, so nothing ever drifts thousands of pixels off screen 
 long the page grows.
 
 Month twelve has no photograph and is not getting one, so it is written as the climax:
-the clouds part and the days of the year count up as the guest scrolls. The four other
-months with no photograph get a keepsake page rather than an empty frame.
+the clouds part and the days of the year count up as the guest scrolls.
+Month eleven has not arrived yet, so it shows a keepsake page rather than an empty frame.
 
 ## Things a human still needs to do
 
-- **RSVP details** are not filled in. Set `rsvp` in `src/data/party.ts`; until
-  `contactName` and `contactNumber` are set, the RSVP section renders an obvious
-  "to be confirmed" state rather than inventing a number.
-- **The twelve-month journey** places the seven supplied photographs in a plausible
-  order, but the actual month each was taken is a guess. Correct the `photo` fields in
-  `src/data/party.ts` and drop further photos into `public/invitation/photos/`, then run
-  `npm run optimize`. A month left at `photo: null` renders its keepsake page instead.
+- **The RSVP form is gone**, at Lester's asking. The closing section invites and
+  tells a guest to reply by message; there is no field, no endpoint and nothing
+  on this site that receives a reply.
+- **The twelve-month journey** has months one to ten. Eleven is still to come and
+  twelve will not exist — it is written as the climax of the story instead. Drop new
+  photographs into `public/invitation/photos/` as `anya-month-11-a.jpg` and so on, add
+  them to the month's `photos` list in `src/data/party.ts`, then run `npm run optimize`.
+  A month left with no photographs renders its keepsake page instead.

@@ -64,39 +64,14 @@ export const story = {
 
   rsvpHeading: "Will you join the magic?",
   rsvpBody: "We would love to celebrate Anya's special day with you.",
-  rsvpYes: "Of course! ✨",
-  rsvpNo: "Sending fairy wishes",
-  rsvpWish: "Leave a little wish for Anya",
-  rsvpSend: "Send My RSVP",
-  rsvpSaved: "Your place in Anya's fairy garden is saved. ✨",
 
-  wishesHeading: "A Wish for Anya",
-  wishesBody: "Leave a little message for Anya to read someday.",
+  /* No form to reply through any more, so this says how a guest actually replies. */
+  rsvpReply: "Send us a message and we'll keep you a place in the garden.",
 
   finaleThanks: "Thank you for being part of Anya's story.",
   finaleSee: "See you in the fairy garden.",
   finaleSignOff: "Anya turns ONE ✨",
 } as const;
-
-
-/**
- * RSVP details have not been given yet.
- *
- * `endpoint` is where the form POSTs its JSON. While it is empty the form still works
- * and still confirms, but hands the guest a pre-filled message to `contactNumber`
- * instead of submitting anywhere — there is no backend on this site, and silently
- * dropping a guest's reply would be worse than asking them to press send.
- */
-export const rsvp = {
-  contactName: "",
-  contactNumber: "",
-  endpoint: "",
-  /** Optional. An ISO date, or empty for no deadline. */
-  byDate: "",
-  note: "",
-} as const;
-
-export const isRsvpConfigured = Boolean(rsvp.contactName && rsvp.contactNumber);
 
 /**
  * How a month's photograph is presented.

@@ -64,215 +64,23 @@
   text-align: left;
 }
 
-.rsvp__form {
-  display: grid;
-  gap: 1.2rem;
+/* A hairline between the invitation and the wish, the same one the journey opens with. */
+.rsvp__rule span {
+  display: block;
+  width: min(9rem, 40vw);
+  height: 1px;
+  margin: 1.6rem auto;
+  background: linear-gradient(90deg, transparent, rgba(150, 128, 178, 0.45), transparent);
 }
 
-.rsvp__field {
-  display: grid;
-  gap: 0.42rem;
-}
-
-.rsvp__field--narrow input {
-  max-width: 7rem;
-}
-
-.rsvp__label {
+.rsvp__wish {
   font-family: var(--sans);
-  font-size: 0.64rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-}
-
-.rsvp__form input,
-.rsvp__form textarea {
-  font-family: var(--sans);
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 300;
-  color: var(--ink);
-  padding: 0.72rem 0.85rem;
-  border: 1px solid rgba(155, 144, 171, 0.34);
-  border-radius: 0.7rem;
-  background: rgba(255, 255, 255, 0.7);
-  transition:
-    border-color 0.3s var(--ease-soft),
-    box-shadow 0.3s var(--ease-soft);
-  /* iOS zooms the page on any field under 16px; 1rem is exactly 17px here. */
-  width: 100%;
-}
-
-.rsvp__form textarea {
-  resize: vertical;
-  line-height: 1.6;
-}
-
-.rsvp__form input:focus,
-.rsvp__form textarea:focus {
-  outline: none;
-  border-color: var(--fairy-gold);
-  box-shadow: 0 0 0 4px rgba(232, 211, 164, 0.25);
-}
-
-.rsvp__choices {
-  border: 0;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 0.5rem;
-}
-
-.rsvp__choice-row {
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-}
-
-/*
- * The two answers are pills rather than radio dots: on a phone a tappable pill is both
- * easier to hit and easier to read at a glance than a 16px circle.
- */
-.rsvp__choice {
-  flex: 1 1 8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.7rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid rgba(155, 144, 171, 0.34);
-  background: rgba(255, 255, 255, 0.6);
-  font-size: 0.88rem;
+  line-height: 1.7;
   color: var(--ink-soft);
-  cursor: pointer;
-  text-align: center;
-  transition:
-    border-color 0.3s var(--ease-soft),
-    background-color 0.3s var(--ease-soft),
-    color 0.3s var(--ease-soft);
-}
-
-.rsvp__choice input {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.rsvp__choice.is-on {
-  border-color: var(--fairy-gold);
-  background: rgba(232, 211, 164, 0.24);
-  color: var(--ink);
-}
-
-.rsvp__choice:focus-within {
-  box-shadow: 0 0 0 4px rgba(232, 211, 164, 0.25);
-}
-
-.rsvp__wishes {
-  padding-top: 1rem;
-  border-top: 1px solid rgba(215, 180, 106, 0.28);
-  display: grid;
-  gap: 0.5rem;
-}
-
-.rsvp__wishes-heading {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 300;
-  color: var(--ink);
-  margin: 0;
-}
-
-.rsvp__wishes-body {
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  margin: 0 0 0.3rem;
-}
-
-.rsvp__send {
-  font-family: var(--sans);
-  font-size: 0.76rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink);
-  padding: 0.95rem 1.4rem;
-  border-radius: 999px;
-  border: 1px solid rgba(215, 180, 106, 0.75);
-  background: linear-gradient(180deg, rgba(255, 253, 248, 0.95), rgba(232, 211, 164, 0.4));
-  cursor: pointer;
-  transition:
-    transform 0.35s var(--ease-soft),
-    box-shadow 0.35s var(--ease-soft);
-  box-shadow: 0 8px 24px rgba(103, 88, 132, 0.14);
-}
-
-.rsvp__send:hover,
-.rsvp__send:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(103, 88, 132, 0.2);
-}
-
-/* Shown in place of the button while there is nowhere for a reply to go. */
-.rsvp__pending {
-  margin: 0;
-  padding: 0.85rem 1rem;
-  border-radius: 0.8rem;
-  border: 1px dashed rgba(155, 144, 171, 0.45);
-  font-size: 0.82rem;
-  color: var(--ink-faint);
-  text-align: center;
-}
-
-.rsvp__failed {
-  margin: 0;
-  font-size: 0.82rem;
-  color: #a4576b;
-}
-
-.rsvp__by,
-.rsvp__note {
-  margin: 0;
-  font-size: 0.78rem;
-  color: var(--ink-faint);
-  text-align: center;
-}
-
-.rsvp__done {
-  display: grid;
-  justify-items: center;
-  gap: 0.9rem;
-  text-align: center;
-  padding: 1.6rem 0;
-}
-
-.rsvp__done p {
-  margin: 0;
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  color: var(--ink);
-}
-
-/* A small gold ring that draws itself once, as a tick would. */
-.rsvp__done-mark {
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: 50%;
-  border: 1px solid var(--fairy-gold);
-  background: radial-gradient(circle at 50% 45%, rgba(232, 211, 164, 0.5), transparent 70%);
-  animation: rsvp-bloom 1.2s var(--ease-soft);
-}
-
-@keyframes rsvp-bloom {
-  from {
-    transform: scale(0.6);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  max-width: 24rem;
+  margin: 0 auto;
 }
 
 .rsvp__meadow {

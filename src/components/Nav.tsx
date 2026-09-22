@@ -14,7 +14,7 @@ const STOPS: readonly { readonly scene: SceneId; readonly href: string; readonly
   { scene: "intro", href: "#top", label: "The beginning" },
   { scene: "month-journey", href: "#garden", label: "Her first year" },
   { scene: "invitation", href: "#invitation", label: "The invitation" },
-  { scene: "rsvp", href: "#rsvp", label: "RSVP" },
+  { scene: "rsvp", href: "#rsvp", label: "Join the magic" },
 ];
 
 /** Which dot to light for a scene that has no dot of its own. */
