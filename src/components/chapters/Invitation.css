@@ -173,3 +173,14 @@
     right: -1.2rem;
   }
 }
+
+/*
+ * Room for the chapter rail. The dots are fixed to the right edge of the screen, and at
+ * 390px the card's own border ran underneath them; widening both gutters equally keeps
+ * the card centred and gets it out from under the rail.
+ */
+@media (max-width: 640px) {
+  .invite {
+    padding-inline: calc(var(--page-gutter) + 1rem);
+  }
+}

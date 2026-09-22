@@ -122,3 +122,10 @@
   z-index: 2;
   pointer-events: none;
 }
+
+/* Shorter on a phone, for the reason set out in MonthJourney.css. */
+@media (max-width: 640px) {
+  .climax {
+    min-height: 122svh;
+  }
+}

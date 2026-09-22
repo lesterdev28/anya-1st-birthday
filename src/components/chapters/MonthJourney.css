@@ -155,3 +155,17 @@
     text-align: right;
   }
 }
+
+/*
+ * Shorter on a phone.
+ *
+ * A chapter is a screen tall and holds its subject in the middle of itself, so between
+ * one subject and the next there is close to a whole screen of air. On a desktop that
+ * air is the pacing of the thing. On a 390px phone it is most of the scrolling, and it
+ * reads as a page that has lost its content rather than as a page that is breathing.
+ */
+@media (max-width: 640px) {
+  .month {
+    min-height: 74svh;
+  }
+}

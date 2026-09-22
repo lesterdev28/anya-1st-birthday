@@ -151,3 +151,10 @@
     right: -4%;
   }
 }
+
+/* Shorter on a phone, for the reason set out in MonthJourney.css. */
+@media (max-width: 640px) {
+  .garden {
+    min-height: 104svh;
+  }
+}

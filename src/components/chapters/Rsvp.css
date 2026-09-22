@@ -86,3 +86,10 @@
 .rsvp__meadow {
   z-index: 4;
 }
+
+/* Shorter on a phone, for the reason set out in MonthJourney.css. */
+@media (max-width: 640px) {
+  .rsvp {
+    min-height: 76svh;
+  }
+}
