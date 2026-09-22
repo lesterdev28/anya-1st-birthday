@@ -19,11 +19,13 @@ import { MUSIC_SOURCES } from "./assets";
  * Starts the music and keeps trying until it is allowed to.
  *
  * Every browser refuses to play sound on a page the guest has not touched yet, and it
- * refuses quietly, by rejecting the promise. So the first attempt is made immediately —
- * it succeeds where the guest has been here before, or has the site's autoplay
- * permission — and the same attempt is armed behind the first gesture of any kind, which
- * on this page is almost always "Enter Anya's Fairy Garden". The guest never sees a
- * prompt either way.
+ * refuses quietly, by rejecting the promise. There is no way around that and no way to
+ * ask. So the first attempt is made immediately — it succeeds where the guest has been
+ * here before, or has the site's autoplay permission — and the same attempt is armed on
+ * the document in the capture phase, so the very first press, key or scroll starts it
+ * before anything else on the page has had a chance to act on that gesture. On this page
+ * that press is almost always "Enter Anya's Fairy Garden". The guest never sees a prompt
+ * either way, and never a control.
  *
  * Returns the teardown for the listeners it attached.
  */
@@ -37,10 +39,18 @@ export function startMusic(audio: HTMLAudioElement): () => void {
   let playing = false;
 
   /* Anything that counts as a gesture, plus the wheel and scroll that often come first. */
-  const gestures = ["pointerdown", "touchstart", "keydown", "wheel", "scroll"] as const;
+  const gestures = ["pointerdown", "touchstart", "mousedown", "click", "keydown", "wheel"] as const;
+
+  /*
+   * On the document, in the capture phase, so this runs before any handler the page has
+   * of its own — the first press on this page is the entrance button, and the music
+   * should start on the press itself rather than after whatever the button does.
+   */
+  const options = { capture: true, passive: true } as const;
 
   const stopListening = () => {
-    for (const event of gestures) window.removeEventListener(event, attempt);
+    for (const event of gestures) document.removeEventListener(event, attempt, options);
+    window.removeEventListener("scroll", attempt);
   };
 
   function attempt(): void {
@@ -68,8 +78,10 @@ export function startMusic(audio: HTMLAudioElement): () => void {
 
   attempt();
   for (const event of gestures) {
-    window.addEventListener(event, attempt, { passive: true });
+    document.addEventListener(event, attempt, options);
   }
+  /* Scroll only fires on the window (or the scrolling element), never on the document. */
+  window.addEventListener("scroll", attempt, { passive: true });
 
   return () => {
     stopListening();
