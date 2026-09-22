@@ -112,3 +112,22 @@
     min-height: 88svh;
   }
 }
+
+/*
+ * Opposite the treehouse, at the far side of the last meadow. Held back to the same
+ * strength as the treehouse so neither of them competes with Anya's portrait.
+ */
+.finale__door {
+  right: 3%;
+  bottom: 1rem;
+  width: clamp(5rem, 20cqw, 8.5rem);
+  z-index: 4;
+  opacity: 0.72;
+}
+
+@container (max-width: 30rem) {
+  .finale__door {
+    width: 4.5rem;
+    right: -2%;
+  }
+}

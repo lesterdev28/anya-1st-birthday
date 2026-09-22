@@ -15,6 +15,7 @@ import { Chapter, Parallax, useChapterScroll } from "../../lib/scene";
 import { CloudLayer } from "../world/Clouds";
 import { Drifters } from "../world/Drifters";
 import { Butterflies } from "../world/Butterflies";
+import { Fairies } from "../world/Fairies";
 import { Reveal } from "../world/Reveal";
 import { MonthFrame } from "./MonthFrame";
 import { monthChapters, story, type MonthChapter } from "../../data/party";
@@ -102,6 +103,12 @@ function MonthContents({ chapter }: { readonly chapter: MonthChapter }) {
         flying the same way.
       */}
       <Butterflies count={5} seed={chapter.month * 11} className="month__butterflies" />
+      {/*
+        And the fairies, ringed around the photographs. They take perches out at the
+        edges and hover there rather than travelling, and they sit under the frame, so
+        the month is surrounded rather than covered.
+      */}
+      <Fairies count={4} seed={chapter.month} className="month__fairies" />
 
       {/* The numeral, large and pale, travelling slower than everything in front of it. */}
       <Parallax depth={0.15} distance={420} className="month__numeral-layer">

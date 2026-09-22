@@ -59,8 +59,24 @@ const BANDS = [
   ],
 ] as const;
 
-/** The two painted butterflies, alternating so a chapter never shows one twice alike. */
-const WINGS = ["butterfly-cream", "butterfly-lilac"] as const;
+/**
+ * The painted butterflies, dealt in order so a chapter never shows one twice alike.
+ *
+ * Eight of them now: the two watercolours the journey started with, a flat blush one,
+ * and the six cut out of the sheet Lester sent. Enough that a guest scrolling through
+ * sixteen chapters never sees the same wing twice in a screen.
+ */
+const WINGS = [
+  "butterfly-cream",
+  "butterfly-pearl-02",
+  "butterfly-lilac",
+  "butterfly-pearl-04",
+  "butterfly-blush",
+  "butterfly-pearl-01",
+  "butterfly-pearl-05",
+  "butterfly-pearl-03",
+  "butterfly-pearl-06",
+] as const;
 
 interface Props {
   readonly count?: number;
@@ -131,7 +147,7 @@ export function Butterflies({ count = 3, className, seed = 5 }: Props) {
       return {
       key: index,
       path: band[Math.floor(random() * band.length)],
-      wing: WINGS[index % WINGS.length],
+      wing: WINGS[(index + seed) % WINGS.length],
       /* Bigger than the drawn ones were: a painting needs room to read as a painting. */
       size: 34 + random() * 26,
       // Slow: a butterfly that crosses in three seconds is a distraction, not scenery.

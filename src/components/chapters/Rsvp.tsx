@@ -15,6 +15,7 @@ import { CloudLayer } from "../world/Clouds";
 import { Drifters } from "../world/Drifters";
 import { Butterflies } from "../world/Butterflies";
 import { Meadow } from "../world/Meadow";
+import { Painted } from "../world/Painted";
 import { Reveal } from "../world/Reveal";
 import { story } from "../../data/party";
 import "./Rsvp.css";
@@ -40,6 +41,9 @@ export function Rsvp() {
           {story.rsvpReply}
         </Reveal>
       </div>
+
+      {/* Somewhere to sit, in the garden the guest is being kept a place in. */}
+      <Painted id="toadstool-bow" className="rsvp__toadstool" />
 
       <Meadow className="rsvp__meadow" seed={8} />
     </Chapter>

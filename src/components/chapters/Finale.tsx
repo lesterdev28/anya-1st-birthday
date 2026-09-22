@@ -50,6 +50,9 @@ export function Finale() {
       {/* "See you in the fairy garden" — so there is a house standing in it, waiting. */}
       <Painted id="fairy-treehouse" className="finale__treehouse" />
 
+      {/* And a way in, on the far side. The last thing in the story is an open invitation. */}
+      <Painted id="fairy-door" className="finale__door" />
+
       <Meadow className="finale__meadow" bands={["far", "mid"]} seed={12} />
     </Chapter>
   );

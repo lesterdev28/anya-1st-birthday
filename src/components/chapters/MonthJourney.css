@@ -38,6 +38,7 @@
 
 .month__clouds,
 .month__air,
+.month__fairies,
 .month__butterflies {
   position: absolute;
   inset: 0;
@@ -60,6 +61,14 @@
 
 .month__butterflies {
   z-index: 5;
+}
+
+/*
+ * Under the photographs (which are z 3) and over the air. A fairy hovering in front of
+ * Anya's face is the one way this decoration could spoil the thing it decorates.
+ */
+.month__fairies {
+  z-index: 2;
 }
 
 .month__numeral-layer {

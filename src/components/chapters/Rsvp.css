@@ -93,3 +93,19 @@
     min-height: 76svh;
   }
 }
+
+/* Standing in the grasses on the left, small enough to be found rather than seen. */
+.rsvp__toadstool {
+  left: 4%;
+  bottom: 1rem;
+  width: clamp(5.5rem, 20cqw, 9rem);
+  z-index: 6;
+  opacity: 0.92;
+}
+
+@container (max-width: 30rem) {
+  .rsvp__toadstool {
+    width: 5rem;
+    left: 2%;
+  }
+}

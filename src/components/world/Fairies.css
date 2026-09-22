@@ -1,0 +1,61 @@
+.fairies {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/*
+ * `--face` mirrors her, so the ones on the right look back into the chapter. It lives in
+ * the same transform as the hover, because a transform set in two places is a transform
+ * one of them silently wins.
+ */
+.fairies__one {
+  position: absolute;
+  display: block;
+  transform: scaleX(var(--face, 1));
+  animation-name: fairy-hover;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-play-state: paused;
+  will-change: transform;
+  opacity: 0.94;
+  filter: drop-shadow(0 6px 16px rgba(120, 100, 150, 0.14));
+}
+
+.fairies.is-here .fairies__one {
+  animation-play-state: running;
+}
+
+.fairies__one img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Small: a hover is a hover, not a bounce. */
+@keyframes fairy-hover {
+  from {
+    transform: scaleX(var(--face, 1)) translate3d(0, 4%, 0) rotate(calc(var(--lean, 0deg) * -1));
+  }
+  to {
+    transform: scaleX(var(--face, 1)) translate3d(0, -5%, 0) rotate(var(--lean, 0deg));
+  }
+}
+
+/*
+ * A phone has the photographs across nearly the whole width, so the two perches nearest
+ * the middle would sit on top of them. The ring thins to the four corners.
+ */
+@media (max-width: 640px) {
+  .fairies__one:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fairies__one {
+    animation: none;
+  }
+}
