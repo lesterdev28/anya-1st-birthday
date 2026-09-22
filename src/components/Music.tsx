@@ -23,9 +23,14 @@ export function Music() {
     /*
       Two sources rather than a runtime `canPlayType` probe: the browser picks the first
       it can decode, and only fetches that one. Opus is a fifth smaller than the AAC.
+
+      The codec has to be spelled out. Given a bare `audio/webm`, Safari answers "maybe",
+      commits to the WebM, and then cannot decode the Opus inside it — and a browser that
+      has already chosen a source never goes back for the next one. With the codec named
+      it answers "no" and moves straight on to the AAC.
     */
     <audio ref={ref} loop preload="auto" aria-hidden="true" tabIndex={-1}>
-      <source src={MUSIC_SOURCES.webm} type="audio/webm" />
+      <source src={MUSIC_SOURCES.webm} type={'audio/webm; codecs="opus"'} />
       <source src={MUSIC_SOURCES.mp4} type="audio/mp4" />
     </audio>
   );

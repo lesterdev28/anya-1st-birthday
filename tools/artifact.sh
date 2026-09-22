@@ -16,11 +16,32 @@ rm -rf "$out"
 npx vite build --base=./ --outDir "$out"
 
 # Runtime string paths, which `base` never touched.
-grep -rl '"/invitation/' "$out/assets" | xargs -r sed -i 's#"/invitation/#"invitation/#g'
-grep -rl '(/fonts/' "$out/assets" | xargs -r sed -i 's#(/fonts/#(fonts/#g'
-sed -i 's#href="/fonts/#href="fonts/#g' "$out/index.html"
+#
+# Each grep is allowed to find nothing. Under `set -e` a grep that matches nothing exits
+# 1 and takes the whole script with it, which once meant a build where Vite had started
+# rewriting the font URLs itself silently skipped every rewrite after that line — and the
+# share-preview path, the last one, was the one that mattered.
+rewrite() {
+  local pattern=$1 replacement=$2
+  shift 2
+  local files
+  files=$(grep -rl "$pattern" "$@" || true)
+  [ -n "$files" ] && echo "$files" | xargs sed -i "s#$pattern#$replacement#g"
+  return 0
+}
+
+rewrite '"/invitation/' '"invitation/' "$out/assets"
+rewrite '(/fonts/' '(fonts/' "$out/assets"
+rewrite 'href="/fonts/' 'href="fonts/' "$out/index.html"
 # The share-preview image, which is a meta tag rather than an asset Vite rewrites.
-sed -i 's#content="/invitation/#content="invitation/#g' "$out/index.html"
+rewrite 'content="/invitation/' 'content="invitation/' "$out/index.html"
+
+# Nothing may reach the artifact still pointing at the root of a domain.
+if grep -rq '"/invitation/\|content="/invitation/\|href="/fonts/' "$out"; then
+  echo "error: absolute paths survived the rewrite" >&2
+  grep -rn '"/invitation/\|content="/invitation/\|href="/fonts/' "$out" | head >&2
+  exit 1
+fi
 
 echo
 echo "$out ready:"

@@ -22,8 +22,14 @@ const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const INVITATION_ROOT = resolve(REPO_ROOT, "public/invitation");
 const MANIFEST_PATH = resolve(REPO_ROOT, "src/data/media-manifest.json");
 
-/** Responsive widths. A source narrower than a width is not upscaled. */
-const PHOTO_WIDTHS = [480, 960, 1440];
+/**
+ * Responsive widths. A source narrower than a width is not upscaled.
+ *
+ * Photos stop at 960 on purpose. The frame asks for 62vw on a phone and 22rem on a
+ * desktop, so even a 3x phone picks 960; a 1440 file is weight almost nobody downloads,
+ * and with forty-odd photographs in the journey that weight is the whole page.
+ */
+const PHOTO_WIDTHS = [480, 960];
 const ART_WIDTHS = [640, 1280, 1920];
 
 interface Job {

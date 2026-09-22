@@ -7,30 +7,51 @@
  * never touched, tinted, restyled or masked over the face. Her photographs are the one
  * thing on this page that is real, and the decoration goes around them.
  *
+ * Most months have several photographs rather than one. The first is the month's own
+ * portrait and gets the frame; the rest hang off two corners as small square keepsakes,
+ * one tucked behind and one laid in front, so a month reads as a handful of pictures
+ * spread on a table rather than as one more card. Where a month has more than three, the
+ * corners take turns showing them, which is the only way to give six photographs a screen
+ * without the screen becoming a contact sheet.
+ *
  * Months with no photograph render the same frame with a keepsake panel inside it: the
  * month's numeral in gold over a wash of the palette. A missing picture then reads as a
  * page of the storybook that was written rather than photographed, instead of a gap.
  */
+import { useEffect, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import { FairyImage } from "../FairyImage";
 import type { MonthFrame as FrameName } from "../../data/party";
 import "./MonthFrame.css";
 
 interface Props {
   readonly frame: FrameName;
-  readonly photo: string | null;
+  readonly photos: readonly string[];
   readonly month: number;
   readonly alt: string;
+  /** True while this month owns the screen. The corners only take turns in view. */
+  readonly active: boolean;
 }
 
-export function MonthFrame({ frame, photo, month, alt }: Props) {
+export function MonthFrame({ frame, photos, month, alt, active }: Props) {
+  const [portrait, ...rest] = photos;
+
+  /*
+   * The extras are dealt alternately into the two corners, so a month with three photos
+   * fills both and a month with six gives each corner a pair to alternate between.
+   */
+  const corners = [rest.filter((_, i) => i % 2 === 0), rest.filter((_, i) => i % 2 === 1)].filter(
+    (corner) => corner.length > 0,
+  );
+
   return (
     <div className={`frame frame--${frame}`}>
       <Ornament frame={frame} />
 
       <div className="frame__opening">
-        {photo ? (
+        {portrait ? (
           <FairyImage
-            id={photo}
+            id={portrait}
             alt={alt}
             sizes="(min-width: 900px) 22rem, 62vw"
             className="frame__photo"
@@ -42,6 +63,59 @@ export function MonthFrame({ frame, photo, month, alt }: Props) {
 
       {/* A ring of light just outside the opening, so the frame glows rather than ends. */}
       <div className="frame__glow" aria-hidden="true" />
+
+      {corners.map((corner, index) => (
+        <Corner key={index} photos={corner} corner={index} active={active} />
+      ))}
+    </div>
+  );
+}
+
+/**
+ * One corner of the cluster.
+ *
+ * Every photograph it can show is rendered and cross-faded with opacity rather than
+ * swapped in and out, so the browser has already decoded the next one when its turn
+ * comes and a change is a fade rather than a flash of empty frame. A corner holding a
+ * single photograph mounts no timer at all, which is most of them.
+ */
+function Corner({
+  photos,
+  corner,
+  active,
+}: {
+  readonly photos: readonly string[];
+  readonly corner: number;
+  readonly active: boolean;
+}) {
+  const reduceMotion = useReducedMotion();
+  const [showing, setShowing] = useState(0);
+
+  useEffect(() => {
+    if (photos.length < 2 || !active || reduceMotion) return;
+    /* Offset per corner, so the two never change on the same beat. */
+    const id = window.setInterval(() => {
+      setShowing((current) => (current + 1) % photos.length);
+    }, 5200 + corner * 1300);
+    return () => window.clearInterval(id);
+  }, [photos.length, active, reduceMotion, corner]);
+
+  return (
+    /*
+      Hidden from screen readers on purpose: the frame's own photograph carries the alt
+      text for the month, and five more readings of "Anya at nine months" is noise, not
+      information.
+    */
+    <div className={`frame__corner frame__corner--${corner}`} aria-hidden="true">
+      {photos.map((id, index) => (
+        <FairyImage
+          key={id}
+          id={id}
+          alt=""
+          sizes="(min-width: 900px) 10rem, 28vw"
+          className={`frame__corner-photo${index === showing ? " is-showing" : ""}`}
+        />
+      ))}
     </div>
   );
 }

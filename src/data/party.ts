@@ -124,8 +124,14 @@ export interface MonthChapter {
   readonly title: string;
   /** One short line. Kept gentle and non-specific, since these are not our memories. */
   readonly caption: string;
-  /** Filename stem under public/invitation/photos, or null for a chapter with no photo. */
-  readonly photo: string | null;
+  /**
+   * Filename stems under public/invitation/photos, best first.
+   *
+   * A list rather than one photo because Anya has several from most months. The first is
+   * the month's own portrait and gets the frame; the rest hang around it as smaller
+   * keepsakes. An empty list is a month with no photograph at all.
+   */
+  readonly photos: readonly string[];
   readonly frame: MonthFrame;
   /** Which side the photograph arrives from, so the journey alternates down the page. */
   readonly from: "left" | "right";
@@ -134,27 +140,98 @@ export interface MonthChapter {
 /**
  * The twelve chapters of the journey.
  *
- * NOTE FOR LESTER: the seven photos you sent are placed in a plausible order, but I do
- * not know which month each one is actually from — please move them to the right months
- * (just change the `photo` field), and drop any further photos into
- * public/invitation/photos/ to fill the empty chapters.
+ * The photographs are the ones Lester sent, month by month, in the batches he labelled.
+ * Within a month the first is the clearest portrait and is the one the frame holds; the
+ * others follow. To reorder a month, reorder its list — the files are named for their
+ * month, so nothing has to be renamed.
  *
- * Month twelve has no photograph and is not going to get one, so it is written as the
- * climax of the story rather than as another picture: the clouds part, the dust rises
- * and what the page reveals is the year itself. A chapter with `photo: null` keeps its
- * place either way, so the year still reads one to twelve.
+ * Month eleven is still to come. Month twelve has no photograph and is not going to get
+ * one, so it is written as the climax of the story rather than as another picture: the
+ * clouds part, the dust rises and what the page reveals is the year itself. A chapter
+ * with no photographs keeps its place either way, so the year still reads one to twelve.
  */
 export const monthChapters: readonly MonthChapter[] = [
-  { month: 1, title: "One Month", caption: "So small, and already the whole world.", photo: null, frame: "cloud", from: "left" },
-  { month: 2, title: "Two Months", caption: "First long looks at everything.", photo: null, frame: "butterfly", from: "right" },
-  { month: 3, title: "Three Months", caption: "The first real laugh.", photo: "anya-smile-01", frame: "wreath", from: "left" },
-  { month: 4, title: "Four Months", caption: "Hands discovered. Everything tasted.", photo: "anya-smile-02", frame: "portal", from: "right" },
-  { month: 5, title: "Five Months", caption: "Rolling over, and very pleased about it.", photo: "anya-smile-03", frame: "arch", from: "left" },
-  { month: 6, title: "Six Months", caption: "Half a year of being adored.", photo: null, frame: "moon", from: "right" },
-  { month: 7, title: "Seven Months", caption: "Sitting up to see it all properly.", photo: "anya-portrait-01", frame: "storybook", from: "left" },
-  { month: 8, title: "Eight Months", caption: "Opinions, and the volume to share them.", photo: null, frame: "meadow", from: "right" },
-  { month: 9, title: "Nine Months", caption: "Off exploring, one hand held.", photo: "anya-sunhat-01", frame: "oval", from: "left" },
-  { month: 10, title: "Ten Months", caption: "A favourite toy, carried everywhere.", photo: "anya-sunhat-02", frame: "vines", from: "right" },
-  { month: 11, title: "Eleven Months", caption: "Almost walking. Definitely running.", photo: "anya-sunhat-03", frame: "starry", from: "left" },
-  { month: 12, title: "Twelve Months", caption: "One whole year of magic.", photo: null, frame: "finale", from: "left" },
+  {
+    month: 1,
+    title: "One Month",
+    caption: "So small, and already the whole world.",
+    photos: ["anya-month-01-a", "anya-month-01-b", "anya-month-01-c", "anya-month-01-d"],
+    frame: "cloud",
+    from: "left",
+  },
+  {
+    month: 2,
+    title: "Two Months",
+    caption: "First long looks at everything.",
+    photos: ["anya-month-02-a", "anya-month-02-b", "anya-month-02-c"],
+    frame: "butterfly",
+    from: "right",
+  },
+  {
+    month: 3,
+    title: "Three Months",
+    caption: "The first real laugh.",
+    photos: ["anya-month-03-a", "anya-month-03-b", "anya-month-03-c"],
+    frame: "wreath",
+    from: "left",
+  },
+  {
+    month: 4,
+    title: "Four Months",
+    caption: "Hands discovered. Everything tasted.",
+    photos: ["anya-month-04-a", "anya-month-04-b", "anya-month-04-c", "anya-month-04-d"],
+    frame: "portal",
+    from: "right",
+  },
+  {
+    month: 5,
+    title: "Five Months",
+    caption: "Rolling over, and very pleased about it.",
+    photos: ["anya-month-05-a", "anya-month-05-b", "anya-month-05-c", "anya-month-05-d", "anya-month-05-e", "anya-month-05-f"],
+    frame: "arch",
+    from: "left",
+  },
+  {
+    month: 6,
+    title: "Six Months",
+    caption: "Half a year of being adored.",
+    photos: ["anya-month-06-a", "anya-month-06-b", "anya-month-06-c", "anya-month-06-d", "anya-month-06-e", "anya-month-06-f"],
+    frame: "moon",
+    from: "right",
+  },
+  {
+    month: 7,
+    title: "Seven Months",
+    caption: "Sitting up to see it all properly.",
+    photos: ["anya-month-07-a", "anya-month-07-b", "anya-month-07-c", "anya-month-07-d"],
+    frame: "storybook",
+    from: "left",
+  },
+  {
+    month: 8,
+    title: "Eight Months",
+    caption: "Opinions, and the volume to share them.",
+    photos: ["anya-month-08-a", "anya-month-08-b"],
+    frame: "meadow",
+    from: "right",
+  },
+  {
+    month: 9,
+    title: "Nine Months",
+    caption: "Off exploring, one hand held.",
+    photos: ["anya-month-09-a", "anya-month-09-b", "anya-month-09-c", "anya-month-09-d", "anya-month-09-e", "anya-month-09-f"],
+    frame: "oval",
+    from: "left",
+  },
+  {
+    month: 10,
+    title: "Ten Months",
+    caption: "A favourite toy, carried everywhere.",
+    photos: ["anya-month-10-a", "anya-month-10-b", "anya-month-10-c", "anya-month-10-d", "anya-month-10-e"],
+    frame: "vines",
+    from: "right",
+  },
+  /* Still to come — Lester is sending these. */
+  { month: 11, title: "Eleven Months", caption: "Almost walking. Definitely running.", photos: [], frame: "starry", from: "left" },
+  { month: 12, title: "Twelve Months", caption: "One whole year of magic.", photos: [], frame: "finale", from: "left" },
 ];

@@ -104,6 +104,101 @@
   pointer-events: none;
 }
 
+/*
+ * The other photographs of the month, tucked into two corners of the frame.
+ *
+ * Square and bordered in cream, so they read as small prints laid against the framed
+ * portrait rather than as more of the same picture. One sits behind the frame and one in
+ * front, which is what stops the three of them reading as a row. They hang outside the
+ * frame's box by less than a fifth of its width, so the cluster still fits the page
+ * gutter on the narrowest phone.
+ */
+.frame__corner {
+  position: absolute;
+  width: 38%;
+  /*
+   * Upright, and close to the shape the photographs already are. A square crop of a
+   * phone portrait throws away the top and bottom of the frame, which on these is often
+   * where Anya is; this keeps almost the whole picture.
+   */
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  border: 4px solid rgba(255, 253, 248, 0.94);
+  background: var(--dream-lavender);
+  box-shadow:
+    0 12px 30px rgba(103, 88, 132, 0.2),
+    0 2px 6px rgba(103, 88, 132, 0.1);
+  transform: rotate(var(--tilt));
+}
+
+/* Behind the frame, top outer corner. */
+.frame__corner--0 {
+  z-index: 1;
+  top: -8%;
+  left: -17%;
+  --tilt: -6.5deg;
+}
+
+/* In front of the frame, bottom opposite corner. */
+.frame__corner--1 {
+  z-index: 4;
+  bottom: -7%;
+  right: -15%;
+  --tilt: 5.5deg;
+}
+
+/* The month reads left or right down the page; its corners should follow it. */
+.month--right .frame__corner--0 {
+  left: auto;
+  right: -17%;
+  --tilt: 6.5deg;
+}
+
+.month--right .frame__corner--1 {
+  right: auto;
+  left: -15%;
+  --tilt: -5.5deg;
+}
+
+/*
+ * Every photograph a corner can show is stacked in it and cross-faded, so the next one
+ * is already decoded when its turn comes. A corner with one photograph never changes,
+ * and `is-showing` is simply always set on it.
+ */
+.frame__corner-photo {
+  position: absolute;
+  inset: 0;
+  /* FairyImage sets the source's own ratio inline; the corner decides the shape here. */
+  aspect-ratio: auto !important;
+  opacity: 0;
+  transition: opacity 1.1s var(--ease-soft);
+}
+
+.frame__corner-photo.is-showing {
+  opacity: 1;
+}
+
+.frame__corner-photo picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.frame__corner-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* What little has to go should come off the bottom: she is rarely at the floor. */
+  object-position: 50% 42%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame__corner-photo {
+    transition: none;
+  }
+}
+
 .frame__glow {
   position: absolute;
   inset: -14%;

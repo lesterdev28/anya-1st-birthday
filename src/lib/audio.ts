@@ -13,6 +13,7 @@
  * the invitation sounds the same on an iPhone — where `.volume` is read-only and every
  * JavaScript fade is silently ignored — as it does anywhere else.
  */
+import { MUSIC_SOURCES } from "./assets";
 
 /**
  * Starts the music and keeps trying until it is allowed to.
@@ -27,6 +28,8 @@
  * Returns the teardown for the listeners it attached.
  */
 export function startMusic(audio: HTMLAudioElement): () => void {
+  claimPlaybackSession();
+
   /* The encode already sits at about -22 LUFS, so full volume is the right volume. */
   audio.volume = 1;
   audio.loop = true;
@@ -53,10 +56,48 @@ export function startMusic(audio: HTMLAudioElement): () => void {
       });
   }
 
+  /*
+   * A browser can also reject because it has no data yet rather than because it is not
+   * allowed to play, so the first moment there is something to play is worth one more
+   * try. And if the chosen source turns out to be undecodable after all, fall back to
+   * the AAC by hand: <source> selection happens once, and a browser that has committed
+   * to a file never reconsiders.
+   */
+  audio.addEventListener("canplay", attempt);
+  audio.addEventListener("error", fallBackToAac);
+
   attempt();
   for (const event of gestures) {
     window.addEventListener(event, attempt, { passive: true });
   }
 
-  return stopListening;
+  return () => {
+    stopListening();
+    audio.removeEventListener("canplay", attempt);
+    audio.removeEventListener("error", fallBackToAac);
+  };
+
+  function fallBackToAac(): void {
+    if (audio.src.endsWith(".mp4")) return;
+    audio.src = MUSIC_SOURCES.mp4;
+    audio.load();
+  }
+}
+
+/**
+ * Asks iOS for a playback audio session.
+ *
+ * Without one, an <audio> element on an iPhone is silenced by the hardware ring/silent
+ * switch — so an invitation opened on a phone that lives on silent, which is most of
+ * them, plays nothing at all and looks broken rather than muted. Safari 16.4 and later
+ * expose this; everything else ignores it.
+ */
+function claimPlaybackSession(): void {
+  const session = (navigator as Navigator & { audioSession?: { type: string } }).audioSession;
+  if (!session) return;
+  try {
+    session.type = "playback";
+  } catch {
+    /* Read-only on some versions. Nothing else to do about it. */
+  }
 }

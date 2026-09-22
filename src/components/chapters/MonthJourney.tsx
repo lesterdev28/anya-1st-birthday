@@ -110,9 +110,10 @@ function MonthContents({ chapter }: { readonly chapter: MonthChapter }) {
         >
           <MonthFrame
             frame={chapter.frame}
-            photo={chapter.photo}
+            photos={chapter.photos}
             month={chapter.month}
             alt={`Anya at ${chapter.title.toLowerCase()}`}
+            active={inChapter}
           />
         </motion.div>
 

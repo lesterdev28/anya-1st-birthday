@@ -7,6 +7,393 @@
     "aspectRatio": 1,
     "placeholder": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACQBQCdASoYABgAPu1kq06ppaQiKA1RMB2JZACdMtDBqEr9QkOMyGoAhKIE3gg7+KNhvVspwAD+04ShHEpfPbpzD8e96cMUUDlKi3KZaLJuCjFnewAM1iRgynw66a6DT47hQuXjhMUwd8HC/o0yOfIJna0qh9bzz4nSb3m5F3qO2b0uLVYYIS1hOsO0JSxq6AA="
   },
+  "anya-month-01-a": {
+    "base": "/invitation/photos/optimized/anya-month-01-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.6665,
+    "placeholder": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAABQBgCdASoYACQAPu1mqU6ppaOiKqwBMB2JZAC1G21AaBDnPN8eQ/grTFrr0PgwXeINj1NGwfDGroDcAAD1/lcAGDttufPrC49ovNbmOkPw+P7yanzEJdzXsOwIWf9ANpCGgW70ki1oxHuOaYTK5c51MK1Hh3Z+QOH2ZJrMwwFplNwFVLpsuNknHz4zA1VhQdIg+M/IyMtC/iSo5hF98zz6vBpg+6wBaAAAAA=="
+  },
+  "anya-month-01-b": {
+    "base": "/invitation/photos/optimized/anya-month-01-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.5004,
+    "placeholder": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQBACdASoYABAAPu1kqk4ppaQiMAgBMB2JYgCw7CPtvt+pa6WbtwtjAAD9/H+9rF9OpT3dipQ1IctX6rSaReZ69xJ889NViQq637AC4yySAAAA"
+  },
+  "anya-month-01-c": {
+    "base": "/invitation/photos/optimized/anya-month-01-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.1907,
+    "placeholder": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwBQCdASoYABQAPu1qrVEppaQiqAqpMB2JQBXJwYAIbvS735gXdqniYXijCsPZ3Yv7AAD+cWj7A1ljNstQcqEEILeuv9XVo7LWTKl+0iVTywMuHOxrhv2xskTvvhNlpfq8zpNXGrhjuXcWDirT0AAA"
+  },
+  "anya-month-01-d": {
+    "base": "/invitation/photos/optimized/anya-month-01-d",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.1757,
+    "placeholder": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAQBQCdASoYABQAPu1kq02ppaQiMBgMATAdiWMAwoAPBhjq7QQnBmJpVagh4YlVLbAAAP7L98CjS3dts85a1w9YBQ+8Oeucx6+NIaAZRf8j7EGuMwauhNqKHTDNXwEmsjWMXByuFUFJ0HLlU/tQIAAA"
+  },
+  "anya-month-02-a": {
+    "base": "/invitation/photos/optimized/anya-month-02-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAABwBQCdASoYACAAPu1kqk2ppaQiMAgBMB2JZAC1GtU/+CnJxuxNmvZot6B6Mu3rXEleDCrYAP7exuPHMkMCcQ+55druvRnZg0M+OSgOzk6Nk+cbb7pTN+l6oufFeeM0A4AydSI7pvT1MDwhyKx7Aleh5IljBcMUFEUa0l6TMhHINsI5xm9Nejg2vF4EUAGbQAA="
+  },
+  "anya-month-02-b": {
+    "base": "/invitation/photos/optimized/anya-month-02-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAAAQBQCdASoYACAAPu1orlCppaQiqAqpMB2JZAC06A35sL2ETUU8fFwc9Xo9sFmWGpmEAP7qlU5YYZl2FPgi3cqcrEYRhrc7KAhXk7cAuV/LtXCz0Pl+NBvbpzhDrw9NEmqu6UJnN5O2SFv05GZeW9HrwNfPj6pfxQAAAA=="
+  },
+  "anya-month-02-c": {
+    "base": "/invitation/photos/optimized/anya-month-02-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAADwBACdASoYACAAPu1eq02ppSQiMBgMATAdiUAWnQIeFr//78stNP3Pj8OOLqMxAAAA/uqNCwAml8GQxJ09aRCDNQBFqn7++FhzFlRoeze0dX1fTGKZPMmsekdziRmYyotkKQk/T0G/zFjfAaY6P/f5Nu6qx/KDjAA="
+  },
+  "anya-month-03-a": {
+    "base": "/invitation/photos/optimized/anya-month-03-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAADQBQCdASoYACAAPuFap02opSOiN/qoARAcCWQAtRqEgNgpR8LXNMQsWLtUIkEzhV0GWHWQ+5gAAP7eeK67s/N2TKG8PdjJKay8Sx0hr6ujf9ExiANQ7lh7aUWKnoTRuUykVBdZzPvhdkF/I/4iCCchhjTK091Ps8lW+vRgz/HM5dm4DqAAAA=="
+  },
+  "anya-month-03-b": {
+    "base": "/invitation/photos/optimized/anya-month-03-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADwBACdASoYACAAPu1iqE2ppaQiMBgMATAdiWYAsR8YATUufrkOp5mwErVW3FtmAAAA/q+N2pWnn8s31cIR4q6+wEytmxYFb1fOoSaLE5GhURkD1jAebgxVgsj+XWQfsZ/Lq75ubUmc9lrEhYjCpD48rNAAAA=="
+  },
+  "anya-month-03-c": {
+    "base": "/invitation/photos/optimized/anya-month-03-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAABQBQCdASoYACAAPuVio02pJaMiMAwBIByJaAC7ABnU6vfkH7PwUktyQacKsXFd9YB/EmAA/rXVNxUj2RFu2D5rti7Bby/bSCKxJr91DaxYTgGwKjFZ/2V6ecphmOhIn8Mu5lvUSATTlZnBGNScxuAxap8DFjpvkc7kAAAA"
+  },
+  "anya-month-04-a": {
+    "base": "/invitation/photos/optimized/anya-month-04-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.3333,
+    "placeholder": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAABQBQCdASoYABIAPu1srVEppiQiqAqpMB2JQBYj2hg0gaV1MeOf104BG/J6bziIp2Hbl/gA/sM9QxoDhFuEVE++e31UHoSf3ZhCRfgqY6m8E9mJ5ucexsTGEK2t6EVdr05DJc+vjQIljGPhSAA="
+  },
+  "anya-month-04-b": {
+    "base": "/invitation/photos/optimized/anya-month-04-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.3299,
+    "placeholder": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAACwAwCdASoYABIAPu1qq08ppiOiMBgIATAdiWMAABU2zOkpHpxkAAD+sjFHgf3lS8amx1JUX81IOW2QbDo1r+wYRDe90w0mWMmmtC6qlRrYTAhgR73Dr1unp6ab5dZVf/bkKNTAAAA="
+  },
+  "anya-month-04-c": {
+    "base": "/invitation/photos/optimized/anya-month-04-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.3333,
+    "placeholder": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADwBACdASoYABIAPu1wr1IppiQiqAgBMB2JYwCsM47Bo+5f1EKOFpiJVoHQL1KrrMAAzeod9ZMDJqqqx7Rfkvab6M1ntWNgqHq8i/ONYcdYfx++7vvyqhQ1/6Kb8vLWEsuFAA/hVCz+moNRcBdCaAeipl2AAA=="
+  },
+  "anya-month-04-d": {
+    "base": "/invitation/photos/optimized/anya-month-04-d",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.3474,
+    "placeholder": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAADQBACdASoYABIAPu1wsFKppiSiqAgBMB2JQBYj0JBTAsR2rdg47MvVeYVgnFaZ0ADNpGN0iOg3fLlq3AKiol5PFZb/s1goX4LcuTLlyv14inde30dsziUA7j+iiooe1+et4RyhHCnBPMWT9DnmgAAA"
+  },
+  "anya-month-05-a": {
+    "base": "/invitation/photos/optimized/anya-month-05-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAAAQBACdASoYACAAPu1mqU4ppaOiMAgBMB2JQAAKUc58GXqHyJJNOPJeQADbVYtFlXfK7yrvn72UfRn960xWvsuWIEmzOFLcgdXvGcKLN9MBkI9QQguQai4qZMNQlsZr4tosjnB6yR23Qk91KhSuUwuZAFpV3m/WZhlXGi04xwAAAA=="
+  },
+  "anya-month-05-b": {
+    "base": "/invitation/photos/optimized/anya-month-05-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.3333,
+    "placeholder": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAABQBQCdASoYABIAPu1orVCppaQiqAqpMB2JYgCdMyGBOY2S1iExJtoa6P1wnpStaqdzdwAA/pgt/IYqBECglYSTd+6vD3OleiuJ6qRqYlZwKtMHk/XtjBWwWJf5Ic1lTLiMN4/fd9jv34IZxSnTuRflzQAAAA=="
+  },
+  "anya-month-05-c": {
+    "base": "/invitation/photos/optimized/anya-month-05-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.3333,
+    "placeholder": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAABQBQCdASoYABIAPu1oqk8ppiOiMBgIATAdiWIAnQAR9UEYmc6Bnlc0eUho+fOBO2euKcAA/mbIJOIRqKu5VJyzx1nXkku40l0t5DZQNeonyd5AHYhXIG4fLrk9pZ2n7Ga8BqDDcjWJQOg4K4UiVUtUAAA="
+  },
+  "anya-month-05-d": {
+    "base": "/invitation/photos/optimized/anya-month-05-d",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.3333,
+    "placeholder": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAAAwBQCdASoYABIAPu1osFCppaSiqAqpMB2JZACpI3+A0181Nvmz1bL1s7vuerzw4Ot5AAD+B9089GSXXBMP8+wis5ocID51DdrnYXsJvjZXZcrBTp/Y4aMchBVhTw9HRToQxWa9rBnLBR56qh5UvhsnHUAcAAAA"
+  },
+  "anya-month-05-e": {
+    "base": "/invitation/photos/optimized/anya-month-05-e",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.3333,
+    "placeholder": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAACQBACdASoYABIAPu1or1CppaQiqAqpMB2JQBdmYwA0gm7UiBTB07d4oOJbHjgA/mtsKdSP8bE4nydIPOUtSkCfpv1CbcdxMco2wW+G/ZZrizs6tCeYmkGIQXwRUYjHI4i6HVDtZhJDaIFrMBoOfetcsK1sAA=="
+  },
+  "anya-month-05-f": {
+    "base": "/invitation/photos/optimized/anya-month-05-f",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 1.3333,
+    "placeholder": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAADwBACdASoYABIAPu1qrVEppaQiqAqpMB2JQBUkdeAdFUXwv1wnudwUlM2gmLyMYQAA/tcdsM58S42LAyG3mm+PIJsUS/vkeYZJP4P4mlUE9stkq3WtIvXZqZKHLlnMrzM3TCUkZ8hDeeqeSAAAAA=="
+  },
+  "anya-month-06-a": {
+    "base": "/invitation/photos/optimized/anya-month-06-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAAAwBQCdASoYACAAPu1iqU2ppaOiMAgBMB2JaACdMtpCxB/KYDheSkDDMunWyZvwL48tAAD7XqAWHljVdntTSr5Qz3cLMX7OvV1YDv0vQc+noYWLBeco1Zvlk2fP/N1i3D/+IYcJkaIFShCmQNENFufQpcRQugFtSgQW+pzOVoRk1RHCYRgAAA=="
+  },
+  "anya-month-06-b": {
+    "base": "/invitation/photos/optimized/anya-month-06-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAAAQBQCdASoYACAAPu1gp04ppSMiMAgBMB2JZgCdMswDKFSbpc2TV+ZoJO1ftFN8QY+AAPVIZKTOxsTm8SuumLwpcTDP1gJN5qoru+adk6IGSkkEMiNMISF0dlbdX6oQO3zg7q5pludBxSb2QYsl4PM0rgTkLx3pNanV7lxabl/vxW4AAAA="
+  },
+  "anya-month-06-c": {
+    "base": "/invitation/photos/optimized/anya-month-06-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABwBQCdASoYACAAPt1WpE2opKOiN/qoARAbiWIAnQAWMwQIGZopW2BhQ3txS7R7flYuyroAAMm2gTPhqo+J2PA5kokwZjiS53rRZFBNbIe0WZaSRKnX+XUJktNZ7NAzzYBWvXp+eJUwy+Pp+nATtBVwu/PYghqNRjfPNUBLp7+RiuRHQMOwbAAA"
+  },
+  "anya-month-06-d": {
+    "base": "/invitation/photos/optimized/anya-month-06-d",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADwBACdASoYACAAPt1YpE2opSOiN/qoARAbiWIAsOwbSggfI/7Vg9Ze4469C7vhgVwA4Xxehoukz3c8dj8XzLHd3gEFTtiEQkO16ypNRRYRqXfcn/b5Tw/ZrwQSq6xILXs97g9Fpfi9XYRIiqa0qCpjKvYGoueR6mZ0OG+p7yqh8VQXRCpRMAAA"
+  },
+  "anya-month-06-e": {
+    "base": "/invitation/photos/optimized/anya-month-06-e",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABwBQCdASoYACAAPtlcpE2oJaOiN/qoAQAbCWIAnTLQwgYV+yzhpfD3R/5AwhZPI4v+P05AAPjsKtpc8oYkK2GO9aaed00FNdUYAQuBaNg0sEaAO3rn3k6aAivTkgQSG07qil3lqcHdVYPBNWZvItgHpCB6dMTGptIxi56TKbYTYhfExQ2G4AAA"
+  },
+  "anya-month-06-f": {
+    "base": "/invitation/photos/optimized/anya-month-06-f",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAAAQBQCdASoYACAAPtFWoU2oJKMiN+gBABoJYgCdMxgFEK8p08zs/ZXqqZLhsuFYNiAAAOI87UIYB3XNabaIJcVE1/B9qPWtfzMsSf0M1xZJENcQp+aemr0R9TQ02S/ahIG42nSNzBUhUUYBDYcgQ7zl3f2CPWUk5sthKrHvOJXAjqG2tRd1ewe02TkJ4e+8IQVCwLkUhbK7VQAA"
+  },
+  "anya-month-07-a": {
+    "base": "/invitation/photos/optimized/anya-month-07-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAACwBQCdASoYACAAPu1irVCppSQisBgIATAdiWgAxPjYgZm5yU5KYekjmrx9XyEsZADCscBpE4AA/tQInVpHj42j+chnVK2FeDIJ5Fs0mZhMTVdMdHv2CN6iE+Hgud1bj35KBzXV6duxa9LFNM5XTMkbFn2O8OlIw2ABmK0gC7y27hcs6A1tDAZQ07ePViOAn4hMRX4ub8ZXXb7Q37nlff4AAAA="
+  },
+  "anya-month-07-b": {
+    "base": "/invitation/photos/optimized/anya-month-07-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAADwBQCdASoYACAAPu1orVAppaQisBgIATAdiWQAxxTmuPVdSILqvzzrYBEq1jWx8bWldGamH8R3wAD+8d0GWuA/uQbvGFupnvl55yBVmVDjbi9B+b0s+Ggkz6r3H2yJ4x38n/tnXLpIfaY0+Ix4ID3ROgfp6NM9CXP6y8u0lPkCcHR0VwlACnQtzmHOFUG5cw53X6kBk0QJAAAA"
+  },
+  "anya-month-07-c": {
+    "base": "/invitation/photos/optimized/anya-month-07-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAABwBQCdASoYACAAPu1qq1EppaOiqAqpMB2JYgC7AGlhs8Nrn7gMnzghVdLuarycc0wEKEAAAP7x0MPYYJ376dNPB9Fs3+u9DTE34Z5srUbaNM/RXDc5Yy7V46um2rKY5GKBMDwnEX29QixCOiaS4tPYUthmQTSFi8+t9JHMuxTrPYgrTbdB0Dp65L8OhSDgsPf9KYkYAAA="
+  },
+  "anya-month-07-d": {
+    "base": "/invitation/photos/optimized/anya-month-07-d",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAAAwBQCdASoYACAAPuVepk2pJSOiN/VYASAciWYAnQA54wQBjvouED0LNVbYBtMHyf3GbAD+40BfYMvR5YSlfS1VYJxOJgTKdAgXaufxkGPcQX5CNp97uw5WBXBywqiEN0t+wWNuD9DqgWds9aGD97LLZKcssMVUOLMvD6B82wPYOxwE0+iGY8HIsKlrQmgAAAA="
+  },
+  "anya-month-08-a": {
+    "base": "/invitation/photos/optimized/anya-month-08-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAACwBACdASoYACAAPtFYok2oJaMiN+gBABoJQBjPhq7OozFHrZHBCSFraNgAK7lAAOJ5+MbbhI8s83FUUCVr9rC+iAR3wveR3lwlP1CUcZLHQ6MP/8gS20PV1Ncm5lUlLqmsqc7DoCQAAA=="
+  },
+  "anya-month-08-b": {
+    "base": "/invitation/photos/optimized/anya-month-08-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAADwBACdASoYACAAPu1srVEppaQiqAqpMB2JZwDKADSpbF6uQS/ecJ1KqpPc8dq+eAAA/u1Ibtz7afEmjK2pcAqIkCdDO1dWh1uqmQyM3McPCo8aIWnOOveOkmaExFa/p2rpLs3tqFhi7nqw151p4AAA"
+  },
+  "anya-month-09-a": {
+    "base": "/invitation/photos/optimized/anya-month-09-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAACQBQCdASoYACAAPu1mqE2ppaOiMBgMATAdiWgAnTODtTkLq1IPLdGrxoc67JxOx5AdOXgIAAD++jn2Y2WrH1poqFIWaq+Kqfg4aQsUXuZ5G+1CJqZL9DZSD3nOH1Gc4JOho1tBIVjid30oWeGV6rtijWHR9AGd90brg6g1MknfoQvBs5Gip9KaKk4kfDvRtpXD4JIfwHqP1TjYO/jVM/AAAAA="
+  },
+  "anya-month-09-b": {
+    "base": "/invitation/photos/optimized/anya-month-09-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAAAwBQCdASoYACAAPu1oq0+ppiOiKA1RMB2JZgCdM47MDBxxksnvQwDuJdGI6rSmUL3oAAD+9jRfhUtZ3hZggH3YjVjLdwCRX4peKNGPU9vARGC6Q0XYXw37LskV+2IyFMYXqMHZ95H31P6d3bEpj1MA5BQZ42U+OHL9AzMi+uq8DgpCZGRbvNW+aJd/l1LFwx8IvXcxmAA="
+  },
+  "anya-month-09-c": {
+    "base": "/invitation/photos/optimized/anya-month-09-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAABwBQCdASoYACAAPu1qrVCppiQiqAqpMB2JbACxHzL6ANwxbm/kVV/58riRDAyj/wojCSZwAOA3u7BjXn1sJJjhdzEoSEqaLUCfKh1752/uUgM9ei9Sxbr3/Igs81pd6epCYG7qR7sioVTRsGxm05heTVIoby7GnszG83fK7wb+UET23Ph154GG0Bl+GJVchz3wAA=="
+  },
+  "anya-month-09-d": {
+    "base": "/invitation/photos/optimized/anya-month-09-d",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACQBQCdASoYACAAPulirE2pJaSiMBgMASAdCWgAnTMRvkELlMdSY3i9OPMoF0pf4g8F+KJ5gAD++jtNSsIDfXrglF8Q8NweBsNr+0ZcmOK49/4OQArPCdFVsbiTXkHRfbx4mYPHtSrPdtUIwsLLhbG3MAel+J/NGG/CvTGQpW8UAYdkM0LEBA5t4W2kdo361NqKNtXGyT9BYJ+Ac6ve04AA"
+  },
+  "anya-month-09-e": {
+    "base": "/invitation/photos/optimized/anya-month-09-e",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAABQBQCdASoYACAAPu1oqk+ppiOiKA1RMB2JZgCxDHAGJiaVPHlbTuSHrruC/qpaX39+xUgA/u2yH9gB+T/varDH9v3Qr9EvQixxZmU6C9Wh+hACL/ggYwM49SjRFr/ovDCym6yYxLrkXUwoRbTem96kLML1Vx/UzHxJmM8D2Z89LWhLv8yY5sPbGKyGwrgA"
+  },
+  "anya-month-09-f": {
+    "base": "/invitation/photos/optimized/anya-month-09-f",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBQCdASoYACAAPu1iqE2ppaOiMAgBMB2JagBV1fgASrKrrU5vBMmXWuyR9CTgD87R0AD++r20vntO5nlauMwIIl04hQ1JfaZaEAodfwNh8CXy/rpe/+dKZI5Br/gvwOR0HSfO4FMf5puDgG6mQpj4KaFb0W5T3pzUxro0YA/+NRs7LLCbbnAh16SR6os4qW3efDQ7vsQw2DCz2uADquDpAAA="
+  },
+  "anya-month-10-a": {
+    "base": "/invitation/photos/optimized/anya-month-10-a",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAADwBACdASoYACAAPtleok2oJaMiN/qoAQAbCWgAuzMvwzmN8rX6daCk0Y9nB43yXfAA/sfn1EV4lBRIy+07aycRez26bDbfSsZlizKn4d1/H6+SQQPWziKSJIb3Im4TjcyPwJ1sKDBGP/er8sIpz/Fbx9hb2Y5wVBJOvyOygewID+DWHgiNuyEaIcl+8OVGkOpnrZnWficD9wcg0Myf+4AA"
+  },
+  "anya-month-10-b": {
+    "base": "/invitation/photos/optimized/anya-month-10-b",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAAAwBQCdASoYACAAPtFUoU2oJKMiN+gBABoJaACdITYCTNzsVYgeX0BmyE8OVT82MP0sAAD+yMYuD0midLJnC4OaRC0RKp+YPXij/rhcMHPqOHio82/x5Lko+djQDLI9BSwOF4ITFuYO2U7vAW1p8HMIbIbLmdn7PazVdwZ8JsiYLKtGg7dz2UUvM4C0qGuvfkwFmSCs663jgNoybdHPAjwNBeRF/gAA"
+  },
+  "anya-month-10-c": {
+    "base": "/invitation/photos/optimized/anya-month-10-c",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACwBQCdASoYACAAPu1kqU2ppaOiMAgBMB2JZACsOUFWABFyeJxtv2HTMeKl4UPZJYe4HKPs1QAA/tObkO4XUf8qOxd5AU7by7G9b/lpu6IE3/wSp/J1bzlPmKtrTwqv8Rmh9X33tNfnopMbphIH9HRbBZlmjgX0XqemXQQ5Ggj6o47/ECyfv07lNP35BrsjB37xamzguvYEwqYp2kkXAAAA"
+  },
+  "anya-month-10-d": {
+    "base": "/invitation/photos/optimized/anya-month-10-d",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAABwBQCdASoYACAAPuVgo02pJaMiMAwBIByJZACdMwnDSwIvNLtcOCk5eYAXcLeYzFqlxf4AAP6uo29F28WYu15HzeL1o2j1Aq96X8IzZviAcVLox8Pwu+Unojl0NaYgIhr9r1uojUoX/BJKEQWcwwEsV0anEgC3RfWkETvc2qbb1bE4XNEIFXQCLQAAAA=="
+  },
+  "anya-month-10-e": {
+    "base": "/invitation/photos/optimized/anya-month-10-e",
+    "widths": [
+      480,
+      960
+    ],
+    "aspectRatio": 0.75,
+    "placeholder": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABwBQCdASoYACAAPtleo02oJaMiN/qoAQAbCWoArAAj6c7bM/fPG18r+evInqiP9Tlo5qkAAP7WwqMFu1e7tubTVULDLUUI4mOV6l/SmaWwohia1IbLGyCuTvbGQe38gXaUO+6pfdNo8Z7PP1/r/A1jGiOZVsz83Hc3mZ2squWCepB6vCyDIqLJLW7ZRaPgc29X/ye4nTwfICIQ0tQAAA=="
+  },
   "anya-portrait-01": {
     "base": "/invitation/photos/optimized/anya-portrait-01",
     "widths": [
@@ -20,8 +407,7 @@
     "base": "/invitation/photos/optimized/anya-smile-01",
     "widths": [
       480,
-      960,
-      1440
+      960
     ],
     "aspectRatio": 0.75,
     "placeholder": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAABwBQCdASoYACAAPu1oqk+ppaOiMBgIATAdiUAYmw0q8SvYPwu0Xy+vTqrSYbS1E6tPdSEAAP78EnFcj3qTVkwkh6x02Mv4A6PuA2cSa3c2J64YLPWFvCD0SQRfipYqxLYkNOKPCTEztBpNjhB455fw+KjGx6q9HiCTC0aye1sU9XCQayNud6SVrV4zMLZU+wuU4AAA"
@@ -30,8 +416,7 @@
     "base": "/invitation/photos/optimized/anya-smile-02",
     "widths": [
       480,
-      960,
-      1440
+      960
     ],
     "aspectRatio": 0.75,
     "placeholder": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACQBQCdASoYACAAPtleo02oJaMiN/qoAQAbCWQAv+xXb1/yBw+14vVsFdrpXFBPy9xEBBqxOAD+9PUd1nKQFx1vhDtOR5qhGDhpLvOQ88WpUIRnC/UkUiAk5q4mjY9x/ZhstqVMPH+lO48fHnDAUvbmtqUPLP3q02w0HU0tE3wxX3MIbWYzxFwKavl0mKw9tjggAA=="
@@ -40,8 +425,7 @@
     "base": "/invitation/photos/optimized/anya-smile-03",
     "widths": [
       480,
-      960,
-      1440
+      960
     ],
     "aspectRatio": 0.75,
     "placeholder": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAABQBQCdASoYACAAPu1eqE4ppKOiMBgMATAdiWIAwoWxxC565/+qme6vgnvIZLj7/GReC0AA/vf7AAmTuYcIqBmHHhZ86AOoY1NkemRuOb/M1qD2lqXVGTAb86bEnXTjrVC2dEYjrbf3/PaVlLuZIwiT0iKHzMysxtyzBoYtu1QV41/nediQifiFux72wMW5uW8w1bAAAAA="
@@ -50,8 +434,7 @@
     "base": "/invitation/photos/optimized/anya-sunhat-01",
     "widths": [
       480,
-      960,
-      1440
+      960
     ],
     "aspectRatio": 0.75,
     "placeholder": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAADQBQCdASoYACAAPtlepU2oJaOiN/qoAQAbCWgArDNofgBqDmHwOmtBtIyEY7muDNZ0oVI/g9OAAPrjYCft3RzsyfULsJdyPoNrmPRLlSSfp7d5QcC9wWqz0eCIUYbuBtA2Yv1ATQ+ddbCQXmqcVZqkqhtuTs8NVB4yYwdYBG6Bc06Rn4cqM4dVOpOqvK6LpenWFiXK6C/o+3/xJAePAVLgAAA="
@@ -60,8 +443,7 @@
     "base": "/invitation/photos/optimized/anya-sunhat-02",
     "widths": [
       480,
-      960,
-      1440
+      960
     ],
     "aspectRatio": 0.75,
     "placeholder": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAAAwBQCdASoYACAAPtFUoU2oJKMiN+gBABoJaACdITYCTNzsVYgeX0BmyE8OVT82MP0sAAD+yMYuD0midLJnC4OaRC0RKp+YPXij/rhcMHPqOHio82/x5Lko+djQDLI9BSwOF4ITFuYO2U7vAW1p8HMIbIbLmdn7PazVdwZ8JsiYLKtGg7dz2UUvM4C0qGuvfkwFmSCs663jgNoybdHPAjwNBeRF/gAA"
@@ -70,8 +452,7 @@
     "base": "/invitation/photos/optimized/anya-sunhat-03",
     "widths": [
       480,
-      960,
-      1440
+      960
     ],
     "aspectRatio": 0.75,
     "placeholder": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACwBQCdASoYACAAPu1kqU2ppaOiMAgBMB2JZACsOUFWABFyeJxtv2HTMeKl4UPZJYe4HKPs1QAA/tObkO4XUf8qOxd5AU7by7G9b/lpu6IE3/wSp/J1bzlPmKtrTwqv8Rmh9X33tNfnopMbphIH9HRbBZlmjgX0XqemXQQ5Ggj6o47/ECyfv07lNP35BrsjB37xamzguvYEwqYp2kkXAAAA"
