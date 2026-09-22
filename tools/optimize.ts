@@ -72,7 +72,7 @@ export interface ManifestEntry {
 
 async function buildDerivatives(
   job: Job,
-  force: boolean
+  force: boolean,
 ): Promise<{ written: number; stem: string; entry: ManifestEntry }> {
   const stem = basename(job.source, extname(job.source));
   const outputDirectory = join(dirname(job.source), "optimized");
@@ -92,9 +92,10 @@ async function buildDerivatives(
       if (!force && !(await isStale(job.source, derivative))) continue;
 
       const pipeline = sharp(job.source).resize({ width, withoutEnlargement: true });
-      await (format === "webp"
-        ? pipeline.webp({ quality: job.quality })
-        : pipeline.avif({ quality: job.quality - 5 })
+      await (
+        format === "webp"
+          ? pipeline.webp({ quality: job.quality })
+          : pipeline.avif({ quality: job.quality - 5 })
       ).toFile(derivative);
       written += 1;
     }
@@ -106,9 +107,10 @@ async function buildDerivatives(
     for (const format of ["webp", "avif"] as const) {
       const derivative = join(outputDirectory, `${stem}-${sourceWidth}.${format}`);
       const pipeline = sharp(job.source);
-      await (format === "webp"
-        ? pipeline.webp({ quality: job.quality })
-        : pipeline.avif({ quality: job.quality - 5 })
+      await (
+        format === "webp"
+          ? pipeline.webp({ quality: job.quality })
+          : pipeline.avif({ quality: job.quality - 5 })
       ).toFile(derivative);
       written += 1;
     }
@@ -117,7 +119,11 @@ async function buildDerivatives(
   // A small blurred placeholder, inlined by the site as the low-quality preview.
   const placeholderPath = join(outputDirectory, `${stem}-placeholder.webp`);
   if (force || (await isStale(job.source, placeholderPath))) {
-    await sharp(job.source).resize({ width: 24 }).blur(1.2).webp({ quality: 40 }).toFile(placeholderPath);
+    await sharp(job.source)
+      .resize({ width: 24 })
+      .blur(1.2)
+      .webp({ quality: 40 })
+      .toFile(placeholderPath);
     written += 1;
   }
 
@@ -166,16 +172,22 @@ async function main(): Promise<void> {
     const { written, stem, entry } = await buildDerivatives(job, force);
     total += written;
     manifest[stem] = entry;
-    console.log(`${written > 0 ? "built" : "up to date"}  ${job.source.replace(`${REPO_ROOT}/`, "")}`);
+    console.log(
+      `${written > 0 ? "built" : "up to date"}  ${job.source.replace(`${REPO_ROOT}/`, "")}`,
+    );
   }
 
   // Sorted so the committed manifest has a stable diff.
-  const sorted = Object.fromEntries(Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b)));
+  const sorted = Object.fromEntries(
+    Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b)),
+  );
   await mkdir(dirname(MANIFEST_PATH), { recursive: true });
   await writeFile(MANIFEST_PATH, `${JSON.stringify(sorted, null, 2)}\n`);
 
   console.log(`\n${total} derivative${total === 1 ? "" : "s"} written.`);
-  console.log(`Manifest: ${Object.keys(sorted).length} assets -> ${MANIFEST_PATH.replace(`${REPO_ROOT}/`, "")}`);
+  console.log(
+    `Manifest: ${Object.keys(sorted).length} assets -> ${MANIFEST_PATH.replace(`${REPO_ROOT}/`, "")}`,
+  );
 }
 
 main().catch((err) => {

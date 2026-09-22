@@ -22,7 +22,12 @@
 
 /* Warm fireflies that drift as well as pulse. */
 .particles--fireflies .particles__dot {
-  background: radial-gradient(circle, rgba(250, 236, 195, 0.95) 0%, rgba(228, 198, 138, 0.55) 45%, rgba(228, 198, 138, 0) 72%);
+  background: radial-gradient(
+    circle,
+    rgba(250, 236, 195, 0.95) 0%,
+    rgba(228, 198, 138, 0.55) 45%,
+    rgba(228, 198, 138, 0) 72%
+  );
   animation-name: particle-float;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
@@ -38,16 +43,36 @@
 }
 
 @keyframes particle-twinkle {
-  0%, 100% { opacity: 0.12; transform: scale(0.7); }
-  50%      { opacity: 0.95; transform: scale(1.15); }
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.15);
+  }
 }
 
 @keyframes particle-float {
-  0%   { opacity: 0.1;  transform: translate3d(0, 0, 0) scale(0.8); }
-  25%  { opacity: 0.85; }
-  50%  { opacity: 0.5;  transform: translate3d(var(--drift, 20px), -26px, 0) scale(1.1); }
-  75%  { opacity: 0.9; }
-  100% { opacity: 0.1;  transform: translate3d(0, 0, 0) scale(0.8); }
+  0% {
+    opacity: 0.1;
+    transform: translate3d(0, 0, 0) scale(0.8);
+  }
+  25% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate3d(var(--drift, 20px), -26px, 0) scale(1.1);
+  }
+  75% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.1;
+    transform: translate3d(0, 0, 0) scale(0.8);
+  }
 }
 
 /* Under reduced motion the particles stay, softly lit, but stop moving. */

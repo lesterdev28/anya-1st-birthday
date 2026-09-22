@@ -47,7 +47,10 @@ export function ParticleField({ kind, count = 40, className }: Props) {
   }, [kind, count]);
 
   return (
-    <div className={`particles particles--${kind}${className ? ` ${className}` : ""}`} aria-hidden="true">
+    <div
+      className={`particles particles--${kind}${className ? ` ${className}` : ""}`}
+      aria-hidden="true"
+    >
       {particles.map((particle) => (
         <span
           key={particle.key}

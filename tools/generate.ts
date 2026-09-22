@@ -68,20 +68,27 @@ async function generateImage(scene: Scene, dryRun: boolean): Promise<void> {
   }
 
   console.log(`Generating image ${scene.id} at ${scene.size} (billable)...`);
+  // The v1 image endpoint expects its arguments under a `params` object, unlike the
+  // model-slug video endpoints, which take a flat body. The SDK posts `input` verbatim
+  // as the request body, so the wrapper has to be written here.
   const response = await higgsfield.subscribe(IMAGE_ENDPOINT, {
     input: {
-      prompt,
-      width_and_height: scene.size,
-      quality: "1080p",
-      batch_size: 1,
-      enhance_prompt: false,
+      params: {
+        prompt,
+        width_and_height: scene.size,
+        quality: "1080p",
+        batch_size: 1,
+        enhance_prompt: false,
+      },
     },
     withPolling: true,
   });
 
   const url = response.status === "completed" ? response.images?.[0]?.url : undefined;
   if (!url) {
-    throw new Error(`Request ${response.request_id} produced no image: ${describeFailure(response)}.`);
+    throw new Error(
+      `Request ${response.request_id} produced no image: ${describeFailure(response)}.`,
+    );
   }
 
   const destination = resolve(MEDIA_ROOT, scene.category, `${scene.id}.png`);
@@ -91,7 +98,9 @@ async function generateImage(scene: Scene, dryRun: boolean): Promise<void> {
 
 async function generateVideo(scene: VideoScene, dryRun: boolean): Promise<void> {
   if (dryRun) {
-    console.log(`\n--- ${scene.id} (${scene.aspectRatio}, ${scene.duration}s) ---\n${scene.prompt}\n`);
+    console.log(
+      `\n--- ${scene.id} (${scene.aspectRatio}, ${scene.duration}s) ---\n${scene.prompt}\n`,
+    );
     return;
   }
 
@@ -107,7 +116,9 @@ async function generateVideo(scene: VideoScene, dryRun: boolean): Promise<void> 
   });
 
   if (response.status !== "completed" || !response.video?.url) {
-    throw new Error(`Request ${response.request_id} produced no video: ${describeFailure(response)}.`);
+    throw new Error(
+      `Request ${response.request_id} produced no video: ${describeFailure(response)}.`,
+    );
   }
 
   const destination = resolve(MEDIA_ROOT, "video", `${scene.id}-raw.mp4`);
@@ -155,9 +166,11 @@ async function main(): Promise<void> {
 
   if (args.list) {
     console.log("Image scenes:");
-    for (const scene of SCENES) console.log(`  ${scene.id.padEnd(34)} ${scene.category}/${scene.size}`);
+    for (const scene of SCENES)
+      console.log(`  ${scene.id.padEnd(34)} ${scene.category}/${scene.size}`);
     console.log("Video scenes:");
-    for (const scene of VIDEO_SCENES) console.log(`  ${scene.id.padEnd(34)} ${scene.aspectRatio}/${scene.duration}s`);
+    for (const scene of VIDEO_SCENES)
+      console.log(`  ${scene.id.padEnd(34)} ${scene.aspectRatio}/${scene.duration}s`);
     return;
   }
 
@@ -178,7 +191,9 @@ async function main(): Promise<void> {
       });
 
   if (images.length === 0 && videos.length === 0) {
-    throw new Error("Nothing to do. Pass --scene <id>, --video <id>, --images, --videos or --list.");
+    throw new Error(
+      "Nothing to do. Pass --scene <id>, --video <id>, --images, --videos or --list.",
+    );
   }
 
   if (!args.dryRun) {
@@ -186,7 +201,7 @@ async function main(): Promise<void> {
     if (!credentials || !credentials.includes(":")) {
       throw new Error(
         "HF_CREDENTIALS is not set (expected format key-id:key-secret). Set it in the " +
-          "environment or in tools/.env.local before running this script."
+          "environment or in tools/.env.local before running this script.",
       );
     }
     configureHiggsfield({ credentials });

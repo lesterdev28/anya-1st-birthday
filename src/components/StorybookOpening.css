@@ -1,0 +1,148 @@
+.storybook {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(201, 184, 228, 0.3) 0%, transparent 62%),
+    linear-gradient(180deg, var(--ivory) 0%, #f6eef6 55%, var(--ivory) 100%);
+}
+
+.storybook__sparkles {
+  opacity: 0.55;
+}
+
+.storybook__stage {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  /* The cover rotates back in 3D; the perspective has to live on an ancestor. */
+  perspective: 1800px;
+}
+
+.storybook__book {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* ---- the parchment spread ---- */
+
+.storybook__pages {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 26px 60px -28px rgba(74, 63, 86, 0.45);
+}
+
+.storybook__pages-painted {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(196, 160, 82, 0.16) 0%,
+      transparent 6%,
+      transparent 94%,
+      rgba(196, 160, 82, 0.16) 100%
+    ),
+    linear-gradient(180deg, #fdf8ef 0%, #f6ecdc 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(228, 198, 138, 0.5),
+    inset 0 0 40px rgba(196, 160, 82, 0.12);
+}
+
+.storybook__pages-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.4rem, 6vw, 3rem);
+  text-align: center;
+}
+
+.storybook__once {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 5vw, 2rem);
+  color: var(--ink);
+  margin: 0 0 0.8rem;
+}
+
+.storybook__body {
+  font-size: clamp(0.85rem, 3.2vw, 1.02rem);
+  line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 30ch;
+  margin: 0 0 0.6rem;
+}
+
+.storybook__body--last {
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+/* ---- the cover ---- */
+
+.storybook__cover {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transition:
+    transform 1900ms var(--ease-soft),
+    opacity 300ms linear 1500ms;
+  backface-visibility: hidden;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 26px 60px -28px rgba(74, 63, 86, 0.5);
+}
+
+.storybook__book.is-open .storybook__cover {
+  transform: rotateY(-166deg);
+  /* Once it is flat against the left it would otherwise show through; hide it. */
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Painted stand-in until the generated cover exists. */
+.storybook__cover-painted {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(251, 245, 234, 0.5) 0%, transparent 65%),
+    linear-gradient(150deg, #f0cdd8 0%, #e6c3d6 45%, #d8bce2 100%);
+}
+
+.storybook__cover-border {
+  display: grid;
+  place-items: center;
+  width: 82%;
+  height: 78%;
+  border: 2px solid rgba(228, 198, 138, 0.9);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 0 5px rgba(251, 245, 234, 0.35),
+    inset 0 0 0 7px rgba(228, 198, 138, 0.55),
+    0 0 26px rgba(228, 198, 138, 0.35);
+}
+
+.storybook__cover-crown {
+  width: clamp(56px, 14vw, 88px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .storybook__cover {
+    transition: opacity 200ms linear;
+  }
+  .storybook__book.is-open .storybook__cover {
+    transform: none;
+  }
+}
