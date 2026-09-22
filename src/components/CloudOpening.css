@@ -1,0 +1,39 @@
+/*
+ * Above the page and below the loading screen, so the loader dissolves onto closed cloud
+ * rather than onto the parting itself.
+ */
+.opening {
+  position: fixed;
+  inset: 0;
+  z-index: 58;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/*
+ * The two banks overlap across the middle by a quarter of the screen. Meeting exactly
+ * would show a seam the moment either one moved a pixel, and a bank of cloud with a
+ * straight edge down the centre of it is the one thing this cannot look like.
+ */
+.opening__half {
+  position: absolute;
+  top: -12%;
+  bottom: -12%;
+  left: -8%;
+  width: 66%;
+  will-change: transform;
+}
+
+.opening__half--right {
+  left: auto;
+  right: -8%;
+}
+
+/*
+ * A little of the blue taken out, and nothing else. The drawing is Lester's and stays
+ * his; dropping the saturation is what lets it sit in a pink-and-lilac sky rather than
+ * on top of one. Turning the hue as well was tried and turns the bank green.
+ */
+.opening .painted-clouds__cloud {
+  filter: saturate(0.82);
+}

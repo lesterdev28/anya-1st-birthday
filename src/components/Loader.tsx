@@ -16,7 +16,7 @@ import { story } from "../data/party";
 import "./Loader.css";
 
 /** Long enough to cover the font swap, short enough that nobody waits for it. */
-const HOLD_MS = 1500;
+export const HOLD_MS = 1500;
 
 export function Loader() {
   const [open, setOpen] = useState(true);

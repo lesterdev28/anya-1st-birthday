@@ -1,0 +1,59 @@
+.painted-clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/*
+ * The mirrored bank. Flipping the whole layout rather than re-seeding it is what makes a
+ * pair of gate halves read as one bank cut down the middle: each half keeps its mass at
+ * the outside edge, where it is needed, instead of both crowding the same side.
+ */
+.painted-clouds--mirror {
+  transform: scaleX(-1);
+}
+
+.painted-clouds__cloud {
+  position: absolute;
+  display: block;
+  transform: scaleX(var(--flip, 1)) rotate(var(--tilt, 0deg));
+  animation-name: painted-cloud-breathe;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+.painted-clouds__cloud img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/*
+ * A drift of a couple of percent. Enough that the bank is never a still picture, small
+ * enough that no single cloud is ever seen to move.
+ */
+@keyframes painted-cloud-breathe {
+  from {
+    transform: scaleX(var(--flip, 1)) rotate(var(--tilt, 0deg)) translate3d(-1.5%, 0.6%, 0);
+  }
+  to {
+    transform: scaleX(var(--flip, 1)) rotate(var(--tilt, 0deg)) translate3d(1.5%, -0.6%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /*
+ * The mirrored bank. Flipping the whole layout rather than re-seeding it is what makes a
+ * pair of gate halves read as one bank cut down the middle: each half keeps its mass at
+ * the outside edge, where it is needed, instead of both crowding the same side.
+ */
+.painted-clouds--mirror {
+  transform: scaleX(-1);
+}
+
+.painted-clouds__cloud {
+    animation: none;
+  }
+}

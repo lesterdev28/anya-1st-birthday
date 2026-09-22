@@ -11,6 +11,7 @@ import { useCallback } from "react";
 import { SceneProvider } from "./lib/scene";
 import { Sky } from "./components/world/Sky";
 import { Loader } from "./components/Loader";
+import { CloudOpening } from "./components/CloudOpening";
 import { Nav } from "./components/Nav";
 import { Music } from "./components/Music";
 import { CloudKingdom } from "./components/chapters/CloudKingdom";
@@ -38,6 +39,7 @@ export function App() {
   return (
     <SceneProvider>
       <Loader />
+      <CloudOpening />
       <Sky />
 
       <main>

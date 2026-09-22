@@ -40,6 +40,13 @@ const ART_WIDTHS = [640, 1280, 1920];
  * photograph hides it.
  */
 const DECOR_WIDTHS = [320, 640];
+/**
+ * The exceptions among the cut-outs: pieces drawn at the scale of the screen rather than
+ * at the scale of an ornament. The cloud bank is one shape spanning half a desktop, so
+ * 640 would be visibly soft where the same number is plenty for a butterfly.
+ */
+const WIDE_DECOR = new Set(["story-cloud"]);
+const WIDE_DECOR_WIDTHS = [640, 1280];
 
 interface Job {
   readonly source: string;
@@ -170,7 +177,11 @@ async function main(): Promise<void> {
       .map((source) => ({ source, widths: ART_WIDTHS, quality: 82 })),
     ...decor
       .filter((file) => !file.includes("/optimized/"))
-      .map((source) => ({ source, widths: DECOR_WIDTHS, quality: 88 })),
+      .map((source) => ({
+        source,
+        widths: WIDE_DECOR.has(basename(source, extname(source))) ? WIDE_DECOR_WIDTHS : DECOR_WIDTHS,
+        quality: 88,
+      })),
   ];
 
   if (jobs.length === 0) {
