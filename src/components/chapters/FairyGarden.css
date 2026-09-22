@@ -114,25 +114,29 @@
  * The cottage and the fairy, standing in the meadow.
  *
  * Both are pinned to the bottom of the chapter rather than centred in it, because a
- * meadow has a floor and anything living in it stands on that floor. The cottage sits
- * behind the grasses (z 4, under the meadow's 5) so the stems grow up in front of it and
- * it reads as further away; the fairy sits in front of them (z 6), which is what makes
- * the two of them a depth rather than a pair of stickers side by side.
+ * meadow has a floor and anything living in it stands on that floor.
+ *
+ * Both are also in front of the grasses (z 6 and 7, over the meadow's 5). The cottage
+ * used to sit behind them, which read as distance but cost it the thing it is there for:
+ * it is a painted house with a door and a window, and stems growing over it turned it
+ * into background texture. Lester asked for it forward and larger, and he is right —
+ * this chapter is the one place in the journey with somewhere to live in it.
  */
 .garden__cottage {
-  left: -3%;
+  /* On the page rather than hanging off it: the door and the flowerbed are the point. */
+  left: 0;
   bottom: 1.5rem;
-  width: clamp(7rem, 30cqw, 11rem);
-  z-index: 4;
-  /* Further off, so it takes more of the sky's colour and less of its own. */
-  opacity: 0.8;
+  width: clamp(10rem, 42cqw, 15.5rem);
+  z-index: 6;
+  /* Full strength now that it is the near thing rather than the far one. */
+  opacity: 1;
 }
 
 .garden__fairy {
-  right: -2%;
+  right: -1%;
   bottom: 0.5rem;
-  width: clamp(8rem, 34cqw, 13rem);
-  z-index: 6;
+  width: clamp(11rem, 46cqw, 17.5rem);
+  z-index: 7;
 }
 
 /*
@@ -142,13 +146,13 @@
  */
 @container (max-width: 30rem) {
   .garden__cottage {
-    width: 6.5rem;
-    left: -5%;
+    width: 9rem;
+    left: -1%;
   }
 
   .garden__fairy {
-    width: 7.5rem;
-    right: -4%;
+    width: 10.5rem;
+    right: -2%;
   }
 }
 

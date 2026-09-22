@@ -6,10 +6,9 @@
  * them — which is the point of putting them here rather than in the hero: they are the
  * premise of the year that follows, and they need their own quiet screen.
  *
- * It is also where the meadow becomes a place someone lives: a cottage back among the
- * grasses and, in front of them, the fairy herself on her toadstool. "One little fairy"
- * is the first line the guest reads here, and until now there was no fairy to read it
- * about.
+ * It is also where the meadow becomes a place someone lives: a cottage standing in the
+ * grasses and, beside it, the fairy herself on her toadstool. "One little fairy" is the
+ * first line the guest reads here, and until now there was no fairy to read it about.
  */
 import { Chapter } from "../../lib/scene";
 import { CloudLayer } from "../world/Clouds";
@@ -43,12 +42,10 @@ export function FairyGarden() {
         </Reveal>
       </div>
 
-      {/* Behind the grasses, so the meadow grows up in front of it and it sits back. */}
-      <Painted id="fairy-cottage" className="garden__cottage" />
-
       <Meadow className="garden__meadow" seed={3} />
 
-      {/* In front of the grasses: she is the nearest thing in the scene. */}
+      {/* Both in front of the grasses. See the note in FairyGarden.css. */}
+      <Painted id="fairy-cottage" className="garden__cottage" />
       <Painted id="fairy-on-toadstool" className="garden__fairy" />
     </Chapter>
   );
