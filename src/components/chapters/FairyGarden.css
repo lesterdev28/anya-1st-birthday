@@ -69,7 +69,7 @@
   font-weight: 400;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
   margin: clamp(2rem, 8vh, 3.4rem) 0 0;
 }
 
@@ -87,7 +87,7 @@
   font-size: 0.66rem;
   letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
 }
 
 .garden__hint-trail {

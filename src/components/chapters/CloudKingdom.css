@@ -214,8 +214,11 @@
    * Solid gold, not gilded. It is one short word in letterspaced caps at about a third
    * the size of the name, and the sheen's dark band lands across the middle of letters
    * that small as a smudge rather than as a polish.
+   *
+   * And the dark gold, because this one sits on the brightest part of the sky rather
+   * than on cream: the lighter gold measured 1.8 against the 4.5 it needs at 20px.
    */
-  color: var(--fairy-gold);
+  color: var(--gold-ink);
 }
 
 .kingdom__invite {

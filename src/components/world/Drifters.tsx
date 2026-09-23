@@ -11,7 +11,7 @@
  * Counts are halved on small screens, which is the brief's own instruction for phones:
  * keep the magic, reduce the particle count.
  */
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./Drifters.css";
 
 export type DrifterKind = "stars" | "dust" | "petals" | "pollen" | "fireflies";
@@ -63,6 +63,31 @@ const DURATIONS: Record<DrifterKind, readonly [number, number]> = {
 };
 
 export function Drifters({ kind, count = 24, className }: Props) {
+  const group = useRef<HTMLDivElement>(null);
+  const [near, setNear] = useState(false);
+
+  /*
+   * Off-screen particles hold still.
+   *
+   * Measured on a throttled phone over one full scroll of the page, the drifters cost
+   * about ten seconds of main-thread work, two thirds of it in style recalculation —
+   * because a keyframe that reads a custom property (`--drift`, `--mote`) cannot be
+   * handed to the compositor and has to be ticked on the main thread instead. There are
+   * five hundred of them on the page and at most two chapters' worth are ever in view.
+   *
+   * `rootMargin` starts a chapter's particles moving well before it arrives, so nothing
+   * is ever caught standing still, and `Fairies` already does exactly this.
+   */
+  useEffect(() => {
+    const element = group.current;
+    if (!element) return;
+    const watcher = new IntersectionObserver(([entry]) => setNear(entry.isIntersecting), {
+      rootMargin: "50% 0px 50% 0px",
+    });
+    watcher.observe(element);
+    return () => watcher.disconnect();
+  }, []);
+
   const particles = useMemo(() => {
     const random = seeded(SEEDS[kind]);
     const [size, sizeSpread] = SIZES[kind];
@@ -82,7 +107,11 @@ export function Drifters({ kind, count = 24, className }: Props) {
   }, [count, kind]);
 
   return (
-    <div className={`drifters drifters--${kind}${className ? ` ${className}` : ""}`} aria-hidden="true">
+    <div
+      ref={group}
+      className={`drifters drifters--${kind}${near ? " is-here" : ""}${className ? ` ${className}` : ""}`}
+      aria-hidden="true"
+    >
       {particles.map((particle) => (
         <span
           key={particle.key}

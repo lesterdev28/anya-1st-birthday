@@ -64,7 +64,7 @@
   font-size: clamp(1.7rem, 9cqw, 2.6rem);
   font-weight: 500;
   line-height: 1;
-  color: var(--gold-antique);
+  color: var(--gold-ink);
   font-variant-numeric: tabular-nums;
 }
 
@@ -73,16 +73,18 @@
   font-size: clamp(0.52rem, 2.4cqw, 0.64rem);
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--ink-soft);
   margin-top: 0.4rem;
 }
 
 /*
- * The seconds are the live one. Now that the whole clock is gold, a gold second hand
- * marks nothing — so it is the light end of the ramp against the antique of the rest.
+ * The seconds are the live one, marked by being a step brighter than the rest of the
+ * clock rather than by being a different colour. It stops at the antique: the numbers
+ * are 28px, and the lighter golds do not hold at that size even by the looser rule
+ * large text gets.
  */
 .countdown__unit--seconds .countdown__value {
-  color: var(--fairy-gold);
+  color: var(--gold-antique);
 }
 
 @media (prefers-reduced-motion: reduce) {

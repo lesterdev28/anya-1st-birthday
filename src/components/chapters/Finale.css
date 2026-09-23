@@ -67,10 +67,12 @@
   letter-spacing: 0.3em;
   text-transform: uppercase;
   /*
-   * A deeper gold than the palette's own. The sign-off sits on the warmest part of the
-   * sunset, where --fairy-gold is close enough in value to the background to disappear.
+   * The sign-off sits on the warmest part of the sunset, where the lighter golds are
+   * close enough in value to the background to disappear. This used to be a one-off
+   * hex mixed by eye for that; it is the palette's own small-text gold now, which is
+   * darker still and measures where 11px type has to be.
    */
-  color: #a8823c;
+  color: var(--gold-ink);
   margin: 0;
 }
 

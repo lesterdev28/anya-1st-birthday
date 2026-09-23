@@ -34,6 +34,16 @@
    */
   --gold-deep: #96702f;
   --gold-antique: #b28b3c;
+  /*
+   * Gold for small text, which is a different problem from gold for a title.
+   *
+   * `--gold-antique` is mixed to look like metal at display size, where the eye reads a
+   * letterform two hundred pixels wide. At eleven pixels there is no letterform to read,
+   * only colour, and on cream it measured 3.0 against the 4.5 small text needs. This is
+   * the same hue carried down until it clears that, which is as dark as gold goes before
+   * it reads as bronze.
+   */
+  --gold-ink: #7d5f21;
   --gold-light: #f2e2bd;
   --gold-highlight: #fffaef;
 
@@ -44,13 +54,13 @@
    */
   --gold-sheen: linear-gradient(
     168deg,
-    var(--gold-light) 0%,
-    var(--champagne-gold) 18%,
-    var(--fairy-gold) 34%,
+    var(--champagne-gold) 0%,
+    var(--fairy-gold) 16%,
+    var(--gold-antique) 32%,
     var(--gold-deep) 46%,
-    var(--gold-antique) 53%,
-    var(--fairy-gold) 66%,
-    var(--champagne-gold) 82%,
+    #85631f 53%,
+    var(--gold-antique) 66%,
+    var(--fairy-gold) 82%,
     var(--gold-highlight) 100%
   );
 
@@ -60,7 +70,14 @@
    * part of the world instead of as type dropped on top of it.
    */
   --ink: #453a57;
-  --ink-soft: #6c6080;
+  --ink-soft: #625670;
+  /*
+   * The faintest ink is for decoration — a watermark, a hairline — and no longer for
+   * text. Measured against the real backdrop on a phone, every label set in it came in
+   * between 2.3 and 2.9 against the 4.5 that small text needs, because a third tier
+   * below `--ink-soft` on a near-white page has nowhere left to go. The labels moved up
+   * to `--ink-soft` instead; this keeps its job and its value.
+   */
   --ink-faint: #9b90ab;
 
   /*
@@ -217,7 +234,7 @@ h3 {
  * them. A drop-shadow follows the painted shape after the clip, so it behaves.
  */
 .gilt {
-  color: var(--gold-antique);
+  color: var(--gold-ink);
 }
 
 @supports (background-clip: text) or (-webkit-background-clip: text) {
@@ -245,10 +262,11 @@ h3 {
   word-spacing: 0.3em;
   /*
    * Gold rather than lavender. Great Vibes is a hairline face, so it is the one place
-   * the flat antique gold is better than the sheen: the gradient's dark band lands
-   * inside a stroke one pixel wide and breaks the letter in half.
+   * a flat gold is better than the sheen: the gradient's dark band lands inside a stroke
+   * one pixel wide and breaks the letter in half. It takes the darker gold too — a
+   * hairline at 25px measured below the 3.0 that large text needs in the antique.
    */
-  color: var(--gold-antique);
+  color: var(--gold-ink);
 }
 
 p {
@@ -278,7 +296,7 @@ img {
   font-size: 0.72rem;
   letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: var(--gold-antique);
+  color: var(--gold-ink);
   margin: 0 0 1.1rem;
   font-weight: 500;
 }

@@ -12,6 +12,12 @@
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   will-change: transform, opacity;
+  /* Still until the group is near the screen — see the note in Drifters.tsx. */
+  animation-play-state: paused;
+}
+
+.drifters.is-here .drifters__bit {
+  animation-play-state: running;
 }
 
 /* ---- stars: fixed points that twinkle rather than travel ---- */
