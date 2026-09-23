@@ -65,6 +65,16 @@ export const story = {
   inviteTitle: "Anya's 1st Birthday",
   inviteBody: "Join us for an enchanted celebration as our little fairy turns ONE.",
 
+  /*
+   * Lester asked for gift ideas that do not sound demanding, so this page gives the gift
+   * back before it suggests anything and ends by saying nothing is needed at all.
+   */
+  giftsEyebrow: "Only if you'd like to",
+  giftsTitle: "Gift Ideas",
+  giftsBody:
+    "Having you there is the whole gift. But if you would like a starting point, here are a few things Anya would enjoy.",
+  giftsFoot: "anything at all, or nothing at all, is lovely",
+
   countdownHeading: "The magic begins in…",
   countdownToday: "The magic is happening today",
   countdownPast: "Thank you for celebrating with us",
@@ -77,6 +87,35 @@ export const story = {
   finaleSee: "See you in the fairy garden.",
   finaleSignOff: "Anya turns ONE ✨",
 } as const;
+
+/**
+ * The gift suggestions, in the order they are shown.
+ *
+ * Each `id` is a stem under public/invitation/gifts; a gift whose picture has not been
+ * optimized yet simply does not render, the same rule the rest of the site follows.
+ */
+export const gifts = [
+  {
+    id: "gift-montessori-toys",
+    name: "Montessori wooden toys",
+    note: "Stacking, sorting and fitting things together.",
+  },
+  {
+    id: "gift-bible-stories",
+    name: "My First Bible Stories",
+    note: "A sound book with ten stories to press along to.",
+  },
+  {
+    id: "gift-bookshelf",
+    name: "A little bookshelf",
+    note: "Low enough that she can choose her own book.",
+  },
+  {
+    id: "gift-peppa-chair",
+    name: "A Peppa Pig chair",
+    note: "A seat of her very own, exactly her size.",
+  },
+] as const;
 
 /**
  * How a month's photograph is presented.

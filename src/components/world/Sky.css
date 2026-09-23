@@ -92,6 +92,14 @@ body[data-scene="invitation"] {
   --sky-d: #fff9f1;
 }
 
+/* Half a step from the invitation towards the garden, so the pair reads as one descent. */
+body[data-scene="gifts"] {
+  --sky-a: #f6f1f3;
+  --sky-b: #f0e6f1;
+  --sky-c: #e1e2ee;
+  --sky-d: #fff9f1;
+}
+
 body[data-scene="rsvp"] {
   --sky-a: #e8ddf5;
   --sky-b: #e4e9ee;

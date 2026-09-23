@@ -658,6 +658,42 @@
     "aspectRatio": 0.5655,
     "placeholder": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAACwBACdASoYACoAPuVkpU24piOiNVgIAxAciWMAxNgeNTYdG6lAl2y9FLKkoEs8AP7tQ+7ufrtk/tfucsjvuIVjnTnzeLlewVxcL8XiybAFZExjc0LjXx2R5iqlFfRbK2SFKtpixJ6daywg77vHfrjh8+XcA+vjqHUGElQAAAA="
   },
+  "gift-bible-stories": {
+    "base": "/invitation/gifts/optimized/gift-bible-stories",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAAAQBQCdASoYABgAPu1mqU8ppaOiKA1RMB2JZgCdMzLyTCS29VsAN4ZSeBMaf0D8eXnAAP7temdn04kr5TzGYji5bYXyhwKsUT8kY6OxHCcoUiXXlULpLHkmYAZC0xb4qHDQD4Gw6pMk+42TfzJ5Vei3LrZ8q0DxAhmo7HxFzwu57GFeTtV4NrVyWjw/Jv79bcdAmsMAAAA="
+  },
+  "gift-bookshelf": {
+    "base": "/invitation/gifts/optimized/gift-bookshelf",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAACwBACdASoYABgAPu1mqk2ppaQiMAgBMB2JQBUehDv3M5FreMZEwa8/g3lXfLIwAP7ThfZYD2USfAy29M2AL3Mu0KLKJQJGP7exkesoHOQKVkdY6tqGNspcRue2hIEVhzA60v+rvdWLFM5+qwg3Imx+AT2GMKAA"
+  },
+  "gift-montessori-toys": {
+    "base": "/invitation/gifts/optimized/gift-montessori-toys",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAABwBQCdASoYABgAPu1uq1GppqOiqAqpMB2JZACxG2uA5s87raXzAx8tq2cVuPIgUm+hsx4AAP7rDTNPjZYJwxG6zEgckkWYH2wyswW4pGB9oY+U/F1y8/gRUQ1AiP+tQXtzZ8V86U2JPAGC0Slv8uKvegH9cV5YAAA="
+  },
+  "gift-peppa-chair": {
+    "base": "/invitation/gifts/optimized/gift-peppa-chair",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAAAwBQCdASoYABgAPu1mq08ppaOiKA1RMB2JZmDrTaTVAGwNVMZNPPnAdQvIug/iKXtYAAD+53EPZ9BdKLNbAh29Ifiz2AbDbxcdu4tt9Oc+ksIYWskIBYDS8/mj9DKIBkEsPMFyB4YC0ssGhitMXEEfVwz0c4sgkBwBhAAA"
+  },
   "magnolia-spray": {
     "base": "/invitation/art/optimized/magnolia-spray",
     "widths": [

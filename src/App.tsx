@@ -19,6 +19,7 @@ import { FairyGarden } from "./components/chapters/FairyGarden";
 import { MonthJourney } from "./components/chapters/MonthJourney";
 import { YearClimax } from "./components/chapters/YearClimax";
 import { Invitation } from "./components/chapters/Invitation";
+import { Gifts } from "./components/chapters/Gifts";
 import { Rsvp } from "./components/chapters/Rsvp";
 import { Finale } from "./components/chapters/Finale";
 import { child, story } from "./data/party";
@@ -69,6 +70,7 @@ export function App() {
         <MonthJourney />
         <YearClimax />
         <Invitation />
+        <Gifts />
         <Rsvp />
         <Finale />
       </main>

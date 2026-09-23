@@ -47,6 +47,14 @@ const DECOR_WIDTHS = [320, 640];
  */
 const WIDE_DECOR = new Set(["story-cloud"]);
 const WIDE_DECOR_WIDTHS = [640, 1280];
+/**
+ * The gift suggestions in public/invitation/gifts.
+ *
+ * Product pictures rather than photographs of Anya, shown two to a row in cards about
+ * 160 CSS pixels across on a phone and 260 on a desktop — so 640 already covers a 2x
+ * screen and anything larger is weight for a thumbnail.
+ */
+const GIFT_WIDTHS = [320, 640];
 
 interface Job {
   readonly source: string;
@@ -167,6 +175,7 @@ async function main(): Promise<void> {
   const photos = await collect(join(INVITATION_ROOT, "photos"), [".jpg", ".jpeg", ".png"]);
   const art = await collect(join(INVITATION_ROOT, "higgsfield"), [".png", ".jpg"]);
   const decor = await collect(join(INVITATION_ROOT, "art"), [".png"]);
+  const gifts = await collect(join(INVITATION_ROOT, "gifts"), [".jpg", ".jpeg", ".png"]);
 
   const jobs: Job[] = [
     ...photos
@@ -182,6 +191,9 @@ async function main(): Promise<void> {
         widths: WIDE_DECOR.has(basename(source, extname(source))) ? WIDE_DECOR_WIDTHS : DECOR_WIDTHS,
         quality: 88,
       })),
+    ...gifts
+      .filter((file) => !file.includes("/optimized/"))
+      .map((source) => ({ source, widths: GIFT_WIDTHS, quality: 82 })),
   ];
 
   if (jobs.length === 0) {

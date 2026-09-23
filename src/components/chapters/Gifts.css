@@ -1,0 +1,156 @@
+.gifts {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(4rem, 12vh, 7rem) var(--page-gutter);
+  container-type: inline-size;
+}
+
+.gifts__clouds,
+.gifts__air,
+.gifts__butterflies {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gifts__clouds {
+  z-index: 1;
+  opacity: 0.45;
+}
+
+.gifts__air {
+  z-index: 2;
+}
+
+.gifts__butterflies {
+  z-index: 5;
+}
+
+/*
+ * Above the butterflies rather than under them. Everywhere else they drift across a card
+ * with a solid back, but this copy sits straight on the sky, and a wing over the middle
+ * of a sentence is the one place they stop being charming.
+ */
+.gifts__inner {
+  position: relative;
+  z-index: 6;
+  max-width: 34rem;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.gifts__eyebrow {
+  margin-bottom: 0.5rem;
+}
+
+.gifts__heading {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 10cqw, 2.5rem);
+  font-weight: 500;
+  margin: 0 0 0.7rem;
+}
+
+.gifts__body {
+  font-size: clamp(0.88rem, 3.8cqw, 0.98rem);
+  color: var(--ink-soft);
+  max-width: 24rem;
+  margin: 0 auto 2rem;
+}
+
+/*
+ * Two to a row at every width. Four across on a desktop would make each picture a
+ * thumbnail and turn the row into a shop shelf; two keeps them big enough to see what
+ * the thing actually is, which is the only job these pictures have.
+ */
+.gifts__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.8rem, 3.5cqw, 1.2rem);
+}
+
+.gifts__card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0.5rem 0.9rem;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(215, 180, 106, 0.4);
+  background: linear-gradient(
+    172deg,
+    rgba(255, 253, 248, 0.92) 0%,
+    rgba(255, 249, 241, 0.8) 100%
+  );
+  backdrop-filter: blur(8px);
+  box-shadow: 0 14px 34px rgba(103, 88, 132, 0.13);
+}
+
+/*
+ * The pictures are square, and saying so here rather than letting the file decide stops
+ * the grid reflowing as each one loads.
+ */
+.gifts__shot {
+  display: block;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  background: rgba(240, 234, 226, 0.6);
+}
+
+.gifts__shot img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.gifts__name {
+  font-family: var(--serif);
+  font-size: clamp(0.95rem, 4cqw, 1.05rem);
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0.7rem 0 0.25rem;
+}
+
+.gifts__note {
+  font-family: var(--sans);
+  font-size: clamp(0.72rem, 3cqw, 0.8rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* The permission to bring nothing, in the hand the sign-offs are written in. */
+.gifts__foot {
+  font-size: clamp(1.15rem, 5cqw, 1.4rem);
+  margin: 1.8rem 0 0;
+}
+
+/*
+ * One row once there is room for it. Four cards stacked two-by-two run past the bottom of
+ * a laptop screen, and a guest who has to scroll to find out there were four of them has
+ * already read this as a list of demands rather than a handful of ideas.
+ */
+@container (min-width: 52rem) {
+  .gifts__inner {
+    max-width: 56rem;
+  }
+
+  .gifts__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Shorter on a phone, for the reason set out in MonthJourney.css. */
+@media (max-width: 640px) {
+  .gifts {
+    min-height: 88svh;
+  }
+}

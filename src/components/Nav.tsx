@@ -21,6 +21,7 @@ const STOPS: readonly { readonly scene: SceneId; readonly href: string; readonly
 const STANDS_FOR: Partial<Record<SceneId, SceneId>> = {
   "fairy-garden": "month-journey",
   "month-12": "month-journey",
+  gifts: "invitation",
   finale: "rsvp",
 };
 

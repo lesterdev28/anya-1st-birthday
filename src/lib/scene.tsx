@@ -42,6 +42,7 @@ export const SCENES = [
   "month-journey",
   "month-12",
   "invitation",
+  "gifts",
   "rsvp",
   "finale",
 ] as const;
