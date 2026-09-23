@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.5rem;
-  /* A 44px touch target around a 7px dot. */
+  /* A 25px target around a 7px dot, which is for a mouse: see the touch rule below. */
   padding: 0.55rem;
   text-decoration: none;
   border-radius: 999px;
@@ -80,6 +80,28 @@
     overflow: hidden;
     clip: rect(0 0 0 0);
     white-space: nowrap;
+  }
+}
+
+/*
+ * On a touch screen the rail shows where you are and does nothing else.
+ *
+ * It is fixed to the middle of the right edge — the one part of a phone screen a thumb
+ * is guaranteed to travel over, again and again, for the whole length of a very long
+ * page. A dot caught at the end of a swipe navigates, and the page glides off to another
+ * chapter: the guest did not ask to go anywhere, so it reads as the scroll jumping ahead.
+ * Measured on a 390px screen the four dots cover the rightmost 34px and the middle 142px
+ * of the viewport, which is not a target a thumb can reliably avoid.
+ *
+ * On a phone the labels are hidden anyway, so what is being given up is four unlabelled
+ * dots that teleport you somewhere unnamed. The rail keeps the job it actually does
+ * there — saying how far through the journey you are — and the keyboard keeps the links,
+ * because `pointer-events` does not affect focus.
+ */
+@media (pointer: coarse) {
+  .nav__dot {
+    pointer-events: none;
+    cursor: default;
   }
 }
 
