@@ -676,6 +676,42 @@
     "aspectRatio": 1,
     "placeholder": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAACwBACdASoYABgAPu1mqk2ppaQiMAgBMB2JQBUehDv3M5FreMZEwa8/g3lXfLIwAP7ThfZYD2USfAy29M2AL3Mu0KLKJQJGP7exkesoHOQKVkdY6tqGNspcRue2hIEVhzA60v+rvdWLFM5+qwg3Imx+AT2GMKAA"
   },
+  "gift-cuddle-bunny": {
+    "base": "/invitation/gifts/optimized/gift-cuddle-bunny",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAABQBQCdASoYABgAPu1srFGppaQiqAqpMB2JYgCdMoABrT5Pye+EXC3aa68h9ih7SolRsAAA/u1/TntNlerKt0rMSTjFh9VdIKadGVZBbSh96I8vaYEYbYZREbwXwyH38ZGRGI+DHD4JRdmKgeb2kAAA"
+  },
+  "gift-diapers": {
+    "base": "/invitation/gifts/optimized/gift-diapers",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAACQBQCdASoYABgAPu1krE2ppaSiKA1RMB2JZgCdMuIyTJaZx0eynqrHZbMF7toMAEarvVowAAD+87rZyUOTLMhNZjnfo77Jssc3z7wMvlXrQA3ScUDEzXKVdm9TMON0uiMLVLRuRNtMwehqG1HsYiEsNMDCgaYTUtc2IMY7B4+nwpcAAAA="
+  },
+  "gift-first-sneakers": {
+    "base": "/invitation/gifts/optimized/gift-first-sneakers",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAAAwBQCdASoYABgAPu1orU6ppiSiMAgBMB2JQBWGW+BoAWcX7kTklwC6FtAMjttGDFiN4AD+7dzKscBNPkmoA7nz0YMphFiGkBZHBsxUBF/6hn/FUtTeBo093ZIn2h0uRHE+FtW0TuP3Ee4OgQqNw8F6Lrc8WnF1XjxerMI+Jx/LSD9iEa7OccXdR/Y70dAA"
+  },
+  "gift-hair-clips": {
+    "base": "/invitation/gifts/optimized/gift-hair-clips",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBQCdASoYABgAPu1eqk6ppKOiMBgMATAdiUAVHoIelQ3aGX5hTCTUm0eW+gJNawawAP7emL7aa8wB2X8l4PG83A7/efe84O2Yue6mdzeUH183p/5wL4R3xmsB12D7rESm2bGYQ6CsiAAA"
+  },
   "gift-montessori-toys": {
     "base": "/invitation/gifts/optimized/gift-montessori-toys",
     "widths": [
@@ -693,6 +729,24 @@
     ],
     "aspectRatio": 1,
     "placeholder": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAAAwBQCdASoYABgAPu1mq08ppaOiKA1RMB2JZmDrTaTVAGwNVMZNPPnAdQvIug/iKXtYAAD+53EPZ9BdKLNbAh29Ifiz2AbDbxcdu4tt9Oc+ksIYWskIBYDS8/mj9DKIBkEsPMFyB4YC0ssGhitMXEEfVwz0c4sgkBwBhAAA"
+  },
+  "gift-play-balls": {
+    "base": "/invitation/gifts/optimized/gift-play-balls",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADQBACdASoYABgAPtFUoU2oJKMiN+gBABoJZACdADIZZcn/ozcQ6UyIIJMgSM2wAAD+7+z1K4nyo9F/3jKCIHfWRU2Jk857KkCJTKTJsNffPMO0MRllSvCgudD1HAW5Ny0zz8ekpkrx0qCSg6omr/4rM5+tj3QcW2AAAA=="
+  },
+  "gift-rocking-horse": {
+    "base": "/invitation/gifts/optimized/gift-rocking-horse",
+    "widths": [
+      320,
+      640
+    ],
+    "aspectRatio": 1,
+    "placeholder": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAQBQCdASoYABgAPu1eqk2ppKQiMBgMATAdiUAWo2QwNQQ1hQcbXLUo66nKSFnKDqgAAP7tgAZRFf2JQvRRVWo0ztEJKSju2gFOFVm69xCB1uhzHhAyYmIAWW5QnQY0qIL5FPks6/THUJmKOL+RE/wA"
   },
   "magnolia-spray": {
     "base": "/invitation/art/optimized/magnolia-spray",

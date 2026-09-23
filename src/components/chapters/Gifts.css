@@ -134,17 +134,22 @@
 }
 
 /*
- * One row once there is room for it. Four cards stacked two-by-two run past the bottom of
- * a laptop screen, and a guest who has to scroll to find out there were four of them has
- * already read this as a list of demands rather than a handful of ideas.
+ * Five to a row once there is room, which is exactly two rows for the ten ideas there are.
+ * Four columns would leave a ragged pair hanging off the end, and a row that does not fill
+ * reads as something missing rather than as the last of the list.
  */
 @container (min-width: 52rem) {
   .gifts__inner {
-    max-width: 56rem;
+    max-width: 58rem;
   }
 
   .gifts__grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  /* Smaller cards want a smaller caption, or the notes run to four lines each. */
+  .gifts__note {
+    font-size: 0.74rem;
   }
 }
 

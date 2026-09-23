@@ -125,6 +125,36 @@ export const gifts = [
     name: "A Peppa Pig chair",
     note: "A seat of her very own, exactly her size.",
   },
+  {
+    id: "gift-rocking-horse",
+    name: "A rocking horse",
+    note: "Steady to climb on, and a gentle rock.",
+  },
+  {
+    id: "gift-first-sneakers",
+    name: "Her first sneakers",
+    note: "For all the walking that is about to start.",
+  },
+  {
+    id: "gift-cuddle-bunny",
+    name: "A cuddle bunny",
+    note: "Soft, washable, and made to be carried everywhere.",
+  },
+  {
+    id: "gift-play-balls",
+    name: "A hundred play balls",
+    note: "For a ball pit, or for rolling across the floor.",
+  },
+  {
+    id: "gift-hair-clips",
+    name: "Hair clips and ties",
+    note: "Bows, flowers and little bears for her hair.",
+  },
+  {
+    id: "gift-diapers",
+    name: "MamyPoko diapers",
+    note: "Size L. Practical, and always welcome.",
+  },
 ] as const;
 
 /**
