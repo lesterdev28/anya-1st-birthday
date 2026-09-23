@@ -96,6 +96,21 @@
   margin: 1rem 0 0;
 }
 
+/*
+ * The twelfth milestone. Body copy, so it takes the reading face and the reading colour
+ * rather than the gold and the letterspacing of the line above it, and it keeps its own
+ * line breaks.
+ */
+.climax__milestone {
+  font-family: var(--sans);
+  font-size: clamp(0.88rem, 3.8cqw, 0.98rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  white-space: pre-line;
+  margin: 1.6rem 0 0;
+}
+
 .climax__gate {
   position: absolute;
   inset: 0;

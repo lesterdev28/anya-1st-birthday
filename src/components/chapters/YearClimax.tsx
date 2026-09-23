@@ -77,6 +77,18 @@ function ClimaxScene() {
         <Reveal as="p" className="climax__celebrate" delay={0.25} amount={0.5}>
           {story.climaxCelebrate}
         </Reveal>
+
+        {/*
+          The twelfth milestone, in Lester's words.
+
+          Every other month shows its milestone through MonthJourney; the twelfth is this
+          chapter instead, and until now its caption was only ever read out to a screen
+          reader. So it is set here, in the same face and colour as the lines above it.
+          The text carries its own line breaks, which is why it is `pre-line`.
+        */}
+        <Reveal as="p" className="climax__milestone" delay={0.34} amount={0.4}>
+          {twelfth.caption}
+        </Reveal>
       </div>
 
       {/* In front of the words, and travelling outward: the year opening up. */}

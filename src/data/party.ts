@@ -181,7 +181,11 @@ export type MonthFrame =
 export interface MonthChapter {
   readonly month: number;
   readonly title: string;
-  /** One short line. Kept gentle and non-specific, since these are not our memories. */
+  /**
+   * The milestone, in Lester's own words. His, not mine to reword.
+   *
+   * A newline is a line break on the page, which only the twelfth month uses.
+   */
   readonly caption: string;
   /**
    * Filename stems under public/invitation/photos, best first.
@@ -212,88 +216,88 @@ export interface MonthChapter {
 export const monthChapters: readonly MonthChapter[] = [
   {
     month: 1,
-    title: "One Month",
-    caption: "So small, and already the whole world.",
+    title: "One Month — Our Tiny Newborn",
+    caption: "Our first month was filled with cuddles, crying, and very little sleep. Anya was very gassy, had frequent spit-ups, and woke up about every two hours—even through the night. We were all learning together during those first precious weeks.",
     photos: ["anya-month-01-a", "anya-month-01-b", "anya-month-01-c", "anya-month-01-d"],
     frame: "cloud",
     from: "left",
   },
   {
     month: 2,
-    title: "Two Months",
-    caption: "First long looks at everything.",
+    title: "Two Months — Little Smiles",
+    caption: "The colic and gassiness continued, but Anya started sleeping a little better. She still made her adorable little “O” face, and every now and then, she would surprise us with the sweetest little smile.",
     photos: ["anya-month-02-a", "anya-month-02-b", "anya-month-02-c"],
     frame: "butterfly",
     from: "right",
   },
   {
     month: 3,
-    title: "Three Months",
-    caption: "The first real laugh.",
+    title: "Three Months — Hello, Little Personality!",
+    caption: "Anya started laughing when we tickled and played with her. She loved “singing,” babbling, and having little conversations with us. She also discovered how to roll from her back to her tummy—especially when she was bored or frustrated!",
     photos: ["anya-month-03-a", "anya-month-03-b", "anya-month-03-c"],
     frame: "wreath",
     from: "left",
   },
   {
     month: 4,
-    title: "Four Months",
-    caption: "Hands discovered. Everything tasted.",
+    title: "Four Months — Ready to Explore",
+    caption: "Rolling over became easy for Anya, and she started practicing the movements that would eventually lead to crawling. Our little girl was getting stronger, more curious, and ready to explore.",
     photos: ["anya-month-04-a", "anya-month-04-b", "anya-month-04-c", "anya-month-04-d"],
     frame: "portal",
     from: "right",
   },
   {
     month: 5,
-    title: "Five Months",
-    caption: "Rolling over, and very pleased about it.",
+    title: "Five Months — On the Move",
+    caption: "Crawling practice continued! Anya became more determined to move around and explore everything within reach. Every day, she was getting stronger, more active, and more curious about the world around her.",
     photos: ["anya-month-05-a", "anya-month-05-b", "anya-month-05-c", "anya-month-05-d", "anya-month-05-e", "anya-month-05-f"],
     frame: "arch",
     from: "left",
   },
   {
     month: 6,
-    title: "Six Months",
-    caption: "Half a year of being adored.",
+    title: "Six Months — So Many Firsts!",
+    caption: "Anya discovered her fingers and her very high-pitched voice! She could sit on her own, loved bouncing and moving her whole body with excitement, and started saying sounds like “mum” and “ma.” She also had her first food—steak!",
     photos: ["anya-month-06-a", "anya-month-06-b", "anya-month-06-c", "anya-month-06-d", "anya-month-06-e", "anya-month-06-f"],
     frame: "moon",
     from: "right",
   },
   {
     month: 7,
-    title: "Seven Months",
-    caption: "Sitting up to see it all properly.",
+    title: "Seven Months — “Mama!”",
+    caption: "One of our favorite milestones finally happened—Anya said “Mama!” She also learned to pull herself up and stand while holding onto the bed frame and furniture. Suddenly, everything became something to climb and explore.",
     photos: ["anya-month-07-a", "anya-month-07-b", "anya-month-07-c", "anya-month-07-d"],
     frame: "storybook",
     from: "left",
   },
   {
     month: 8,
-    title: "Eight Months",
-    caption: "Opinions, and the volume to share them.",
+    title: "Eight Months — Little Miss Independent",
+    caption: "Anya became our little chatterbox, saying “dada,” “tata,” “baba,” “dadididii,” and endless baby babbles. She could stand alone for 5–10 seconds, crawl backward, lower herself bottom-first, and wave her hand. Her first tooth—the upper right—also appeared! She clearly recognized Daddy and would light up whenever she saw him.",
     photos: ["anya-month-08-a", "anya-month-08-b"],
     frame: "meadow",
     from: "right",
   },
   {
     month: 9,
-    title: "Nine Months",
-    caption: "Off exploring, one hand held.",
+    title: "Nine Months — Clap, Wave & Say Hi!",
+    caption: "At 9 months, Anya weighed 8.4 kg and measured 70 cm tall. She learned to clap—at first without making a sound—and started waving while saying her own adorable version of “Hi!” She was also becoming much more confident standing independently.",
     photos: ["anya-month-09-a", "anya-month-09-b", "anya-month-09-c", "anya-month-09-d", "anya-month-09-e", "anya-month-09-f"],
     frame: "oval",
     from: "left",
   },
   {
     month: 10,
-    title: "Ten Months",
-    caption: "A favourite toy, carried everywhere.",
+    title: "Ten Months — Our Little Communicator",
+    caption: "Anya started saying “du” for duck and “bu” for bird, while “Dada” became one of her favorite words—sometimes even used to wake Daddy! She could shake her head for “no,” stick out her tongue, dance, and call Bondi using her special mouth-clicking sound and hand gesture. She loved assisted walking and, toward the end of the month, took her first 2–3 independent steps.",
     photos: ["anya-month-10-a", "anya-month-10-b", "anya-month-10-c", "anya-month-10-d", "anya-month-10-e"],
     frame: "vines",
     from: "right",
   },
   {
     month: 11,
-    title: "Eleven Months",
-    caption: "Almost walking. Definitely running.",
+    title: "Eleven Months — And She’s Walking!",
+    caption: "Those first tiny steps quickly became more. Anya started by slowly walking about five steps on her own. By her second week at 11 months, she was already walking farther and becoming more confident on her little feet.",
     photos: [
       "anya-month-11-a",
       "anya-month-11-b",
@@ -306,5 +310,5 @@ export const monthChapters: readonly MonthChapter[] = [
     from: "left",
   },
   /* No photograph, and there will not be one — Lester said so. Twelve is the climax. */
-  { month: 12, title: "Twelve Months", caption: "One whole year of magic.", photos: [], frame: "finale", from: "left" },
+  { month: 12, title: "Twelve Months — ONE!", caption: "Our little baby is ONE! From sleepless newborn nights to smiles, laughter, rolling, crawling, babbling, standing, waving, clapping, dancing, and finally walking—what an incredible first year it has been.\n365 days of firsts.\n365 days of memories.\n365 days of watching our answered prayer grow.\nHappy 1st Birthday, Anya! ♡", photos: [], frame: "finale", from: "left" },
 ];
