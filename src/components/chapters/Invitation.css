@@ -74,6 +74,25 @@
   margin: 0;
 }
 
+/*
+ * Her name in full. It is deliberately smaller than the title above it: the title is
+ * what the invitation is for, and this is who it is for, set the way an engraver would
+ * set it — wide letterspacing in the serif, so it is unmistakably a name and not a
+ * second line of the heading. The sans eyebrow above is uppercase too, which is why
+ * this one stays in the display face; two identical treatments would flatten the card.
+ */
+.invite__fullname {
+  font-family: var(--serif);
+  font-size: clamp(0.82rem, 3.5cqw, 0.94rem);
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  /* Letterspacing pads the right of the last glyph; this pulls the line back to centre. */
+  text-indent: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  margin: 0.75rem 0 0;
+}
+
 .invite__body {
   font-size: clamp(0.88rem, 3.8cqw, 0.98rem);
   color: var(--ink-soft);

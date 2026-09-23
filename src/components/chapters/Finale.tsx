@@ -28,7 +28,7 @@ export function Finale() {
 
       <div className="finale__inner">
         <Reveal className="finale__portrait" amount={0.3}>
-          <PortraitMedallion photoId={child.finalePortrait} alt={`${child.name}`} />
+          <PortraitMedallion photoId={child.finalePortrait} alt={child.fullName} />
         </Reveal>
 
         <Reveal as="p" className="finale__thanks" delay={0.14} amount={0.4}>

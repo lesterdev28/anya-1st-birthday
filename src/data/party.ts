@@ -5,6 +5,13 @@
 
 export const child = {
   name: "Anya",
+  /**
+   * Her name in full, for the one place it belongs: the formal invitation.
+   *
+   * Everywhere else on the page she is Anya, because that is what everyone being invited
+   * calls her — a printed invitation is the one moment that sets the whole name down.
+   */
+  fullName: "Briella Anya Orot",
   turning: "ONE",
   /**
    * The photograph the journey closes on. Any stem from public/invitation/photos works.

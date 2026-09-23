@@ -40,6 +40,13 @@ export function Invitation() {
 
         <h2 className="invite__title gilt">{story.inviteTitle}</h2>
 
+        {/*
+          The full name, set the way an engraved invitation sets it: small, wide and
+          quiet under the title, so it reads as the formal record of who is being
+          celebrated rather than as a second heading competing with the first.
+        */}
+        <p className="invite__fullname">{child.fullName}</p>
+
         <div className="rule" aria-hidden="true">
           <span />
         </div>
