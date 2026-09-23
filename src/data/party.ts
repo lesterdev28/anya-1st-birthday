@@ -72,8 +72,6 @@ export const story = {
   rsvpHeading: "Will you join the magic?",
   rsvpBody: "We would love to celebrate Anya's special day with you.",
 
-  /* No form to reply through any more, so this says how a guest actually replies. */
-  rsvpReply: "Send us a message and we'll keep you a place in the garden.",
 
   finaleThanks: "Thank you for being part of Anya's story.",
   finaleSee: "See you in the fairy garden.",

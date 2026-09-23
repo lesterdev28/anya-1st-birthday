@@ -8,7 +8,8 @@
  * answer to is worse than one that simply invites, so this is now the invitation.
  *
  * Replies come back to Lester the way they already were: by message, in the group the
- * invitation was shared into.
+ * invitation was shared into. The line that said so is gone too, at his asking on
+ * 2026-09-23 — the invitation reads as an invitation, and does not explain itself.
  */
 import { Chapter } from "../../lib/scene";
 import { CloudLayer } from "../world/Clouds";
@@ -34,11 +35,9 @@ export function Rsvp() {
         <Reveal as="p" className="rsvp__body" delay={0.12} amount={0.4}>
           {story.rsvpBody}
         </Reveal>
+        {/* The rule closes the section now rather than dividing it. */}
         <Reveal className="rsvp__rule" delay={0.24} amount={0.4}>
           <span />
-        </Reveal>
-        <Reveal as="p" className="rsvp__wish" delay={0.32} amount={0.4}>
-          {story.rsvpReply}
         </Reveal>
       </div>
 

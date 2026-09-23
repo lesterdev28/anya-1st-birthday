@@ -50,36 +50,17 @@
   font-size: clamp(0.88rem, 3.8cqw, 0.98rem);
   color: var(--ink-soft);
   max-width: 21rem;
-  margin: 0 auto 2rem;
+  /* Nothing follows the rule below any more, so it carries the spacing on its own. */
+  margin: 0 auto;
 }
 
-.rsvp__panel {
-  padding: clamp(1.4rem, 6cqw, 2.2rem);
-  border-radius: 1.4rem;
-  border: 1px solid rgba(201, 183, 232, 0.4);
-  background: rgba(255, 253, 248, 0.78);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 20px 50px rgba(103, 88, 132, 0.13);
-  text-align: left;
-}
-
-/* A hairline between the invitation and the wish, the same one the journey opens with. */
+/* The hairline the journey opens with, closing the page rather than dividing it. */
 .rsvp__rule span {
   display: block;
   width: min(9rem, 40vw);
   height: 1px;
   margin: 1.6rem auto;
   background: linear-gradient(90deg, transparent, rgba(150, 128, 178, 0.45), transparent);
-}
-
-.rsvp__wish {
-  font-family: var(--sans);
-  font-size: 0.92rem;
-  font-weight: 300;
-  line-height: 1.7;
-  color: var(--ink-soft);
-  max-width: 24rem;
-  margin: 0 auto;
 }
 
 .rsvp__meadow {
