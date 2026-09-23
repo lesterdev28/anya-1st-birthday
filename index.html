@@ -6,20 +6,64 @@
     <meta name="theme-color" content="#fbf5ea" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Shared into a group chat as often as it is opened directly. -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Anya is turning ONE" />
-    <meta
-      property="og:description"
-      content="Saturday 10 October 2026 · 2:00 – 6:00 in the afternoon · Bantug Lake Ranch"
-    />
-    <meta property="og:image" content="/invitation/photos/optimized/anya-month-10-a-960.webp" />
-    <meta name="twitter:card" content="summary_large_image" />
-
     <title>Anya is turning ONE · 10 October 2026</title>
     <meta
       name="description"
       content="You're invited to Anya's first birthday. Saturday 10 October 2026, 2:00 to 6:00 in the afternoon, at Bantug Lake Ranch."
+    />
+
+    <!--
+      This invitation is shared into a group chat as often as it is opened directly, so
+      the link preview is a first impression rather than an afterthought.
+
+      What used to be here pointed at one of the site's own optimized photographs, and
+      that is why Messenger drew a bare grey link with nothing on it but the domain:
+      Facebook and Messenger do not read WebP, so the image fetch simply failed and the
+      card had nothing to show. Three rules, none of them optional:
+
+      1. A JPEG or a PNG. Never one of the .webp or .avif derivatives, however much
+         smaller they are — those exist for browsers, and a scraper is not a browser.
+      2. An absolute URL, so nothing depends on a scraper resolving a path.
+      3. Declared dimensions, or the preview is laid out before the image has been
+         fetched and a large card gets drawn as a small one.
+
+      The card itself is built by tools/share/build.mjs, which renders it through the
+      browser so it carries the invitation's own type, its gold and her photograph.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Anya's Enchanted First Year" />
+    <meta property="og:locale" content="en_PH" />
+    <meta property="og:url" content="https://briella-anya-1st-birthday.vercel.app/" />
+    <meta property="og:title" content="Anya is turning ONE" />
+    <meta
+      property="og:description"
+      content="Saturday, 10 October 2026 · 2:00 – 6:00 in the afternoon · Bantug Lake Ranch. Come and celebrate a magical first year with us."
+    />
+    <meta
+      property="og:image"
+      content="https://briella-anya-1st-birthday.vercel.app/invitation/share/anya-share.jpg"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://briella-anya-1st-birthday.vercel.app/invitation/share/anya-share.jpg"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Anya is turning one. Saturday, 10 October 2026, 2:00 to 6:00 in the afternoon, at Bantug Lake Ranch."
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Anya is turning ONE" />
+    <meta
+      name="twitter:description"
+      content="Saturday, 10 October 2026 · 2:00 – 6:00 in the afternoon · Bantug Lake Ranch."
+    />
+    <meta
+      name="twitter:image"
+      content="https://briella-anya-1st-birthday.vercel.app/invitation/share/anya-share.jpg"
     />
 
     <!--
