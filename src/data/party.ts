@@ -83,6 +83,16 @@ export const story = {
   rsvpBody: "We would love to celebrate Anya's special day with you.",
 
 
+  /*
+   * Lester's own words, sent on 2026-09-23, and the one piece of copy on this site that is
+   * not mine to reword. Any change here should come from him.
+   */
+  blessingVerse:
+    "For this child I prayed, and the LORD has granted me my petition that I made to him.",
+  blessingCitation: "1 Samuel 1:27 (ESV)",
+  blessingPrayer:
+    "One beautiful year of watching God's goodness unfold before our eyes. Our prayer is that as you grow, you will know Christ, love His Word, and walk faithfully with Him all the days of your life.",
+
   finaleThanks: "Thank you for being part of Anya's story.",
   finaleSee: "See you in the fairy garden.",
   finaleSignOff: "Anya turns ONE ✨",

@@ -22,6 +22,7 @@ const STANDS_FOR: Partial<Record<SceneId, SceneId>> = {
   "fairy-garden": "month-journey",
   "month-12": "month-journey",
   gifts: "invitation",
+  blessing: "rsvp",
   finale: "rsvp",
 };
 

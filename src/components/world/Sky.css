@@ -107,6 +107,14 @@ body[data-scene="rsvp"] {
   --sky-d: #fff9f1;
 }
 
+/* Where the warm turn begins: the first colour of the sunset, still mostly the garden's. */
+body[data-scene="blessing"] {
+  --sky-a: #d6c8e6;
+  --sky-b: #ded1e7;
+  --sky-c: #ecd9dd;
+  --sky-d: #fff4ea;
+}
+
 /* The ending returns to the sky, lower and warmer — sunset rather than sunrise. */
 body[data-scene="finale"] {
   --sky-a: #b9a7d8;

@@ -18,7 +18,7 @@ import type { ReactNode } from "react";
 import "./Reveal.css";
 
 /** The handful of tags a revealed block is ever going to be. */
-type RevealTag = "div" | "p" | "h2" | "h3" | "li" | "figure" | "span";
+type RevealTag = "div" | "p" | "h2" | "h3" | "li" | "figure" | "span" | "blockquote";
 
 interface RevealProps {
   readonly children: ReactNode;

@@ -1,0 +1,115 @@
+.blessing {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(4rem, 12vh, 7rem) var(--page-gutter);
+  container-type: inline-size;
+}
+
+.blessing__clouds,
+.blessing__air {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.blessing__clouds {
+  z-index: 1;
+  opacity: 0.4;
+}
+
+.blessing__air {
+  z-index: 2;
+}
+
+.blessing__inner {
+  position: relative;
+  z-index: 4;
+  /* Narrow enough that no line reaches the navigation rail on a phone. */
+  max-width: 28rem;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.blessing__rule span {
+  display: block;
+  width: min(7rem, 32vw);
+  height: 1px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(90deg, transparent, var(--champagne-gold), transparent);
+}
+
+/*
+ * Scripture is set in the display face rather than gilded. The gilt is the invitation's
+ * party voice — it belongs on "Gift Ideas" and on her name, and putting it here would
+ * make the verse look like another heading instead of something quoted.
+ */
+.blessing__verse {
+  margin: 0;
+}
+
+.blessing__verse p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 6.4cqw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0 0 0.9rem;
+  text-wrap: balance;
+}
+
+.blessing__cite {
+  display: block;
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  /* Letterspacing pads the right of the last glyph; this pulls the line back to centre. */
+  text-indent: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+.blessing__prayer {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 4.4cqw, 1.12rem);
+  line-height: 1.75;
+  color: var(--ink-soft);
+  /*
+   * 20rem rather than the measure the type wants, because the navigation rail overlays
+   * the right edge of a phone screen and a full-width line runs its last letter under a
+   * dot. The desktop rule below gives the paragraph its proper width back.
+   */
+  max-width: 20rem;
+  margin: 2.2rem auto 0;
+  text-wrap: pretty;
+}
+
+@container (min-width: 34rem) {
+  .blessing__prayer {
+    max-width: 26rem;
+  }
+}
+
+.blessing__bloom {
+  position: absolute;
+  right: -3%;
+  bottom: -2%;
+  width: clamp(7rem, 30cqw, 12rem);
+  z-index: 3;
+  opacity: 0.45;
+  transform: scaleX(-1);
+}
+
+/* Shorter on a phone, for the reason set out in MonthJourney.css. */
+@media (max-width: 640px) {
+  .blessing {
+    min-height: 84svh;
+  }
+}

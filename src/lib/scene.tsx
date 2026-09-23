@@ -44,6 +44,7 @@ export const SCENES = [
   "invitation",
   "gifts",
   "rsvp",
+  "blessing",
   "finale",
 ] as const;
 
