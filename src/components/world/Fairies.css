@@ -118,8 +118,8 @@
 }
 
 /*
- * A phone has the photographs across nearly the whole width, so the two perches nearest
- * the middle would sit on top of them. The ring thins to the four corners.
+ * A phone carries three, not four. Which three is decided in Fairies.tsx, because the
+ * perches themselves have to change on a narrow screen — see the note on PERCHES there.
  */
 @media (max-width: 640px) {
   .fairies__one:nth-child(n + 4) {

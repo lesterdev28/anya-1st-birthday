@@ -35,17 +35,25 @@ export function Nav() {
   const lit = STANDS_FOR[active] ?? active;
 
   /*
-   * Where the pointer went down, so a swipe can be told from a tap.
+   * Where the pointer went down, and what kind of pointer it was.
    *
    * The rail is fixed to the middle of the right edge, which on a phone is exactly where
-   * a right thumb scrolls. A finger dragged up the screen that happens to pass over a dot
-   * ends its gesture there, the browser calls that a click on a link to another chapter,
-   * and the page glides away to it — which is what a guest experiences as the scroll
-   * jumping ahead of them. The rail is inert to touch now (see Nav.css), and this is the
-   * same guard for a mouse or a stylus: a press that moved, or during which the page
-   * scrolled, was a scroll and not a choice.
+   * a thumb goes. A finger that ends a swipe on a dot, or simply rests on one to stop the
+   * page, is a click on a link to another chapter as far as the browser is concerned, and
+   * the page glides away to it. The guest did not ask to go anywhere, so it reads as the
+   * scroll jumping to the next chapter or the previous one.
+   *
+   * Nav.css already makes the dots inert under `(pointer: coarse)`, and that is the real
+   * fix. This is the same rule written again in a way that cannot be missed: some
+   * in-app browsers and phones in desktop mode answer that media query as though they
+   * had a mouse, and a guest reading the invitation inside Messenger is not a rare case
+   * here. So the pointer says what it is, and anything that is not a mouse cannot follow
+   * the link, whatever the stylesheet was told.
+   *
+   * For a real mouse the older guard still applies: a press that moved, or during which
+   * the page scrolled, was a scroll and not a choice.
    */
-  const pressed = useRef<{ x: number; y: number; scroll: number } | null>(null);
+  const pressed = useRef<{ x: number; y: number; scroll: number; kind: string } | null>(null);
 
   return (
     <nav className="nav" aria-label="Jump to a part of the invitation">
@@ -61,6 +69,7 @@ export function Nav() {
                   x: event.clientX,
                   y: event.clientY,
                   scroll: window.scrollY,
+                  kind: event.pointerType,
                 };
               }}
               onClick={(event) => {
@@ -73,7 +82,20 @@ export function Nav() {
                  * press left over from an earlier gesture veto it.
                  */
                 if (event.detail === 0) return;
-                if (!start) return;
+                /*
+                 * No press recorded means no pointer we can vouch for. On a page whose
+                 * only other way here is the keyboard, which has already returned above,
+                 * the safe answer is to do nothing.
+                 */
+                if (!start) {
+                  event.preventDefault();
+                  return;
+                }
+                /* A finger or a stylus never follows the rail. */
+                if (start.kind !== "mouse") {
+                  event.preventDefault();
+                  return;
+                }
                 const travelled = Math.hypot(event.clientX - start.x, event.clientY - start.y);
                 if (travelled > TAP_SLOP || Math.abs(window.scrollY - start.scroll) > 4) {
                   event.preventDefault();

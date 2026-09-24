@@ -33,6 +33,19 @@ export function App() {
    */
   useEffect(() => {
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    /*
+     * And no fragment in the address bar either.
+     *
+     * The chapter rail links to `#garden`, `#invitation` and `#rsvp`, so one tap leaves
+     * the fragment in the URL for good. A fragment is not inert: the browser owns it, and
+     * re-scrolls to it on its own account — on a reload, and on some browsers whenever
+     * the viewport is resized, which on a phone happens every time the address bar slides
+     * in or out, which is every time the guest stops scrolling. That is a page that jumps
+     * to a chapter when you hold it still, and nothing in this code would be doing it.
+     */
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
     window.scrollTo(0, 0);
   }, []);
 

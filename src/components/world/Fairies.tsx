@@ -22,20 +22,30 @@ const FAIRIES = ["fairy-with-poppy", "fairy-leaf-wings", "fairy-in-flight"] as c
 /**
  * Where a fairy can stand, as a percentage of the chapter box.
  *
- * All of them are out near an edge, and `face` turns her to look inward — a row of
- * fairies all facing the same way reads as clip art, and a ring of them looking at the
- * photograph in the middle reads as attention.
+ * All of them are out near an edge, and `face` turns her to look inward: a row of fairies
+ * all facing the same way reads as clip art, and a ring of them looking at the photograph
+ * in the middle reads as attention.
+ *
+ * `high` marks the perches a phone may use. Behind the photograph a fairy is fine, and
+ * always was: she is a layer below it and only ever peeks out from its edge. Behind the
+ * words she is not. On a 390px screen the milestone runs the full width of the chapter
+ * from about 55% of its height down to 91%, so a painted figure anywhere in that band
+ * sits directly under a sentence, and Lester said on 2026-09-24 that it made the text
+ * hard to read. The high perches all finish above it, allowing for her own height.
  */
 const PERCHES = [
-  { x: 1, y: 14, face: 1 },
-  { x: 80, y: 19, face: -1 },
-  { x: 0, y: 58, face: 1 },
-  { x: 82, y: 63, face: -1 },
-  { x: 34, y: 2, face: 1 },
-  { x: 52, y: 82, face: -1 },
-  { x: 14, y: 84, face: 1 },
-  { x: 70, y: 40, face: -1 },
+  { x: 1, y: 14, face: 1, high: true },
+  { x: 80, y: 19, face: -1, high: true },
+  { x: 0, y: 58, face: 1, high: false },
+  { x: 82, y: 63, face: -1, high: false },
+  { x: 34, y: 2, face: 1, high: true },
+  { x: 52, y: 82, face: -1, high: false },
+  { x: 14, y: 84, face: 1, high: false },
+  { x: 70, y: 36, face: -1, high: true },
 ] as const;
+
+/** The width below which the words fill the chapter, matching Fairies.css. */
+const PHONE = "(max-width: 640px)";
 
 interface Props {
   readonly count?: number;
@@ -55,6 +65,16 @@ export function Fairies({ count = 4, seed = 1, className }: Props) {
   const group = useRef<HTMLDivElement>(null);
   const [near, setNear] = useState(false);
 
+  /* Which perches are available depends on the width, so it has to be watched. */
+  const [phone, setPhone] = useState(() => window.matchMedia(PHONE).matches);
+
+  useEffect(() => {
+    const watcher = window.matchMedia(PHONE);
+    const onChange = () => setPhone(watcher.matches);
+    watcher.addEventListener("change", onChange);
+    return () => watcher.removeEventListener("change", onChange);
+  }, []);
+
   useEffect(() => {
     const element = group.current;
     if (!element) return;
@@ -68,7 +88,7 @@ export function Fairies({ count = 4, seed = 1, className }: Props) {
   const flock = useMemo(() => {
     const random = seeded(seed * 2246822519 + 1);
     /* Drawn without replacement, so no month ever puts two fairies on one perch. */
-    const perches = [...PERCHES];
+    const perches = PERCHES.filter((perch) => !phone || perch.high);
     return Array.from({ length: Math.min(count, perches.length) }, (_, index) => {
       const perch = perches.splice(Math.floor(random() * perches.length), 1)[0];
       return {
@@ -82,7 +102,7 @@ export function Fairies({ count = 4, seed = 1, className }: Props) {
         lean: Math.floor(random() * 3),
       };
     });
-  }, [count, seed]);
+  }, [count, phone, seed]);
 
   return (
     <div
