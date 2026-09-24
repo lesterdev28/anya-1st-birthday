@@ -44,10 +44,15 @@
   width: 0;
   height: var(--h);
   transform-origin: bottom center;
-  animation-name: meadow-sway;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  /* Still until the band is near the screen — see the note in src/lib/near.ts. */
+  animation-play-state: paused;
+}
+
+.meadow.is-here .meadow__stem {
+  animation-play-state: running;
   will-change: transform;
 }
 
@@ -108,12 +113,104 @@
   opacity: 0.9;
 }
 
-@keyframes meadow-sway {
+/*
+ * A stem's lean, as seven fixed angles rather than one angle per stem.
+ *
+ * The sway used to be a single keyframe doing arithmetic on a `--lean` custom property,
+ * which reads better but cannot be composited: a keyframe that reads a variable is
+ * stepped on the main thread instead, and two hundred blades of grass doing that on
+ * every frame is most of what made this page stutter on a phone. Seven literal angles
+ * across the same range are indistinguishable in a meadow — the stems differ far more in
+ * height, speed and phase than in a fifth of a degree — and they are composited.
+ */
+.meadow__stem--s0 {
+  animation-name: meadow-sway-0;
+}
+
+@keyframes meadow-sway-0 {
   from {
-    transform: rotate(calc(var(--lean, 0deg) * -0.16));
+    transform: rotate(0.8deg);
   }
   to {
-    transform: rotate(calc(var(--lean, 0deg) * 0.16 + 1.4deg));
+    transform: rotate(0.6deg);
+  }
+}
+
+.meadow__stem--s1 {
+  animation-name: meadow-sway-1;
+}
+
+@keyframes meadow-sway-1 {
+  from {
+    transform: rotate(0.53deg);
+  }
+  to {
+    transform: rotate(0.87deg);
+  }
+}
+
+.meadow__stem--s2 {
+  animation-name: meadow-sway-2;
+}
+
+@keyframes meadow-sway-2 {
+  from {
+    transform: rotate(0.27deg);
+  }
+  to {
+    transform: rotate(1.13deg);
+  }
+}
+
+.meadow__stem--s3 {
+  animation-name: meadow-sway-3;
+}
+
+@keyframes meadow-sway-3 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1.4deg);
+  }
+}
+
+.meadow__stem--s4 {
+  animation-name: meadow-sway-4;
+}
+
+@keyframes meadow-sway-4 {
+  from {
+    transform: rotate(-0.27deg);
+  }
+  to {
+    transform: rotate(1.67deg);
+  }
+}
+
+.meadow__stem--s5 {
+  animation-name: meadow-sway-5;
+}
+
+@keyframes meadow-sway-5 {
+  from {
+    transform: rotate(-0.53deg);
+  }
+  to {
+    transform: rotate(1.93deg);
+  }
+}
+
+.meadow__stem--s6 {
+  animation-name: meadow-sway-6;
+}
+
+@keyframes meadow-sway-6 {
+  from {
+    transform: rotate(-0.8deg);
+  }
+  to {
+    transform: rotate(2.2deg);
   }
 }
 

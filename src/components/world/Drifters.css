@@ -11,13 +11,17 @@
   border-radius: 50%;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
-  will-change: transform, opacity;
   /* Still until the group is near the screen — see the note in Drifters.tsx. */
   animation-play-state: paused;
 }
 
+/*
+ * `will-change` is here rather than above so a group that is not near the screen does not
+ * hold a compositing layer per particle. There are a few hundred of these on the page.
+ */
 .drifters.is-here .drifters__bit {
   animation-play-state: running;
+  will-change: transform, opacity;
 }
 
 /* ---- stars: fixed points that twinkle rather than travel ---- */
@@ -64,7 +68,6 @@
   box-shadow:
     0 0 6px rgba(215, 180, 106, 0.9),
     0 0 16px rgba(232, 211, 164, 0.5);
-  animation-name: rise;
 }
 
 /*
@@ -110,14 +113,6 @@
     0% 50%,
     42% 42%
   );
-  /*
-   * A glint is a flare, so it sits larger than the grain it came from — and the size
-   * has to go in as a variable the keyframes multiply by, not as a `transform` here.
-   * The climb animates `transform`, and an animated property beats the element's own
-   * declaration for as long as it runs, so a bare `scale` on the element is discarded
-   * the moment the mote starts moving.
-   */
-  --mote: 1.45;
 }
 
 /*
@@ -128,10 +123,10 @@
  * as the climb. Folding the brightness steps into the climb keeps one animation, and
  * because each mote climbs at its own speed no two flare together anyway.
  */
-@keyframes rise {
+@keyframes rise-0 {
   0% {
     opacity: 0;
-    transform: translate3d(0, 30px, 0) scale(calc(0.6 * var(--mote, 1)));
+    transform: translate3d(0, 30px, 0) scale(0.6);
   }
   14% {
     opacity: 0.95;
@@ -150,7 +145,85 @@
   }
   100% {
     opacity: 0;
-    transform: translate3d(var(--drift, 0px), -140px, 0) scale(calc(1.1 * var(--mote, 1)));
+    transform: translate3d(-45px, -140px, 0) scale(1.1);
+  }
+}
+
+@keyframes rise-1 {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0) scale(0.6);
+  }
+  14% {
+    opacity: 0.95;
+  }
+  31% {
+    opacity: 0.62;
+  }
+  48% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 0.7;
+  }
+  84% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-18px, -140px, 0) scale(1.1);
+  }
+}
+
+@keyframes rise-2 {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0) scale(0.6);
+  }
+  14% {
+    opacity: 0.95;
+  }
+  31% {
+    opacity: 0.62;
+  }
+  48% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 0.7;
+  }
+  84% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(18px, -140px, 0) scale(1.1);
+  }
+}
+
+@keyframes rise-3 {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0) scale(0.6);
+  }
+  14% {
+    opacity: 0.95;
+  }
+  31% {
+    opacity: 0.62;
+  }
+  48% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 0.7;
+  }
+  84% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(45px, -140px, 0) scale(1.1);
   }
 }
 
@@ -159,10 +232,9 @@
 .drifters--pollen .drifters__bit {
   background: rgba(255, 253, 248, 0.9);
   box-shadow: 0 0 8px rgba(255, 253, 248, 0.7);
-  animation-name: wander;
 }
 
-@keyframes wander {
+@keyframes wander-0 {
   0%,
   100% {
     opacity: 0.25;
@@ -170,11 +242,59 @@
   }
   33% {
     opacity: 0.85;
-    transform: translate3d(var(--drift, 0px), -26px, 0);
+    transform: translate3d(-45px, -26px, 0);
   }
   66% {
     opacity: 0.55;
-    transform: translate3d(calc(var(--drift, 0px) * -0.6), -52px, 0);
+    transform: translate3d(27.0px, -52px, 0);
+  }
+}
+
+@keyframes wander-1 {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translate3d(0, 0, 0);
+  }
+  33% {
+    opacity: 0.85;
+    transform: translate3d(-18px, -26px, 0);
+  }
+  66% {
+    opacity: 0.55;
+    transform: translate3d(10.8px, -52px, 0);
+  }
+}
+
+@keyframes wander-2 {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translate3d(0, 0, 0);
+  }
+  33% {
+    opacity: 0.85;
+    transform: translate3d(18px, -26px, 0);
+  }
+  66% {
+    opacity: 0.55;
+    transform: translate3d(-10.8px, -52px, 0);
+  }
+}
+
+@keyframes wander-3 {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translate3d(0, 0, 0);
+  }
+  33% {
+    opacity: 0.85;
+    transform: translate3d(45px, -26px, 0);
+  }
+  66% {
+    opacity: 0.55;
+    transform: translate3d(-27.0px, -52px, 0);
   }
 }
 
@@ -185,11 +305,10 @@
   border-radius: 60% 0 60% 0;
   background: linear-gradient(140deg, var(--blush-pink), var(--rose-mist));
   opacity: 0.75;
-  animation-name: fall;
   animation-timing-function: linear;
 }
 
-@keyframes fall {
+@keyframes fall-0 {
   0% {
     opacity: 0;
     transform: translate3d(0, -40px, 0) rotate(0deg);
@@ -202,7 +321,58 @@
   }
   100% {
     opacity: 0;
-    transform: translate3d(var(--drift, 0px), 340px, 0) rotate(calc(var(--spin, 1) * 420deg));
+    transform: translate3d(-45px, 340px, 0) rotate(-420deg);
+  }
+}
+
+@keyframes fall-1 {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -40px, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 0.8;
+  }
+  88% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-18px, 340px, 0) rotate(-420deg);
+  }
+}
+
+@keyframes fall-2 {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -40px, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 0.8;
+  }
+  88% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(18px, 340px, 0) rotate(420deg);
+  }
+}
+
+@keyframes fall-3 {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -40px, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 0.8;
+  }
+  88% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(45px, 340px, 0) rotate(420deg);
   }
 }
 
@@ -211,10 +381,9 @@
 .drifters--fireflies .drifters__bit {
   background: radial-gradient(circle, rgba(255, 244, 214, 0.95), rgba(215, 180, 106, 0) 70%);
   box-shadow: 0 0 12px rgba(232, 211, 164, 0.8);
-  animation-name: hover-glow;
 }
 
-@keyframes hover-glow {
+@keyframes hover-glow-0 {
   0%,
   100% {
     opacity: 0.15;
@@ -222,12 +391,134 @@
   }
   30% {
     opacity: 0.95;
-    transform: translate3d(calc(var(--drift, 0px) * 0.5), -18px, 0);
+    transform: translate3d(-22.5px, -18px, 0);
   }
   60% {
     opacity: 0.4;
-    transform: translate3d(var(--drift, 0px), -34px, 0);
+    transform: translate3d(-45px, -34px, 0);
   }
+}
+
+@keyframes hover-glow-1 {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    opacity: 0.95;
+    transform: translate3d(-9.0px, -18px, 0);
+  }
+  60% {
+    opacity: 0.4;
+    transform: translate3d(-18px, -34px, 0);
+  }
+}
+
+@keyframes hover-glow-2 {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    opacity: 0.95;
+    transform: translate3d(9.0px, -18px, 0);
+  }
+  60% {
+    opacity: 0.4;
+    transform: translate3d(18px, -34px, 0);
+  }
+}
+
+@keyframes hover-glow-3 {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: translate3d(0, 0, 0);
+  }
+  30% {
+    opacity: 0.95;
+    transform: translate3d(22.5px, -18px, 0);
+  }
+  60% {
+    opacity: 0.4;
+    transform: translate3d(45px, -34px, 0);
+  }
+}
+
+/*
+ * Which way a mote wanders, as four fixed lanes rather than a number per particle.
+ *
+ * Every one of these used to be one keyframe reading a `--drift` custom property, and a
+ * keyframe that reads a variable cannot be handed to the compositor: it is stepped on
+ * the main thread instead, once per particle per frame. That is what a phone feels as a
+ * scroll that hesitates and then catches up. Four lanes are composited and, across a few
+ * hundred specks that already differ in size, speed and phase, indistinguishable from
+ * four hundred.
+ */
+.drifters--dust .drifters__bit--d0 {
+  animation-name: rise-0;
+}
+
+.drifters--dust .drifters__bit--d1 {
+  animation-name: rise-1;
+}
+
+.drifters--dust .drifters__bit--d2 {
+  animation-name: rise-2;
+}
+
+.drifters--dust .drifters__bit--d3 {
+  animation-name: rise-3;
+}
+
+.drifters--pollen .drifters__bit--d0 {
+  animation-name: wander-0;
+}
+
+.drifters--pollen .drifters__bit--d1 {
+  animation-name: wander-1;
+}
+
+.drifters--pollen .drifters__bit--d2 {
+  animation-name: wander-2;
+}
+
+.drifters--pollen .drifters__bit--d3 {
+  animation-name: wander-3;
+}
+
+.drifters--petals .drifters__bit--d0 {
+  animation-name: fall-0;
+}
+
+.drifters--petals .drifters__bit--d1 {
+  animation-name: fall-1;
+}
+
+.drifters--petals .drifters__bit--d2 {
+  animation-name: fall-2;
+}
+
+.drifters--petals .drifters__bit--d3 {
+  animation-name: fall-3;
+}
+
+.drifters--fireflies .drifters__bit--d0 {
+  animation-name: hover-glow-0;
+}
+
+.drifters--fireflies .drifters__bit--d1 {
+  animation-name: hover-glow-1;
+}
+
+.drifters--fireflies .drifters__bit--d2 {
+  animation-name: hover-glow-2;
+}
+
+.drifters--fireflies .drifters__bit--d3 {
+  animation-name: hover-glow-3;
 }
 
 /*

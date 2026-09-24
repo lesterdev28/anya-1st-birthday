@@ -10,16 +10,31 @@
   pointer-events: none;
 }
 
+/*
+ * A cloud's own size carries its scale, and its transform is left for the drift alone.
+ *
+ * This is not a tidying-up. A keyframe that reads a custom property cannot be handed to
+ * the compositor, so a `scale(var(--cloud-scale))` inside the drift kept all hundred and
+ * ten clouds being stepped on the main thread, every frame, for the whole page. Written
+ * as width they are composited and cost nothing to move — and the drop-shadow below is
+ * then painted once into the layer instead of being re-blurred on every frame.
+ */
 .cloud {
   position: absolute;
   display: block;
-  width: 46vw;
-  max-width: 460px;
+  width: calc(46vw * var(--cloud-scale, 1));
+  max-width: calc(460px * var(--cloud-scale, 1));
   aspect-ratio: 5 / 2;
-  transform: scale(var(--cloud-scale, 1));
   animation-name: cloud-drift;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  /* Still until the band is near the screen — see the note in src/lib/near.ts. */
+  animation-play-state: paused;
+}
+
+/* `will-change` sits here so a band off screen does not hold a layer per cloud. */
+.clouds.is-here .cloud {
+  animation-play-state: running;
   will-change: transform;
 }
 
@@ -65,14 +80,14 @@
  * multiplier the component passes rides on top of this.
  */
 .clouds--far .cloud {
-  width: 30vw;
-  max-width: 300px;
+  width: calc(30vw * var(--cloud-scale, 1));
+  max-width: calc(300px * var(--cloud-scale, 1));
   filter: opacity(0.72);
 }
 
 .clouds--near .cloud {
-  width: 68vw;
-  max-width: 720px;
+  width: calc(68vw * var(--cloud-scale, 1));
+  max-width: calc(720px * var(--cloud-scale, 1));
 }
 
 /*
@@ -95,10 +110,10 @@
  */
 @keyframes cloud-drift {
   from {
-    transform: translate3d(-130%, 0, 0) scale(var(--cloud-scale, 1));
+    transform: translate3d(-130%, 0, 0);
   }
   to {
-    transform: translate3d(130%, 0, 0) scale(var(--cloud-scale, 1));
+    transform: translate3d(130%, 0, 0);
   }
 }
 
@@ -138,6 +153,5 @@
 @media (prefers-reduced-motion: reduce) {
   .cloud {
     animation: none;
-    transform: scale(var(--cloud-scale, 1));
   }
 }

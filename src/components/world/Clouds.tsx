@@ -11,6 +11,7 @@
  * watercolour rather than cut out.
  */
 import { useMemo } from "react";
+import { useNearViewport } from "../../lib/near";
 import { Parallax } from "../../lib/scene";
 import "./Clouds.css";
 
@@ -44,6 +45,13 @@ interface BandProps {
  * sky, where there is no scroll to parallax against.
  */
 export function CloudBand({ depth, count = 4, className, seed = 1 }: BandProps) {
+  /*
+   * A band holds still until it is near the screen. There are a hundred and ten clouds
+   * on this page and at most a dozen are ever in view; the rest were costing a frame's
+   * work each for nobody. See src/lib/near.ts.
+   */
+  const { ref, near } = useNearViewport<HTMLDivElement>();
+
   const clouds = useMemo(() => {
     const random = seeded(seed * 7919 + DEPTH_SPEED[depth] * 10000);
     return Array.from({ length: count }, (_, index) => ({
@@ -60,7 +68,11 @@ export function CloudBand({ depth, count = 4, className, seed = 1 }: BandProps) 
   }, [count, depth, seed]);
 
   return (
-    <div className={`clouds clouds--${depth}${className ? ` ${className}` : ""}`} aria-hidden="true">
+    <div
+      ref={ref}
+      className={`clouds clouds--${depth}${near ? " is-here" : ""}${className ? ` ${className}` : ""}`}
+      aria-hidden="true"
+    >
       {clouds.map((cloud) => (
         <span
           key={cloud.key}

@@ -106,9 +106,17 @@
   user-select: none;
 }
 
+/*
+ * No z-index here, deliberately.
+ *
+ * It used to carry `z-index: 3`, which made it a stacking context — and a stacking
+ * context is a lid: the frame and the words could then only be ordered against each
+ * other, never against the butterflies flying at 5 outside it. The 3 has moved down
+ * onto the frame, which is what actually wanted it, and the words take their own place
+ * in the chapter's stack.
+ */
 .month__inner {
   position: relative;
-  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,6 +127,8 @@
 }
 
 .month__frame-holder {
+  position: relative;
+  z-index: 3;
   width: 100%;
   will-change: transform;
 }
@@ -128,9 +138,8 @@
  *
  * A one-line caption was a small enough target that a wing rarely found it. The
  * milestones are five to ten lines now, and a butterfly crossing the middle of a
- * sentence is the one thing on this page that makes words hard to read. Nothing else
- * changes: the fairies stay behind the words as they always were, and the photograph
- * keeps its own place in the stack.
+ * sentence is the one thing on this page that makes words hard to read. The fairies
+ * stay behind the words as they always were, and the photograph keeps its own place.
  */
 .month__words {
   position: relative;

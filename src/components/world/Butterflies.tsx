@@ -193,10 +193,8 @@ function Wing({ id, flap, lean }: { readonly id: string; readonly flap: number; 
 
   return (
     <picture
-      className="butterflies__wings"
-      style={
-        { animationDuration: `${flap}s`, "--lean": `${lean * 7}deg` } as React.CSSProperties
-      }
+      className={`butterflies__wings butterflies__wings--${lean < 0 ? "left" : "right"}`}
+      style={{ animationDuration: `${flap}s` }}
     >
       <source type="image/avif" srcSet={art.avifSrcSet} sizes="80px" />
       <img src={art.src} srcSet={art.srcSet} sizes="80px" alt="" loading="lazy" decoding="async" />

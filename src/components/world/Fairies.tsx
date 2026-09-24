@@ -78,7 +78,8 @@ export function Fairies({ count = 4, seed = 1, className }: Props) {
         size: 5.4 + random() * 2.6,
         hover: 5.5 + random() * 3.5,
         delay: -random() * 8,
-        lean: (random() - 0.5) * 5,
+        /* Which of the three tips in the stylesheet she takes; see the note there. */
+        lean: Math.floor(random() * 3),
       };
     });
   }, [count, seed]);
@@ -116,18 +117,14 @@ function Fairy({
 
   return (
     <span
-      className="fairies__one"
-      style={
-        {
-          left: `${perch.x}%`,
-          top: `${perch.y}%`,
-          width: `clamp(3.4rem, ${size}cqw, ${size}rem)`,
-          animationDuration: `${hover}s`,
-          animationDelay: `${delay}s`,
-          "--face": perch.face,
-          "--lean": `${lean}deg`,
-        } as React.CSSProperties
-      }
+      className={`fairies__one fairies__one--${perch.face === 1 ? "in" : "out"}${lean}`}
+      style={{
+        left: `${perch.x}%`,
+        top: `${perch.y}%`,
+        width: `clamp(3.4rem, ${size}cqw, ${size}rem)`,
+        animationDuration: `${hover}s`,
+        animationDelay: `${delay}s`,
+      }}
     >
       <picture>
         <source type="image/avif" srcSet={image.avifSrcSet} sizes="120px" />

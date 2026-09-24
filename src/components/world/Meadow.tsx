@@ -13,6 +13,7 @@
  * nothing else, which is what distance actually does.
  */
 import { useMemo } from "react";
+import { useNearViewport } from "../../lib/near";
 import { Parallax } from "../../lib/scene";
 import "./Meadow.css";
 
@@ -69,7 +70,12 @@ function Stems({ band, seed }: StemsProps) {
         x: ((index + 0.5 + (random() - 0.5) * 0.7) / count) * 100,
         height: height[0] + random() * height[1],
         head: head[0] + random() * head[1],
-        lean: (random() - 0.5) * 10,
+        /*
+         * Which of the seven lean angles in the stylesheet this stem takes. It is a
+         * bucket rather than an angle because a keyframe that does arithmetic on a
+         * custom property cannot be composited; see the note in Meadow.css.
+         */
+        lean: Math.round(random() * 6),
         colour: palette[Math.floor(random() * palette.length)],
         shape: kind < 0.38 ? "flower" : kind < 0.66 ? "bud" : "grass",
         sway: 4 + random() * 4,
@@ -83,12 +89,11 @@ function Stems({ band, seed }: StemsProps) {
       {stems.map((stem) => (
         <span
           key={stem.key}
-          className="meadow__stem"
+          className={`meadow__stem meadow__stem--s${stem.lean}`}
           style={
             {
               left: `${stem.x}%`,
               "--h": `${stem.height}px`,
-              "--lean": `${stem.lean}deg`,
               animationDuration: `${stem.sway}s`,
               animationDelay: `${stem.delay}s`,
             } as React.CSSProperties
@@ -114,8 +119,19 @@ interface Props {
 }
 
 export function Meadow({ className, bands = ["far", "mid", "near"], seed = 3 }: Props) {
+  /*
+   * A meadow holds still until its chapter is near. Two hundred stems sway in one of
+   * these, and there is one at the foot of most chapters — the grass at the bottom of
+   * the page was swaying the whole time the guest was reading the top. See lib/near.ts.
+   */
+  const { ref, near } = useNearViewport<HTMLDivElement>();
+
   return (
-    <div className={`meadow${className ? ` ${className}` : ""}`} aria-hidden="true">
+    <div
+      ref={ref}
+      className={`meadow${near ? " is-here" : ""}${className ? ` ${className}` : ""}`}
+      aria-hidden="true"
+    >
       {bands.map((band, index) => (
         <Parallax
           key={band}

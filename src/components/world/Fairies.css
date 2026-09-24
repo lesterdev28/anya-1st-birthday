@@ -6,26 +6,23 @@
 }
 
 /*
- * `--face` mirrors her, so the ones on the right look back into the chapter. It lives in
- * the same transform as the hover, because a transform set in two places is a transform
- * one of them silently wins.
+ * The mirror that turns her to face into the chapter lives in the hover keyframes, not
+ * here, because a transform set in two places is a transform one of them silently wins.
  */
 .fairies__one {
   position: absolute;
   display: block;
-  transform: scaleX(var(--face, 1));
-  animation-name: fairy-hover;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-play-state: paused;
-  will-change: transform;
   opacity: 0.94;
   filter: drop-shadow(0 6px 16px rgba(120, 100, 150, 0.14));
 }
 
 .fairies.is-here .fairies__one {
   animation-play-state: running;
+  will-change: transform;
 }
 
 .fairies__one img {
@@ -34,13 +31,89 @@
   height: auto;
 }
 
-/* Small: a hover is a hover, not a bounce. */
-@keyframes fairy-hover {
+/*
+ * Small: a hover is a hover, not a bounce.
+ *
+ * Six of them — which way she faces, times three tips — rather than one keyframe reading
+ * `--face` and `--lean`. A keyframe that reads a custom property cannot be handed to the
+ * compositor and is stepped on the main thread instead, once per fairy per frame, and
+ * the tips are two and a half degrees apart.
+ */
+.fairies__one--in0 {
+  animation-name: fairy-hover-in-0;
+}
+
+.fairies__one--in1 {
+  animation-name: fairy-hover-in-1;
+}
+
+.fairies__one--in2 {
+  animation-name: fairy-hover-in-2;
+}
+
+.fairies__one--out0 {
+  animation-name: fairy-hover-out-0;
+}
+
+.fairies__one--out1 {
+  animation-name: fairy-hover-out-1;
+}
+
+.fairies__one--out2 {
+  animation-name: fairy-hover-out-2;
+}
+
+@keyframes fairy-hover-in-0 {
   from {
-    transform: scaleX(var(--face, 1)) translate3d(0, 4%, 0) rotate(calc(var(--lean, 0deg) * -1));
+    transform: scaleX(1) translate3d(0, 4%, 0) rotate(2.5deg);
   }
   to {
-    transform: scaleX(var(--face, 1)) translate3d(0, -5%, 0) rotate(var(--lean, 0deg));
+    transform: scaleX(1) translate3d(0, -5%, 0) rotate(-2.5deg);
+  }
+}
+
+@keyframes fairy-hover-in-1 {
+  from {
+    transform: scaleX(1) translate3d(0, 4%, 0) rotate(0deg);
+  }
+  to {
+    transform: scaleX(1) translate3d(0, -5%, 0) rotate(0deg);
+  }
+}
+
+@keyframes fairy-hover-in-2 {
+  from {
+    transform: scaleX(1) translate3d(0, 4%, 0) rotate(-2.5deg);
+  }
+  to {
+    transform: scaleX(1) translate3d(0, -5%, 0) rotate(2.5deg);
+  }
+}
+
+@keyframes fairy-hover-out-0 {
+  from {
+    transform: scaleX(-1) translate3d(0, 4%, 0) rotate(2.5deg);
+  }
+  to {
+    transform: scaleX(-1) translate3d(0, -5%, 0) rotate(-2.5deg);
+  }
+}
+
+@keyframes fairy-hover-out-1 {
+  from {
+    transform: scaleX(-1) translate3d(0, 4%, 0) rotate(0deg);
+  }
+  to {
+    transform: scaleX(-1) translate3d(0, -5%, 0) rotate(0deg);
+  }
+}
+
+@keyframes fairy-hover-out-2 {
+  from {
+    transform: scaleX(-1) translate3d(0, 4%, 0) rotate(-2.5deg);
+  }
+  to {
+    transform: scaleX(-1) translate3d(0, -5%, 0) rotate(2.5deg);
   }
 }
 

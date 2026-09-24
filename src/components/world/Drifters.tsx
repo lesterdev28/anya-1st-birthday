@@ -11,7 +11,8 @@
  * Counts are halved on small screens, which is the brief's own instruction for phones:
  * keep the magic, reduce the particle count.
  */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
+import { useNearViewport } from "../../lib/near";
 import "./Drifters.css";
 
 export type DrifterKind = "stars" | "dust" | "petals" | "pollen" | "fireflies";
@@ -63,30 +64,15 @@ const DURATIONS: Record<DrifterKind, readonly [number, number]> = {
 };
 
 export function Drifters({ kind, count = 24, className }: Props) {
-  const group = useRef<HTMLDivElement>(null);
-  const [near, setNear] = useState(false);
-
   /*
    * Off-screen particles hold still.
    *
    * Measured on a throttled phone over one full scroll of the page, the drifters cost
-   * about ten seconds of main-thread work, two thirds of it in style recalculation —
-   * because a keyframe that reads a custom property (`--drift`, `--mote`) cannot be
-   * handed to the compositor and has to be ticked on the main thread instead. There are
-   * five hundred of them on the page and at most two chapters' worth are ever in view.
-   *
-   * `rootMargin` starts a chapter's particles moving well before it arrives, so nothing
-   * is ever caught standing still, and `Fairies` already does exactly this.
+   * seconds of main-thread work for groups nobody could see. `rootMargin` starts a
+   * chapter's particles moving well before it arrives, so nothing is ever caught
+   * standing still. The hook is shared with the clouds and the meadow; see lib/near.ts.
    */
-  useEffect(() => {
-    const element = group.current;
-    if (!element) return;
-    const watcher = new IntersectionObserver(([entry]) => setNear(entry.isIntersecting), {
-      rootMargin: "50% 0px 50% 0px",
-    });
-    watcher.observe(element);
-    return () => watcher.disconnect();
-  }, []);
+  const { ref, near } = useNearViewport<HTMLDivElement>();
 
   const particles = useMemo(() => {
     const random = seeded(SEEDS[kind]);
@@ -97,37 +83,38 @@ export function Drifters({ kind, count = 24, className }: Props) {
       key: index,
       left: random() * 100,
       top: random() * 100,
-      size: size + random() * sizeSpread,
+      /*
+       * A glint is a flare, so it sits larger than the grain it came from. It is sized
+       * here rather than scaled in the keyframes, because a keyframe that multiplies by
+       * a custom property cannot be composited. `4n + 1` in the stylesheet is this.
+       */
+      size: (size + random() * sizeSpread) * (kind === "dust" && index % 4 === 0 ? 1.45 : 1),
       duration: duration + random() * durationSpread,
       // Negative delays start every particle mid-cycle, so nothing begins in unison.
       delay: -random() * 30,
-      drift: (random() - 0.5) * 90,
-      spin: random() > 0.5 ? 1 : -1,
+      /* Which of the four drift lanes in the stylesheet this one takes. */
+      lane: Math.floor(random() * 4),
     }));
   }, [count, kind]);
 
   return (
     <div
-      ref={group}
+      ref={ref}
       className={`drifters drifters--${kind}${near ? " is-here" : ""}${className ? ` ${className}` : ""}`}
       aria-hidden="true"
     >
       {particles.map((particle) => (
         <span
           key={particle.key}
-          className="drifters__bit"
-          style={
-            {
-              left: `${particle.left}%`,
-              top: `${particle.top}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              animationDuration: `${particle.duration}s`,
-              animationDelay: `${particle.delay}s`,
-              "--drift": `${particle.drift}px`,
-              "--spin": particle.spin,
-            } as React.CSSProperties
-          }
+          className={`drifters__bit drifters__bit--d${particle.lane}`}
+          style={{
+            left: `${particle.left}%`,
+            top: `${particle.top}%`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            animationDuration: `${particle.duration}s`,
+            animationDelay: `${particle.delay}s`,
+          }}
         />
       ))}
     </div>

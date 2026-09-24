@@ -52,7 +52,6 @@
 .butterflies__wings {
   display: block;
   width: 100%;
-  animation-name: butterfly-flap;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -72,12 +71,34 @@
  * rendering fault. Taking a tenth off the width and tipping a few degrees reads as a
  * butterfly working its wings while it drifts.
  */
-@keyframes butterfly-flap {
+/*
+ * Two of them, one tipping each way, rather than one keyframe reading a `--lean`
+ * property: a keyframe that reads a variable cannot be composited and is stepped on the
+ * main thread instead. The flyer only ever tips one way or the other anyway.
+ */
+.butterflies__wings--left {
+  animation-name: butterfly-flap-left;
+}
+
+.butterflies__wings--right {
+  animation-name: butterfly-flap-right;
+}
+
+@keyframes butterfly-flap-left {
   from {
     transform: scaleX(1) rotate(0deg);
   }
   to {
-    transform: scaleX(0.88) rotate(var(--lean, 5deg));
+    transform: scaleX(0.88) rotate(-7deg);
+  }
+}
+
+@keyframes butterfly-flap-right {
+  from {
+    transform: scaleX(1) rotate(0deg);
+  }
+  to {
+    transform: scaleX(0.88) rotate(7deg);
   }
 }
 
